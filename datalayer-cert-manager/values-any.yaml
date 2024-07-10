@@ -1,0 +1,12 @@
+installCRDs: true
+nodeSelector:
+  role.datalayer.io/router: "true"
+startupapicheck:
+  nodeSelector:
+    role.datalayer.io/router: "true"
+cainjector:
+  nodeSelector:
+    role.datalayer.io/router: "true"
+webhook:
+  nodeSelector:
+    role.datalayer.io/router: "true"

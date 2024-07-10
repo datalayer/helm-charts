@@ -1,0 +1,8 @@
+library:
+  clusterType: ovh
+  image: datalayer/library:0.0.6
+  imagePullPolicy: Always
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  env:
+    DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"

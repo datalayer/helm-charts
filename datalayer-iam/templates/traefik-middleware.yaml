@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: iam-auth
+  namespace: {{ .Release.Namespace }}
+spec:
+  forwardAuth:
+    address: http://{{ .Release.Name }}-svc.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.iam.port }}/api/iam/v1/auth
+    trustForwardHeader: true
+    # authRequestHeaders:
+    #   - "Authorization"

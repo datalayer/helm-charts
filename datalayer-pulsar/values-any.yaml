@@ -1,0 +1,15 @@
+volumes:
+  persistence: true
+components:
+  functions: false
+  toolset: false
+  proxy: false
+  pulsar_manager: false
+kube-prometheus-stack:
+  enabled: false
+bookkeeper:
+  replicaCount: 2
+broker:
+  replicaCount: 2
+zookeeper:
+  replicaCount: 2

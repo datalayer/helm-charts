@@ -1,0 +1,7 @@
+simple:
+  image: datalayer/example-simple:0.0.6
+  ingress: true
+  ingressMinikube: false
+  cert: true
+service:
+  type: ClusterIP

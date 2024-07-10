@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-svc
+  labels:
+    app: {{ template "jupyterpool.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"jupyterpool-http": "jupyterpool-backend-config"}}'
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.jupyterpool.port }}
+    name: jupyterpool-http
+    protocol: TCP
+    targetPort: {{ .Values.jupyterpool.port }}
+  selector:
+    app: {{ template "jupyterpool.name" . }}
+    release: {{ .Release.Name }}
+#  externalTrafficPolicy: Local       # Important?!

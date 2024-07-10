@@ -1,0 +1,26 @@
+jupyter:
+  image: datalayer/jupyter:0.1.1
+  imagePullPolicy: Always
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  clusterType: any
+  certificateIssuer: letsencrypt
+  ingressClass: datalayer-traefik
+  port: 9500
+#  resources:
+#    limits:
+#      memory: "8192Mi"
+#      cpu: "3000m"
+  env:
+    DATALAYER_RUN_HOST: ""
+    DATALAYER_CDN_URL: ""
+    DATALAYER_RUNTIME_ENV: "prod"
+    DATALAYER_JWT_ISSUER: ""
+    DATALAYER_JWT_SECRET: ""
+    DATALAYER_JWT_ALGORITHM: ""
+    DATALAYER_AUTHZ_ENGINE: ""
+    DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
+    DATALAYER_OPENFGA_STORE_ID: ""
+    DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
+    DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
+    DATALAYER_OPERATOR_API_KEY: ""

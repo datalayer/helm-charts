@@ -1,0 +1,20 @@
+server:
+  image: datalayer/jupyter-server:0.0.8
+  replicaCount: 1
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  imagePullPolicy: IfNotPresent
+  port: 8888
+  service:
+    name: jupyter-server
+    type: LoadBalancer
+#  resources:
+#    limits:
+#      memory: "8192Mi"
+#      cpu: "3000m"
+  env:
+    DATALAYER_RUN_HOST: ""
+    GITHUB_CLIENT_ID: ""
+    GITHUB_CLIENT_SECRET: ""
+    GITHUB_OAUTH_CALLBACK_URL: ""
+  extraEnvVars: []

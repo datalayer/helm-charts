@@ -1,0 +1,25 @@
+Your jupyter-server server has now been installed, and can be accessed in the following ways:
+
+1. Connect to the jupyter-server CLI pod:
+
+  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "jupyter-server.name" . }} -o jsonpath='{.items...metadata.name}') -- sh
+
+2. Connect with HTTP internally, within the kubernetes cluster on:
+
+  {{ template "jupyter-server.service-name" . }}.{{ .Release.Namespace }}:{{ .Values.server.port }}
+
+3. Connect with HTTP Node Port to the kubernetes cluster:
+
+  export NODE_IP=$(kubectl get nodes --namespace jupyter-server -o jsonpath="{.items[0].status.addresses[0].address}")
+  export NODE_PORT=$(kubectl get --namespace jupyter-server -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "jupyter-server.service-name" . }})
+  echo http://$NODE_IP:$NODE_PORT/jupyter-server/
+
+4. Connect with HTTP external service to the kubernetes cluster:
+
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "jupyter-server.name" . }}" -o jsonpath="{ .items[0].metadata.name }")
+  echo "Visit http://127.0.0.1:{{ .Values.server.port }}/jupyter-server/ to access jupyter-server"
+  kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.server.port }}:{{ .Values.server.port }}
+
+5. For Minikube:
+
+  open http://minikube.local/api/jupyter-server/

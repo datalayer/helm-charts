@@ -1,0 +1,5 @@
+globalArguments:
+- "--global.checknewversion"
+
+nodeSelector:
+  role.datalayer.io/router: "true"

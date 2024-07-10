@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-svc
+  labels:
+    app: {{ template "jupyter-server.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    # Trick for CORS bug in starlette middleware
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.httponly: "false"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.samesite: "none"
+    cloud.google.com/backend-config: '{"ports": {"jupyter-server-http": "jupyter-server-backend-config"}}'
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.server.port }}
+    name: jupyter-server-http
+    protocol: TCP
+    targetPort: {{ .Values.server.port }}
+  selector:
+    app: {{ template "jupyter-server.name" . }}
+    release: {{ .Release.Name }}
+#  externalTrafficPolicy: Local       # Important?!

@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "jupyter-server.name" . }}
+spec:
+  replicas: {{ .Values.server.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "jupyter-server.name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "jupyter-server.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/api
+                operator: In
+                values:
+                - "true"
+{{ if eq .Values.server.clusterType "minikube" }}
+#      volumes:
+#        - name: nfs-volume
+#          nfs:
+#            server: 172.17.0.8
+#            path: /
+#            readOnly: no
+{{- end }}
+      imagePullSecrets:
+            - name: reg-creds
+      containers:
+        - name: jupyter-server
+          image: {{ .Values.server.image }}
+          imagePullPolicy: {{ .Values.server.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.server.port }}
+              protocol: TCP
+          env:
+          - name: DATALAYER_RUN_HOST
+            value: {{ .Values.server.env.DATALAYER_RUN_HOST }}
+          - name: JUPYTER_BASE_URL
+            value: /api/jupyter-server
+#          - name: GITHUB_CLIENT_ID
+#            value: {{ .Values.server.env.GITHUB_CLIENT_ID }}
+#          - name: GITHUB_CLIENT_SECRET
+#            value: {{ .Values.server.env.GITHUB_CLIENT_SECRET }}
+#          - name: GITHUB_OAUTH_CALLBACK_URL
+#            value: {{ .Values.server.env.GITHUB_OAUTH_CALLBACK_URL }}
+{{- if .Values.server.extraEnvVars }}
+{{ toYaml .Values.server.extraEnvVars | indent 10 }}
+{{- end }}
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+          readinessProbe:
+            httpGet:
+              path: /api/jupyter-server/login
+              port: 8888
+            successThreshold: 1
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          volumeMounts:
+{{ if eq .Values.server.clusterType "minikube" }}
+#            - name: nfs-volume
+#              mountPath: /data
+{{- end }}
+          resources:
+{{ toYaml .Values.server.resources | indent 12 }} 
+#        - name: jupyter-server-sidecar
+#          image: {{ .Values.server.sidecar.image }}
+#          imagePullPolicy: {{ .Values.server.imagePullPolicy }}
+#          args: ["proxy", "-p", "8001"]

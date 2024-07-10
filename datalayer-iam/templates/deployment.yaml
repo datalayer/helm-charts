@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "iam.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "iam.name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "iam.name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "iam.name" . }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/api
+                operator: In
+                values:
+                - "true"
+      imagePullSecrets:
+            - name: reg-creds
+      containers:
+        - name: iam
+          image: {{ .Values.iam.image }}
+          imagePullPolicy: {{ .Values.iam.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.iam.port }}
+              protocol: TCP
+          env:
+          - name: DATALAYER_RUNTIME_ENV
+            value: {{ .Values.iam.env.DATALAYER_RUNTIME_ENV }}
+          - name: DATALAYER_RUN_HOST
+            value: {{ .Values.iam.env.DATALAYER_RUN_HOST }}
+          - name: DATALAYER_CDN_URL
+            value: {{ .Values.iam.env.DATALAYER_CDN_URL }}
+          - name: DATALAYER_JWT_ISSUER
+            value: {{ .Values.iam.env.DATALAYER_JWT_ISSUER }}
+          - name: DATALAYER_JWT_SECRET
+            value: {{ .Values.iam.env.DATALAYER_JWT_SECRET }}
+          - name: DATALAYER_JWT_ALLOWED_ISSUERS
+            value: {{ .Values.iam.env.DATALAYER_JWT_ALLOWED_ISSUERS }}
+          - name: DATALAYER_JWT_ALGORITHM
+            value: {{ .Values.iam.env.DATALAYER_JWT_ALGORITHM }}
+          - name: DATALAYER_JWT_DEFAULT_KID_ISSUER
+            value: {{ .Values.iam.env.DATALAYER_JWT_DEFAULT_KID_ISSUER }}
+          - name: DATALAYER_JWT_SKIP_3RD_TOKEN_SIGNATURE_VERIFICATION
+            value: {{ .Values.iam.env.DATALAYER_JWT_SKIP_3RD_TOKEN_SIGNATURE_VERIFICATION | quote }}
+          - name: DATALAYER_AUTHZ_ENGINE
+            value: {{ .Values.iam.env.DATALAYER_AUTHZ_ENGINE }}
+          - name: DATALAYER_OPENFGA_REST_URL
+            value: {{ .Values.iam.env.DATALAYER_OPENFGA_REST_URL }}
+          - name: DATALAYER_OPENFGA_STORE_ID
+            value: {{ .Values.iam.env.DATALAYER_OPENFGA_STORE_ID }}
+          - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
+            value: {{ .Values.iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID }}
+          - name: DATALAYER_SOLR_ZK_HOST
+            value: {{ .Values.iam.env.DATALAYER_SOLR_ZK_HOST }}
+          - name: DATALAYER_SOLR_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: solr-basic-auth
+                key: username
+          - name: DATALAYER_SOLR_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: solr-basic-auth
+                key: password
+          - name: DATALAYER_SUPPORT_EMAIL
+            value: {{ .Values.iam.env.DATALAYER_SUPPORT_EMAIL }}
+          - name: DATALAYER_SMTP_HOST
+            value: {{ .Values.iam.env.DATALAYER_SMTP_HOST }}
+          - name: DATALAYER_SMTP_PORT
+            value: {{ .Values.iam.env.DATALAYER_SMTP_PORT | quote }}
+          - name: DATALAYER_SMTP_USERNAME
+            value: {{ .Values.iam.env.DATALAYER_SMTP_USERNAME }}
+          - name: DATALAYER_SMTP_PASSWORD
+            value: {{ .Values.iam.env.DATALAYER_SMTP_PASSWORD }}
+          - name: DATALAYER_GITHUB_CLIENT_ID
+            value: {{ .Values.iam.env.DATALAYER_GITHUB_CLIENT_ID }}
+          - name: DATALAYER_GITHUB_CLIENT_SECRET
+            value: {{ .Values.iam.env.DATALAYER_GITHUB_CLIENT_SECRET }}
+          - name: DATALAYER_CREDITS_PROVIDER
+            value: {{ .Values.iam.env.DATALAYER_CREDITS_PROVIDER }}
+          - name: DATALAYER_IAM_API_KEY
+            value: {{ .Values.iam.env.DATALAYER_IAM_API_KEY }}
+          - name: DATALAYER_PULSAR_URL
+            value: {{ .Values.iam.env.DATALAYER_PULSAR_URL }}
+          # Addons
+          {{ if eq .Values.iam.env.DATALAYER_CREDITS_PROVIDER "stripe" }}
+          - name: DATALAYER_STRIPE_API_KEY
+            value: {{ .Values.iam.env.DATALAYER_STRIPE_API_KEY }}
+          - name: DATALAYER_STRIPE_JS_API_KEY
+            value: {{ .Values.iam.env.DATALAYER_STRIPE_JS_API_KEY }}
+          - name: DATALAYER_STRIPE_PRODUCT_ID
+            value: {{ .Values.iam.env.DATALAYER_STRIPE_PRODUCT_ID }}
+          - name: DATALAYER_STRIPE_BILLING_ROUTE
+            value: {{ .Values.iam.env.DATALAYER_STRIPE_BILLING_ROUTE }}
+          - name: DATALAYER_STRIPE_WEBHOOK_SECRET
+            value: {{ .Values.iam.env.DATALAYER_STRIPE_WEBHOOK_SECRET }}{{ end }}
+          volumeMounts:
+          resources:
+{{ toYaml .Values.iam.resources | indent 12 }} 
+#        - name: iam-sidecar
+#          image: {{ .Values.iam.sidecar.image }}
+#          imagePullPolicy: {{ .Values.iam.imagePullPolicy }}
+#          args: ["proxy", "-p", "8001"]

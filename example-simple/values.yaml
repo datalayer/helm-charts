@@ -1,0 +1,13 @@
+namespace: datalayer-simple
+simple:
+  image: datalayer/example-simple:0.0.6
+service:
+  name: simple-svc
+  type: NodePort
+simpleSecretName: simple-secret
+api:
+  secretName: simple-secret
+  secretNamespace: simple
+  address: simple-address
+  username: datalayer
+  password: simple_password

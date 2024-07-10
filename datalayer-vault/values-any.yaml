@@ -1,0 +1,9 @@
+injector:
+  nodeSelector:
+    role.datalayer.io/system: "true"
+server:
+  nodeSelector:
+    role.datalayer.io/system: "true"
+csi:
+  nodeSelector:
+    role.datalayer.io/system: "true"

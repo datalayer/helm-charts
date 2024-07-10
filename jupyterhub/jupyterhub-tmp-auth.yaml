@@ -1,0 +1,18 @@
+proxy:
+  secretToken: 34acae5e59a68148e615e0939b03ab5c506dab8893abf6eaffe60b71f7cd386d
+hub:
+  baseUrl: /api/jupyterhub
+  allowNamedServers: true
+  config:
+    JupyterHub:
+      authenticator_class: tmp
+    Authenticator:
+      allowed_users:
+        - admin
+      admin_users:
+        - datalayer
+singleuser:
+  image:
+    name: jupyter/scipy-notebook
+    tag: 2023-07-11
+  defaultUrl: /lab

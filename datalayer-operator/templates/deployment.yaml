@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "operator.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "operator.name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "operator.name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "operator.name" . }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/api
+                operator: In
+                values:
+                - "true"
+      imagePullSecrets:
+            - name: reg-creds
+      containers:
+        - name: operator
+          image: {{ .Values.operator.image }}
+          imagePullPolicy: {{ .Values.operator.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.operator.port }}
+              protocol: TCP
+          env:
+          - name: AWS_ACCESS_KEY_ID
+            value: {{ .Values.operator.env.AWS_ACCESS_KEY_ID }}
+          - name: AWS_SECRET_ACCESS_KEY
+            value: {{ .Values.operator.env.AWS_SECRET_ACCESS_KEY }}
+          - name: AWS_DEFAULT_REGION
+            value: {{ .Values.operator.env.AWS_DEFAULT_REGION }}
+          - name: DATALAYER_RUN_HOST
+            value: {{ .Values.operator.env.DATALAYER_RUN_HOST }}
+          - name: DATALAYER_INGRESS_CLASS_NAME
+            value: {{ .Values.operator.env.DATALAYER_INGRESS_CLASS_NAME }}
+          - name: DATALAYER_CERT_ISSUER
+            value: {{ .Values.operator.env.DATALAYER_CERT_ISSUER }}
+          - name: DATALAYER_DOCKER_REGISTRY
+            value: {{ .Values.operator.env.DATALAYER_DOCKER_REGISTRY }}
+          - name: DATALAYER_AUTHZ_ENGINE
+            value: {{ .Values.operator.env.DATALAYER_AUTHZ_ENGINE }}
+          - name: DATALAYER_OPERATOR_API_KEY
+            value: {{ .Values.operator.env.DATALAYER_OPERATOR_API_KEY }}
+          - name: DATALAYER_IAM_API_KEY
+            value: {{ .Values.operator.env.DATALAYER_IAM_API_KEY }}
+          - name: DATALAYER_IAM_HOST
+            value: {{ .Values.operator.env.DATALAYER_IAM_HOST }}
+          - name: DATALAYER_PULSAR_URL
+            value: {{ .Values.operator.env.DATALAYER_PULSAR_URL }}
+          readinessProbe:
+            httpGet:
+              path: /api/operator/version
+              port: 2111
+            successThreshold: 1
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          volumeMounts:
+          resources:
+{{ toYaml .Values.operator.resources | indent 12 }} 
+#        - name: operator-sidecar
+#          image: {{ .Values.operator.sidecar.image }}
+#          imagePullPolicy: {{ .Values.operator.imagePullPolicy }}
+#          args: ["proxy", "-p", "8001"]

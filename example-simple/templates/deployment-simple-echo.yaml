@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-echo
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: simple-echo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simple-echo
+  template:
+    metadata:
+      labels:
+        app: simple-echo
+    spec:
+      containers:
+        - name: simple-echo
+          image: hashicorp/http-echo
+          securityContext:
+            runAsUser: 0
+            privileged: true
+          args:
+            - "-text=hello simple-echo"
+          ports:
+            - containerPort: 5678
+              protocol: TCP
+          env:
+          - name: "USERNAME"
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.simpleSecretName }}
+                key:  username
+          - name: "DATALAYER_LDAP_BIND_PWD"
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.simpleSecretName }}
+                key: DATALAYER_LDAP_BIND_PWD

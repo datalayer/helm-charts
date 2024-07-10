@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-svc
+  labels:
+    app: {{ template "operator.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"2111": "operator-backend-config"}}'
+spec:
+  type: ClusterIP
+  ports:
+  - port: {{ .Values.operator.port }}
+    name: operator-http
+    protocol: TCP
+    targetPort: {{ .Values.operator.port }}
+  selector:
+    app: {{ template "operator.name" . }}
+    release: {{ .Release.Name }}
+#  externalTrafficPolicy: Local       # Important?!

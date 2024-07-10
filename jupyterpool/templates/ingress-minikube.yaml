@@ -1,0 +1,37 @@
+{{ if eq .Values.jupyterpool.clusterType "minikube" -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jupyterpool-ingress
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-name: datalayer-jupyterpool-stick
+    nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
+#    nginx.ingress.kubernetes.io/configuration-snippet: |
+#      set $cookie "${http_cookie}";
+#      if ($http_sec_websocket_protocol) {
+#        set $cookie "datalayer-jupyterpool-stick=${http_sec_websocket_protocol}; ${http_cookie}";
+#      }
+#      proxy_set_header Cookie $cookie;
+#    nginx.ingress.kubernetes.io/rewrite-target: /$1/$3
+spec:
+  tls:
+  - hosts:
+    - minikube.local
+  rules:
+  - host: minikube.local
+    http:
+      paths:
+      - path: /api/jupyter-server/
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-svc
+            port:
+              number: {{ .Values.jupyterpool.port }}
+{{- end }}

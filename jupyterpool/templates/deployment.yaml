@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "jupyterpool.name" . }}
+spec:
+  replicas: {{ .Values.jupyterpool.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "jupyterpool.name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "jupyterpool.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/jupyter
+                operator: In
+                values:
+                - "true"
+              - key: node.datalayer.io/xpu
+                operator: In
+                values:
+                - cpu
+{{ if eq .Values.jupyterpool.clusterType "minikube" }}
+#      volumes:
+#        - name: nfs-volume
+#          nfs:
+#            server: 172.17.0.8
+#            path: /
+#            readOnly: no
+{{- end }}
+      containers:
+        - name: jupyterpool
+          image: {{ .Values.jupyterpool.image }}
+          imagePullPolicy: {{ .Values.jupyterpool.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.jupyterpool.port }}
+              protocol: TCP
+          env:
+          - name: DATALAYER_RUN_HOST
+            value: {{ .Values.jupyterpool.env.DATALAYER_RUN_HOST }}
+          - name: JUPYTER_BASE_URL
+            value: /api/jupyter-server
+#          - name: GITHUB_CLIENT_ID
+#            value: {{ .Values.jupyterpool.env.GITHUB_CLIENT_ID }}
+#          - name: GITHUB_CLIENT_SECRET
+#            value: {{ .Values.jupyterpool.env.GITHUB_CLIENT_SECRET }}
+#          - name: GITHUB_OAUTH_CALLBACK_URL
+#            value: {{ .Values.jupyterpool.env.GITHUB_OAUTH_CALLBACK_URL }}
+{{- if .Values.jupyterpool.extraEnvVars }}
+{{ toYaml .Values.jupyterpool.extraEnvVars | indent 10 }}
+{{- end }}
+          readinessProbe:
+            httpGet:
+              path: /api/jupyter-server/login
+              port: 2300
+            successThreshold: 1
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          volumeMounts:
+{{ if eq .Values.jupyterpool.clusterType "minikube" }}
+#            - name: nfs-volume
+#              mountPath: /data
+{{- end }}
+          resources:
+{{ toYaml .Values.jupyterpool.resources | indent 12 }} 
+#        - name: jupyterpool-sidecar
+#          image: {{ .Values.jupyterpool.sidecar.image }}
+#          imagePullPolicy: {{ .Values.jupyterpool.imagePullPolicy }}
+#          args: ["proxy", "-p", "8001"]

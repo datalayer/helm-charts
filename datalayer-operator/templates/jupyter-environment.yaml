@@ -1,0 +1,125 @@
+{{ if eq .Values.operator.crds true -}}
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: jupyter-environments.datalayer.io
+spec:
+  scope: Namespaced
+  group: datalayer.io
+  names:
+    kind: JupyterEnvironment
+    singular: jupyter-environment
+    plural: jupyter-environments
+    shortNames:
+      - je
+      - jes
+      - jenv
+      - jenvs
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+              properties:
+                title:
+                  type: string
+                  title: Environment short description
+                description:
+                  type: string
+                  title: Environment long description
+                dockerImage:
+                  type: string
+                  title: Environment docker image
+                example:
+                  type: string
+                  format: uri
+                  title: Environment example
+                  description: URL pointing to an environment example code.
+                snippets:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        title: A summary of the snippet goal
+                      description:
+                        type: string
+                      code:
+                        type: string
+                    required:
+                      - title
+                      - code
+                kernel:
+                  type: object
+                  properties:
+                    givenNameTemplate:
+                      type: string
+                      title: Template for the user kernel name built on the environment
+                language:
+                  type: string
+                  title: Programming language of the environment
+                resourcesRanges:
+                  type: object
+                  title: Pod recommended resources
+                  properties:
+                    default: 
+                      type: object
+                      properties:
+                        requests:
+                          type: object
+                          properties:
+                            cpu:
+                              type: string
+                            memory:
+                              type: string
+                            nvidia.com/gpu:
+                              type: string
+                          required:
+                            - cpu
+                            - memory
+                        limits:
+                          type: object
+                          properties:
+                            cpu:
+                              type: string
+                            memory:
+                              type: string
+                            nvidia.com/gpu:
+                              type: string
+                      required:
+                        - limits
+                  required:
+                    - default
+              required:
+                - title
+                - dockerImage
+                - language
+                - resourcesRanges
+            status:
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+              properties:
+                create_jupyter_environment:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+      additionalPrinterColumns:
+        - name: DockerImage
+          type: string
+          priority: 0
+          jsonPath: .spec.dockerImage
+          description: Docker image for the Jupyter pods.
+        - name: Message
+          type: string
+          priority: 0
+          jsonPath: .status.create_jupyter_environment.message
+          description: Message returned after the Jupyter Environment creation.
+{{- end }}

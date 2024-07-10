@@ -1,0 +1,41 @@
+iam:
+  image: datalayer/iam:0.1.1
+  imagePullPolicy: Always
+  port: 9700
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  clusterType: any
+  certificateIssuer: letsencrypt
+  ingressClass: datalayer-traefik
+#  resources:
+#    limits:
+#      memory: "8192Mi"
+#      cpu: "3000m"
+  env:
+    DATALAYER_RUN_HOST: ""
+    DATALAYER_CDN_URL: ""
+    DATALAYER_RUNTIME_ENV: "prod"
+    DATALAYER_CREDITS_PROVIDER: ""
+    DATALAYER_GITHUB_CLIENT_ID: ""
+    DATALAYER_GITHUB_CLIENT_SECRET: ""
+    DATALAYER_IAM_API_KEY: ""
+    DATALAYER_JWT_ISSUER: ""
+    DATALAYER_JWT_SECRET: ""
+    DATALAYER_JWT_ALGORITHM: ""
+    DATALAYER_AUTHZ_ENGINE: ""
+    DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
+    DATALAYER_OPENFGA_STORE_ID: ""
+    DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
+    DATALAYER_RUN_HOST: ""
+    DATALAYER_SMTP_HOST: ""
+    DATALAYER_SMTP_PASSWORD: ""
+    DATALAYER_SMTP_PORT: "0"
+    DATALAYER_SMTP_USERNAME: ""
+    DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
+    DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
+    # Addons
+    DATALAYER_STRIPE_API_KEY: ""
+    DATALAYER_STRIPE_JS_API_KEY: ""
+    DATALAYER_STRIPE_BILLING_ROUTE: "/usage/billing"
+    DATALAYER_STRIPE_PRODUCT_ID: ""
+    DATALAYER_STRIPE_WEBHOOK_SECRET: ""

@@ -1,0 +1,7 @@
+jupyterpool:
+  clusterType: ovh
+  image: datalayer/jupyterpool:0.0.8
+  imagePullPolicy: Always
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  replicaCount: 1

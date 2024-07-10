@@ -1,0 +1,22 @@
+operator:
+  image: datalayer/operator:0.1.1
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  imagePullPolicy: Always
+  crds: false
+  port: 2111
+#  resources:
+#    limits:
+#      memory: "8192Mi"
+#      cpu: "3000m"
+  env:
+    AWS_ACCESS_KEY_ID: ""
+    AWS_DEFAULT_REGION: ""
+    AWS_SECRET_ACCESS_KEY: ""
+    DATALAYER_CERT_ISSUER: "letsencrypt"
+    DATALAYER_IAM_API_KEY: ""
+    DATALAYER_IAM_HOST: "datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"
+    DATALAYER_INGRESS_CLASS_NAME: "datalayer-traefik"
+    DATALAYER_OPERATOR_API_KEY: ""
+    DATALAYER_RUN_HOST: ""
+    DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"

@@ -1,0 +1,53 @@
+{{ if eq .Values.jupyter.clusterType "any" -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jupyter-ingress
+  annotations:
+    acme.cert-manager.io/http01-ingress-class: {{ .Values.jupyter.ingressClass }}
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: {{ .Values.jupyter.certificateIssuer }}
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/affinity-mode: persistent
+    nginx.ingress.kubernetes.io/session-cookie-expires: '172800'
+    nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
+    nginx.ingress.kubernetes.io/session-cookie-samesite: None
+    nginx.ingress.kubernetes.io/session-cookie-name: jupyter-affinity
+    nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
+    # FIXME what is the best way to parametrize this - full url or composition?
+#    nginx.ingress.kubernetes.io/auth-url: 'http://datalayer-iam-svc.{{ .Release.Namespace }}.svc.cluster.local:9500/api/iam/v1/auth'
+#    nginx.ingress.kubernetes.io/auth-snippet: |
+#      proxy_set_header X-Forwarded-Method $request_method;
+#      proxy_set_header X-Forwarded-Proto $scheme;
+#      proxy_set_header X-Forwarded-Host $host;
+#      proxy_set_header X-Forwarded-Uri $scheme://$host$request_uri;
+    # FIXME HttpOnly needs also to be taken into account.
+    # TODO apply that logic on spacer and library services.
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "Set-Cookie: SameSite=None";
+      more_set_headers "Set-Cookie: Secure";
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+#    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-iam-auth@kubernetescrd
+  labels:
+    app: jupyter
+spec:
+  ingressClassName: {{ .Values.jupyter.ingressClass }}
+  tls:
+  - hosts:
+    - {{ .Values.jupyter.env.DATALAYER_RUN_HOST }}
+    secretName: {{ .Values.jupyter.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
+  rules:
+  - host: {{ .Values.jupyter.env.DATALAYER_RUN_HOST }}
+    http:
+      paths:
+      - path: /api/jupyter
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-svc
+            port: 
+              number: {{ .Values.jupyter.port }}
+{{- end }}

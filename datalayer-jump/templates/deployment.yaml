@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "jump.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "jump.name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "jump.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      subdomain: jump
+      terminationGracePeriodSeconds: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/api
+                operator: In
+                values:
+                - "true"
+      containers:
+        - name: jump
+          image: {{ .Values.jump.image }}
+          imagePullPolicy: {{ .Values.jump.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.jump.port }}
+              protocol: TCP
+          env:
+          - name: DATALAYER_RUN_HOST
+            value: {{ .Values.jump.env.DATALAYER_RUN_HOST }}
+#          readinessProbe:
+#            httpGet:
+#              path: /api/jump/version
+#              port: 2223
+#            successThreshold: 1
+#            failureThreshold: 5
+#            initialDelaySeconds: 5
+#            periodSeconds: 15
+          volumeMounts:
+          resources:
+{{ toYaml .Values.jump.resources | indent 12 }} 
+#         - name: jump-sidecar
+#           image: {{ .Values.jump.sidecar.image }}
+#           imagePullPolicy: {{ .Values.jump.imagePullPolicy }}
+#           args: ["proxy", "-p", "8001"]

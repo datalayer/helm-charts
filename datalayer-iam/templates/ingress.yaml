@@ -1,0 +1,40 @@
+{{ if eq .Values.iam.clusterType "any" -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: iam-ingress
+  annotations:
+    acme.cert-manager.io/http01-ingress-class: {{ .Values.iam.ingressClass }}
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: {{ .Values.iam.certificateIssuer }}
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/affinity-mode: persistent
+    nginx.ingress.kubernetes.io/session-cookie-expires: '172800'
+    nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
+    nginx.ingress.kubernetes.io/session-cookie-samesite: None
+    nginx.ingress.kubernetes.io/session-cookie-name: iam-affinity
+    nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+  labels:
+    app: iam
+spec:
+  ingressClassName: {{ .Values.iam.ingressClass }}
+  tls:
+  - hosts:
+    - {{ .Values.iam.env.DATALAYER_RUN_HOST }}
+    secretName: {{ .Values.iam.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
+  rules:
+  - host: {{ .Values.iam.env.DATALAYER_RUN_HOST }}
+    http:
+      paths:
+      - path: /api/iam
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-svc
+            port: 
+              number: {{ .Values.iam.port }}
+{{- end }}

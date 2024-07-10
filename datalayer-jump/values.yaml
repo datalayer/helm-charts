@@ -1,0 +1,30 @@
+jump:
+  image: datalayer/jump:0.0.6
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  imagePullPolicy: IfNotPresent
+  port: 2223
+  service:
+    name: jump
+    type: LoadBalancer
+#  resources:
+#    limits:
+#      memory: "8192Mi"
+#      cpu: "3000m"
+  env:
+    DATALAYER_RUN_HOST: ""
+    DATALAYER_CDN_URL: ""
+    DATALAYER_SOLR_ZK_HOST: ""
+    DATALAYER_KEYCLOAK_REALM_CLIENT_SECRET: ""
+    DATALAYER_KEYCLOAK_SCHEME_HOST: ""
+    AWS_ACCESS_KEY_ID: ""
+    AWS_SECRET_ACCESS_KEY: ""
+    AWS_DEFAULT_REGION: ""
+    DATALAYER_JWT_SECRET: ""
+    DATALAYER_SMTP_HOST: ""
+    DATALAYER_SMTP_PORT: ""
+    DATALAYER_SMTP_USERNAME: ""
+    DATALAYER_SMTP_PASSWORD: ""
+    DATALAYER_LDAP_HOST: ""
+    DATALAYER_LDAP_BIND: ""
+    DATALAYER_LDAP_BIND_PWD: ""

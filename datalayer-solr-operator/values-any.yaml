@@ -1,0 +1,5 @@
+nodeSelector:
+  role.datalayer.io/system: "true"
+zookeeper-operator:
+  nodeSelector:
+    role.datalayer.io/system: "true"

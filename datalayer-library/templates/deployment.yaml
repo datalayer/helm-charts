@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "library.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "library.name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "library.name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "library.name" . }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/api
+                operator: In
+                values:
+                - "true"
+      imagePullSecrets:
+            - name: reg-creds
+      containers:
+        - name: library
+          image: {{ .Values.library.image }}
+          imagePullPolicy: {{ .Values.library.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.library.port }}
+              protocol: TCP
+          env:
+          - name: DATALAYER_RUN_HOST
+            value: {{ .Values.library.env.DATALAYER_RUN_HOST }}
+          - name: DATALAYER_CDN_URL
+            value: {{ .Values.library.env.DATALAYER_CDN_URL }}
+          - name: DATALAYER_RUNTIME_ENV
+            value: {{ .Values.library.env.DATALAYER_RUNTIME_ENV }}
+          - name: DATALAYER_LIBRARY_AUTH_CALLBACK
+            value: {{ .Values.library.env.DATALAYER_LIBRARY_AUTH_CALLBACK }}
+          - name: DATALAYER_LIBRARY_UI_REDIRECT
+            value: {{ .Values.library.env.DATALAYER_LIBRARY_UI_REDIRECT }}
+          - name: DATALAYER_SOLR_ZK_HOST
+            value: {{ .Values.library.env.DATALAYER_SOLR_ZK_HOST }}
+          - name: DATALAYER_SOLR_USERNAME
+            value: {{ .Values.library.env.DATALAYER_SOLR_USERNAME }}
+          - name: DATALAYER_SOLR_PASSWORD
+            value: {{ .Values.library.env.DATALAYER_SOLR_PASSWORD }}
+          - name: AWS_ACCESS_KEY_ID
+            value: {{ .Values.library.env.AWS_ACCESS_KEY_ID }}
+          - name: AWS_SECRET_ACCESS_KEY
+            value: {{ .Values.library.env.AWS_SECRET_ACCESS_KEY }}
+          - name: AWS_DEFAULT_REGION
+            value: {{ .Values.library.env.AWS_DEFAULT_REGION }}
+          - name: DATALAYER_SMTP_HOST
+            value: {{ .Values.library.env.DATALAYER_SMTP_HOST }}
+          - name: DATALAYER_SMTP_PORT
+            value: {{ .Values.library.env.DATALAYER_SMTP_PORT | quote }}
+          - name: DATALAYER_SMTP_USERNAME
+            value: {{ .Values.library.env.DATALAYER_SMTP_USERNAME }}
+          - name: DATALAYER_SMTP_PASSWORD
+            value: {{ .Values.library.env.DATALAYER_SMTP_PASSWORD }}
+          - name: DATALAYER_JWT_CACHE_VALIDATE
+            value: "false"
+          - name: DATALAYER_JWT_ISSUER
+            value: {{ .Values.library.env.DATALAYER_JWT_ISSUER }}
+          - name: DATALAYER_JWT_SECRET
+            value: {{ .Values.library.env.DATALAYER_JWT_SECRET }}
+          - name: DATALAYER_JWT_ALGORITHM
+            value: {{ .Values.library.env.DATALAYER_JWT_ALGORITHM }}
+          - name: DATALAYER_AUTHZ_ENGINE
+            value: {{ .Values.library.env.DATALAYER_AUTHZ_ENGINE }}
+          - name: DATALAYER_OPENFGA_REST_URL
+            value: {{ .Values.library.env.DATALAYER_OPENFGA_REST_URL }}
+          - name: DATALAYER_OPENFGA_STORE_ID
+            value: {{ .Values.library.env.DATALAYER_OPENFGA_STORE_ID }}
+          - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
+            value: {{ .Values.library.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID }}
+          readinessProbe:
+            httpGet:
+              path: /api/library/version
+              port: 9800
+            successThreshold: 1
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          volumeMounts:
+          resources:
+{{ toYaml .Values.library.resources | indent 12 }} 
+#         - name: library-sidecar
+#           image: {{ .Values.library.sidecar.image }}
+#          imagePullPolicy: {{ .Values.library.imagePullPolicy }}
+#           args: ["proxy", "-p", "8001"]
