@@ -32,6 +32,7 @@ iam:
     DATALAYER_SMTP_PORT: "0"
     DATALAYER_SMTP_USERNAME: ""
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
+    DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     # Addons
     DATALAYER_STRIPE_API_KEY: ""
