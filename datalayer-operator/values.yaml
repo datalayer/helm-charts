@@ -5,10 +5,15 @@ operator:
   imagePullPolicy: Always
   crds: true
   port: 2111
-#  resources:
-#    limits:
-#      memory: "8192Mi"
-#      cpu: "3000m"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: role.datalayer.io/api
+                operator: In
+                values:
+                  - "true"
   env:
     AWS_ACCESS_KEY_ID: ""
     AWS_DEFAULT_REGION: ""
@@ -23,3 +28,7 @@ operator:
     DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUN_HOST: ""
+  # resources:
+  #   limits:
+  #     memory: "8192Mi"
+  #     cpu: "3000m"

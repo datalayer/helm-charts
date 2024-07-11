@@ -1,0 +1,11 @@
+suite: test roles
+templates:
+  - templates/roles.yaml
+tests:
+  - it: "test ClusterRoleBinding subjects"
+    release:
+      namespace: default
+    asserts:
+      - equal: 
+          path: subjects[0].namespace
+          value: default
