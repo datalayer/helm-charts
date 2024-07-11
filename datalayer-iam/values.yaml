@@ -26,7 +26,6 @@ iam:
     DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
     DATALAYER_OPENFGA_STORE_ID: ""
     DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
-    DATALAYER_RUN_HOST: ""
     DATALAYER_SMTP_HOST: ""
     DATALAYER_SMTP_PASSWORD: ""
     DATALAYER_SMTP_PORT: "0"
