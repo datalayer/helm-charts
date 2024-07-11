@@ -62,6 +62,8 @@ spec:
             value: {{ .Values.operator.env.DATALAYER_IAM_API_KEY }}
           - name: DATALAYER_IAM_HOST
             value: {{ .Values.operator.env.DATALAYER_IAM_HOST }}
+          - name: DATALAYER_PUB_SUB_ENGINE
+            value: {{ .Values.operator.env.DATALAYER_PUB_SUB_ENGINE }}
           - name: DATALAYER_PULSAR_URL
             value: {{ .Values.operator.env.DATALAYER_PULSAR_URL }}
           readinessProbe:

@@ -96,6 +96,8 @@ spec:
             value: {{ .Values.iam.env.DATALAYER_CREDITS_PROVIDER }}
           - name: DATALAYER_IAM_API_KEY
             value: {{ .Values.iam.env.DATALAYER_IAM_API_KEY }}
+          - name: DATALAYER_PUB_SUB_ENGINE
+            value: {{ .Values.iam.env.DATALAYER_PUB_SUB_ENGINE }}
           - name: DATALAYER_PULSAR_URL
             value: {{ .Values.iam.env.DATALAYER_PULSAR_URL }}
           # Addons

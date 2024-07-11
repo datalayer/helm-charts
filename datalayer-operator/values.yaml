@@ -19,4 +19,5 @@ operator:
     DATALAYER_INGRESS_CLASS_NAME: "datalayer-traefik"
     DATALAYER_OPERATOR_API_KEY: ""
     DATALAYER_RUN_HOST: ""
+    DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
