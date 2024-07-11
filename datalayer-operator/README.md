@@ -20,11 +20,13 @@ Datalayer Operator
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| operator.crds | bool | `false` |  |
+| operator.crds | bool | `true` |  |
 | operator.env.AWS_ACCESS_KEY_ID | string | `""` |  |
 | operator.env.AWS_DEFAULT_REGION | string | `""` |  |
 | operator.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
+| operator.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
 | operator.env.DATALAYER_CERT_ISSUER | string | `"letsencrypt"` |  |
+| operator.env.DATALAYER_DOCKER_REGISTRY | string | `""` |  |
 | operator.env.DATALAYER_IAM_API_KEY | string | `""` |  |
 | operator.env.DATALAYER_IAM_HOST | string | `"datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"` |  |
 | operator.env.DATALAYER_INGRESS_CLASS_NAME | string | `"datalayer-traefik"` |  |

@@ -25,7 +25,7 @@ Datalayer Jupyter
 | jupyter.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | jupyter.env.DATALAYER_CDN_URL | string | `""` |  |
 | jupyter.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
-| jupyter.env.DATALAYER_JWT_ISSUER | string | `""` |  |
+| jupyter.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | jupyter.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | jupyter.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | jupyter.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |

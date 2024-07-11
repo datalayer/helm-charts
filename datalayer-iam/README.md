@@ -22,22 +22,24 @@ Datalayer IAM
 |-----|------|---------|-------------|
 | iam.certificateIssuer | string | `"letsencrypt"` |  |
 | iam.clusterType | string | `"any"` |  |
-| iam.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
+| iam.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
 | iam.env.DATALAYER_CDN_URL | string | `""` |  |
 | iam.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | iam.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | iam.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_IAM_API_KEY | string | `""` |  |
 | iam.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
-| iam.env.DATALAYER_JWT_ISSUER | string | `""` |  |
+| iam.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
+| iam.env.DATALAYER_JWT_DEFAULT_KID_ISSUER | string | `""` |  |
+| iam.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | iam.env.DATALAYER_JWT_SECRET | string | `""` |  |
+| iam.env.DATALAYER_JWT_SKIP_3RD_TOKEN_SIGNATURE_VERIFICATION | string | `"false"` |  |
 | iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | iam.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | iam.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
 | iam.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | iam.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| iam.env.DATALAYER_RUN_HOST | string | `""` |  |
 | iam.env.DATALAYER_RUN_HOST | string | `""` |  |
 | iam.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | iam.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
@@ -49,6 +51,7 @@ Datalayer IAM
 | iam.env.DATALAYER_STRIPE_JS_API_KEY | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_PRODUCT_ID | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
+| iam.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | iam.image | string | `"datalayer/iam:0.1.1"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
