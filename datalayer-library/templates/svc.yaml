@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-svc
   labels:
-    app: {{ template "library.name" . }}
+    app: {{ template "library.app-name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -22,6 +22,6 @@ spec:
     protocol: TCP
     targetPort: {{ .Values.library.port }}
   selector:
-    app: {{ template "library.name" . }}
+    app: {{ template "library.app-name" . }}
     release: {{ .Release.Name }}
 #  externalTrafficPolicy: Local       # Important?!

@@ -20,3 +20,10 @@ Define the name of the client service for operator.
 {{- define "operator.service-name" -}}
 {{- printf "%s-%s" (include "operator.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Define the value for the app label.
+*/}}
+{{- define "operator.app-name" -}}
+{{- printf "%s" .Chart.Name | replace "datalayer-" "" -}}
+{{- end -}}

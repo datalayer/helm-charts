@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-svc
   labels:
-    app: {{ template "operator.name" . }}
+    app: {{ template "operator.app-name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -17,6 +17,6 @@ spec:
     protocol: TCP
     targetPort: {{ .Values.operator.port }}
   selector:
-    app: {{ template "operator.name" . }}
+    app: {{ template "operator.app-name" . }}
     release: {{ .Release.Name }}
 #  externalTrafficPolicy: Local       # Important?!

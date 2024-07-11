@@ -4,21 +4,21 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "spacer.name" . }}
+    app: {{ template "spacer.app-name" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "spacer.name" . }}
+      app: {{ template "spacer.app-name" . }}
   strategy:
     rollingUpdate:
       maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: {{ template "spacer.name" . }}
+        app: {{ template "spacer.app-name" . }}
         release: {{ .Release.Name }}
-        datalayer.io/app: {{ template "spacer.name" . }}
+        datalayer.io/app: {{ template "spacer.app-name" . }}
     spec:
       terminationGracePeriodSeconds: 0
       affinity:
