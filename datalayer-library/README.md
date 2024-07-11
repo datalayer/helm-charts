@@ -14,7 +14,7 @@ Datalayer Library
 
 ## Source Code
 
-* <https://github.com/datalayer/services/tree/main/plane/etc/helm/datalayer-library>
+* <https://github.com/datalayer/helm-charts/tree/main/datalayer-library>
 
 ## Values
 

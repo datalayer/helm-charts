@@ -14,7 +14,7 @@ Datalayer IAM
 
 ## Source Code
 
-* <https://github.com/datalayer/services/tree/main/plane/etc/helm/datalayer-iam>
+* <https://github.com/datalayer/helm-charts/tree/main/datalayer-iam>
 
 ## Values
 

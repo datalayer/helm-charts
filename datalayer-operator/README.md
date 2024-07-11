@@ -14,7 +14,7 @@ Datalayer Operator
 
 ## Source Code
 
-* <https://github.com/datalayer/services/tree/main/plane/etc/helm/datalayer-operator>
+* <https://github.com/datalayer/helm-charts/tree/main/datalayer-operator>
 
 ## Values
 
