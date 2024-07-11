@@ -10,7 +10,7 @@ Jupyterpool
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Datalayer | <info@datalayer.io> |  |
+| Datalayer | <support@datalayer.io> |  |
 
 ## Source Code
 
