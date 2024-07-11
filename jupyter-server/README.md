@@ -1,24 +1,35 @@
-[![Datalayer](https://assets.datalayer.tech/datalayer-25.svg)](https://datalayer.io)
+# jupyter-server
 
-# Datalayer Jupyter Server Helm Chart
+![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square) ![AppVersion: 0.0.6](https://img.shields.io/badge/AppVersion-0.0.6-informational?style=flat-square)
 
-```bash
-export RELEASE=jupyter-server
-export NAMESPACE=datalayer
-helm upgrade \
-  --install $RELEASE \
-  $DATALAYER_HOME/etc/helm/jupyter-server \
-  --namespace $NAMESPACE \
-  --timeout 99999s
-```
+Jupyter Server
 
-```bash
-export POD_NAME=$(kubectl get pods -n datalayer -l "app=jupyter-server" -o jsonpath="{.items[0].metadata.name}")
-echo https://127.0.0.1:8888
-kubectl -n datalayer port-forward $POD_NAME 8888:8888
-```
+**Homepage:** <https://datalayer.io>
 
-```bash
-helm delete $RELEASE --purge && \
-  kubectl delete namespace $NAMESPACE
-```
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Datalayer | <info@datalayer.io> |  |
+
+## Source Code
+
+* <https://github.com/datalayer/services/tree/main/plane/etc/helm/datalayer-jupyter-server>
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| server.env.DATALAYER_RUN_HOST | string | `""` |  |
+| server.env.GITHUB_CLIENT_ID | string | `""` |  |
+| server.env.GITHUB_CLIENT_SECRET | string | `""` |  |
+| server.env.GITHUB_OAUTH_CALLBACK_URL | string | `""` |  |
+| server.extraEnvVars | list | `[]` |  |
+| server.image | string | `"datalayer/jupyter-server:0.0.8"` |  |
+| server.imagePullPolicy | string | `"IfNotPresent"` |  |
+| server.port | int | `8888` |  |
+| server.replicaCount | int | `1` |  |
+| server.service.name | string | `"jupyter-server"` |  |
+| server.service.type | string | `"LoadBalancer"` |  |
+| server.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
+
