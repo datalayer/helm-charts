@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ default .Release.Namespace .Values.namespace }}
+  namespace: {{ default .Values.jupyter.namespace .Release.Namespace }}
   labels:
     app: {{ template "jupyter.app-name" . }}
 spec:
