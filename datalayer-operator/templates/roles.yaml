@@ -4,7 +4,7 @@ metadata:
   name: datalayer-operator
   labels:
     k8s-app: datalayer-operator
-    app: {{ template "operator.name" . }}
+    app: {{ template "operator.app-name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}

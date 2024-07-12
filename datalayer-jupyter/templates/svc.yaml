@@ -9,7 +9,7 @@ metadata:
     traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.samesite: "none"
   labels:
-    app: {{ template "jupyter.name" . }}
+    app: {{ template "jupyter.app-name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -19,5 +19,5 @@ spec:
   - port: {{ .Values.jupyter.port }}
     name: jupyter-http
   selector:
-    app: {{ template "jupyter.name" . }}
+    app: {{ template "jupyter.app-name" . }}
     release: {{ .Release.Name }}

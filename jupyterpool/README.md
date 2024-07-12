@@ -10,11 +10,11 @@ Jupyterpool
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Datalayer | <info@datalayer.io> |  |
+| Datalayer | <support@datalayer.io> |  |
 
 ## Source Code
 
-* <https://github.com/datalayer/services/tree/main/plane/etc/helm/datalayer-jupyterpool>
+* <https://github.com/datalayer/helm-charts/tree/main/datalayer-jupyterpool>
 
 ## Values
 

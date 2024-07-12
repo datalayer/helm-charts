@@ -1,4 +1,4 @@
-# spacer
+# datalayer-spacer
 
 ![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square) ![AppVersion: 0.0.6](https://img.shields.io/badge/AppVersion-0.0.6-informational?style=flat-square)
 
@@ -10,11 +10,11 @@ Datalayer Spacer
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Datalayer | <info@datalayer.io> |  |
+| Datalayer | <support@datalayer.io> |  |
 
 ## Source Code
 
-* <https://github.com/datalayer/services/tree/main/plane/etc/helm/datalayer-spacer>
+* <https://github.com/datalayer/helm-charts/tree/main/datalayer-spacer>
 
 ## Values
 

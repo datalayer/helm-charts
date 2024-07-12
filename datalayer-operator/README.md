@@ -1,4 +1,4 @@
-# operator
+# datalayer-operator
 
 ![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![AppVersion: 0.1.1](https://img.shields.io/badge/AppVersion-0.1.1-informational?style=flat-square)
 
@@ -10,11 +10,11 @@ Datalayer Operator
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Datalayer | <info@datalayer.io> |  |
+| Datalayer | <support@datalayer.io> |  |
 
 ## Source Code
 
-* <https://github.com/datalayer/services/tree/main/plane/etc/helm/datalayer-operator>
+* <https://github.com/datalayer/helm-charts/tree/main/datalayer-operator>
 
 ## Values
 
