@@ -1,0 +1,10 @@
+suite: test traefik-middleware
+templates:
+  - templates/traefik-middleware.yaml
+tests:
+  - it: "test traefik middleware resource"
+    values:
+      - ./values/alternate_ingressclass.yaml
+    asserts:
+      - hasDocuments:
+          count: 0

@@ -1,0 +1,59 @@
+suite: test deployment
+templates:
+  - templates/deployment.yaml
+tests:
+  - it: "test affinity"
+    asserts:
+      - isSubset:
+          path: spec.template.spec
+          content:
+            affinity:
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: role.datalayer.io/api
+                      operator: In
+                      values:
+                      - "true"
+  - it: "test environment variables"
+    asserts:
+      - isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            env:
+            - name: DATALAYER_SOLR_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: solr-basic-auth
+            - name: DATALAYER_SOLR_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: solr-basic-auth
+            - name: DATALAYER_AUTHZ_ENGINE
+              value: ""
+            - name: DATALAYER_CDN_URL
+              value: ""
+            - name: DATALAYER_JWT_ALGORITHM
+              value: ""
+            - name: DATALAYER_JWT_ISSUER
+              value: "https://id.datalayer.run"
+            - name: DATALAYER_JWT_SECRET
+              value: ""
+            - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
+              value: ""
+            - name: DATALAYER_OPENFGA_REST_URL
+              value: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
+            - name: DATALAYER_OPENFGA_STORE_ID
+              value: ""
+            - name: DATALAYER_OPERATOR_API_KEY
+              value: ""
+            - name: DATALAYER_RUNTIME_ENV
+              value: "prod"
+            - name: DATALAYER_RUN_HOST
+              value: ""
+            - name: DATALAYER_SOLR_ZK_HOST
+              value: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
+

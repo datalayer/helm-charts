@@ -7,10 +7,24 @@ jupyter:
   certificateIssuer: letsencrypt
   ingressClass: datalayer-traefik
   port: 9500
-#  resources:
-#    limits:
-#      memory: "8192Mi"
-#      cpu: "3000m"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/api
+            operator: In
+            values:
+            - "true"
+  envValueFrom:
+    DATALAYER_SOLR_USERNAME:
+      secretKeyRef:
+        name: solr-basic-auth
+        key: username
+    DATALAYER_SOLR_PASSWORD:
+      secretKeyRef:
+        name: solr-basic-auth
+        key: password
   env:
     DATALAYER_AUTHZ_ENGINE: ""
     DATALAYER_CDN_URL: ""
@@ -24,3 +38,8 @@ jupyter:
     DATALAYER_RUNTIME_ENV: "prod"
     DATALAYER_RUN_HOST: ""
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
+
+#  resources:
+#    limits:
+#      memory: "8192Mi"
+#      cpu: "3000m"

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ default .Values.jupyter.namespace .Release.Namespace }}
   labels:
     app: {{ template "jupyter.app-name" . }}
 spec:
@@ -21,15 +21,9 @@ spec:
         datalayer.io/app: {{ template "jupyter.app-name" . }}
     spec:
       terminationGracePeriodSeconds: 0
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: role.datalayer.io/api
-                operator: In
-                values:
-                - "true"
+      {{- with .Values.jupyter.affinity }}
+      affinity: {{- toYaml . | nindent 8 }}
+      {{- end }}
       imagePullSecrets:
             - name: reg-creds
       containers:
@@ -39,46 +33,23 @@ spec:
           ports:
             - containerPort: {{ .Values.jupyter.port }}
               protocol: TCP
+          {{- if or .Values.jupyter.env .Values.jupyter.envValueFrom }}
           env:
-          - name: DATALAYER_RUN_HOST
-            value: {{ .Values.jupyter.env.DATALAYER_RUN_HOST }}
-          - name: DATALAYER_CDN_URL
-            value: {{ .Values.jupyter.env.DATALAYER_CDN_URL }}
-          - name: DATALAYER_RUNTIME_ENV
-            value: {{ .Values.jupyter.env.DATALAYER_RUNTIME_ENV }}
-          - name: DATALAYER_JWT_ISSUER
-            value: {{ .Values.jupyter.env.DATALAYER_JWT_ISSUER }}
-          - name: DATALAYER_JWT_SECRET
-            value: {{ .Values.jupyter.env.DATALAYER_JWT_SECRET }}
-          - name: DATALAYER_JWT_ALGORITHM
-            value: {{ .Values.jupyter.env.DATALAYER_JWT_ALGORITHM }}
-          - name: DATALAYER_AUTHZ_ENGINE
-            value: {{ .Values.jupyter.env.DATALAYER_AUTHZ_ENGINE }}
-          - name: DATALAYER_OPENFGA_REST_URL
-            value: {{ .Values.jupyter.env.DATALAYER_OPENFGA_REST_URL }}
-          - name: DATALAYER_OPENFGA_STORE_ID
-            value: {{ .Values.jupyter.env.DATALAYER_OPENFGA_STORE_ID }}
-          - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
-            value: {{ .Values.jupyter.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID }}
-          - name: DATALAYER_SOLR_ZK_HOST
-            value: {{ .Values.jupyter.env.DATALAYER_SOLR_ZK_HOST }}
-          - name: DATALAYER_SOLR_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: solr-basic-auth
-                key: username
-          - name: DATALAYER_SOLR_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: solr-basic-auth
-                key: password
-          - name: DATALAYER_OPERATOR_API_KEY
-            value: {{ .Values.jupyter.env.DATALAYER_OPERATOR_API_KEY }}
-          - name: DATALAYER_JWT_CACHE_VALIDATE
-            value: "false"
-          volumeMounts:
-          resources:
-{{ toYaml .Values.jupyter.resources | indent 12 }} 
+            {{- range $key, $value := .Values.jupyter.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom: {{- $value | toYaml | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.jupyter.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.jupyter.resources }}
+          resources: {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.jupyter.volumeMounts }}
+          volumeMounts: {{- toYaml . | nindent 12 }}
+          {{- end }}
 #        - name: jupyter-sidecar
 #          image: {{ .Values.jupyter.sidecar.image }}
 #          imagePullPolicy: {{ .Values.jupyter.imagePullPolicy }}

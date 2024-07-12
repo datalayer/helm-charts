@@ -1,0 +1,61 @@
+name: Unit tests
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+jobs:
+  unittests:
+    runs-on:
+      labels: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@cc733854b1f224978ef800d29e4709d5ee2883e4 # v44.5.5
+        with:
+          files: "./**"
+          dir_names: "true"
+          dir_names_max_depth: "2"
+          dir_names_deleted_files_include_only_deleted_dirs: "true"
+
+      - name: List all changed files
+        id: modify-changed-files
+        run: |
+          echo "Number of changed files: ${{ steps.changed-files.outputs.all_modified_files_count }}"
+
+          folders=""
+          counter=0
+
+          for folder in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            echo "$folder was changed"
+
+            # Check if overall chart folder still exists
+            if [[ -d "$folder" ]]; then
+              folders+="$folder "
+              counter=$((counter+1))
+            else
+              echo "$folder no longer exists and will not be tested"
+            fi
+          done
+
+          modified_folders=$(echo "$folders" | sed 's/ *$//')
+
+          echo "folder_string=$modified_folders" >> "$GITHUB_OUTPUT"
+          echo "folder_count=$counter" >> "$GITHUB_OUTPUT"
+
+      - name: Setup up Helm and unittest
+        uses: d3adb5/helm-unittest-action@66140cd099aa6c4f2ebc59735b8e421135a6d4e3 # v2.4
+        if: steps.modify-changed-files.outputs.folder_count > 0
+        with:
+          helm-version: v3.12.2
+          charts: ${{ steps.changed-files.outputs.folder_string }}

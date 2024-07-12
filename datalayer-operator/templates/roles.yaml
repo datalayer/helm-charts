@@ -15,5 +15,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: default
-# TODO FIX ME - Should be {{ .Values.namespace }} !!!
-  namespace: datalayer-api
+  namespace: {{ default .Values.operator.namespace .Release.Namespace }}
