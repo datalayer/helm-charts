@@ -8,7 +8,7 @@ Datalaeyr Simple Helm Chart Example
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Datalayer | <support@datalayer.io> |  |
+| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
 
 ## Values
 
