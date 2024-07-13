@@ -10,7 +10,7 @@ Jupyter Server
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Datalayer | <support@datalayer.io> |  |
+| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
 
 ## Source Code
 

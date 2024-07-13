@@ -10,7 +10,7 @@ Datalayer IAM
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Datalayer | <support@datalayer.io> |  |
+| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
 
 ## Source Code
 
@@ -20,6 +20,9 @@ Datalayer IAM
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| iam.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/api"` |  |
+| iam.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| iam.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
 | iam.certificateIssuer | string | `"letsencrypt"` |  |
 | iam.clusterType | string | `"any"` |  |
 | iam.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
@@ -34,7 +37,6 @@ Datalayer IAM
 | iam.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | iam.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_JWT_SKIP_3RD_TOKEN_SIGNATURE_VERIFICATION | string | `"false"` |  |
-| iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | iam.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
@@ -53,6 +55,10 @@ Datalayer IAM
 | iam.env.DATALAYER_STRIPE_PRODUCT_ID | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
 | iam.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
+| iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.key | string | `"password"` |  |
+| iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
+| iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
+| iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | iam.image | string | `"datalayer/iam:0.1.1"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |

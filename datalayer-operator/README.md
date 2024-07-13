@@ -10,7 +10,7 @@ Datalayer Operator
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Datalayer | <support@datalayer.io> |  |
+| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
 
 ## Source Code
 
@@ -20,6 +20,9 @@ Datalayer Operator
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/api"` |  |
+| operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
 | operator.crds | bool | `true` |  |
 | operator.env.AWS_ACCESS_KEY_ID | string | `""` |  |
 | operator.env.AWS_DEFAULT_REGION | string | `""` |  |
