@@ -82,8 +82,8 @@ tests:
               value: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
             - name: DATALAYER_STRIPE_API_KEY
               value: ""
-            - name: DATALAYER_STRIPE_BILLING_ROUTE
-              value: "/usage/billing"
+            - name: DATALAYER_STRIPE_CHECKOUT_ROUTE
+              value: "/usage/checkout"
             - name: DATALAYER_STRIPE_JS_API_KEY
               value: ""
             - name: DATALAYER_STRIPE_PRODUCT_ID
