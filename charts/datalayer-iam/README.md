@@ -50,7 +50,7 @@ Datalayer IAM
 | iam.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | iam.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | iam.env.DATALAYER_STRIPE_API_KEY | string | `""` |  |
-| iam.env.DATALAYER_STRIPE_BILLING_ROUTE | string | `"/usage/billing"` |  |
+| iam.env.DATALAYER_STRIPE_CHECKOUT_ROUTE | string | `"/usage/checkout"` |  |
 | iam.env.DATALAYER_STRIPE_JS_API_KEY | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_PRODUCT_ID | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
