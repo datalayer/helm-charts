@@ -16,6 +16,10 @@ iam:
             operator: In
             values:
             - "true"
+  # This is how prometheus discovers this component
+  serviceMonitor:
+    enabled: true
+    interval: 60s
   envValueFrom:
     DATALAYER_SOLR_USERNAME:
       secretKeyRef:

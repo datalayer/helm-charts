@@ -22,6 +22,9 @@ kube-prometheus-stack:
     alertmanagerSpec:
       nodeSelector:
         role.datalayer.io/system: "true"
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/enabled: "true"
   grafana:
     enabled: true
     # Use random password at installation time for Grafana by default by setting empty value to `adminPassword`.
@@ -30,6 +33,10 @@ kube-prometheus-stack:
     adminPassword:
     nodeSelector:
       role.datalayer.io/system: "true"
+    serviceMonitor:
+      labels:
+        monitoring.datalayer.io/enabled: "true"
+      path: /grafana/metrics
     ## Config to serve from sub_path
     # https://github.com/prometheus-community/helm-charts/issues/201
     # https://github.com/kubernetes/ingress-nginx/issues/6140#issuecomment-1132972644
@@ -108,11 +115,17 @@ kube-prometheus-stack:
       routePrefix: /prometheus
       # Scan all namespace for podMonitor
       podMonitorNamespaceSelector: {}
-      # podMonitorSelector:
-      #   matchLabels:
-      #     monitoring.datalayer.io/name: datalayer-jupyter
+      podMonitorSelector:
+        matchLabels:
+          monitoring.datalayer.io/enabled: "true"
+      serviceMonitorSelector:
+        matchLabels:
+          monitoring.datalayer.io/enabled: "true"
       nodeSelector:
         role.datalayer.io/system: "true"
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/enabled: "true"
     ingress:
       enabled: false
   prometheus-node-exporter:
@@ -120,6 +133,9 @@ kube-prometheus-stack:
   prometheusOperator:
     nodeSelector:
       role.datalayer.io/system: "true"
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/enabled: "true"
     admissionWebhooks:
       deployment:
           nodeSelector:
@@ -127,7 +143,3 @@ kube-prometheus-stack:
       patch:
           nodeSelector:
             role.datalayer.io/system: "true"
-  thanosRuler:
-    thanosRulerSpec:
-      nodeSelector:
-        role.datalayer.io/system: "true"
