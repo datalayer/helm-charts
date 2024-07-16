@@ -5,7 +5,7 @@ version: 0.0.6
 appVersion: 0.0.6
 home: https://datalayer.io
 sources:
-- https://github.com/datalayer/helm-charts/tree/main/datalayer-spacer
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-spacer
 icon: https://assets.datalayer.tech/datalayer-square.png
 maintainers:
 - name: Datalayer

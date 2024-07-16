@@ -14,7 +14,7 @@ Datalayer Jupyter
 
 ## Source Code
 
-* <https://github.com/datalayer/helm-charts/tree/main/datalayer-jupyter>
+* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-jupyter>
 
 ## Values
 
