@@ -34,6 +34,6 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - host: {{ .Values.observer.env.DATALAYER_RUN_HOST }}
+    - {{ .Values.observer.env.DATALAYER_RUN_HOST }}
     secretName: {{ .Values.observer.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
 
