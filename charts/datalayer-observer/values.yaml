@@ -5,7 +5,6 @@ observer:
   env:
     DATALAYER_RUN_HOST: "dev1.datalayer.run"
 
-
 #############################################################
 ### Monitoring Stack : kube-prometheus-stack chart
 #############################################################
@@ -24,6 +23,7 @@ kube-prometheus-stack:
         role.datalayer.io/system: "true"
     serviceMonitor:
       additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
         monitoring.datalayer.io/enabled: "true"
   grafana:
     enabled: true
@@ -35,6 +35,7 @@ kube-prometheus-stack:
       role.datalayer.io/system: "true"
     serviceMonitor:
       labels:
+        monitoring.datalayer.io/instance: "observer"
         monitoring.datalayer.io/enabled: "true"
       path: /grafana/metrics
     ## Config to serve from sub_path
@@ -50,14 +51,14 @@ kube-prometheus-stack:
       dashboardproviders.yaml:
         apiVersion: 1
         providers:
-        - name: 'pulsar'
-          orgId: 1
-          folder: 'Pulsar'
-          type: file
-          disableDeletion: true
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/pulsar
+          - name: "pulsar"
+            orgId: 1
+            folder: "Pulsar"
+            type: file
+            disableDeletion: true
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/pulsar
     dashboards:
       pulsar:
         # Download the maintained dashboards from AL 2.0 licenced repo https://github.com/streamnative/apache-pulsar-grafana-dashboard
@@ -116,30 +117,41 @@ kube-prometheus-stack:
       # Scan all namespace for podMonitor
       podMonitorNamespaceSelector: {}
       podMonitorSelector:
-        matchLabels:
-          monitoring.datalayer.io/enabled: "true"
+        # Add pulsar podMonitors - currently the only one used
+        matchExpressions:
+          - key: app
+            operator: In
+            values: [pulsar]
       serviceMonitorSelector:
         matchLabels:
+          monitoring.datalayer.io/instance: "observer"
           monitoring.datalayer.io/enabled: "true"
       nodeSelector:
         role.datalayer.io/system: "true"
     serviceMonitor:
       additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
         monitoring.datalayer.io/enabled: "true"
     ingress:
       enabled: false
   prometheus-node-exporter:
     enabled: true
+    prometheus:
+      monitor:
+        additionalLabels:
+          monitoring.datalayer.io/instance: "observer"
+          monitoring.datalayer.io/enabled: "true"
   prometheusOperator:
     nodeSelector:
       role.datalayer.io/system: "true"
     serviceMonitor:
       additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
         monitoring.datalayer.io/enabled: "true"
     admissionWebhooks:
       deployment:
-          nodeSelector:
-            role.datalayer.io/system: "true"
+        nodeSelector:
+          role.datalayer.io/system: "true"
       patch:
-          nodeSelector:
-            role.datalayer.io/system: "true"
+        nodeSelector:
+          role.datalayer.io/system: "true"

@@ -11,5 +11,8 @@ bookkeeper:
   replicaCount: 2
 broker:
   replicaCount: 2
+proxy:
+  podMonitor:
+    enabled: false
 zookeeper:
   replicaCount: 2

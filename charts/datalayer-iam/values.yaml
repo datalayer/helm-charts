@@ -19,7 +19,13 @@ iam:
   # This is how prometheus discovers this component
   serviceMonitor:
     enabled: true
-    interval: 60s
+    ## Scrape interval. If not set, the Prometheus default scrape interval is used.
+    ##
+    interval: ""
+    ## Additional labels
+    ##
+    additionalLabels: {}
+    #  foo: bar
   envValueFrom:
     DATALAYER_SOLR_USERNAME:
       secretKeyRef:

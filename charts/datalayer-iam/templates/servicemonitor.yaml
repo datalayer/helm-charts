@@ -7,15 +7,21 @@ metadata:
   labels:
     app: {{ template "iam.app-name" . }}
     monitoring.datalayer.io/enabled: "true"
+    monitoring.datalayer.io/instance: "observer"
+{{- with .Values.iam.serviceMonitor.additionalLabels }}
+{{ toYaml . | indent 4 }}
+{{- end }}
 spec:
   selector:
     matchLabels:
       app: {{ template "iam.app-name" . }}
   endpoints:
-  - interval: {{ .Values.iam.serviceMonitor.interval }}
-    targetPort: {{ .Values.iam.port }}
+  - targetPort: {{ .Values.iam.port }}
     path: /api/iam/metrics
+    {{- if .Values.iam.serviceMonitor.interval }}
+    interval: {{ .Values.iam.serviceMonitor.interval }}
+    {{- end }}
   namespaceSelector:
     matchNames:
-    - {{ default .Values.iam.namespace .Release.Namespace }}
+      - {{ default .Values.iam.namespace .Release.Namespace }}
 {{- end }}
