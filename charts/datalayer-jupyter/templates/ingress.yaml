@@ -15,6 +15,7 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
     nginx.ingress.kubernetes.io/session-cookie-samesite: None
     nginx.ingress.kubernetes.io/session-cookie-name: jupyter-affinity
+    nginx.ingress.kubernetes.io/session-cookie-path: "/"
     nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
     nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
     # FIXME what is the best way to parametrize this - full url or composition?
