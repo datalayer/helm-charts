@@ -1,3 +1,4 @@
+{{- if index .Values "kube-prometheus-stack" "enabled" }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -36,4 +37,4 @@ spec:
   - hosts:
     - {{ .Values.observer.env.DATALAYER_RUN_HOST }}
     secretName: {{ .Values.observer.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
-
+{{- end }}

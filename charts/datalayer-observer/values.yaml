@@ -13,6 +13,7 @@ observer:
 ## https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
 ## For sample values, please see their documentation.
 kube-prometheus-stack:
+  enabled: true
   defaultRules:
     create: true
     rules:
@@ -155,3 +156,9 @@ kube-prometheus-stack:
       patch:
         nodeSelector:
           role.datalayer.io/system: "true"
+
+opentelemetry-operator:
+  enabled: true
+  manager:
+    collectorImage:
+      repository: otel/opentelemetry-collector-k8s
