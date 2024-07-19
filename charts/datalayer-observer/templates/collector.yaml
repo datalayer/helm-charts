@@ -1,10 +1,11 @@
-apiVersion: opentelemetry.io/v1alpha1
+{{- if index .Values "opentelemetry-operator" "enabled" }}
+apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
   name: datalayer-collector
 spec:
   mode: deployment # This configuration is omittable.
-  config: |
+  config:
     receivers:
       otlp:
         protocols:
@@ -55,4 +56,4 @@ spec:
           receivers: [otlp]
           processors: [memory_limiter, batch]
           exporters: [debug]
-          
+{{- end }}

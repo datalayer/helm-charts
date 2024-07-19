@@ -19,6 +19,12 @@ collector:
 
 
 #############################################################
+## Install Opentelemetry Operator CRDs
+#############################################################
+crds:
+  enabled: true
+
+#############################################################
 ### Monitoring Stack : kube-prometheus-stack chart
 #############################################################
 
@@ -172,8 +178,20 @@ kube-prometheus-stack:
         nodeSelector:
           role.datalayer.io/system: "true"
 
+
+#############################################################
+## OpenTelemetry operator
+#############################################################
+
 opentelemetry-operator:
   enabled: true
   manager:
     collectorImage:
-      repository: otel/opentelemetry-collector-k8s
+      repository: otel/opentelemetry-collector-contrib
+    serviceMonitor:
+      enabled: true
+      extraLabels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
+  crds:
+    create: false

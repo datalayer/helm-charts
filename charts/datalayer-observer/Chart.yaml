@@ -12,11 +12,14 @@ maintainers:
   email: support@datalayer.io
   url: https://datalayer.io
 dependencies:
+  # - name: crds
+  #   version: "0.0.0"
+  #   condition: crds.enabled
   - name: kube-prometheus-stack
     version: 61.x.x
     repository: https://prometheus-community.github.io/helm-charts
     condition: kube-prometheus-stack.enabled
-  # - name: opentelemetry-operator
-  #   version: 0.64.x
-  #   repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-  #   condition: opentelemetry-operator.enabled
+  - name: opentelemetry-operator
+    version: 0.64.x
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+    condition: opentelemetry-operator.enabled

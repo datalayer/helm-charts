@@ -1,0 +1,59 @@
+{{- if index .Values "opentelemetry-operator" "enabled" }}
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: datalayer-collector
+spec:
+  mode: deployment # This configuration is omittable.
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    processors:
+      # https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
+      batch: {}
+      # https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor
+      memory_limiter:
+        check_interval: 1s
+        limit_mib: 4000
+        spike_limit_mib: 800
+
+    exporters:
+      # https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter
+      debug:
+        verbosity: detailed
+
+      # Data sources: metrics
+      # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/prometheusexporter
+      prometheus:
+        endpoint: 0.0.0.0:8889
+        namespace: default
+
+    extensions:
+      # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckextension
+      health_check: {}
+      # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/pprofextension
+      pprof: {}
+      # https://github.com/open-telemetry/opentelemetry-collector/blob/main/extension/zpagesextension/README.md
+      zpages: {}
+
+    service:
+      extensions: [health_check, pprof, zpages]
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [debug]
+        metrics:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [prometheus,debug]
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [debug]
+{{- end }}
