@@ -16,16 +16,6 @@ iam:
             operator: In
             values:
             - "true"
-  # This is how prometheus discovers this component
-  serviceMonitor:
-    enabled: true
-    ## Scrape interval. If not set, the Prometheus default scrape interval is used.
-    ##
-    interval: ""
-    ## Additional labels
-    ##
-    additionalLabels: {}
-    #  foo: bar
   envValueFrom:
     DATALAYER_SOLR_USERNAME:
       secretKeyRef:
@@ -67,6 +57,7 @@ iam:
     DATALAYER_STRIPE_WEBHOOK_SECRET: ""
     DATALAYER_SUPPORT_EMAIL: ""
     OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
 
 #  resources:
 #    limits:
