@@ -1,0 +1,28 @@
+{{- if .Values.collector.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: opentelemetry-collector
+  namespace: {{ default .Values.observer.namespace .Release.Namespace }}
+  labels:
+    # FIXME should be configurable
+    app: opentelemetry-collector
+    monitoring.datalayer.io/enabled: "true"
+    monitoring.datalayer.io/instance: "observer"
+{{- with .Values.collector.serviceMonitor.additionalLabels }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  selector:
+    matchLabels:
+      # FIXME should be configurable
+      app: opentelemetry-collector
+  endpoints:
+  - targetPort: prometheus
+    {{- if .Values.collector.serviceMonitor.interval }}
+    interval: {{ .Values.collector.serviceMonitor.interval }}
+    {{- end }}
+  namespaceSelector:
+    matchNames:
+      - {{ default .Values.observer.namespace .Release.Namespace }}
+{{- end }}

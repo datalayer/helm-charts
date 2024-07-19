@@ -5,6 +5,19 @@ observer:
   env:
     DATALAYER_RUN_HOST: "dev1.datalayer.run"
 
+collector:
+  # This is how prometheus discovers the opentelemetry collector
+  serviceMonitor:
+    enabled: true
+    ## Scrape interval. If not set, the Prometheus default scrape interval is used.
+    ##
+    interval: ""
+    ## Additional labels
+    ##
+    additionalLabels: {}
+    #  foo: bar
+
+
 #############################################################
 ### Monitoring Stack : kube-prometheus-stack chart
 #############################################################
@@ -115,6 +128,8 @@ kube-prometheus-stack:
     enabled: true
     prometheusSpec:
       routePrefix: /prometheus
+      enableFeatures:
+        - exemplar-storage
       # Scan all namespace for podMonitor
       podMonitorNamespaceSelector: {}
       podMonitorSelector:
