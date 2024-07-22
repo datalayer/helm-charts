@@ -53,6 +53,11 @@ spec:
           priority: 0
           jsonPath: .spec.size
           description: Number of pods to maintain in the Jupyterpool.
+        - name: BurningRate
+          type: string
+          priority: 0
+          jsonPath: .spec.burningRate
+          description: Burning rate (credits per second).
         - name: Message
           type: string
           priority: 0
