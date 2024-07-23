@@ -258,6 +258,8 @@ loki:
     enabled: false
   # FIXME this is deprecated
   monitoring:
+    dashboards:
+      enabled: true
     serviceMonitor:
       enabled: true
       labels:
