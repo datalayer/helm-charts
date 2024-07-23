@@ -2,10 +2,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: opentelemetry-collector
+  name: {{ default .Values.observer.namespace .Release.Namespace }}-opentelemetry-collector
   namespace: {{ default .Values.observer.namespace .Release.Namespace }}
   labels:
-    # FIXME should be configurable
     app: opentelemetry-collector
     monitoring.datalayer.io/enabled: "true"
     monitoring.datalayer.io/instance: "observer"
@@ -15,10 +14,10 @@ metadata:
 spec:
   selector:
     matchLabels:
-      # FIXME should be configurable
-      app: opentelemetry-collector
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/name: datalayer-collector-collector
   endpoints:
-  - targetPort: prometheus
+  - port: prometheus
     {{- if .Values.collector.serviceMonitor.interval }}
     interval: {{ .Values.collector.serviceMonitor.interval }}
     {{- end }}
