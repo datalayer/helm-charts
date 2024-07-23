@@ -361,9 +361,9 @@ metrics:
 
   ## -- Prometheus is enabled by default.
   ## -- It can be disabled by setting "prometheus: null"
-  prometheus:
+  prometheus: null
     # -- Entry point used to expose metrics.
-    entryPoint: metrics
+    # entryPoint: metrics
     ## Enable metrics on entry points. Default=true
     # addEntryPointsLabels: false
     ## Enable metrics on routers. Default=false
@@ -424,51 +424,51 @@ metrics:
   #    # addServicesLabels: false
   otlp:
     # -- Set to true in order to enable the OpenTelemetry metrics
-    enabled: false
+    enabled: true
     # -- Enable metrics on entry points. Default: true
-    addEntryPointsLabels:
-    # -- Enable metrics on routers. Default: false
-    addRoutersLabels:
-    # -- Enable metrics on services. Default: true
-    addServicesLabels:
-    # -- Explicit boundaries for Histogram data points. Default: [.005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10]
-    explicitBoundaries:
-    # -- Interval at which metrics are sent to the OpenTelemetry Collector. Default: 10s
-    pushInterval:
-    http:
-      # -- Set to true in order to send metrics to the OpenTelemetry Collector using HTTP.
-      enabled: false
-      # -- Format: <scheme>://<host>:<port><path>. Default: http://localhost:4318/v1/metrics
-      endpoint:
-      # -- Additional headers sent with metrics by the reporter to the OpenTelemetry Collector.
-      headers:
-      ## Defines the TLS configuration used by the reporter to send metrics to the OpenTelemetry Collector.
-      tls:
-        # -- The path to the certificate authority, it defaults to the system bundle.
-        ca:
-        # -- The path to the public certificate. When using this option, setting the key option is required.
-        cert:
-        # -- The path to the private key. When using this option, setting the cert option is required.
-        key:
-        # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
-        insecureSkipVerify:
+    # addEntryPointsLabels:
+    # # -- Enable metrics on routers. Default: false
+    # addRoutersLabels:
+    # # -- Enable metrics on services. Default: true
+    # addServicesLabels:
+    # # -- Explicit boundaries for Histogram data points. Default: [.005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10]
+    # explicitBoundaries:
+    # # -- Interval at which metrics are sent to the OpenTelemetry Collector. Default: 10s
+    # pushInterval:
+    # http:
+    #   # -- Set to true in order to send metrics to the OpenTelemetry Collector using HTTP.
+    #   enabled: false
+    #   # -- Format: <scheme>://<host>:<port><path>. Default: http://localhost:4318/v1/metrics
+    #   endpoint:
+    #   # -- Additional headers sent with metrics by the reporter to the OpenTelemetry Collector.
+    #   headers:
+    #   ## Defines the TLS configuration used by the reporter to send metrics to the OpenTelemetry Collector.
+    #   tls:
+    #     # -- The path to the certificate authority, it defaults to the system bundle.
+    #     ca:
+    #     # -- The path to the public certificate. When using this option, setting the key option is required.
+    #     cert:
+    #     # -- The path to the private key. When using this option, setting the cert option is required.
+    #     key:
+    #     # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
+    #     insecureSkipVerify:
     grpc:
       # -- Set to true in order to send metrics to the OpenTelemetry Collector using gRPC
-      enabled: false
+      enabled: true
       # -- Format: <scheme>://<host>:<port><path>. Default: http://localhost:4318/v1/metrics
-      endpoint:
+      endpoint: http://datalayer-collector-collector.datalayer-observer.svc.cluster.local:4317
       # -- Allows reporter to send metrics to the OpenTelemetry Collector without using a secured protocol.
-      insecure:
+      insecure: true
       ## Defines the TLS configuration used by the reporter to send metrics to the OpenTelemetry Collector.
-      tls:
-        # -- The path to the certificate authority, it defaults to the system bundle.
-        ca:
-        # -- The path to the public certificate. When using this option, setting the key option is required.
-        cert:
-        # -- The path to the private key. When using this option, setting the cert option is required.
-        key:
-        # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
-        insecureSkipVerify:
+      # tls:
+      #   # -- The path to the certificate authority, it defaults to the system bundle.
+      #   ca:
+      #   # -- The path to the public certificate. When using this option, setting the key option is required.
+      #   cert:
+      #   # -- The path to the private key. When using this option, setting the cert option is required.
+      #   key:
+      #   # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
+      #   insecureSkipVerify:
 
   ## -- enable optional CRDs for Prometheus Operator
   ##
@@ -523,44 +523,44 @@ metrics:
 # -- https://doc.traefik.io/traefik/observability/tracing/overview/
 tracing:
   # -- Enables tracing for internal resources. Default: false.
-  addInternals:
+  # addInternals:
   otlp:
     # -- See https://doc.traefik.io/traefik/v3.0/observability/tracing/opentelemetry/
-    enabled: false
-    http:
-      # -- Set to true in order to send metrics to the OpenTelemetry Collector using HTTP.
-      enabled: false
-      # -- Format: <scheme>://<host>:<port><path>. Default: http://localhost:4318/v1/metrics
-      endpoint:
-      # -- Additional headers sent with metrics by the reporter to the OpenTelemetry Collector.
-      headers:
-      ## Defines the TLS configuration used by the reporter to send metrics to the OpenTelemetry Collector.
-      tls:
-        # -- The path to the certificate authority, it defaults to the system bundle.
-        ca:
-        # -- The path to the public certificate. When using this option, setting the key option is required.
-        cert:
-        # -- The path to the private key. When using this option, setting the cert option is required.
-        key:
-        # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
-        insecureSkipVerify:
+    enabled: true
+    # http:
+    #   # -- Set to true in order to send metrics to the OpenTelemetry Collector using HTTP.
+    #   enabled: false
+    #   # -- Format: <scheme>://<host>:<port><path>. Default: http://localhost:4318/v1/metrics
+    #   endpoint:
+    #   # -- Additional headers sent with metrics by the reporter to the OpenTelemetry Collector.
+    #   headers:
+    #   ## Defines the TLS configuration used by the reporter to send metrics to the OpenTelemetry Collector.
+    #   tls:
+    #     # -- The path to the certificate authority, it defaults to the system bundle.
+    #     ca:
+    #     # -- The path to the public certificate. When using this option, setting the key option is required.
+    #     cert:
+    #     # -- The path to the private key. When using this option, setting the cert option is required.
+    #     key:
+    #     # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
+    #     insecureSkipVerify:
     grpc:
       # -- Set to true in order to send metrics to the OpenTelemetry Collector using gRPC
-      enabled: false
+      enabled: true
       # -- Format: <scheme>://<host>:<port><path>. Default: http://localhost:4318/v1/metrics
-      endpoint:
+      endpoint: http://datalayer-collector-collector.datalayer-observer.svc.cluster.local:4317
       # -- Allows reporter to send metrics to the OpenTelemetry Collector without using a secured protocol.
-      insecure:
+      insecure: true
       ## Defines the TLS configuration used by the reporter to send metrics to the OpenTelemetry Collector.
-      tls:
-        # -- The path to the certificate authority, it defaults to the system bundle.
-        ca:
-        # -- The path to the public certificate. When using this option, setting the key option is required.
-        cert:
-        # -- The path to the private key. When using this option, setting the cert option is required.
-        key:
-        # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
-        insecureSkipVerify:
+      # tls:
+      #   # -- The path to the certificate authority, it defaults to the system bundle.
+      #   ca:
+      #   # -- The path to the public certificate. When using this option, setting the key option is required.
+      #   cert:
+      #   # -- The path to the private key. When using this option, setting the cert option is required.
+      #   key:
+      #   # -- When set to true, the TLS connection accepts any certificate presented by the server regardless of the hostnames it covers.
+      #   insecureSkipVerify:
 
 # -- Global command arguments to be passed to all traefik's pods
 globalArguments:
@@ -748,23 +748,23 @@ ports:
     #   - namespace-name1@kubernetescrd
     #   - namespace-name2@kubernetescrd
     middlewares: []
-  metrics:
-    # -- When using hostNetwork, use another port to avoid conflict with node exporter:
-    # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
-    port: 9100
-    # hostPort: 9100
-    # Defines whether the port is exposed if service.type is LoadBalancer or
-    # NodePort.
-    #
-    # -- You may not want to expose the metrics port on production deployments.
-    # If you want to access it from outside your cluster,
-    # use `kubectl port-forward` or create a secure ingress
-    expose:
-      default: false
-    # -- The exposed port for this service
-    exposedPort: 9100
-    # -- The port protocol (TCP/UDP)
-    protocol: TCP
+  # metrics:
+  #   # -- When using hostNetwork, use another port to avoid conflict with node exporter:
+  #   # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
+  #   port: 9100
+  #   # hostPort: 9100
+  #   # Defines whether the port is exposed if service.type is LoadBalancer or
+  #   # NodePort.
+  #   #
+  #   # -- You may not want to expose the metrics port on production deployments.
+  #   # If you want to access it from outside your cluster,
+  #   # use `kubectl port-forward` or create a secure ingress
+  #   expose:
+  #     default: false
+  #   # -- The exposed port for this service
+  #   exposedPort: 9100
+  #   # -- The port protocol (TCP/UDP)
+  #   protocol: TCP
 
 # -- TLS Options are created as TLSOption CRDs
 # https://doc.traefik.io/traefik/https/tls/#tls-options
