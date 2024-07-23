@@ -67,6 +67,11 @@ kube-prometheus-stack:
         serve_from_sub_path: true
     ingress:
       enabled: false
+    sidecar:
+      datasources:
+        exemplarTraceIdDestinations:
+          datasourceUid: tempo
+          traceIdLabelName: TraceID
     additionalDataSources:
       - uid: loki
         orgId: 1
@@ -80,14 +85,42 @@ kube-prometheus-stack:
         database: ''
         basicAuth: false
         isDefault: false
-        # jsonData:
-        #   derivedFields:
-        #     - datasourceUid: tempo
-        #       matcherRegex: (?:trace_id)=(\w+)
-        #       name: TraceID
-        #       url: $${__value.raw}
+        jsonData:
+          derivedFields:
+            - datasourceUid: tempo
+              matcherRegex: (?:trace_id)=(\w+)
+              name: TraceID
+              url: $${__value.raw}
         readOnly: false
-        editable: true    
+        editable: true
+      - uid: tempo
+        orgId: 1
+        name: Tempo
+        type: tempo
+        typeName: Tempo
+        access: proxy
+        url: http://datalayer-observer-tempo.datalayer-observer
+        password: ''
+        user: ''
+        database: ''
+        basicAuth: false
+        isDefault: false
+        jsonData:
+          nodeGraph:
+            enabled: true
+          search:
+            hide: false
+          lokiSearch:
+            datasourceUid: loki
+          tracesToLogs:
+            datasourceUid: loki
+            filterBySpanID: false
+            filterByTraceID: true
+            mapTagNamesEnabled: false
+            tags:
+              - compose_service
+        readOnly: false
+        editable: true
     # Configure Pulsar dashboards for Grafana
     dashboardProviders:
       dashboardproviders.yaml:
@@ -234,6 +267,20 @@ loki:
     replicas: 0
   write:
     replicas: 0
+
+# https://github.com/grafana/helm-charts/tree/main/charts/tempo
+tempo:
+  enabled: true
+  # persistence:
+  #   enabled: true
+  receivers:
+    jaeger:
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      monitoring.datalayer.io/instance: "observer"
+      monitoring.datalayer.io/enabled: "true"
+  reportingEnabled: false
 
 #############################################################
 ## OpenTelemetry operator

@@ -119,7 +119,7 @@ spec:
       pipelines:
         logs:
           receivers: [filelog]
-          processors: [memory_limiter, resource]
+          processors: [memory_limiter, batch, resource]
           exporters: [otlphttp]
 
   # Mount node folders to access logs within the daemonset containers

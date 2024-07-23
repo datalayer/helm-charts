@@ -23,6 +23,10 @@ dependencies:
     version: 6.x.x
     repository: https://grafana.github.io/helm-charts
     condition: loki.enabled
+  - name: tempo
+    version: 1.x.x
+    repository: https://grafana.github.io/helm-charts
+    condition: tempo.enabled
   - name: opentelemetry-operator
     version: 0.64.x
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts

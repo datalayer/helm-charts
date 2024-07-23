@@ -24,14 +24,19 @@ spec:
 
     exporters:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter
-      debug:
-        verbosity: detailed
+      # debug:
+      #   verbosity: detailed
 
       # Data sources: metrics
       # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/prometheusexporter
       prometheus:
         endpoint: 0.0.0.0:8889
         namespace: default
+
+      otlp:
+        endpoint: datalayer-observer-tempo:4317
+        tls:
+          insecure: true
 
     extensions:
       # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckextension
@@ -47,13 +52,9 @@ spec:
         traces:
           receivers: [otlp]
           processors: [memory_limiter, batch]
-          exporters: [debug]
+          exporters: [otlp]
         metrics:
           receivers: [otlp]
           processors: [memory_limiter, batch]
-          exporters: [prometheus,debug]
-        logs:
-          receivers: [otlp]
-          processors: [memory_limiter, batch]
-          exporters: [debug]
+          exporters: [prometheus]
 {{- end }}
