@@ -254,11 +254,15 @@ loki:
           period: 24h
         object_store: filesystem # we're storing on filesystem so there's no real persistence here.
         schema: v13
-  serviceMonitor:
-    enabled: true
-    labels:
-      monitoring.datalayer.io/instance: "observer"
-      monitoring.datalayer.io/enabled: "true"
+  gateway:
+    enabled: false
+  # FIXME this is deprecated
+  monitoring:
+    serviceMonitor:
+      enabled: true
+      labels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
   singleBinary:
     replicas: 1
   read:
