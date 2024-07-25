@@ -104,7 +104,7 @@ spec:
       # Data sources: traces, metrics, logs
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
       otlphttp:
-        logs_endpoint: http://datalayer-observer-loki.datalayer-observer.svc.cluster.local:3100/otlp/v1/logs
+        logs_endpoint: http://{{ default .Values.observer.namespace .Release.Namespace }}-loki.{{ default .Values.observer.namespace .Release.Namespace }}.svc.cluster.local:3100/otlp/v1/logs
 
     extensions:
       # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckextension
