@@ -34,6 +34,7 @@ Datalayer Jupyter
 | jupyter.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | jupyter.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | jupyter.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
+| jupyter.env.DATALAYER_OPERATOR_HOST | string | `"datalayer-operator-svc.datalayer-api.svc.cluster.local:2111"` |  |
 | jupyter.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | jupyter.env.DATALAYER_RUN_HOST | string | `""` |  |
 | jupyter.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |

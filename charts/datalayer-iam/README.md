@@ -36,7 +36,7 @@ Datalayer IAM
 | iam.env.DATALAYER_JWT_DEFAULT_KID_ISSUER | string | `""` |  |
 | iam.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | iam.env.DATALAYER_JWT_SECRET | string | `""` |  |
-| iam.env.DATALAYER_JWT_SKIP_3RD_TOKEN_SIGNATURE_VERIFICATION | string | `"false"` |  |
+| iam.env.DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION | string | `"false"` |  |
 | iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | iam.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
