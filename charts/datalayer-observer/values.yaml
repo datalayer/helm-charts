@@ -6,6 +6,15 @@ observer:
     DATALAYER_RUN_HOST: "dev1.datalayer.run"
 
 collector:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
   # This is how prometheus discovers the opentelemetry collector
   serviceMonitor:
     enabled: true
@@ -39,20 +48,34 @@ kube-prometheus-stack:
       alertmanager: false
   alertmanager:
     alertmanagerSpec:
-      nodeSelector:
-        role.datalayer.io/system: "true"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role.datalayer.io/system
+              operator: In
+              values:
+              - "true"
     serviceMonitor:
       additionalLabels:
         monitoring.datalayer.io/instance: "observer"
         monitoring.datalayer.io/enabled: "true"
   grafana:
     enabled: true
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role.datalayer.io/system
+              operator: In
+              values:
+              - "true"
     # Use random password at installation time for Grafana by default by setting empty value to `adminPassword`.
     # You can find out the actual password by running the following command:
     # kubectl get secret -l app.kubernetes.io/name=grafana -o=jsonpath="{.items[0].data.admin-password}" | base64 --decode
     adminPassword:
-    nodeSelector:
-      role.datalayer.io/system: "true"
     serviceMonitor:
       enabled: true
       labels:
@@ -203,8 +226,15 @@ kube-prometheus-stack:
         matchLabels:
           monitoring.datalayer.io/instance: "observer"
           monitoring.datalayer.io/enabled: "true"
-      nodeSelector:
-        role.datalayer.io/system: "true"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/system
+                operator: In
+                values:
+                - "true"
     serviceMonitor:
       additionalLabels:
         monitoring.datalayer.io/instance: "observer"
@@ -219,8 +249,15 @@ kube-prometheus-stack:
           monitoring.datalayer.io/instance: "observer"
           monitoring.datalayer.io/enabled: "true"
   prometheusOperator:
-    nodeSelector:
-      role.datalayer.io/system: "true"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role.datalayer.io/system
+              operator: In
+              values:
+              - "true"
     serviceMonitor:
       additionalLabels:
         monitoring.datalayer.io/instance: "observer"
@@ -267,20 +304,58 @@ loki:
         monitoring.datalayer.io/enabled: "true"
   singleBinary:
     replicas: 1
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role.datalayer.io/system
+              operator: In
+              values:
+              - "true"
   read:
     replicas: 0
   backend:
     replicas: 0
   write:
     replicas: 0
+  resultsCache:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role.datalayer.io/system
+              operator: In
+              values:
+              - "true"
+  chunksCache:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: role.datalayer.io/system
+              operator: In
+              values:
+              - "true"
 
 # https://github.com/grafana/helm-charts/tree/main/charts/tempo
 tempo:
   enabled: true
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
   # persistence:
   #   enabled: true
   receivers:
-    jaeger:
+    jaeger: null
   serviceMonitor:
     enabled: true
     additionalLabels:
@@ -294,6 +369,15 @@ tempo:
 
 opentelemetry-operator:
   enabled: true
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
   manager:
     collectorImage:
       repository: otel/opentelemetry-collector-contrib

@@ -3,6 +3,9 @@ apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
   name: datalayer-collector
+{{- with .Values.collector.affinity }}
+affinity: {{- toYaml . | nindent 8 }}
+{{- end }}
 spec:
   mode: deployment # This configuration is omittable.
   config:
@@ -31,10 +34,10 @@ spec:
       # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/prometheusexporter
       prometheus:
         endpoint: 0.0.0.0:8889
-        namespace: default
+        # namespace: default
 
       otlp:
-        endpoint: datalayer-observer-tempo:4317
+        endpoint: {{ default .Values.observer.namespace .Release.Namespace }}-tempo:4317
         tls:
           insecure: true
 
