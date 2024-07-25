@@ -122,7 +122,7 @@ kube-prometheus-stack:
         type: tempo
         typeName: Tempo
         access: proxy
-        url: http://datalayer-observer-tempo.datalayer-observer
+        url: http://datalayer-observer-tempo.datalayer-observer:3100
         password: ''
         user: ''
         database: ''
@@ -140,6 +140,7 @@ kube-prometheus-stack:
             filterBySpanID: false
             filterByTraceID: true
             mapTagNamesEnabled: false
+            # FIXME
             tags:
               - compose_service
         readOnly: false
