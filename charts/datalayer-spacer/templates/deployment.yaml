@@ -39,49 +39,17 @@ spec:
           ports:
             - containerPort: {{ .Values.spacer.port }}
               protocol: TCP
+          {{- if or .Values.spacer.env .Values.spacer.envValueFrom }}
           env:
-          - name: DATALAYER_RUN_HOST
-            value: {{ .Values.spacer.env.DATALAYER_RUN_HOST }}
-          - name: DATALAYER_CDN_URL
-            value: {{ .Values.spacer.env.DATALAYER_CDN_URL }}
-          - name: DATALAYER_RUNTIME_ENV
-            value: {{ .Values.spacer.env.DATALAYER_RUNTIME_ENV }}
-          - name: DATALAYER_SOLR_ZK_HOST
-            value: {{ .Values.spacer.env.DATALAYER_SOLR_ZK_HOST }}
-          - name: DATALAYER_SOLR_USERNAME
-            value: {{ .Values.spacer.env.DATALAYER_SOLR_USERNAME }}
-          - name: DATALAYER_SOLR_PASSWORD
-            value: {{ .Values.spacer.env.DATALAYER_SOLR_PASSWORD }}
-          - name: AWS_ACCESS_KEY_ID
-            value: {{ .Values.spacer.env.AWS_ACCESS_KEY_ID }}
-          - name: AWS_SECRET_ACCESS_KEY
-            value: {{ .Values.spacer.env.AWS_SECRET_ACCESS_KEY }}
-          - name: AWS_DEFAULT_REGION
-            value: {{ .Values.spacer.env.AWS_DEFAULT_REGION }}
-          - name: DATALAYER_SMTP_HOST
-            value: {{ .Values.spacer.env.DATALAYER_SMTP_HOST }}
-          - name: DATALAYER_SMTP_PORT
-            value: {{ .Values.spacer.env.DATALAYER_SMTP_PORT | quote }}
-          - name: DATALAYER_SMTP_USERNAME
-            value: {{ .Values.spacer.env.DATALAYER_SMTP_USERNAME }}
-          - name: DATALAYER_SMTP_PASSWORD
-            value: {{ .Values.spacer.env.DATALAYER_SMTP_PASSWORD }}
-          - name: DATALAYER_JWT_CACHE_VALIDATE
-            value: "false"
-          - name: DATALAYER_JWT_ISSUER
-            value: {{ .Values.spacer.env.DATALAYER_JWT_ISSUER }}
-          - name: DATALAYER_JWT_SECRET
-            value: {{ .Values.spacer.env.DATALAYER_JWT_SECRET }}
-          - name: DATALAYER_JWT_ALGORITHM
-            value: {{ .Values.spacer.env.DATALAYER_JWT_ALGORITHM }}
-          - name: DATALAYER_AUTHZ_ENGINE
-            value: {{ .Values.spacer.env.DATALAYER_AUTHZ_ENGINE }}
-          - name: DATALAYER_OPENFGA_REST_URL
-            value: {{ .Values.spacer.env.DATALAYER_OPENFGA_REST_URL }}
-          - name: DATALAYER_OPENFGA_STORE_ID
-            value: {{ .Values.spacer.env.DATALAYER_OPENFGA_STORE_ID }}
-          - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
-            value: {{ .Values.spacer.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID }}
+            {{- range $key, $value := .Values.spacer.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom: {{- $value | toYaml | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.spacer.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
           readinessProbe:
             httpGet:
               path: /api/spacer/version
