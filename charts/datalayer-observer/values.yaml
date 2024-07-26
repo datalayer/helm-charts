@@ -102,6 +102,7 @@ kube-prometheus-stack:
         type: loki
         typeName: Loki
         access: proxy
+        # Look for loki.server.http_listen_port in loki helm chart to find the port
         url: http://datalayer-observer-loki.datalayer-observer:3100
         password: ''
         user: ''
@@ -110,6 +111,7 @@ kube-prometheus-stack:
         isDefault: false
         jsonData:
           derivedFields:
+            # Link log to trace
             - datasourceUid: tempo
               matcherRegex: (?:trace_id)=(\w+)
               name: TraceID
@@ -122,6 +124,7 @@ kube-prometheus-stack:
         type: tempo
         typeName: Tempo
         access: proxy
+        # Look for tempo.server.http_listen_port in tempo helm chart to find the port
         url: http://datalayer-observer-tempo.datalayer-observer:3100
         password: ''
         user: ''
@@ -214,6 +217,7 @@ kube-prometheus-stack:
     prometheusSpec:
       routePrefix: /prometheus
       enableFeatures:
+        # Needed to link metrics and traces
         - exemplar-storage
       # Scan all namespace for podMonitor
       podMonitorNamespaceSelector: {}
