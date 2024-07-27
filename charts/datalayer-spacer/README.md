@@ -14,7 +14,7 @@ Datalayer Spacer
 
 ## Source Code
 
-* <https://github.com/datalayer/helm-charts/tree/main/datalayer-spacer>
+* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-spacer>
 
 ## Values
 

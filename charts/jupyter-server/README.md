@@ -14,7 +14,7 @@ Jupyter Server
 
 ## Source Code
 
-* <https://github.com/datalayer/helm-charts/tree/main/datalayer-jupyter-server>
+* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-jupyter-server>
 
 ## Values
 

@@ -1,0 +1,5 @@
+# charts
+.chart-packages/**
+.chart-index/**
+charts/**/*.tgz
+charts/**/*.lock

@@ -32,6 +32,7 @@ jupyter:
     DATALAYER_JWT_ISSUER: "https://id.datalayer.run"
     DATALAYER_JWT_CACHE_VALIDATE: "true"
     DATALAYER_JWT_SECRET: ""
+    DATALAYER_JWT_CACHE_VALIDATE: "false"
     DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
     DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
     DATALAYER_OPENFGA_STORE_ID: ""
@@ -40,6 +41,8 @@ jupyter:
     DATALAYER_RUNTIME_ENV: "prod"
     DATALAYER_RUN_HOST: ""
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
+    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
 
 #  resources:
 #    limits:

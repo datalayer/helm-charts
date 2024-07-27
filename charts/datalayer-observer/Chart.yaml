@@ -1,0 +1,33 @@
+apiVersion: v1
+description: Datalayer Observer
+name: datalayer-observer
+version: 0.1.0
+appVersion: 0.1.0
+home: https://datalayer.io
+sources:
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-observer
+icon: https://assets.datalayer.tech/datalayer-square.png
+maintainers:
+- name: Datalayer
+  email: support@datalayer.io
+  url: https://datalayer.io
+dependencies:
+  - name: crds
+    version: "0.0.0"
+    condition: crds.enabled
+  - name: kube-prometheus-stack
+    version: 61.x.x
+    repository: https://prometheus-community.github.io/helm-charts
+    condition: kube-prometheus-stack.enabled
+  - name: loki
+    version: 6.x.x
+    repository: https://grafana.github.io/helm-charts
+    condition: loki.enabled
+  - name: tempo
+    version: 1.x.x
+    repository: https://grafana.github.io/helm-charts
+    condition: tempo.enabled
+  - name: opentelemetry-operator
+    version: 0.64.x
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+    condition: opentelemetry-operator.enabled

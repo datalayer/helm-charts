@@ -14,7 +14,7 @@ Datalayer Jump
 
 ## Source Code
 
-* <https://github.com/datalayer/helm-charts/tree/main/datalayer-jump>
+* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-jump>
 
 ## Values
 

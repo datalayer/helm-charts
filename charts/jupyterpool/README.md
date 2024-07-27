@@ -14,7 +14,7 @@ Jupyterpool
 
 ## Source Code
 
-* <https://github.com/datalayer/helm-charts/tree/main/datalayer-jupyterpool>
+* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-jupyterpool>
 
 ## Values
 

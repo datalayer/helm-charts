@@ -28,6 +28,8 @@ operator:
     DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUN_HOST: ""
+    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
   # resources:
   #   limits:
   #     memory: "8192Mi"

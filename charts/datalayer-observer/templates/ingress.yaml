@@ -1,0 +1,40 @@
+{{- if index .Values "kube-prometheus-stack" "enabled" }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    acme.cert-manager.io/http01-ingress-class: {{ .Values.observer.ingressClass }}
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: {{ .Values.observer.certificateIssuer }}
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/affinity-mode: persistent
+    nginx.ingress.kubernetes.io/session-cookie-expires: '172800'
+    nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
+    nginx.ingress.kubernetes.io/session-cookie-samesite: None
+    nginx.ingress.kubernetes.io/session-cookie-name: grafana-affinity
+    nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  labels:
+    app: grafana
+  name: grafana-ingress
+spec:
+  ingressClassName: {{ .Values.observer.ingressClass }}
+  rules:
+  - host: {{ .Values.observer.env.DATALAYER_RUN_HOST }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: {{ .Release.Namespace }}-grafana
+            port:
+              number: 80
+        path: /grafana
+        pathType: Prefix
+  tls:
+  - hosts:
+    - {{ .Values.observer.env.DATALAYER_RUN_HOST }}
+    secretName: {{ .Values.observer.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
+{{- end }}

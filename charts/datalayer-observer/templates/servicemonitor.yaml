@@ -1,0 +1,27 @@
+{{- if .Values.collector.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ default .Values.observer.namespace .Release.Namespace }}-opentelemetry-collector
+  namespace: {{ default .Values.observer.namespace .Release.Namespace }}
+  labels:
+    app: opentelemetry-collector
+    monitoring.datalayer.io/enabled: "true"
+    monitoring.datalayer.io/instance: "observer"
+{{- with .Values.collector.serviceMonitor.additionalLabels }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/name: datalayer-collector-collector
+  endpoints:
+  - port: prometheus
+    {{- if .Values.collector.serviceMonitor.interval }}
+    interval: {{ .Values.collector.serviceMonitor.interval }}
+    {{- end }}
+  namespaceSelector:
+    matchNames:
+      - {{ default .Values.observer.namespace .Release.Namespace }}
+{{- end }}
