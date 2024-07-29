@@ -39,7 +39,7 @@ tests:
             - name: DATALAYER_JWT_ALGORITHM
               value: ""
             - name: DATALAYER_JWT_CACHE_VALIDATE
-              value: "true"
+              value: "false"
             - name: DATALAYER_JWT_ISSUER
               value: "https://id.datalayer.run"
             - name: DATALAYER_JWT_SECRET
