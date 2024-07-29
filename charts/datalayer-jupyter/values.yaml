@@ -30,7 +30,7 @@ jupyter:
     DATALAYER_CDN_URL: ""
     DATALAYER_JWT_ALGORITHM: ""
     DATALAYER_JWT_ISSUER: "https://id.datalayer.run"
-    DATALAYER_JWT_CACHE_VALIDATE: "true"
+    DATALAYER_JWT_CACHE_VALIDATE: "false"
     DATALAYER_JWT_SECRET: ""
     DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
     DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
