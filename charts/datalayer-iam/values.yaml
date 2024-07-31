@@ -58,6 +58,7 @@ iam:
     DATALAYER_SUPPORT_EMAIL: ""
     OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
+    OTEL_SDK_DISABLED: "false"
 
 #  resources:
 #    limits:

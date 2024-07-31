@@ -42,8 +42,4 @@ jupyter:
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
     OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
-
-#  resources:
-#    limits:
-#      memory: "8192Mi"
-#      cpu: "3000m"
+    OTEL_SDK_DISABLED: "false"

@@ -60,4 +60,5 @@ tests:
               value: ""
             - name: DATALAYER_SOLR_ZK_HOST
               value: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
-
+            - name: OTEL_SDK_DISABLED
+              value: "false"

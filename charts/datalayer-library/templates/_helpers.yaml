@@ -20,3 +20,10 @@ Define the name of the client service for library.
 {{- define "library.service-name" -}}
 {{- printf "%s-%s" (include "library.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Define the value for the app label.
+*/}}
+{{- define "library.app-name" -}}
+{{- printf "%s" .Chart.Name | replace "datalayer-" "" -}}
+{{- end -}}
