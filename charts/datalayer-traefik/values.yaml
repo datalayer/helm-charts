@@ -548,7 +548,7 @@ tracing:
       # -- Set to true in order to send metrics to the OpenTelemetry Collector using gRPC
       enabled: true
       # -- Format: <scheme>://<host>:<port><path>. Default: http://localhost:4318/v1/metrics
-      endpoint: http://datalayer-collector-collector.datalayer-observer.svc.cluster.local:4317
+      endpoint: datalayer-collector-collector.datalayer-observer.svc.cluster.local:4317
       # -- Allows reporter to send metrics to the OpenTelemetry Collector without using a secured protocol.
       insecure: true
       ## Defines the TLS configuration used by the reporter to send metrics to the OpenTelemetry Collector.
