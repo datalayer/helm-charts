@@ -3,3 +3,30 @@ globalArguments:
 
 nodeSelector:
   role.datalayer.io/router: "true"
+
+logs:
+  access:
+    enabled: true
+
+metrics:
+  prometheus: null
+  otlp:
+    enabled: true
+    grpc:
+      # -- Set to true in order to send metrics to the OpenTelemetry Collector using gRPC
+      enabled: true
+      # -- Format: <host>:<port>
+      endpoint: datalayer-collector-collector.datalayer-observer.svc.cluster.local:4317
+      # -- Allows reporter to send metrics to the OpenTelemetry Collector without using a secured protocol.
+      insecure: true
+
+tracing:
+  otlp:
+    enabled: true
+    grpc:
+      # -- Set to true in order to send metrics to the OpenTelemetry Collector using gRPC
+      enabled: true
+      # -- Format: <host>:<port>
+      endpoint: datalayer-collector-collector.datalayer-observer.svc.cluster.local:4317
+      # -- Allows reporter to send metrics to the OpenTelemetry Collector without using a secured protocol.
+      insecure: true
