@@ -43,8 +43,6 @@ spec:
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
-            - name: DATALAYER_JWT_CACHE_VALIDATE
-              value: "true"
           {{- end }}
           {{- with .Values.iam.resources }}
           resources: {{- toYaml . | nindent 12 }}

@@ -48,4 +48,9 @@ tests:
                 value: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
               - name: DATALAYER_RUN_HOST
                 value: ""
-
+              - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
+                value: ""
+              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+                value: ""
+              - name: OTEL_SDK_DISABLED
+                value: "false"

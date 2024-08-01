@@ -26,6 +26,7 @@ Datalayer Library
 | library.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | library.env.DATALAYER_CDN_URL | string | `""` |  |
 | library.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
+| library.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | library.env.DATALAYER_JWT_ISSUER | string | `""` |  |
 | library.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | library.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
@@ -37,6 +38,9 @@ Datalayer Library
 | library.env.DATALAYER_SMTP_PORT | string | `""` |  |
 | library.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | library.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
+| library.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
+| library.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| library.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | library.image | string | `"datalayer/library:0.0.6"` |  |
 | library.imagePullPolicy | string | `"IfNotPresent"` |  |
 | library.port | int | `9800` |  |

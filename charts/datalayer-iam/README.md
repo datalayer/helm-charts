@@ -33,6 +33,7 @@ Datalayer IAM
 | iam.env.DATALAYER_IAM_API_KEY | string | `""` |  |
 | iam.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | iam.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
+| iam.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"true"` |  |
 | iam.env.DATALAYER_JWT_DEFAULT_KID_ISSUER | string | `""` |  |
 | iam.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | iam.env.DATALAYER_JWT_SECRET | string | `""` |  |
@@ -50,11 +51,14 @@ Datalayer IAM
 | iam.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | iam.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | iam.env.DATALAYER_STRIPE_API_KEY | string | `""` |  |
-| iam.env.DATALAYER_STRIPE_CHECKOUT_ROUTE | string | `"/usage/checkout"` |  |
+| iam.env.DATALAYER_STRIPE_CHECKOUT_ROUTE | string | `"checkout"` |  |
 | iam.env.DATALAYER_STRIPE_JS_API_KEY | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_PRODUCT_ID | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
 | iam.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
+| iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
+| iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.key | string | `"password"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |

@@ -48,6 +48,8 @@ tests:
               value: ""
             - name: DATALAYER_JWT_ALLOWED_ISSUERS
               value: ""
+            - name: DATALAYER_JWT_CACHE_VALIDATE
+              value: "true"
             - name: DATALAYER_JWT_DEFAULT_KID_ISSUER
               value: ""
             - name: DATALAYER_JWT_ISSUER
@@ -92,5 +94,9 @@ tests:
               value: ""
             - name: DATALAYER_SUPPORT_EMAIL
               value: ""
-
-
+            - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
+              value: ""
+            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+              value: ""
+            - name: OTEL_SDK_DISABLED
+              value: "false"
