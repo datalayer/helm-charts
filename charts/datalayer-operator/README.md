@@ -37,6 +37,9 @@ Datalayer Operator
 | operator.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
 | operator.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | operator.env.DATALAYER_RUN_HOST | string | `""` |  |
+| operator.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
+| operator.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| operator.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | operator.image | string | `"datalayer/operator:0.1.1"` |  |
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |

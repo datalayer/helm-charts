@@ -26,6 +26,7 @@ Datalayer Spacer
 | spacer.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | spacer.env.DATALAYER_CDN_URL | string | `""` |  |
 | spacer.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
+| spacer.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | spacer.env.DATALAYER_JWT_ISSUER | string | `""` |  |
 | spacer.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | spacer.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
@@ -38,6 +39,9 @@ Datalayer Spacer
 | spacer.env.DATALAYER_SMTP_PORT | string | `""` |  |
 | spacer.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | spacer.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
+| spacer.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
+| spacer.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| spacer.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | spacer.image | string | `"datalayer/spacer:0.0.6"` |  |
 | spacer.imagePullPolicy | string | `"IfNotPresent"` |  |
 | spacer.port | int | `9900` |  |

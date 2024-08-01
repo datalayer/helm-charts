@@ -28,6 +28,7 @@ Datalayer Jupyter
 | jupyter.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | jupyter.env.DATALAYER_CDN_URL | string | `""` |  |
 | jupyter.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
+| jupyter.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | jupyter.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | jupyter.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | jupyter.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
@@ -38,6 +39,9 @@ Datalayer Jupyter
 | jupyter.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | jupyter.env.DATALAYER_RUN_HOST | string | `""` |  |
 | jupyter.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
+| jupyter.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
+| jupyter.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| jupyter.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | jupyter.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.key | string | `"password"` |  |
 | jupyter.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | jupyter.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |

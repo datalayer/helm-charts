@@ -22,42 +22,53 @@ tests:
           path: spec.template.spec.containers[0]
           content:
             env:
-            - name: DATALAYER_SOLR_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: password
-                  name: solr-basic-auth
-            - name: DATALAYER_SOLR_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: username
-                  name: solr-basic-auth
-            - name: DATALAYER_AUTHZ_ENGINE
-              value: ""
-            - name: DATALAYER_CDN_URL
-              value: ""
-            - name: DATALAYER_JWT_ALGORITHM
-              value: ""
-            - name: DATALAYER_JWT_CACHE_VALIDATE
-              value: "false"
-            - name: DATALAYER_JWT_ISSUER
-              value: "https://id.datalayer.run"
-            - name: DATALAYER_JWT_SECRET
-              value: ""
-            - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
-              value: ""
-            - name: DATALAYER_OPENFGA_REST_URL
-              value: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
-            - name: DATALAYER_OPENFGA_STORE_ID
-              value: ""
-            - name: DATALAYER_OPERATOR_API_KEY
-              value: ""
-            - name: DATALAYER_OPERATOR_HOST
-              value: "datalayer-operator-svc.datalayer-api.svc.cluster.local:2111"
-            - name: DATALAYER_RUNTIME_ENV
-              value: "prod"
-            - name: DATALAYER_RUN_HOST
-              value: ""
-            - name: DATALAYER_SOLR_ZK_HOST
-              value: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
-
+              - name: DATALAYER_SOLR_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: password
+                    name: solr-basic-auth
+              - name: DATALAYER_SOLR_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    key: username
+                    name: solr-basic-auth
+              - name: DATALAYER_AUTHZ_ENGINE
+                value: ""
+              - name: DATALAYER_CDN_URL
+                value: ""
+              - name: DATALAYER_JWT_ALGORITHM
+                value: ""
+              - name: DATALAYER_JWT_CACHE_VALIDATE
+                value: "false"
+              - name: DATALAYER_JWT_ISSUER
+                value: https://id.datalayer.run
+              - name: DATALAYER_JWT_SECRET
+                value: ""
+              - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
+                value: ""
+              - name: DATALAYER_OPENFGA_REST_URL
+                value: http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080
+              - name: DATALAYER_OPENFGA_STORE_ID
+                value: ""
+              - name: DATALAYER_OPERATOR_API_KEY
+                value: ""
+              - name: DATALAYER_OPERATOR_HOST
+                value: datalayer-operator-svc.datalayer-api.svc.cluster.local:2111
+              - name: DATALAYER_RUNTIME_ENV
+                value: prod
+              - name: DATALAYER_RUN_HOST
+                value: ""
+              - name: DATALAYER_SOLR_ZK_HOST
+                value: solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local
+              - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
+                value: ""
+              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+                value: ""
+              - name: OTEL_SDK_DISABLED
+                value: "false"
+            image: datalayer/jupyter:0.1.1
+            imagePullPolicy: Always
+            name: jupyter
+            ports:
+              - containerPort: 9500
+                protocol: TCP

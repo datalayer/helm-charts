@@ -1,170 +1,208 @@
-[![Datalayer](https://assets.datalayer.tech/datalayer-25.svg)](https://datalayer.io)
+# datalayer-observer
 
-# Datalayer Observer Helm Chart
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
 
-Install observability tools for Datalayer stack.
+Datalayer Observer
 
-The tools used:
-- OpenTelemetry Collector:
-    - As deployment to proxy metrics and traces from Datalayer services to Prometheus and Tempo
-    - As daemonset to parse pod log files and send them to Loki
-- Prometheus: To gather metrics
-- Tempo: To gather traces
-- Loki: To gather logs
-- AlertManager: To manage alerts
-- Grafana: To visualize and analyze the telemetry
+**Homepage:** <https://datalayer.io>
 
-## How to install?
+## Maintainers
 
-```
-plane up datalayer-observer
-```
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
 
-If you face some issues due to the opentelemetry operator, it is likely
-related to the CRDs being undefined in the cluster. You can install them
-manually from `plane/etc/helm/charts/datalayer-observer/charts/crds/crds`.
+## Source Code
 
-> [!NOTE]
-> Helm should install them the first time. But this is a complex
-> thing to handle; see https://helm.sh/docs/chart_best_practices/custom_resource_definitions/#install-a-crd-declaration-before-using-the-resource
+* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-observer>
 
-## What is deployed?
+## Values
 
-This chart is built on top of multiple subcharts:
-- kube-prometheus-stack - Full Prometheus stack activating:
-    - AlertManager
-    - Grafana
-    - Prometheus Operator
-    - Prometheus
-    - Prometheus Node Exporter
-- loki
-    - Loki as single binary
-- tempo
-    - Tempo as single binary
-- opentelemetry-operator - using collector-contrib image
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| collector.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| collector.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| collector.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| collector.serviceMonitor.additionalLabels | object | `{}` |  |
+| collector.serviceMonitor.enabled | bool | `true` |  |
+| collector.serviceMonitor.interval | string | `""` |  |
+| crds.enabled | bool | `true` |  |
+| kube-prometheus-stack.alertmanager.alertmanagerSpec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| kube-prometheus-stack.alertmanager.alertmanagerSpec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| kube-prometheus-stack.alertmanager.alertmanagerSpec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| kube-prometheus-stack.alertmanager.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.alertmanager.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.defaultRules.create | bool | `true` |  |
+| kube-prometheus-stack.defaultRules.rules.alertmanager | bool | `false` |  |
+| kube-prometheus-stack.enabled | bool | `true` |  |
+| kube-prometheus-stack.grafana."grafana.ini".server.serve_from_sub_path | bool | `true` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].access | string | `"proxy"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].basicAuth | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].database | string | `""` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].editable | bool | `true` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].isDefault | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].jsonData.derivedFields[0].datasourceUid | string | `"tempo"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].jsonData.derivedFields[0].matcherRegex | string | `"(?:trace_id)=(\\w+)"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].jsonData.derivedFields[0].name | string | `"TraceID"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].jsonData.derivedFields[0].url | string | `"$${__value.raw}"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].name | string | `"Loki"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].orgId | int | `1` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].password | string | `""` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].readOnly | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].type | string | `"loki"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].typeName | string | `"Loki"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].uid | string | `"loki"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].url | string | `"http://datalayer-observer-loki.datalayer-observer:3100"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[0].user | string | `""` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].access | string | `"proxy"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].basicAuth | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].database | string | `""` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].editable | bool | `true` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].isDefault | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].jsonData.lokiSearch.datasourceUid | string | `"loki"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].jsonData.nodeGraph.enabled | bool | `true` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].jsonData.search.hide | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].jsonData.tracesToLogs.datasourceUid | string | `"loki"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].jsonData.tracesToLogs.filterBySpanID | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].jsonData.tracesToLogs.filterByTraceID | bool | `true` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].jsonData.tracesToLogs.mapTagNamesEnabled | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].jsonData.tracesToLogs.tags[0] | string | `"compose_service"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].name | string | `"Tempo"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].orgId | int | `1` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].password | string | `""` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].readOnly | bool | `false` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].type | string | `"tempo"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].typeName | string | `"Tempo"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].uid | string | `"tempo"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].url | string | `"http://datalayer-observer-tempo.datalayer-observer:3100"` |  |
+| kube-prometheus-stack.grafana.additionalDataSources[1].user | string | `""` |  |
+| kube-prometheus-stack.grafana.adminPassword | string | `nil` |  |
+| kube-prometheus-stack.grafana.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| kube-prometheus-stack.grafana.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| kube-prometheus-stack.grafana.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| kube-prometheus-stack.grafana.dashboardProviders."dashboardproviders.yaml".apiVersion | int | `1` |  |
+| kube-prometheus-stack.grafana.dashboardProviders."dashboardproviders.yaml".providers[0].disableDeletion | bool | `true` |  |
+| kube-prometheus-stack.grafana.dashboardProviders."dashboardproviders.yaml".providers[0].editable | bool | `true` |  |
+| kube-prometheus-stack.grafana.dashboardProviders."dashboardproviders.yaml".providers[0].folder | string | `"Pulsar"` |  |
+| kube-prometheus-stack.grafana.dashboardProviders."dashboardproviders.yaml".providers[0].name | string | `"pulsar"` |  |
+| kube-prometheus-stack.grafana.dashboardProviders."dashboardproviders.yaml".providers[0].options.path | string | `"/var/lib/grafana/dashboards/pulsar"` |  |
+| kube-prometheus-stack.grafana.dashboardProviders."dashboardproviders.yaml".providers[0].orgId | int | `1` |  |
+| kube-prometheus-stack.grafana.dashboardProviders."dashboardproviders.yaml".providers[0].type | string | `"file"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.bookkeeper.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.bookkeeper.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/bookkeeper.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.broker.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.broker.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/broker.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.connector_sink.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.connector_sink.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/connector_sink.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.connector_source.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.connector_source.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/connector_source.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.container.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.container.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/container.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.functions.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.functions.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/functions.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.jvm.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.jvm.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/jvm.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.loadbalance.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.loadbalance.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/loadbalance.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.messaging.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.messaging.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/messaging.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.node.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.node.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/node.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.overview.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.overview.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/overview.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.proxy.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.proxy.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/proxy.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.recovery.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.recovery.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/recovery.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.topic.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.topic.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/topic.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.transaction.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.transaction.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/transaction.json"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.zookeeper.datasource | string | `"Prometheus"` |  |
+| kube-prometheus-stack.grafana.dashboards.pulsar.zookeeper.url | string | `"https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/zookeeper-3.6.json"` |  |
+| kube-prometheus-stack.grafana.enabled | bool | `true` |  |
+| kube-prometheus-stack.grafana.ingress.enabled | bool | `false` |  |
+| kube-prometheus-stack.grafana.serviceMonitor.enabled | bool | `true` |  |
+| kube-prometheus-stack.grafana.serviceMonitor.labels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.grafana.serviceMonitor.labels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.grafana.serviceMonitor.path | string | `"/grafana/metrics"` |  |
+| kube-prometheus-stack.grafana.sidecar.datasources.exemplarTraceIdDestinations.datasourceUid | string | `"tempo"` |  |
+| kube-prometheus-stack.grafana.sidecar.datasources.exemplarTraceIdDestinations.traceIdLabelName | string | `"TraceID"` |  |
+| kube-prometheus-stack.prometheus-node-exporter.enabled | bool | `true` |  |
+| kube-prometheus-stack.prometheus-node-exporter.prometheus.monitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.prometheus-node-exporter.prometheus.monitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.prometheus.enabled | bool | `true` |  |
+| kube-prometheus-stack.prometheus.ingress.enabled | bool | `false` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.enableFeatures[0] | string | `"exemplar-storage"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.podMonitorNamespaceSelector | object | `{}` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.podMonitorSelector.matchExpressions[0].key | string | `"app"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.podMonitorSelector.matchExpressions[0].operator | string | `"In"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.podMonitorSelector.matchExpressions[0].values[0] | string | `"pulsar"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.routePrefix | string | `"/prometheus"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.serviceMonitorSelector.matchLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.serviceMonitorSelector.matchLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.prometheus.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.prometheus.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.prometheusOperator.admissionWebhooks.deployment.nodeSelector."role.datalayer.io/system" | string | `"true"` |  |
+| kube-prometheus-stack.prometheusOperator.admissionWebhooks.patch.nodeSelector."role.datalayer.io/system" | string | `"true"` |  |
+| kube-prometheus-stack.prometheusOperator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| kube-prometheus-stack.prometheusOperator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| kube-prometheus-stack.prometheusOperator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| kube-prometheus-stack.prometheusOperator.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.prometheusOperator.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| loki.backend.replicas | int | `0` |  |
+| loki.chunksCache.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| loki.chunksCache.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| loki.chunksCache.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| loki.deploymentMode | string | `"SingleBinary"` |  |
+| loki.enabled | bool | `true` |  |
+| loki.gateway.enabled | bool | `false` |  |
+| loki.loki.auth_enabled | bool | `false` |  |
+| loki.loki.commonConfig.replication_factor | int | `1` |  |
+| loki.loki.limits_config.allow_structured_metadata | bool | `true` |  |
+| loki.loki.schemaConfig.configs[0].from | string | `"2024-01-01"` |  |
+| loki.loki.schemaConfig.configs[0].index.period | string | `"24h"` |  |
+| loki.loki.schemaConfig.configs[0].index.prefix | string | `"loki_index_"` |  |
+| loki.loki.schemaConfig.configs[0].object_store | string | `"filesystem"` |  |
+| loki.loki.schemaConfig.configs[0].schema | string | `"v13"` |  |
+| loki.loki.schemaConfig.configs[0].store | string | `"tsdb"` |  |
+| loki.loki.storage.type | string | `"filesystem"` |  |
+| loki.monitoring.dashboards.enabled | bool | `true` |  |
+| loki.monitoring.serviceMonitor.enabled | bool | `true` |  |
+| loki.monitoring.serviceMonitor.labels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| loki.monitoring.serviceMonitor.labels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| loki.read.replicas | int | `0` |  |
+| loki.resultsCache.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| loki.resultsCache.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| loki.resultsCache.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| loki.singleBinary.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| loki.singleBinary.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| loki.singleBinary.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| loki.singleBinary.replicas | int | `1` |  |
+| loki.write.replicas | int | `0` |  |
+| observer.certificateIssuer | string | `"letsencrypt"` |  |
+| observer.clusterType | string | `"any"` |  |
+| observer.env.DATALAYER_RUN_HOST | string | `"dev1.datalayer.run"` |  |
+| observer.ingressClass | string | `"datalayer-traefik"` |  |
+| opentelemetry-operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| opentelemetry-operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| opentelemetry-operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| opentelemetry-operator.crds.create | bool | `false` |  |
+| opentelemetry-operator.enabled | bool | `true` |  |
+| opentelemetry-operator.manager.collectorImage.repository | string | `"otel/opentelemetry-collector-contrib"` |  |
+| opentelemetry-operator.manager.serviceMonitor.enabled | bool | `true` |  |
+| opentelemetry-operator.manager.serviceMonitor.extraLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| opentelemetry-operator.manager.serviceMonitor.extraLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| tempo.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
+| tempo.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
+| tempo.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| tempo.enabled | bool | `true` |  |
+| tempo.receivers.jaeger | string | `nil` |  |
+| tempo.reportingEnabled | bool | `false` |  |
+| tempo.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| tempo.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| tempo.serviceMonitor.enabled | bool | `true` |  |
 
-In addition to the subcharts elements, it creates:
-
-- An opentelemetry collector as singleton instance to proxy traces and metrics from services and remote kernels to Prometheus and Tempo
-- An opentelemetry collector as daemonset to parse the container log files and proxy them to loki
-- An opentelemetry instrumentation to add Python auto instrumentation on Jupyter Server when a pod is created.
-- A custom ingress for grafana to use similar config as for Datalayer services
-- A service monitor to tell prometheus to fetch the metrics from the opentelemetry collector singleton
-
-
-```mermaid
-flowchart LR
-    subgraph node1
-    subgraph pod1
-    ai[Auto instrumentation]-.->rk[remote kernels]
-    oc[Operator Companion]
-    end
-    lc[Log collector]-- parse logs -->rk
-    lc-- parse logs -->oc
-    ne[Node exporter]
-    end
-    lc-. send logs .->Loki
-    pr-->ne
-    subgraph node2
-    subgraph pod2
-    iam
-    end
-    lc2[Log collector]-- parse logs -->iam
-    ne2[Node exporter]
-    end
-    lc2-. send logs .->Loki
-    pr-->ne2
-    otelc[OpenTelemetry Collector]
-    iam-- metrics & traces -->otelc
-    pr[Prometheus]-- metrics -->otelc
-    rk-- metrics & traces -->otelc
-    oc-- metrics & traces -->otelc
-    otelc-- traces -->Tempo
-    Grafana-->Tempo
-    Grafana-->Loki
-    Grafana-->pr
-
-    style pr stroke:salmon
-    style lc stroke:green
-    style lc2 stroke:green
-    style Loki stroke:green
-    style Tempo stroke:salmon
-    linkStyle 1,2,3,5,6 stroke:green
-```
-
-## Tips and tricks
-
-### Prometheus
-
-Prometheus gets its data source definition from CRs `PodMonitor` and
-`ServiceMonitor` (recommended). Third-parties that don't support
-opentelemetry metrics use such monitors and therefore are
-not proxied by the opentelemetry collector. For now:
-- `ServiceMonitor`: used by Grafana, AlertManager, Loki, Tempo, Prometheus, PrometheusOperator, Prometheus Node Exporter and OpenTelemetry Collector singleton.
-   - To be detected by Prometheus the ServiceMonitor must have the two labels:
-
-```
-        monitoring.datalayer.io/instance: "observer"
-        monitoring.datalayer.io/enabled: "true"
-```
-
-  - Kubernetes metrics are also gathered through service monitors defined in the kube-prometheus-stack.
-
-- `PodMonitor`: used by Pulsar stack (default in helm chart).
-   - PodMonitor can be defined in any namespace 
-   - To be detected by Prometheus the PodMonitor must have a label `app=pulsar`. Other app name could be defined in the `kube-prometheus-stack.prometheus.prometheusSpec.podMonitorSelector`.
-
-### Instrumentation
-
-#### Datalayer services
-
-The services based on connexion are instrumented explicitly using the code
-defined in `datalayer_common.instrumentation` as a custom version of the
-Python instrumentation ASGI was needed in particular to push the http route
-metadata.
-
-> [!IMPORTANT]
-> The logging instrumentor is used as by default it calls `basicConfig`. The
-> service must not call it.
-
-Configuring the metrics and traces targets is done through environment variables:
-
-```
-export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://datalayer-collector-collector.datalayer-observer.svc.cluster.local:4317
-export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://datalayer-collector-collector.datalayer-observer.svc.cluster.local:4317
-```
-
-> [!NOTE]
-> Currently the data is sent using gRPC. Http is also available but would
-> require to change the instrumentation code as the library to use is different.
-
-#### Jupyter Remote Kernels
-
-The remote kernels pod are auto-instrumented by the OpenTelemetry operator
-via a CR `Instrumentation`.
-
-That CR must be defined in the namespace the pod are gonna be created and
-the instrumentation will occur only at the pod creation.
-
-A pod is selected for instrumentation if it gets some annotations. In this 
-specific case, to instrument Python on a multi-container pod:
-
-
-```python
-    instrumentation.opentelemetry.io/inject-python: "true"
-    instrumentation.opentelemetry.io/container-names: "{KERNEL_CONTAINER_NAME}"
-```
-
-> See https://github.com/open-telemetry/opentelemetry-operator?tab=readme-ov-file#opentelemetry-auto-instrumentation-injection for more information and available options (to be set through environment variables).
-
-The Python auto-instrumentation is using http to send data to the OpenTelemetry Collector.
-
-## TODO
-
-- [ ] Drop the Prometheus Node Exporter to use the OpenTelemetry Collector Daemonset
-- [ ] OpenTelemetry to gather kubernetes metrics (needed?) - for now the system is monitor by Prometheus directly.
-- [ ] Quid about storage
-- [ ] Link traces -> metrics (exemplar) and traces -> logs (tags?)
-- [ ] Quid accounts and roles
-- [ ] Fix Traefik observability
-- [ ] Some logs don't have trace id in Datalayer services
