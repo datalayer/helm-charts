@@ -85,7 +85,7 @@ tests:
               - name: DATALAYER_STRIPE_API_KEY
                 value: ""
               - name: DATALAYER_STRIPE_CHECKOUT_ROUTE
-                value: /usage/checkout
+                value: checkout
               - name: DATALAYER_STRIPE_JS_API_KEY
                 value: ""
               - name: DATALAYER_STRIPE_PRODUCT_ID
@@ -100,3 +100,9 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
+            image: datalayer/iam:0.1.1
+            imagePullPolicy: Always
+            name: iam
+            ports:
+              - containerPort: 9700
+                protocol: TCP
