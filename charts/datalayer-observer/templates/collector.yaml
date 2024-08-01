@@ -16,6 +16,8 @@ spec:
             endpoint: 0.0.0.0:4317
           http:
             endpoint: 0.0.0.0:4318
+
+    # https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor#recommended-processors
     processors:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
       batch: {}
@@ -24,6 +26,8 @@ spec:
         check_interval: 1s
         limit_mib: 4000
         spike_limit_mib: 800
+      # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
+      k8sattributes: {}
 
     exporters:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter
@@ -54,10 +58,10 @@ spec:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [memory_limiter, batch]
+          processors: [memory_limiter, k8sattributes, batch]
           exporters: [otlp]
         metrics:
           receivers: [otlp]
-          processors: [memory_limiter, batch]
+          processors: [memory_limiter, k8sattributes, batch]
           exporters: [prometheus]
 {{- end }}
