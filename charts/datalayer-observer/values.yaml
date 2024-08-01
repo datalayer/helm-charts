@@ -212,6 +212,47 @@ kube-prometheus-stack:
         zookeeper:
           url: https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/zookeeper-3.6.json
           datasource: Prometheus
+  kubeApiServer:
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
+  kubelet:
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
+  kubeControllerManager:
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
+  coreDns:
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
+  kubeEtcd:
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
+  kubeScheduler:
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
+  kubeProxy:
+    serviceMonitor:
+      additionalLabels:
+        monitoring.datalayer.io/instance: "observer"
+        monitoring.datalayer.io/enabled: "true"
+  kube-state-metrics:
+    prometheus:
+      monitor:
+        additionalLabels:
+          monitoring.datalayer.io/instance: "observer"
+          monitoring.datalayer.io/enabled: "true"
   prometheus:
     enabled: true
     prometheusSpec:
