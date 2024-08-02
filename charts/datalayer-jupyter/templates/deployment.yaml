@@ -24,6 +24,9 @@ spec:
       {{- with .Values.jupyter.affinity }}
       affinity: {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.jupyter.tolerations }}
+      tolerations: {{- toYaml . | nindent 8 }}
+      {{- end }}
       imagePullSecrets:
             - name: reg-creds
       containers:
