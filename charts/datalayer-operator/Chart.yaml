@@ -3,7 +3,7 @@ description: Datalayer Operator
 name: datalayer-operator
 version: 0.1.2
 appVersion: 0.1.1
-home: https://datalayer.io
+home: https://datalayer.tech
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-operator
 icon: https://assets.datalayer.tech/datalayer-square.png
