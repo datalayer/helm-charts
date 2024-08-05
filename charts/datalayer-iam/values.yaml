@@ -60,7 +60,7 @@ iam:
     OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
     OTEL_SDK_DISABLED: "false"
-
+  tolerations: {}
 #  resources:
 #    limits:
 #      memory: "8192Mi"

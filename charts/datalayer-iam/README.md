@@ -4,7 +4,7 @@
 
 Datalayer IAM
 
-**Homepage:** <https://datalayer.io>
+**Homepage:** <https://datalayer.tech>
 
 ## Maintainers
 
@@ -68,4 +68,5 @@ Datalayer IAM
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |
 | iam.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
+| iam.tolerations | object | `{}` |  |
 

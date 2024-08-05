@@ -4,7 +4,7 @@
 
 Datalayer Spacer
 
-**Homepage:** <https://datalayer.io>
+**Homepage:** <https://datalayer.tech>
 
 ## Maintainers
 

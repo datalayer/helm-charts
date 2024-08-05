@@ -4,7 +4,7 @@
 
 Datalayer Jupyter
 
-**Homepage:** <https://datalayer.io>
+**Homepage:** <https://datalayer.tech>
 
 ## Maintainers
 
@@ -51,4 +51,5 @@ Datalayer Jupyter
 | jupyter.ingressClass | string | `"datalayer-traefik"` |  |
 | jupyter.port | int | `9500` |  |
 | jupyter.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
+| jupyter.tolerations | object | `{}` |  |
 

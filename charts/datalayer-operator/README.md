@@ -4,7 +4,7 @@
 
 Datalayer Operator
 
-**Homepage:** <https://datalayer.io>
+**Homepage:** <https://datalayer.tech>
 
 ## Maintainers
 
@@ -44,4 +44,5 @@ Datalayer Operator
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |
 | operator.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
+| operator.tolerations | object | `{}` |  |
 
