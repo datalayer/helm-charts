@@ -10,6 +10,15 @@ spec:
   # The opentelemetry-collector chart is a good place to look for good configuration
   # Reference: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
   mode: deployment # This configuration is omittable.
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
   config:
     receivers:
       otlp:
