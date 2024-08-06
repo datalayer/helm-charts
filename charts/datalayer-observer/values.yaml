@@ -3,8 +3,9 @@ observer:
   certificateIssuer: letsencrypt
   ingressClass: datalayer-traefik
   env:
-    DATALAYER_RUN_HOST: "dev1.datalayer.run"
+    DATALAYER_RUN_HOST: "oss.datalayer.run"
 
+# Metrics and traces collector
 collector:
   affinity:
     nodeAffinity:
@@ -26,6 +27,9 @@ collector:
     additionalLabels: {}
     #  foo: bar
 
+# Log collector - will be instantiated as a daemonset
+logsCollector:
+  clusterName: "oss.datalayer.run"
 
 #############################################################
 ## Install Opentelemetry Operator CRDs
