@@ -17,10 +17,22 @@ spec:
       app.kubernetes.io/component: opentelemetry-collector
       app.kubernetes.io/name: datalayer-collector-collector
   endpoints:
+  # Collector metrics monitoring
+  - port: metrics
+    {{- if .Values.collector.serviceMonitor.interval }}
+    interval: {{ .Values.collector.serviceMonitor.interval }}
+    {{- end }}
+  # Scraping of collected metrics
   - port: prometheus
     {{- if .Values.collector.serviceMonitor.interval }}
     interval: {{ .Values.collector.serviceMonitor.interval }}
     {{- end }}
+    relabelings:
+    - regex: (container|endpoint|namespace|pod|service)
+      action: labeldrop
+    metricRelabelings:
+    - regex: instance
+      action: labeldrop
   namespaceSelector:
     matchNames:
       - {{ default .Values.observer.namespace .Release.Namespace }}

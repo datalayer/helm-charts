@@ -95,6 +95,16 @@ spec:
         - sources:
           - from: connection
 
+      transform:
+        metric_statements:
+        - context: datapoint
+          statements:
+          - set(attributes["namespace"], resource.attributes["k8s.namespace.name"])
+          # - set(attributes["container"], resource.attributes["k8s.container.name"])
+          - set(attributes["pod"], resource.attributes["k8s.pod.name"])
+          # - set(attributes["instance"], )
+          # - set(attributes["service"], )
+
     exporters:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter
       # debug:
@@ -124,10 +134,10 @@ spec:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [k8sattributes, memory_limiter, batch]
+          processors: [memory_limiter, k8sattributes, batch]
           exporters: [otlp]
         metrics:
           receivers: [otlp]
-          processors: [k8sattributes, memory_limiter, batch]
+          processors: [memory_limiter, k8sattributes, transform, batch]
           exporters: [prometheus]
 {{- end }}
