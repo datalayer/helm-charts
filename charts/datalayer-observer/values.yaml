@@ -27,10 +27,6 @@ collector:
     additionalLabels: {}
     #  foo: bar
 
-# Log collector - will be instantiated as a daemonset
-logsCollector:
-  clusterName: "oss.datalayer.run"
-
 #############################################################
 ## Install Opentelemetry Operator CRDs
 #############################################################

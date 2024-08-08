@@ -31,8 +31,13 @@ spec:
     - regex: (container|endpoint|namespace|pod|service)
       action: labeldrop
     metricRelabelings:
-    - regex: instance
+    - regex: (job|instance)
       action: labeldrop
+    # Restore original label (hide the collector proxy)
+    - regex: "exported_(.*)"
+      action: "labelmap"
+    - regex: "exported_(.*)"
+      action: "labeldrop"
   namespaceSelector:
     matchNames:
       - {{ default .Values.observer.namespace .Release.Namespace }}

@@ -31,9 +31,6 @@ spec:
           - type: container
             id: container-parser
             max_log_size: 102400
-          - type: add
-            field: resource["k8s.cluster"]
-            value: '{{ .Values.logsCollector.clusterName }}'
 
     processors:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
@@ -56,9 +53,6 @@ spec:
           - tag_name: app.name
             key: datalayer.io/app
             from: pod
-          - tag_name: datalayer.environment.name
-            key: environment.datalayer.io/name
-            from: pod
           - tag_name: datalayer.pool.name
             key: jupyterpool.datalayer.io/name
             from: pod
@@ -67,12 +61,6 @@ spec:
             from: pod
           - tag_name: datalayer.pool.user
             key: jupyterpool.datalayer.io/user-uid
-            from: pod
-          - tag_name: datalayer.pool.started-at
-            key: jupyterpool.datalayer.io/started-at
-            from: pod
-          - tag_name: datalayer.pool.expired-at
-            key: jupyterpool.datalayer.io/expired-at
             from: pod
           - tag_name: datalayer.pool.type
             key: jupyterpool.datalayer.io/kernel-type
@@ -102,6 +90,39 @@ spec:
         # By default spike_limit_mib is set to 25% of ".Values.resources.limits.memory"
         spike_limit_percentage: 25
 
+      # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourceprocessor
+      resource:
+        attributes:
+        # Align resource attributes names with prometheus metrics attributes names
+        - key: cluster
+          action: upsert
+          value: '{{ .Values.observer.env.DATALAYER_RUN_HOST }}'
+        - key: namespace
+          action: upsert
+          from_attribute: k8s.namespace.name
+        - key: pod
+          action: upsert
+          from_attribute: k8s.pod.name
+        - key: instance
+          action: upsert
+          from_attribute: k8s.pod.uid
+        - key: app
+          action: upsert
+          from_attribute: datalayer.app.name
+        # Opentelemetry service specification attributes
+        # https://opentelemetry.io/docs/specs/semconv/resource/#service
+        - key: service.name
+          action: upsert
+          from_attribute: k8s.container.name
+        - key: service.namespace
+          action: upsert
+          from_attribute: k8s.namespace.name
+        - key: service.instance.id
+          action: upsert
+          from_attribute: k8s.pod.uid
+        # Reduce the attributes duplication
+        - action: delete
+          pattern: k8s\..*
     exporters:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter
       debug:
@@ -125,7 +146,7 @@ spec:
       pipelines:
         logs:
           receivers: [filelog]
-          processors: [k8sattributes, memory_limiter, batch]
+          processors: [memory_limiter, k8sattributes, resource, batch]
           exporters: [otlphttp]
 
   # Mount node folders to access logs within the daemonset containers

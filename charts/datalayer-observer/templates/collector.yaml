@@ -60,9 +60,6 @@ spec:
           - tag_name: app.name
             key: datalayer.io/app
             from: pod
-          - tag_name: datalayer.environment.name
-            key: environment.datalayer.io/name
-            from: pod
           - tag_name: datalayer.pool.name
             key: jupyterpool.datalayer.io/name
             from: pod
@@ -71,12 +68,6 @@ spec:
             from: pod
           - tag_name: datalayer.pool.user
             key: jupyterpool.datalayer.io/user-uid
-            from: pod
-          - tag_name: datalayer.pool.started-at
-            key: jupyterpool.datalayer.io/started-at
-            from: pod
-          - tag_name: datalayer.pool.expired-at
-            key: jupyterpool.datalayer.io/expired-at
             from: pod
           - tag_name: datalayer.pool.type
             key: jupyterpool.datalayer.io/kernel-type
@@ -95,15 +86,49 @@ spec:
         - sources:
           - from: connection
 
+      # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourceprocessor
+      resource:
+        attributes:
+        # Align resource attributes names with prometheus metrics attributes names
+        - key: cluster
+          action: upsert
+          value: '{{ .Values.observer.env.DATALAYER_RUN_HOST }}'
+        - key: namespace
+          action: upsert
+          from_attribute: k8s.namespace.name
+        - key: pod
+          action: upsert
+          from_attribute: k8s.pod.name
+        - key: instance
+          action: upsert
+          from_attribute: k8s.pod.uid
+        - key: app
+          action: upsert
+          from_attribute: datalayer.app.name
+        # Opentelemetry service specification attributes
+        # https://opentelemetry.io/docs/specs/semconv/resource/#service
+        # service.name is already set by the code instrumentation in traces
+        - key: service.namespace
+          action: upsert
+          from_attribute: k8s.namespace.name
+        - key: service.instance.id
+          action: upsert
+          from_attribute: k8s.pod.uid
+        # Reduce the attributes duplication
+        - action: delete
+          pattern: k8s\..*
+
       transform:
         metric_statements:
+        # Set metric labels from resource attribute as prometheus does not handle them properly
         - context: datapoint
           statements:
+          - set(attributes["cluster"], "{{ .Values.observer.env.DATALAYER_RUN_HOST }}")
           - set(attributes["namespace"], resource.attributes["k8s.namespace.name"])
-          # - set(attributes["container"], resource.attributes["k8s.container.name"])
           - set(attributes["pod"], resource.attributes["k8s.pod.name"])
-          # - set(attributes["instance"], )
-          # - set(attributes["service"], )
+          - set(attributes["instance"], resource.attributes["k8s.pod.uid"])
+          - set(attributes["app"], resource.attributes["datalayer.app.name"])
+          - set(attributes["service_name"], resource.attributes["service.name"])
 
     exporters:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter
@@ -134,7 +159,7 @@ spec:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [memory_limiter, k8sattributes, batch]
+          processors: [memory_limiter, k8sattributes, resource, batch]
           exporters: [otlp]
         metrics:
           receivers: [otlp]
