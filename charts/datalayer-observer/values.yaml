@@ -138,14 +138,11 @@ kube-prometheus-stack:
             hide: false
           lokiSearch:
             datasourceUid: loki
-          tracesToLogs:
+          tracesToLogsV2:
             datasourceUid: loki
             filterBySpanID: false
             filterByTraceID: true
-            mapTagNamesEnabled: false
-            # FIXME
-            tags:
-              - compose_service
+            tags: [{ key: 'service.namespace', value: 'service_namespace' }, { key: 'service.name', value: 'service_name' }, { key: 'service.instance.id', value: 'service_instance_id' }]
         readOnly: false
         editable: true
     # Configure Pulsar dashboards for Grafana
