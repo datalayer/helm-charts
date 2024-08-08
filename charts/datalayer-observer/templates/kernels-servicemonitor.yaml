@@ -1,0 +1,27 @@
+{{- if .Values.collector.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ default .Values.observer.namespace .Release.Namespace }}-jupyter-kernels
+  namespace: {{ default .Values.observer.namespace .Release.Namespace }}
+  labels:
+    app: jupyter-kernels
+    monitoring.datalayer.io/enabled: "true"
+    monitoring.datalayer.io/instance: "observer"
+{{- with .Values.collector.serviceMonitor.additionalLabels }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  selector:
+    matchLabels:
+      datalayer.io/app: jupyterpool
+  endpoints:
+  # Collector metrics monitoring
+  - targetPort:  2300
+    {{- if .Values.collector.serviceMonitor.interval }}
+    interval: {{ .Values.collector.serviceMonitor.interval }}
+    {{- end }}
+  namespaceSelector:
+    matchNames:
+      - datalayer-jupyter
+{{- end }}
