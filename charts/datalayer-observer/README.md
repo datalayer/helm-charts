@@ -4,7 +4,7 @@
 
 Datalayer Observer
 
-**Homepage:** <https://datalayer.io>
+**Homepage:** <https://datalayer.tech>
 
 ## Maintainers
 
@@ -32,6 +32,8 @@ Datalayer Observer
 | kube-prometheus-stack.alertmanager.alertmanagerSpec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
 | kube-prometheus-stack.alertmanager.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
 | kube-prometheus-stack.alertmanager.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.coreDns.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.coreDns.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
 | kube-prometheus-stack.defaultRules.create | bool | `true` |  |
 | kube-prometheus-stack.defaultRules.rules.alertmanager | bool | `false` |  |
 | kube-prometheus-stack.enabled | bool | `true` |  |
@@ -128,6 +130,20 @@ Datalayer Observer
 | kube-prometheus-stack.grafana.serviceMonitor.path | string | `"/grafana/metrics"` |  |
 | kube-prometheus-stack.grafana.sidecar.datasources.exemplarTraceIdDestinations.datasourceUid | string | `"tempo"` |  |
 | kube-prometheus-stack.grafana.sidecar.datasources.exemplarTraceIdDestinations.traceIdLabelName | string | `"TraceID"` |  |
+| kube-prometheus-stack.kube-state-metrics.prometheus.monitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.kube-state-metrics.prometheus.monitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.kubeApiServer.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.kubeApiServer.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.kubeControllerManager.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.kubeControllerManager.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.kubeEtcd.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.kubeEtcd.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.kubeProxy.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.kubeProxy.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.kubeScheduler.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.kubeScheduler.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
+| kube-prometheus-stack.kubelet.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
+| kube-prometheus-stack.kubelet.serviceMonitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
 | kube-prometheus-stack.prometheus-node-exporter.enabled | bool | `true` |  |
 | kube-prometheus-stack.prometheus-node-exporter.prometheus.monitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
 | kube-prometheus-stack.prometheus-node-exporter.prometheus.monitor.additionalLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |

@@ -16,6 +16,22 @@ tests:
                       operator: In
                       values:
                       - "true"
+  - it: "test tolerations"
+    set:
+      jupyter.tolerations:
+        - key: "key1"
+          operator: "Equal"
+          value: "value1"
+          effect: "NoSchedule"
+    asserts:
+      - isSubset:
+          path: spec.template.spec
+          content:
+            tolerations:
+              - key: "key1"
+                operator: "Equal"
+                value: "value1"
+                effect: "NoSchedule"
   - it: "test environment variables"
     asserts:
       - isSubset:

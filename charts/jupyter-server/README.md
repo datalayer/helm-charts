@@ -4,7 +4,7 @@
 
 Jupyter Server
 
-**Homepage:** <https://datalayer.io>
+**Homepage:** <https://datalayer.tech>
 
 ## Maintainers
 
