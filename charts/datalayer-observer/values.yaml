@@ -150,6 +150,14 @@ kube-prometheus-stack:
       dashboardproviders.yaml:
         apiVersion: 1
         providers:
+          - name: "datalayer"
+            orgId: 1
+            folder: "Datalayer"
+            type: file
+            disableDeletion: true
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/datalayer
           - name: "pulsar"
             orgId: 1
             folder: "Pulsar"
@@ -159,8 +167,21 @@ kube-prometheus-stack:
             options:
               path: /var/lib/grafana/dashboards/pulsar
     dashboards:
+      datalayer:
+        services:
+          url: https://raw.githubusercontent.com/datalayer/helm-charts/main/charts/datalayer-observer/dashboards/datalayer-service.json
+          bearerToken: ''
+          datasource: Prometheus
+        remote_kernels:
+          url: https://raw.githubusercontent.com/datalayer/helm-charts/main/charts/datalayer-observer/dashboards/remote-kernels-overview.json
+          bearerToken: ''
+          datasource: Prometheus
+        remote_kernel:
+          url: https://raw.githubusercontent.com/datalayer/helm-charts/main/charts/datalayer-observer/dashboards/remote-kernels-details.json
+          bearerToken: ''
+          datasource: Prometheus
       pulsar:
-        # Download the maintained dashboards from AL 2.0 licenced repo https://github.com/streamnative/apache-pulsar-grafana-dashboard
+        # Download the maintained dashboards from AL 2.0 licensed repo https://github.com/streamnative/apache-pulsar-grafana-dashboard
         bookkeeper:
           url: https://raw.githubusercontent.com/streamnative/apache-pulsar-grafana-dashboard/master/dashboards.kubernetes/bookkeeper.json
           datasource: Prometheus
