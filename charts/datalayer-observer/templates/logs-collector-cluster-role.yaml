@@ -1,0 +1,29 @@
+{{- if index .Values "opentelemetry-operator" "enabled" }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: datalayer-logs-collector
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: ["apps"]
+  resources: ["replicasets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["extensions"]
+  resources: ["replicasets"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: datalayer-logs-collector
+subjects:
+- kind: ServiceAccount
+  name: datalayer-logs-collector-collector
+  namespace: {{ default .Values.observer.namespace .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: datalayer-logs-collector
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}

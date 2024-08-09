@@ -1,0 +1,44 @@
+{{- if .Values.collector.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ default .Values.observer.namespace .Release.Namespace }}-opentelemetry-collector
+  namespace: {{ default .Values.observer.namespace .Release.Namespace }}
+  labels:
+    app: opentelemetry-collector
+    monitoring.datalayer.io/enabled: "true"
+    monitoring.datalayer.io/instance: "observer"
+{{- with .Values.collector.serviceMonitor.additionalLabels }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: opentelemetry-collector
+      app.kubernetes.io/name: datalayer-collector-collector
+  endpoints:
+  # Collector metrics monitoring
+  - port: metrics
+    {{- if .Values.collector.serviceMonitor.interval }}
+    interval: {{ .Values.collector.serviceMonitor.interval }}
+    {{- end }}
+  # Scraping of collected metrics
+  - port: prometheus
+    {{- if .Values.collector.serviceMonitor.interval }}
+    interval: {{ .Values.collector.serviceMonitor.interval }}
+    {{- end }}
+    relabelings:
+    - regex: (container|endpoint|namespace|pod|service)
+      action: labeldrop
+    metricRelabelings:
+    - regex: (job|instance)
+      action: labeldrop
+    # Restore original label (hide the collector proxy)
+    - regex: "exported_(.*)"
+      action: "labelmap"
+    - regex: "exported_(.*)"
+      action: "labeldrop"
+  namespaceSelector:
+    matchNames:
+      - {{ default .Values.observer.namespace .Release.Namespace }}
+{{- end }}

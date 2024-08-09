@@ -2,10 +2,10 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ default .Values.observer.namespace .Release.Namespace }}-opentelemetry-collector
+  name: {{ default .Values.observer.namespace .Release.Namespace }}-jupyter-kernels
   namespace: {{ default .Values.observer.namespace .Release.Namespace }}
   labels:
-    app: opentelemetry-collector
+    app: jupyter-kernels
     monitoring.datalayer.io/enabled: "true"
     monitoring.datalayer.io/instance: "observer"
 {{- with .Values.collector.serviceMonitor.additionalLabels }}
@@ -14,14 +14,14 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/component: opentelemetry-collector
-      app.kubernetes.io/name: datalayer-collector-collector
+      datalayer.io/app: jupyterpool
   endpoints:
-  - port: prometheus
+  # Collector metrics monitoring
+  - targetPort:  2300
     {{- if .Values.collector.serviceMonitor.interval }}
     interval: {{ .Values.collector.serviceMonitor.interval }}
     {{- end }}
   namespaceSelector:
     matchNames:
-      - {{ default .Values.observer.namespace .Release.Namespace }}
+      - datalayer-jupyter
 {{- end }}
