@@ -2239,7 +2239,9 @@
   ],
   "refresh": "10s",
   "schemaVersion": 39,
-  "tags": [],
+  "tags": [
+    "datalayer"
+  ],
   "templating": {
     "list": [
       {
@@ -2310,7 +2312,7 @@
   },
   "timepicker": {},
   "timezone": "utc",
-  "title": "Overall view",
+  "title": "Datalayer / Overall view",
   "uid": "e4c90b3ebfaaa2259fa900d3c80a9637",
   "version": 5,
   "weekStart": ""
