@@ -1083,7 +1083,9 @@
   ],
   "refresh": "10s",
   "schemaVersion": 39,
-  "tags": [],
+  "tags": [
+    "datalayer"
+  ],
   "templating": {
     "list": [
       {
@@ -1176,7 +1178,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Datalayer Service",
+  "title": "Datalayer / Services",
   "uid": "ad5e35f5cdc892317c4b7e4f321c402c",
   "version": 10,
   "weekStart": ""
