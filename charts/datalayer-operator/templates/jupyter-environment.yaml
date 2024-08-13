@@ -69,7 +69,7 @@ spec:
                   type: object
                   title: Pod recommended resources
                   properties:
-                    default: 
+                    default:
                       type: object
                       properties:
                         requests:
@@ -81,9 +81,6 @@ spec:
                               type: string
                             nvidia.com/gpu:
                               type: string
-                          required:
-                            - cpu
-                            - memory
                         limits:
                           type: object
                           properties:
