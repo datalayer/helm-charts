@@ -1,20 +1,12 @@
 # datalayer-library
 
-![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square) ![AppVersion: 0.0.6](https://img.shields.io/badge/AppVersion-0.0.6-informational?style=flat-square)
-
 Datalayer Library
 
-**Homepage:** <https://datalayer.tech>
+![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square) ![AppVersion: 0.0.6](https://img.shields.io/badge/AppVersion-0.0.6-informational?style=flat-square)
 
-## Maintainers
+## Documentation
 
-| Name | Email | Url |
-| ---- | ------ | --- |
-| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
-
-## Source Code
-
-* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-library>
+For full documentation please checkout [Datalayer TECH](https://datalayer.tech/docs/build).
 
 ## Values
 
