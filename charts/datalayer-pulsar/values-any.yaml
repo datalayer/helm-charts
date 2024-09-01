@@ -1,5 +1,13 @@
 volumes:
   persistence: true
+tls:
+  enabled: false
+  proxy:
+    enabled: false
+  broker:
+    enabled: false
+  zookeeper:
+    enabled: false
 components:
   functions: false
   toolset: false
@@ -8,11 +16,19 @@ components:
 kube-prometheus-stack:
   enabled: false
 bookkeeper:
-  replicaCount: 2
+  replicaCount: 3
+  nodeSelector:
+    role.datalayer.io/system: "true"
 broker:
-  replicaCount: 2
+  replicaCount: 3
+  nodeSelector:
+    role.datalayer.io/system: "true"
 proxy:
   podMonitor:
     enabled: false
+  nodeSelector:
+    role.datalayer.io/system: "true"
 zookeeper:
-  replicaCount: 2
+  replicaCount: 3
+  nodeSelector:
+    role.datalayer.io/system: "true"
