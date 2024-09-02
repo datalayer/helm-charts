@@ -169,16 +169,13 @@ kube-prometheus-stack:
     dashboards:
       datalayer:
         services:
-          url: https://raw.githubusercontent.com/datalayer/helm-charts/main/charts/datalayer-observer/dashboards/datalayer-service.json
-          bearerToken: ''
+          url: https://raw.githubusercontent.com/datalayer/grafana-dashboards/main/dashboards/datalayer-service.json
           datasource: Prometheus
         remote_kernels:
-          url: https://raw.githubusercontent.com/datalayer/helm-charts/main/charts/datalayer-observer/dashboards/remote-kernels-overview.json
-          bearerToken: ''
+          url: https://raw.githubusercontent.com/datalayer/grafana-dashboards/main/dashboards/remote-kernels-overview.json
           datasource: Prometheus
         remote_kernel:
-          url: https://raw.githubusercontent.com/datalayer/helm-charts/main/charts/datalayer-observer/dashboards/remote-kernels-details.json
-          bearerToken: ''
+          url: https://raw.githubusercontent.com/datalayer/grafana-dashboards/main/dashboards/remote-kernels-details.json
           datasource: Prometheus
       pulsar:
         # Download the maintained dashboards from AL 2.0 licensed repo https://github.com/streamnative/apache-pulsar-grafana-dashboard
