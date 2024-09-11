@@ -31,6 +31,26 @@ spec:
           - type: container
             id: container-parser
             max_log_size: 102400
+          # Router to use different multiline logs logic
+          - type: router
+            routes:
+              - output: combine_python_otel_logs
+                expr: 'resource["k8s.container.name"] in ["iam", "jupyter", "operator", "operator-companion"]'
+            default: combine_logs
+          - id: combine_python_otel_logs
+            type: recombine
+            output: noop
+            combine_field: body
+            # Match asctime '<YEAR>-<MONTH>-<DAY> <HOUR>:'
+            is_first_entry: body matches "^\\d{4}-\\d{2}-\\d{2} \\d{2}:"
+            source_identifier: attributes["log.file.path"]
+          - id: combine_logs
+            type: recombine
+            combine_field: body
+            is_first_entry: body matches "^[^\\s]"
+            source_identifier: attributes["log.file.path"]
+          # Trick to skip routes
+          - type: noop
 
     processors:
       # https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
