@@ -15,6 +15,9 @@ components:
   pulsar_manager: false
 kube-prometheus-stack:
   enabled: false
+autorecovery:
+  nodeSelector:
+    role.datalayer.io/system: "true"
 bookkeeper:
   replicaCount: 3
   nodeSelector:
