@@ -37,36 +37,36 @@ tests:
       - isSubset:
           path: spec.template.spec.containers[0]
           content:
-				env:
-				  - name: AWS_ACCESS_KEY_ID
-				    value: ""
-				  - name: AWS_DEFAULT_REGION
-				    value: ""
-				  - name: AWS_SECRET_ACCESS_KEY
-				    value: ""
-				  - name: DATALAYER_AUTHZ_ENGINE
-				    value: openfga
-				  - name: DATALAYER_CERT_ISSUER
-				    value: letsencrypt
-				  - name: DATALAYER_DOCKER_REGISTRY
-				    value: ""
-				  - name: DATALAYER_IAM_API_KEY
-				    value: ""
-				  - name: DATALAYER_IAM_HOST
-				    value: datalayer-iam-svc.datalayer-api.svc.cluster.local:9700
-				  - name: DATALAYER_INGRESS_CLASS_NAME
-				    value: datalayer-traefik
-				  - name: DATALAYER_OPERATOR_API_KEY
-				    value: ""
-				  - name: DATALAYER_PUB_SUB_ENGINE
-				    value: pulsar
-				  - name: DATALAYER_PULSAR_URL
-				    value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
-				  - name: DATALAYER_RUN_HOST
-				    value: ""
-				  - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
-				    value: ""
-				  - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-				    value: ""
-				  - name: OTEL_SDK_DISABLED
-				    value: "false"
+            env:
+              - name: AWS_ACCESS_KEY_ID
+                value: ""
+              - name: AWS_DEFAULT_REGION
+                value: ""
+              - name: AWS_SECRET_ACCESS_KEY
+                value: ""
+              - name: DATALAYER_AUTHZ_ENGINE
+                value: openfga
+              - name: DATALAYER_CERT_ISSUER
+                value: letsencrypt
+              - name: DATALAYER_DOCKER_REGISTRY
+                value: ""
+              - name: DATALAYER_IAM_API_KEY
+                value: ""
+              - name: DATALAYER_IAM_HOST
+                value: datalayer-iam-svc.datalayer-api.svc.cluster.local:9700
+              - name: DATALAYER_INGRESS_CLASS_NAME
+                value: datalayer-traefik
+              - name: DATALAYER_OPERATOR_API_KEY
+                value: ""
+              - name: DATALAYER_PUB_SUB_ENGINE
+                value: pulsar
+              - name: DATALAYER_PULSAR_URL
+                value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
+              - name: DATALAYER_RUN_HOST
+                value: ""
+              - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
+                value: ""
+              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+                value: ""
+              - name: OTEL_SDK_DISABLED
+                value: "false"
