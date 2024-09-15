@@ -74,17 +74,3 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/operator:0.1.1
-            imagePullPolicy: Always
-            name: operator
-            ports:
-              - containerPort: 2111
-                protocol: TCP
-            readinessProbe:
-              failureThreshold: 5
-              httpGet:
-                path: /api/operator/version
-                port: 2111
-              initialDelaySeconds: 5
-              periodSeconds: 15
-              successThreshold: 1
