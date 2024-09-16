@@ -560,6 +560,15 @@ cephFileSystems:
           requests:
             cpu: "1000m"
             memory: "4Gi"
+        placement:  # 'all' placement is not used for the MDS
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: role.datalayer.io/ceph
+                    operator: In
+                    values:
+                    - "true"
         priorityClassName: system-cluster-critical
     storageClass:
       enabled: true
