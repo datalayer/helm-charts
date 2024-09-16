@@ -141,6 +141,12 @@ cephClusterSpec:
     # The mons should be on unique nodes. For production, at least 3 nodes are recommended for this reason.
     # Mons should only be allowed on the same node for test environments where data loss is acceptable.
     allowMultiplePerNode: false
+    volumeClaimTemplate:
+      spec:
+        storageClassName: csi-cinder-high-speed
+        resources:
+          requests:
+            storage: 10Gi
 
   mgr:
     # When higher availability of the mgr is needed, increase the count to 2.
@@ -364,8 +370,26 @@ cephClusterSpec:
     mgr: system-cluster-critical
 
   storage: # cluster level storage configuration and selection
-    useAllNodes: true
-    useAllDevices: true
+    storageClassDeviceSets:
+    - name: set1
+      count: 3
+      portable: false
+      encrypted: false
+      volumeClaimTemplates:
+      - metadata:
+          name: data
+        spec:
+          resources:
+            requests:
+              storage: 10Gi
+          # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2-csi)
+          storageClassName: csi-cinder-high-speed
+          volumeMode: Block
+          accessModes:
+            - ReadWriteOnce
+    onlyApplyOSDPlacement: false
+    # useAllNodes: true
+    # useAllDevices: true
     # deviceFilter:
     # config:
     #   crushRoot: "custom-root" # specify a non-default root label for the CRUSH map
@@ -512,54 +536,56 @@ cephBlockPools: []
 
 # -- A list of CephFileSystem configurations to deploy
 # @default -- See [below](#ceph-file-systems)
-cephFileSystems: []
-  # - name: ceph-filesystem
-  #   # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
-  #   spec:
-  #     metadataPool:
-  #       replicated:
-  #         size: 3
-  #     dataPools:
-  #       - failureDomain: host
-  #         replicated:
-  #           size: 3
-  #         # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
-  #         name: data0
-  #     metadataServer:
-  #       activeCount: 1
-  #       activeStandby: true
-  #       resources:
-  #         limits:
-  #           memory: "4Gi"
-  #         requests:
-  #           cpu: "1000m"
-  #           memory: "4Gi"
-  #       priorityClassName: system-cluster-critical
-  #   storageClass:
-  #     enabled: true
-  #     isDefault: false
-  #     name: ceph-filesystem
-  #     # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
-  #     pool: data0
-  #     reclaimPolicy: Delete
-  #     allowVolumeExpansion: true
-  #     volumeBindingMode: "Immediate"
-  #     annotations: {}
-  #     labels: {}
-  #     mountOptions: []
-  #     # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage.md#provision-storage for available configuration
-  #     parameters:
-  #       # The secrets contain Ceph admin credentials.
-  #       csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
-  #       csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
-  #       csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
-  #       csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
-  #       csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
-  #       csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
-  #       # Specify the filesystem type of the volume. If not specified, csi-provisioner
-  #       # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
-  #       # in hyperconverged settings where the volume is mounted on the same node as the osds.
-  #       csi.storage.k8s.io/fstype: ext4
+cephFileSystems:
+  - name: ceph-filesystem
+    # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
+    spec:
+      metadataPool:
+        replicated:
+          size: 3
+      dataPools:
+        - failureDomain: host
+          replicated:
+            size: 3
+          # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
+          name: data-users
+      # This is a security measure to avoid loss of data if the CephFilesystem resource is deleted accidentally. The default value is 'false'. 
+      preserveFilesystemOnDelete: true
+      metadataServer:
+        activeCount: 1
+        activeStandby: true
+        resources:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "1000m"
+            memory: "4Gi"
+        priorityClassName: system-cluster-critical
+    storageClass:
+      enabled: true
+      isDefault: false
+      name: ceph-filesystem
+      # (Optional) specify a data pool to use, must be the name of one of the data pools above, 'data0' by default
+      pool: data-users
+      reclaimPolicy: Delete
+      allowVolumeExpansion: true
+      volumeBindingMode: "Immediate"
+      annotations: {}
+      labels: {}
+      mountOptions: []
+      # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Shared-Filesystem-CephFS/filesystem-storage.md#provision-storage for available configuration
+      parameters:
+        # The secrets contain Ceph admin credentials.
+        csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+        csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+        csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+        csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+        csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+        csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+        # Specify the filesystem type of the volume. If not specified, csi-provisioner
+        # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
+        # in hyperconverged settings where the volume is mounted on the same node as the osds.
+        csi.storage.k8s.io/fstype: ext4
 
 # -- Settings for the filesystem snapshot class
 # @default -- See [CephFS Snapshots](../Storage-Configuration/Ceph-CSI/ceph-csi-snapshot.md#cephfs-snapshots)
