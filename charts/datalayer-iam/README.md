@@ -4,7 +4,7 @@
 
 Datalayer IAM
 
-![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![AppVersion: 0.1.2](https://img.shields.io/badge/AppVersion-0.1.2-informational?style=flat-square)
+![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![AppVersion: 0.1.3](https://img.shields.io/badge/AppVersion-0.1.3-informational?style=flat-square)
 
 ## Documentation
 
@@ -50,6 +50,8 @@ For full documentation please checkout [Datalayer TECH](https://datalayer.tech/d
 | iam.env.DATALAYER_STRIPE_PRODUCT_ID | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
 | iam.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
+| iam.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
+| iam.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
@@ -57,7 +59,7 @@ For full documentation please checkout [Datalayer TECH](https://datalayer.tech/d
 | iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| iam.image | string | `"datalayer/iam:0.1.1"` |  |
+| iam.image | string | `"datalayer/iam:0.1.3"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |
