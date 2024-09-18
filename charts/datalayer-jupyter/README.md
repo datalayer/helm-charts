@@ -40,7 +40,7 @@ For full documentation please checkout [Datalayer TECH](https://datalayer.tech/d
 | jupyter.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | jupyter.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
 | jupyter.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| jupyter.image | string | `"datalayer/jupyter:0.1.1"` |  |
+| jupyter.image | string | `"datalayer/jupyter:1.0.0"` |  |
 | jupyter.imagePullPolicy | string | `"Always"` |  |
 | jupyter.ingressClass | string | `"datalayer-traefik"` |  |
 | jupyter.port | int | `9500` |  |

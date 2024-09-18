@@ -36,7 +36,7 @@ For full documentation please checkout [Datalayer TECH](https://datalayer.tech/d
 | operator.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| operator.image | string | `"datalayer/operator:0.1.1"` |  |
+| operator.image | string | `"datalayer/operator:1.0.0"` |  |
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |
 | operator.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
