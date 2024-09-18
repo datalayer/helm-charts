@@ -1,5 +1,5 @@
 operator:
-  image: datalayer/operator:0.1.1
+  image: datalayer/operator:1.0.0
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
@@ -28,8 +28,6 @@ operator:
     DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUN_HOST: ""
-    DATALAYER_VAULT_TOKEN: ""
-    DATALAYER_VAULT_URL: "http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"
     OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
     OTEL_SDK_DISABLED: "false"
