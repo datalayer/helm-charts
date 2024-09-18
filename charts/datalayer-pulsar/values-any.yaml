@@ -16,11 +16,11 @@ components:
 kube-prometheus-stack:
   enabled: false
 bookkeeper:
-  replicaCount: 3
+  replicaCount: 2
   nodeSelector:
     role.datalayer.io/system: "true"
 broker:
-  replicaCount: 3
+  replicaCount: 2
   nodeSelector:
     role.datalayer.io/system: "true"
 proxy:
@@ -29,6 +29,6 @@ proxy:
   nodeSelector:
     role.datalayer.io/system: "true"
 zookeeper:
-  replicaCount: 3
+  replicaCount: 2
   nodeSelector:
     role.datalayer.io/system: "true"
