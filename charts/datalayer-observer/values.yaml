@@ -150,6 +150,14 @@ kube-prometheus-stack:
       dashboardproviders.yaml:
         apiVersion: 1
         providers:
+          - name: "ceph"
+            orgId: 1
+            folder: "Ceph"
+            type: file
+            disableDeletion: true
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/ceph
           - name: "datalayer"
             orgId: 1
             folder: "Datalayer"
@@ -167,6 +175,16 @@ kube-prometheus-stack:
             options:
               path: /var/lib/grafana/dashboards/pulsar
     dashboards:
+      ceph:
+        cluster:
+          url: https://raw.githubusercontent.com/rook/rook/release-1.15/deploy/examples/monitoring/grafana/Ceph%20Cluster%20Dashboard.json
+          datasource:
+        pools_dashboard:
+          url: https://raw.githubusercontent.com/rook/rook/release-1.15/deploy/examples/monitoring/grafana/Ceph%20Pools%20Dashboard.json
+          datasource:
+        single_dashboard:
+          url: https://raw.githubusercontent.com/rook/rook/release-1.15/deploy/examples/monitoring/grafana/Ceph%20OSD%20Single%20Dashboard.json
+          datasource:
       datalayer:
         services:
           url: https://raw.githubusercontent.com/datalayer/grafana-dashboards/main/dashboards/datalayer-service.json
