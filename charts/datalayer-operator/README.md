@@ -31,8 +31,6 @@ For full documentation please checkout [Datalayer TECH](https://datalayer.tech/d
 | operator.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
 | operator.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | operator.env.DATALAYER_RUN_HOST | string | `""` |  |
-| operator.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
-| operator.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
 | operator.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_SDK_DISABLED | string | `"false"` |  |
