@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cephfs-users-pvc
+  namespace: datalayer-jupyter
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  # Should match storageClass name in ceph-cluster
+  storageClassName: ceph-filesystem
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ceph-users-prepare
+  namespace: datalayer-jupyter
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/jupyter
+            operator: In
+            values:
+            - "true"
+  containers:
+  - image: busybox:1.36.1-musl
+    name: prepare-cephfs
+    command:
+    - /bin/sh
+    - -x
+    - -e
+    - -c
+    - "for DIRECTORY in home public datasets tmp
+      \ndo
+      \n\tmkdir -p /$DIRECTORY
+      \n\tchown $KERNEL_UID:$KERNEL_GID /$DIRECTORY
+      \ndone"
+    env:
+      - name: KERNEL_UID
+        value: '1000'
+      - name: KERNEL_GID
+        value: '100'
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 64Mi
+    volumeMounts:
+    - mountPath: /data/shared
+      name: user-data
+  volumes:
+  - name: user-data
+    persistentVolumeClaim:
+      claimName: cephfs-users-pvc
+      readOnly: false
