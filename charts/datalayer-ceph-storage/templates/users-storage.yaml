@@ -27,6 +27,7 @@ spec:
             operator: In
             values:
             - "true"
+  restartPolicy: OnFailure
   containers:
   - image: busybox:1.36.1-musl
     name: prepare-cephfs
@@ -35,11 +36,12 @@ spec:
     - -x
     - -e
     - -c
-    - "for DIRECTORY in home public datasets tmp
-      \ndo
-      \n\tmkdir -p /$DIRECTORY
-      \n\tchown $KERNEL_UID:$KERNEL_GID /$DIRECTORY
-      \ndone"
+    - |
+      for DIRECTORY in home public datasets tmp
+      do
+        mkdir -p /data/shared/$DIRECTORY
+        chown $KERNEL_UID:$KERNEL_GID /data/shared/$DIRECTORY
+      done
     env:
       - name: KERNEL_UID
         value: '1000'
