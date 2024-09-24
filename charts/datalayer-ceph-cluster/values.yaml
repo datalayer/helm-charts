@@ -147,7 +147,7 @@ cephClusterSpec:
         # storageClassName: csi-cinder-high-speed
         resources:
           requests:
-            storage: 10Gi
+            storage: 8Gi
 
   mgr:
     # When higher availability of the mgr is needed, increase the count to 2.
@@ -386,7 +386,7 @@ cephClusterSpec:
         spec:
           resources:
             requests:
-              storage: 10Gi
+              storage: 8Gi
           # IMPORTANT: Change the storage class depending on your environment (e.g. local-storage, gp2-csi)
           # storageClassName: csi-cinder-high-speed
           volumeMode: Block
