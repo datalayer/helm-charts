@@ -69,7 +69,7 @@ tests:
               - name: DATALAYER_OPERATOR_API_KEY
                 value: ""
               - name: DATALAYER_OPERATOR_HOST
-                value: datalayer-operator-svc.datalayer-api.svc.cluster.local:2111
+                value: datalayer-operator-svc.datalayer-jupyter.svc.cluster.local:2111
               - name: DATALAYER_RUNTIME_ENV
                 value: prod
               - name: DATALAYER_RUN_HOST
