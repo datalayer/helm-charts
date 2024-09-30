@@ -7,7 +7,7 @@ operatorNamespace: datalayer-ceph
 
 # -- The metadata.name of the CephCluster CR
 # @default -- The same as the namespace
-clusterName: dev1.datalayer.run
+# clusterName: oss.datalayer.run
 
 # -- Optional override of the target kubernetes version
 kubeVersion:
