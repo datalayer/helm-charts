@@ -36,7 +36,7 @@ jupyter:
     DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
     DATALAYER_OPENFGA_STORE_ID: ""
     DATALAYER_OPERATOR_API_KEY: ""
-    DATALAYER_OPERATOR_HOST: "datalayer-operator-svc.datalayer-api.svc.cluster.local:2111"
+    DATALAYER_OPERATOR_HOST: "datalayer-operator-svc.datalayer-jupyter.svc.cluster.local:2111"
     DATALAYER_RUNTIME_ENV: "prod"
     DATALAYER_RUN_HOST: ""
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"

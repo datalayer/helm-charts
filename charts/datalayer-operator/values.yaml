@@ -19,7 +19,6 @@ operator:
     AWS_DEFAULT_REGION: ""
     AWS_SECRET_ACCESS_KEY: ""
     DATALAYER_AUTHZ_ENGINE: "openfga"
-    DATALAYER_USERS_VOLUME_CLAIM_NAME: "cephfs-users-pvc"
     DATALAYER_CERT_ISSUER: "letsencrypt"
     DATALAYER_DOCKER_REGISTRY: ""
     DATALAYER_IAM_API_KEY: ""
@@ -33,3 +32,4 @@ operator:
     OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
     OTEL_SDK_DISABLED: "false"
   tolerations: {}
+  usersPVC: "cephfs-users-pvc"
