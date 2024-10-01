@@ -38,9 +38,10 @@ spec:
     - |
       for DIRECTORY in home public datasets tmp
       do
-        mkdir -p /data/shared/$DIRECTORY
-        chown $KERNEL_UID:$KERNEL_GID /data/shared/$DIRECTORY
+        mkdir -p /mnt/ceph/$DIRECTORY
+        chown $KERNEL_UID:$KERNEL_GID /mnt/ceph/$DIRECTORY
       done
+      sleep 1000
     env:
       - name: KERNEL_UID
         value: "{{ .Values.cephStorage.storageOwner.uid }}"
@@ -54,10 +55,10 @@ spec:
         cpu: 250m
         memory: 64Mi
     volumeMounts:
-    - mountPath: /data/shared
-      name: user-data
+    - mountPath: /mnt/ceph
+      name: ceph-data
   volumes:
-  - name: user-data
+  - name: ceph-data
     persistentVolumeClaim:
       claimName: {{ .Values.cephStorage.usersPVC }}
       readOnly: false
