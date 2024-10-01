@@ -39,4 +39,5 @@ For full documentation please checkout [Datalayer TECH](https://datalayer.tech/d
 | operator.port | int | `2111` |  |
 | operator.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 | operator.tolerations | object | `{}` |  |
+| operator.usersPVC | string | `"cephfs-users-pvc"` |  |
 

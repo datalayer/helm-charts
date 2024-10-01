@@ -43,9 +43,9 @@ spec:
       done
     env:
       - name: KERNEL_UID
-        value: {{ .Values.cephStorage.storageOwner.uid }}
+        value: "{{ .Values.cephStorage.storageOwner.uid }}"
       - name: KERNEL_GID
-        value: {{ .Values.cephStorage.storageOwner.gid }}
+        value: "{{ .Values.cephStorage.storageOwner.gid }}"
     resources:
       limits:
         cpu: 500m
