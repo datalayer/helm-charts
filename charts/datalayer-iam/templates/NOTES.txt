@@ -2,7 +2,7 @@ Your iam server has now been installed, and can be accessed in the following way
 
 1. Connect to the iam CLI pod:
 
-  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "iam.name" . }} -o jsonpath='{.items...metadata.name}') -- sh
+  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "iam.app-name" . }} -o jsonpath='{.items...metadata.name}') -- sh
 
 2. Connect with HTTP internally, within the kubernetes cluster on:
 
