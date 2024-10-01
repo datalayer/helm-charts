@@ -1,0 +1,4 @@
+mailer:
+  image:
+  imagePullPolicy: Always
+  namespace: datalayer-system
