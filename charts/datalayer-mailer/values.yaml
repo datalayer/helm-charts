@@ -1,0 +1,14 @@
+mailer:
+  image:
+  imagePullPolicy: Always
+  port: 2331
+  namespace: datalayer-system
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"

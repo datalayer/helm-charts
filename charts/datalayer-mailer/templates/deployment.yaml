@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ default .Values.mailer.namespace .Release.Namespace }}
+  labels:
+    app: {{ template "mailer.app-name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "mailer.app-name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "mailer.app-name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "mailer.app-name" . }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      {{- with .Values.mailer.affinity }}
+      affinity: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.mailer.tolerations }}
+      tolerations: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      imagePullSecrets:
+        - name: reg-creds
+      containers:
+        - name: mailer
+          image: {{ .Values.mailer.image }}
+          imagePullPolicy: {{ .Values.mailer.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.mailer.port }}
+              protocol: TCP
+          {{- if or .Values.mailer.env .Values.mailer.envValueFrom }}
+          env:
+            {{- range $key, $value := .Values.mailer.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom: {{- $value | toYaml | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.mailer.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.mailer.resources }}
+          resources: {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.mailer.volumeMounts }}
+          volumeMounts: {{- toYaml . | nindent 12 }}
+          {{- end }}

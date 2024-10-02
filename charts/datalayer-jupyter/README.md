@@ -4,11 +4,11 @@
 
 Datalayer Jupyter
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 ## Documentation
 
-For full documentation please checkout [Datalayer TECH](https://datalayer.tech/docs/build).
+For full documentation please checkout [Datalayer Tech](https://datalayer.tech/docs/build).
 
 ## Values
 
@@ -40,7 +40,7 @@ For full documentation please checkout [Datalayer TECH](https://datalayer.tech/d
 | jupyter.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | jupyter.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
 | jupyter.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| jupyter.image | string | `"datalayer/jupyter:1.0.0"` |  |
+| jupyter.image | string | `"datalayer/jupyter:1.0.1"` |  |
 | jupyter.imagePullPolicy | string | `"Always"` |  |
 | jupyter.ingressClass | string | `"datalayer-traefik"` |  |
 | jupyter.port | int | `9500` |  |

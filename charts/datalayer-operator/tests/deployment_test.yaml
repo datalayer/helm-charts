@@ -38,6 +38,8 @@ tests:
           path: spec.template.spec.containers[0]
           content:
             env:
+              - name: DATALAYER_USERS_VOLUME_CLAIM_NAME
+                value: cephfs-users-pvc
               - name: AWS_ACCESS_KEY_ID
                 value: ""
               - name: AWS_DEFAULT_REGION
@@ -64,6 +66,10 @@ tests:
                 value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
               - name: DATALAYER_RUN_HOST
                 value: ""
+              - name: DATALAYER_VAULT_TOKEN
+                value: ""
+              - name: DATALAYER_VAULT_URL
+                value: http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200
               - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
                 value: ""
               - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT

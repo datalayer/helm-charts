@@ -1,20 +1,14 @@
-# datalayer-storage
+[![Datalayer](https://assets.datalayer.tech/datalayer-25.svg)](https://datalayer.io)
 
-![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+# datalayer-storage
 
 Datalayer Storage
 
-**Homepage:** <https://datalayer.tech>
+![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
-## Maintainers
+## Documentation
 
-| Name | Email | Url |
-| ---- | ------ | --- |
-| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
-
-## Source Code
-
-* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-ceph-storage>
+For full documentation please checkout [Datalayer Tech](https://datalayer.tech/docs/build).
 
 ## Values
 
