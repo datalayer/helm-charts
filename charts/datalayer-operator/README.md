@@ -4,7 +4,7 @@
 
 Datalayer Operator
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 ## Documentation
 
@@ -31,10 +31,12 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | operator.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
 | operator.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | operator.env.DATALAYER_RUN_HOST | string | `""` |  |
+| operator.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
+| operator.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
 | operator.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| operator.image | string | `"datalayer/operator:1.0.0"` |  |
+| operator.image | string | `"datalayer/operator:1.0.1"` |  |
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |
 | operator.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
