@@ -36,7 +36,7 @@ spec:
           ports:
             - containerPort: {{ .Values.operator.port }}
               protocol: TCP
-          {{- if or .Values.operator.usersPVC or .Values.operator.env .Values.operator.envValueFrom }}
+          {{- if or .Values.operator.usersPVC .Values.operator.env .Values.operator.envValueFrom }}
           env:
             {{- if .Values.operator.usersPVC }}
             - name: 'DATALAYER_USERS_VOLUME_CLAIM_NAME'
@@ -62,7 +62,7 @@ spec:
           {{- with .Values.operator.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if or .Values.operator.usersPVC .Value.operator.volumeMounts }}
+          {{- if or .Values.operator.usersPVC .Values.operator.volumeMounts }}
           volumeMounts:
             {{- if .Values.operator.usersPVC }}
             - name: "user-data"
