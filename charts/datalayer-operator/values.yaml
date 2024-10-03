@@ -35,4 +35,4 @@ operator:
     OTEL_SDK_DISABLED: "false"
   tolerations: {}
   volumeMounts: {}
-  usersPVC: "cephfs-users-pvc"
+  usersPVC: ""

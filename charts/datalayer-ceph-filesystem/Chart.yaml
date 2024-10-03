@@ -1,11 +1,11 @@
 apiVersion: v1
-description: Datalayer Storage
-name: datalayer-storage
+description: Datalayer File System
+name: datalayer-filesystem
 version: 0.0.1
 appVersion: 0.0.1
 home: https://datalayer.tech
 sources:
-- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-ceph-storage
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-ceph-filesystem
 icon: https://assets.datalayer.tech/datalayer-square.png
 maintainers:
 - name: Datalayer
