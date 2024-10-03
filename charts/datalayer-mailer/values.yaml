@@ -12,3 +12,8 @@ mailer:
             operator: In
             values:
             - "true"
+  env:
+    DATALAYER_SMTP_HOST: ""
+    DATALAYER_SMTP_PASSWORD: ""
+    DATALAYER_SMTP_PORT: "0"
+    DATALAYER_SMTP_USERNAME: ""
