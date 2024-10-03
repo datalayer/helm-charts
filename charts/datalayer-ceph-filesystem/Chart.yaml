@@ -1,5 +1,5 @@
 apiVersion: v1
-description: Datalayer File System
+description: Datalayer Filesystem
 name: datalayer-filesystem
 version: 0.0.1
 appVersion: 0.0.1
