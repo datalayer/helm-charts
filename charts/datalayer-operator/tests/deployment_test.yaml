@@ -38,8 +38,6 @@ tests:
           path: spec.template.spec.containers[0]
           content:
             env:
-              - name: DATALAYER_USERS_VOLUME_CLAIM_NAME
-                value: cephfs-users-pvc
               - name: AWS_ACCESS_KEY_ID
                 value: ""
               - name: AWS_DEFAULT_REGION
