@@ -35,7 +35,7 @@ spec:
           - type: router
             routes:
               - output: combine_python_otel_logs
-                expr: 'resource["k8s.container.name"] in ["iam", "jupyter", "operator", "operator-companion"]'
+                expr: 'resource["k8s.container.name"] in ["iam", "jupyter", "operator", "jupyter-companion"]'
             default: combine_logs
           - id: combine_python_otel_logs
             type: recombine

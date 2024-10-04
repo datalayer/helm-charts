@@ -5,9 +5,9 @@ metadata:
   namespace: datalayer-jupyter
 subjects:
 - kind: ServiceAccount
-  name: datalayer-operator-companion
+  name: datalayer-jupyter-companion
   namespace: datalayer-jupyter
 roleRef:
   kind: Role
-  name: datalayer-operator-companion
+  name: datalayer-jupyter-companion
   apiGroup: rbac.authorization.k8s.io
