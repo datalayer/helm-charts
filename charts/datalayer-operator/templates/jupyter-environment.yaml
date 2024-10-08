@@ -38,6 +38,18 @@ spec:
                 dockerImage:
                   type: string
                   title: Environment docker image
+                env:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+                    required:
+                      - name
+                      - value
                 example:
                   type: string
                   format: uri
