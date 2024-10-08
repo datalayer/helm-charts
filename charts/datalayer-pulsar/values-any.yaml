@@ -22,6 +22,11 @@ bookkeeper:
   replicaCount: 2
   nodeSelector:
     role.datalayer.io/system: "true"
+  volumes:
+    journal:
+      size: 4Gi
+    ledgers:
+      size: 8Gi
 broker:
   replicaCount: 2
   nodeSelector:
@@ -35,3 +40,6 @@ zookeeper:
   replicaCount: 2
   nodeSelector:
     role.datalayer.io/system: "true"
+  volumes:
+    data:
+      size: 8Gi
