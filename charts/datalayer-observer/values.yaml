@@ -392,6 +392,8 @@ loki:
               operator: In
               values:
               - "true"
+    persistence:
+      size: 8Gi
   read:
     replicas: 0
   backend:
