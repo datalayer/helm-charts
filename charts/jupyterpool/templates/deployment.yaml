@@ -29,10 +29,10 @@ spec:
                 operator: In
                 values:
                 - "true"
-              - key: node.datalayer.io/xpu
+              - key: xpu.datalayer.io/cpu
                 operator: In
                 values:
-                - cpu
+                - "true"
 {{ if eq .Values.jupyterpool.clusterType "minikube" }}
 #      volumes:
 #        - name: nfs-volume
