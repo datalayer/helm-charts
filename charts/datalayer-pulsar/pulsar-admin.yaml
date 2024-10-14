@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pulsar-manager
+  namespace: datalayer-pulsar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pulsar-manager
+  template:
+    metadata:
+      labels:
+        app: pulsar-manager
+    spec:
+      restartPolicy: Never
+      containers:
+        # The pulsar manager container
+        - name: pulsar-manager
+          image: apachepulsar/pulsar-manager:v0.3.0
+          env:
+            - name: SPRING_CONFIGURATION_FILE
+              value: /pulsar-manager/pulsar-manager/application.properties
+        # Container to initialize an admin account
+        - name: set-pwd
+          image: curlimages/curl:8.10.1
+          command: ["sh", "-c"]
+          args:
+            - |
+              sleep 10
+              export CSRF_TOKEN=$(curl http://localhost:7750/pulsar-manager/csrf-token)
+              curl \
+                -H 'X-XSRF-TOKEN: $CSRF_TOKEN' \
+                -H 'Cookie: XSRF-TOKEN=$CSRF_TOKEN;' \
+                -H "Content-Type: application/json" \
+                -X PUT http://localhost:7750/pulsar-manager/users/superuser \
+                -d '{"name": "admin", "password": "apachepulsar", "description": "test", "email": "username@test.org"}'
