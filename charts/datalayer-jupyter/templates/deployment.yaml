@@ -29,6 +29,7 @@ spec:
       {{- end }}
       imagePullSecrets:
             - name: reg-creds
+      serviceAccountName: datalayer-jupyter
       containers:
         - name: jupyter
           image: {{ .Values.jupyter.image }}
