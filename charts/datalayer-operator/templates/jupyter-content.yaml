@@ -36,6 +36,11 @@ spec:
                 description:
                   type: string
                   title: Content long description.
+                location:
+                  type: string
+                  title: Location
+                  description: |
+                    For `s3`, its the region.
                 source:
                   type: string
                   title: Content source
