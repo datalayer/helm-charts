@@ -12,6 +12,6 @@ rules:
 - apiGroups: [""] # "" indicates the core API group
   resources: ["pods", "secrets"]
   verbs: ["get"]
-- apiGroups: ["batchs"]
+- apiGroups: ["batch"]
   resources: ["jobs"]
   verbs: ["create"]
