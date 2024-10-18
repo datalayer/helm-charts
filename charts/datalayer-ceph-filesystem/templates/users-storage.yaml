@@ -36,7 +36,7 @@ spec:
     - -e
     - -c
     - |
-      for DIRECTORY in home public datasets tmp
+      for DIRECTORY in home public datalayer datasets tmp
       do
         mkdir -p /mnt/ceph/$DIRECTORY
         chown $KERNEL_UID:$KERNEL_GID /mnt/ceph/$DIRECTORY
