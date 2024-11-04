@@ -1,5 +1,5 @@
 operator:
-  image: datalayer/operator:1.0.2
+  image: datalayer/operator:1.0.3
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
@@ -35,4 +35,4 @@ operator:
     OTEL_SDK_DISABLED: "false"
   tolerations: {}
   volumeMounts: {}
-  usersPVC: ""
+  sharedFsPVC: ""

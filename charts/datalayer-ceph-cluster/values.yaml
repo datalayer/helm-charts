@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 # -- Namespace of the main rook operator
-operatorNamespace: datalayer-ceph
+operatorNamespace: datalayer-storage
 
 # -- The metadata.name of the CephCluster CR
 # @default -- The same as the namespace

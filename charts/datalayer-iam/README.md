@@ -59,7 +59,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| iam.image | string | `"datalayer/iam:1.0.2"` |  |
+| iam.image | string | `"datalayer/iam:1.0.3"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |

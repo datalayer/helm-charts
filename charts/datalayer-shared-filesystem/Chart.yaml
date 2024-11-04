@@ -5,7 +5,7 @@ version: 0.0.1
 appVersion: 0.0.1
 home: https://datalayer.tech
 sources:
-- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-ceph-filesystem
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-shared-filesystem
 icon: https://assets.datalayer.tech/datalayer-square.png
 maintainers:
 - name: Datalayer
