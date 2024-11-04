@@ -41,6 +41,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | operator.port | int | `2111` |  |
 | operator.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 | operator.tolerations | object | `{}` |  |
-| operator.usersPVC | string | `""` |  |
+| operator.sharedFsPVC | string | `""` |  |
 | operator.volumeMounts | object | `{}` |  |
 

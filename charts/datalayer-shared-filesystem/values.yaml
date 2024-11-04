@@ -2,7 +2,7 @@ sharedStorage:
   sharedFsPVC: shared-fs-pvc
   # sharedStorage.storageProvider -- Will set automatically value depending on the storage provider.
   # Supported value are: "azure" or "ceph"
-  storageProvider: "azure"
+  storageProvider: "ceph"
   # sharedStorage.storageClassName -- Storage class to use
   # If not specified the default value will be inferred from the provider.
   storageClassName: null
