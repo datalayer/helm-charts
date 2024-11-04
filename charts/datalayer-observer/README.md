@@ -227,6 +227,7 @@ Datalayer Observer
 | loki.singleBinary.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
 | loki.singleBinary.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
 | loki.singleBinary.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
+| loki.singleBinary.persistence.size | string | `"8Gi"` |  |
 | loki.singleBinary.replicas | int | `1` |  |
 | loki.write.replicas | int | `0` |  |
 | observer.certificateIssuer | string | `"letsencrypt"` |  |
