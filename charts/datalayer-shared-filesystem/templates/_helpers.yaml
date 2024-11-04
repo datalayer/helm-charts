@@ -1,0 +1,31 @@
+{{/*
+Define the storage class name
+
+Value for ceph should match the one specified in ceph-cluster chart
+*/}}
+{{- define "sharedStorage.autoStorageClassName"  -}}
+    {{- if default false .Values.sharedStorage.storageClassName -}}
+        {{- .Values.sharedStorage.storageClassName -}}
+    {{- else if eq .Values.sharedStorage.storageProvider "ceph" -}}
+        "ceph-filesystem"
+    {{- else if eq .Values.sharedStorage.storageProvider "azure" -}}
+        "azure-nfs"
+    {{- else -}}
+        null
+    {{- end -}}
+{{- end -}}
+
+{{/*
+Define the storage size
+*/}}
+{{- define "sharedStorage.autoStorageSize"  -}}
+    {{- if .Values.sharedStorage.storageSize -}}
+        {{- .Values.sharedStorage.storageSize -}}
+    {{- else if eq .Values.sharedStorage.storageProvider "ceph" -}}
+        "8Gi"
+    {{- else if eq .Values.sharedStorage.storageProvider "azure" -}}
+        "100Gi"
+    {{- else -}}
+        null
+    {{- end -}}
+{{- end -}}

@@ -1,20 +1,20 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Values.cephStorage.usersPVC }}
+  name: {{ .Values.sharedStorage.sharedFsPVC }}
   namespace: datalayer-jupyter
 spec:
   accessModes:
   - ReadWriteMany
   resources:
     requests:
-      storage: 8Gi
-  storageClassName: {{ .Values.cephStorage.storageClassName }}
+      storage: {{ include "sharedStorage.autoStorageSize" . }}
+  storageClassName: {{ include "sharedStorage.autoStorageClassName" . }}
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ceph-users-prepare
+  name: shared-fs-prepare
   namespace: datalayer-jupyter
 spec:
   affinity:
@@ -38,15 +38,15 @@ spec:
     - |
       for DIRECTORY in home public datalayer datasets tmp
       do
-        mkdir -p /mnt/ceph/$DIRECTORY
-        chown $KERNEL_UID:$KERNEL_GID /mnt/ceph/$DIRECTORY
+        mkdir -p /mnt/sharedfs/$DIRECTORY
+        chown $KERNEL_UID:$KERNEL_GID /mnt/sharedfs/$DIRECTORY
       done
       sleep 1000
     env:
       - name: KERNEL_UID
-        value: "{{ .Values.cephStorage.storageOwner.uid }}"
+        value: "{{ .Values.sharedStorage.storageOwner.uid }}"
       - name: KERNEL_GID
-        value: "{{ .Values.cephStorage.storageOwner.gid }}"
+        value: "{{ .Values.sharedStorage.storageOwner.gid }}"
     resources:
       limits:
         cpu: 500m
@@ -55,10 +55,10 @@ spec:
         cpu: 250m
         memory: 64Mi
     volumeMounts:
-    - mountPath: /mnt/ceph
-      name: ceph-data
+    - mountPath: /mnt/sharedfs
+      name: sharedfs-data
   volumes:
-  - name: ceph-data
+  - name: sharedfs-data
     persistentVolumeClaim:
-      claimName: {{ .Values.cephStorage.usersPVC }}
+      claimName: {{ .Values.sharedStorage.sharedFsPVC }}
       readOnly: false

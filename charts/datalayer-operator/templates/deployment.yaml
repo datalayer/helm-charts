@@ -65,8 +65,8 @@ spec:
           {{- if or .Values.operator.usersPVC .Values.operator.volumeMounts }}
           volumeMounts:
             {{- if .Values.operator.usersPVC }}
-            - name: "user-data"
-              mountPath: "/mnt/ceph"
+            - name: "sharedfs-data"
+              mountPath: "/mnt/sharedfs"
             {{- end }}
             {{- with .Values.operator.volumeMounts }}
             {{- toYaml . | nindent 12 }}
@@ -78,7 +78,7 @@ spec:
 #          args: ["proxy", "-p", "8001"]
       {{- if .Values.operator.usersPVC }}
       volumes:
-        - name: "user-data"
+        - name: "sharedfs-data"
           persistentVolumeClaim:
             claimName: {{ .Values.operator.usersPVC }}
             readOnly: False

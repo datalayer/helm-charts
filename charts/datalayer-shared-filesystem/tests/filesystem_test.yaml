@@ -1,0 +1,62 @@
+suite: test shared-storage assets
+templates:
+  - templates/_helpers.yaml
+  - templates/shared-storage.yaml
+  - templates/storage-class.yaml
+tests:
+  - it: check azure storage class
+    set:
+      sharedStorage.storageProvider: azure
+    template: templates/storage-class.yaml
+    asserts:
+      - equal:
+          path: metadata.name
+          value: azure-nfs
+      - equal:
+          path: provisioner
+          value: file.csi.azure.com
+      - isSubset:
+          path: parameters
+          content:
+            skuName: Premium_LRS
+            protocol: nfs
+  - it: check azure provider PVC
+    set:
+      sharedStorage.storageProvider: azure
+    template: templates/shared-storage.yaml
+    documentIndex: 0
+    asserts:
+      - equal:
+          path: metadata.name
+          value: shared-fs-pvc
+      - isSubset:
+          path: spec
+          content:
+              accessModes:
+              - ReadWriteMany
+              resources:
+                requests:
+                  storage: 100Gi
+              storageClassName: azure-nfs
+  - it: check azure storage class
+    set:
+      sharedStorage.storageProvider: ceph
+    template: templates/storage-class.yaml
+    asserts:
+      - hasDocuments:
+          count: 0
+  - it: check default ceph provider PVC
+    set:
+      sharedStorage.storageProvider: ceph
+    template: templates/shared-storage.yaml
+    documentIndex: 0
+    asserts:
+      - isSubset:
+          path: spec
+          content:
+              accessModes:
+              - ReadWriteMany
+              resources:
+                requests:
+                  storage: 8Gi
+              storageClassName: ceph-filesystem
