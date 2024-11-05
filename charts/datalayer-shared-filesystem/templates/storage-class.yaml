@@ -6,6 +6,7 @@ metadata:
 provisioner: file.csi.azure.com
 allowVolumeExpansion: true
 parameters:
+  shareName: {{ .Values.sharedStorage.shareName }}
   skuName: Premium_LRS
   protocol: nfs
 {{ end }}
