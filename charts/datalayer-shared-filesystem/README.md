@@ -14,6 +14,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| sharedStorage.shareName | string | `"shared-storage"` | Specify Azure file share name (applicable for storageProvider being 'azure'). Existing or new Azure file share name. If empty, driver generates an Azure file share name. |
 | sharedStorage.sharedFsPVC | string | `"shared-fs-pvc"` |  |
 | sharedStorage.storageClassName | string | `nil` | Storage class to use If not specified the default value will be inferred from the provider. |
 | sharedStorage.storageOwner.gid | string | `"100"` |  |

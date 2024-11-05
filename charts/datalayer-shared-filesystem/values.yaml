@@ -1,4 +1,6 @@
 sharedStorage:
+  # sharedStorage.shareName -- Specify Azure file share name (applicable for storageProvider being 'azure'). Existing or new Azure file share name. If empty, driver generates an Azure file share name.
+  shareName: shared-storage
   sharedFsPVC: shared-fs-pvc
   # sharedStorage.storageProvider -- Will set automatically value depending on the storage provider.
   # Supported value are: "azure" or "ceph"
