@@ -14,8 +14,10 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| cephStorage.storageClassName | string | `"ceph-filesystem"` |  |
-| cephStorage.storageOwner.gid | string | `"100"` |  |
-| cephStorage.storageOwner.uid | string | `"1000"` |  |
-| cephStorage.sharedFsPVC | string | `"cephfs-users-pvc"` |  |
+| sharedStorage.sharedFsPVC | string | `"shared-fs-pvc"` |  |
+| sharedStorage.storageClassName | string | `nil` | Storage class to use If not specified the default value will be inferred from the provider. |
+| sharedStorage.storageOwner.gid | string | `"100"` |  |
+| sharedStorage.storageOwner.uid | string | `"1000"` |  |
+| sharedStorage.storageProvider | string | `"ceph"` | Will set automatically value depending on the storage provider. Supported value are: "azure" or "ceph" |
+| sharedStorage.storageSize | string | `nil` | Storage size If not specified the default value will be inferred from the provider. |
 

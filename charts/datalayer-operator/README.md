@@ -4,7 +4,7 @@
 
 Datalayer Operator
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
+![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
 
 ## Documentation
 
@@ -39,8 +39,8 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | operator.image | string | `"datalayer/operator:1.0.3"` |  |
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |
+| operator.sharedFsPVC | string | `""` |  |
 | operator.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 | operator.tolerations | object | `{}` |  |
-| operator.sharedFsPVC | string | `""` |  |
 | operator.volumeMounts | object | `{}` |  |
 
