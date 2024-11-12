@@ -29,6 +29,11 @@ spec:
       {{- end }}
       imagePullSecrets:
         - name: reg-creds
+      {{- if .Values.operator.sharedFsPVC }}
+      securityContext:
+        # Must match KERNEL_GID
+        fsGroup: 100
+      {{- end }}
       containers:
         - name: operator
           image: {{ .Values.operator.image }}

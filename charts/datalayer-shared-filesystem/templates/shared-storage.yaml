@@ -38,7 +38,8 @@ spec:
     - |
       for DIRECTORY in home public datalayer datasets tmp
       do
-        mkdir -p /mnt/sharedfs/$DIRECTORY
+        mkdir -pm 775 /mnt/sharedfs/$DIRECTORY
+        chmod g+ws /mnt/sharedfs/$DIRECTORY
         chown $KERNEL_UID:$KERNEL_GID /mnt/sharedfs/$DIRECTORY
       done
       sleep 1000
