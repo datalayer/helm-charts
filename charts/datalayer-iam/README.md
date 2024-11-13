@@ -4,7 +4,7 @@
 
 Datalayer IAM
 
-![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
+![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![AppVersion: 1.0.4](https://img.shields.io/badge/AppVersion-1.0.4-informational?style=flat-square)
 
 ## Documentation
 
@@ -25,6 +25,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | iam.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | iam.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_IAM_API_KEY | string | `""` |  |
+| iam.env.DATALAYER_INITIAL_USER_CREDITS | string | `"500"` |  |
 | iam.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | iam.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
 | iam.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"true"` |  |
@@ -59,7 +60,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
 | iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| iam.image | string | `"datalayer/iam:1.0.3"` |  |
+| iam.image | string | `"datalayer/iam:1.0.4"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |
