@@ -1,5 +1,5 @@
 iam:
-  image: datalayer/iam:1.0.3
+  image: datalayer/iam:1.0.4
   imagePullPolicy: Always
   port: 9700
   sidecar:
@@ -32,6 +32,7 @@ iam:
     DATALAYER_GITHUB_CLIENT_ID: ""
     DATALAYER_GITHUB_CLIENT_SECRET: ""
     DATALAYER_IAM_API_KEY: ""
+    DATALAYER_INITIAL_USER_CREDITS: "500"
     DATALAYER_JWT_ALGORITHM: ""
     DATALAYER_JWT_ALLOWED_ISSUERS: ""
     DATALAYER_JWT_CACHE_VALIDATE: "true"
