@@ -60,6 +60,8 @@ tests:
                 value: ""
               - name: DATALAYER_IAM_API_KEY
                 value: ""
+              - name: DATALAYER_INITIAL_USER_CREDITS
+                value: "500"
               - name: DATALAYER_JWT_ALGORITHM
                 value: ""
               - name: DATALAYER_JWT_ALLOWED_ISSUERS
@@ -120,3 +122,9 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
+            image: datalayer/iam:1.0.4
+            imagePullPolicy: Always
+            name: iam
+            ports:
+              - containerPort: 9700
+                protocol: TCP
