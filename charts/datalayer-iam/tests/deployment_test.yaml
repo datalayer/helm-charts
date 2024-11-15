@@ -76,6 +76,10 @@ tests:
                 value: ""
               - name: DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION
                 value: "false"
+              - name: DATALAYER_LINKEDIN_CLIENT_ID
+                value: ""
+              - name: DATALAYER_LINKEDIN_CLIENT_SECRET
+                value: ""
               - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
                 value: ""
               - name: DATALAYER_OPENFGA_REST_URL
