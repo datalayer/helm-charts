@@ -120,6 +120,10 @@ tests:
                 value: ""
               - name: DATALAYER_VAULT_URL
                 value: http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200
+              - name: DATALAYER_X_API_KEY
+                value: ""
+              - name: DATALAYER_X_API_SECRET
+                value: ""
               - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
                 value: ""
               - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
