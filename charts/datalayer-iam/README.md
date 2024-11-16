@@ -33,6 +33,8 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | iam.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | iam.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION | string | `"false"` |  |
+| iam.env.DATALAYER_LINKEDIN_CLIENT_ID | string | `""` |  |
+| iam.env.DATALAYER_LINKEDIN_CLIENT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | iam.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
@@ -53,6 +55,8 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | iam.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | iam.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | iam.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
+| iam.env.DATALAYER_X_API_KEY | string | `""` |  |
+| iam.env.DATALAYER_X_API_SECRET | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
