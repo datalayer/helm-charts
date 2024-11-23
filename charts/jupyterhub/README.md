@@ -13,9 +13,8 @@ export RELEASE=jupyterhub
 export NAMESPACE=datalayer-jupyterhub
 ```
 
-Create the values.
-
 ```bash
+# Create the values.
 echo """
 proxy:
   secretToken: $(openssl rand -hex 32)
@@ -64,7 +63,7 @@ helm upgrade \
 ```
 
 ```bash
-# List your deployment.
+# Check the deployment.
 helm ls -n $NAMESPACE
 kubectl get pods -n $NAMESPACE -w
 # hub-5474b656cf-22xp6     1/1     Running   0          2m39s
@@ -77,15 +76,12 @@ kubectl get svc -n $NAMESPACE
 
 ```bash
 # Connect via browser.
+# Authenticate with eric / 123 and use the notebook.
+# Use the JupyterHub Admin Panel to add Users (you must be an admin for this in docker > hub > userlist).
+# Go the the control panel then navigate to "Admin". Here you can add and remove users and even access their servers.
 open http://$DATALAYER_RUN_HOST
 open http://$DATALAYER_RUN_HOST/api/jupyterhub/hub/user-redirect
 ```
-
-Authenticate with eric / 123 and use the notebook.
-
-Use the JupyterHub Admin Panel to add Users (you must be an admin for this in docker > hub > userlist). Go the the control panel then navigate to "Admin". Here you can add and remove users and even access their servers.
-
-## Delete the Deployment
 
 ```bash
 # Delete Deployment.
@@ -93,7 +89,7 @@ helm delete $RELEASE -n $NAMESPACE
 kubectl delete namespace $NAMESPACE
 ```
 
-## Simple Configuration
+## Other Examples
 
 ```bash
 echo """
@@ -122,8 +118,6 @@ ingress:
     - minikube.local
 """ > ./jupyterhub.yaml
 ```
-
-## Other Examples
 
 ```yaml
 proxy:
