@@ -1,3 +1,7 @@
+# Copyright (c) 2023-2024 Datalayer, Inc.
+#
+# Datalayer License
+
 JUPYTER_NAME=hub
 
 KEYCLOAK_NAME=keycloak
