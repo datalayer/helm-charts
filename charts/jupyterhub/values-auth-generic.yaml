@@ -1,5 +1,5 @@
 proxy:
-  secretToken: 0419da72b2ef6bb8908ad586bd1fc6421aeba14b12ae008ead9f6090ba4f5495
+  secretToken: 
 hub:
   baseUrl: /api/jupyterhub
   extraConfig:
