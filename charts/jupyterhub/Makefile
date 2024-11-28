@@ -29,11 +29,11 @@ deploy-jupyterhub: init
 		--install $(JUPYTER_NAME) \
 		jupyterhub/jupyterhub \
 		--namespace $(JUPYTER_NAME) \
-		--timeout 5m \
 		--version 4.0.0 \
 		--values jupyterhub.yaml \
 		--values hub_generated_config.yaml
-		-s auth.custom.client_secret=
+		--set auth.custom.client_secret= \
+		--timeout 5m
 
 rm: init
 	echo $(JUPYTER_NAME)

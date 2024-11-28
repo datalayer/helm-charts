@@ -89,7 +89,7 @@ helm delete $RELEASE -n $NAMESPACE
 kubectl delete namespace $NAMESPACE
 ```
 
-## Other Examples
+## Examples
 
 ```bash
 echo """
@@ -119,7 +119,7 @@ ingress:
 """ > ./jupyterhub.yaml
 ```
 
-```yaml
+```bash
 proxy:
   secretToken: 
 hub:
@@ -145,9 +145,9 @@ ingress:
     - minikube.local
 ```
 
-## Proxy Configuration
-
 ```bash
+# Proxy Configuration
+# open http://minikube.local/api/jupyterhub/hub/user-redirect/proxy-server
 echo """
 proxy:
   secretToken: $(openssl rand -hex 32)
@@ -175,12 +175,6 @@ ingress:
 """ > ./jupyterhub.yaml
 ```
 
-```bash
-open http://minikube.local/api/jupyterhub/hub/user-redirect/proxy-server
-```
-
-## 
-
 ```yaml
 extraEnv:
     JUPYTERHUB_SINGLEUSER_APP: 'jupyter_server.serverapp.ServerApp'
@@ -191,9 +185,8 @@ ingress:
     - jupyterhub.minikube.local
 ```
 
-## HMac Auth
-
 ```bash
+# HMac Auth
 echo """
 proxy:
   secretToken: $(openssl rand -hex 32)
@@ -236,9 +229,8 @@ password
 # 3c6a9c701468db1af65fb14eee09b13ecb2a54f8d32bd93c3e82e9e723271d03a2b9c7600c822a49f59d7d9e19406e1a0f26f2a606efa4a4f93fe38118c09898
 ```
 
-## Root
-
 ```bash
+# Root Auth.
 echo """
 singleuser:
   cmd: start-jupyterlab-rtc.sh
@@ -253,9 +245,8 @@ singleuser:
 """ > ./jupyterhub.yaml
 ```
 
-## RTC
-
 ```bash
+# RTC
 export GITHUB_OAUTH_CALLBACK_URL_DEV=http://minikube.local/api/jupyterhub/hub/oauth_callback
 cat <<EOF > jupyterhub.yaml
 proxy:
@@ -314,9 +305,8 @@ cull:
 EOF
 ```
 
-## Single User
-
 ```bash
+# Single User
 # export DOCKER_REPO=localhost:5000
 export DOCKER_REPO=datalayer
 echo """
@@ -380,9 +370,8 @@ cull:
 """ > ./jupyterhub.yaml
 ```
 
-## Config 1
-
 ```bash
+# Config 1
 echo """
 proxy:
   secretToken: \"$(openssl rand -hex 32)\"
@@ -436,9 +425,8 @@ auth:
 """ > ./jupyterhub.yaml
 ```
 
-## Config 2
-
 ```bash
+# Config 2
 echo """
 proxy:
   secretToken: $(openssl rand -hex 32)
@@ -479,9 +467,8 @@ debug:
 """ > ./jupyterhub.yaml
 ```
 
-## AWS
-
 ```bash
+# AWS
 echo """
 proxy:
   secretToken: $(openssl rand -hex 32)
@@ -559,8 +546,6 @@ ingress:
 """ > ./jupyterhub.yaml
 ```
 
-
-## Other Configurations
 
 ```bash
 echo """
