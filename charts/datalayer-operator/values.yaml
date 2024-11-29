@@ -1,5 +1,5 @@
 operator:
-  image: datalayer/operator:1.0.6
+  image: datalayer/operator:1.0.7
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
