@@ -3,11 +3,8 @@ server:
   replicaCount: 1
   sidecar:
     image: datalayer/whoami:0.0.6
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
   port: 8888
-  service:
-    name: jupyter-server
-    type: LoadBalancer
 #  resources:
 #    limits:
 #      memory: "8192Mi"

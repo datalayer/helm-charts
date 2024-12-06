@@ -37,9 +37,7 @@ Datalayer Jump
 | jump.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | jump.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
 | jump.image | string | `"datalayer/jump:0.0.6"` |  |
-| jump.imagePullPolicy | string | `"IfNotPresent"` |  |
+| jump.imagePullPolicy | string | `"Always"` |  |
 | jump.port | int | `2223` |  |
-| jump.service.name | string | `"jump"` |  |
-| jump.service.type | string | `"LoadBalancer"` |  |
 | jump.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 

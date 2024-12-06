@@ -3,11 +3,8 @@ jupyterpool:
   replicaCount: 1
   sidecar:
     image: datalayer/whoami:0.0.6
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
   port: 2300
-  service:
-    name: jupyterpool
-    type: LoadBalancer
 #  resources:
 #    limits:
 #      memory: "8192Mi"

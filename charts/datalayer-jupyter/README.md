@@ -8,7 +8,7 @@ Datalayer Jupyter
 
 ## Documentation
 
-For full documentation please checkout [Datalayer Tech](https://datalayer.tech/docs/build).
+For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 
 ## Values
 

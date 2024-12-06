@@ -2,11 +2,8 @@ jump:
   image: datalayer/jump:0.0.6
   sidecar:
     image: datalayer/whoami:0.0.6
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
   port: 2223
-  service:
-    name: jump
-    type: LoadBalancer
 #  resources:
 #    limits:
 #      memory: "8192Mi"

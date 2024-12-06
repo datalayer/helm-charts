@@ -8,7 +8,7 @@ Datalayer Library
 
 ## Documentation
 
-For full documentation please checkout [Datalayer Tech](https://datalayer.tech/docs/build).
+For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 
 ## Values
 
@@ -32,13 +32,12 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | library.env.DATALAYER_SMTP_PORT | string | `""` |  |
 | library.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | library.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
+| library.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | library.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | library.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | library.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | library.image | string | `"datalayer/library:0.0.6"` |  |
-| library.imagePullPolicy | string | `"IfNotPresent"` |  |
+| library.imagePullPolicy | string | `"Always"` |  |
 | library.port | int | `9800` |  |
-| library.service.name | string | `"library"` |  |
-| library.service.type | string | `"LoadBalancer"` |  |
 | library.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 

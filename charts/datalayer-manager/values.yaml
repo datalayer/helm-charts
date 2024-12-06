@@ -1,9 +1,10 @@
-library:
-  image: datalayer/library:0.0.6
+manager:
+  image: datalayer/manager:0.0.1
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
-  port: 9800
+  port: 9300
+  ingress: false
 #  resources:
 #    limits:
 #      memory: "8192Mi"
@@ -11,6 +12,7 @@ library:
   env:
     DATALAYER_RUN_HOST: ""
     DATALAYER_CDN_URL: ""
+    DATALAYER_RUNTIME_ENV: "prod"
     DATALAYER_SOLR_ZK_HOST: ""
     AWS_ACCESS_KEY_ID: ""
     AWS_SECRET_ACCESS_KEY: ""

@@ -26,10 +26,8 @@ Jupyter Server
 | server.env.GITHUB_OAUTH_CALLBACK_URL | string | `""` |  |
 | server.extraEnvVars | list | `[]` |  |
 | server.image | string | `"datalayer/jupyter-server:0.0.8"` |  |
-| server.imagePullPolicy | string | `"IfNotPresent"` |  |
+| server.imagePullPolicy | string | `"Always"` |  |
 | server.port | int | `8888` |  |
 | server.replicaCount | int | `1` |  |
-| server.service.name | string | `"jupyter-server"` |  |
-| server.service.type | string | `"LoadBalancer"` |  |
 | server.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 

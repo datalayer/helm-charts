@@ -8,7 +8,7 @@ Datalayer Spacer
 
 ## Documentation
 
-For full documentation please checkout [Datalayer Tech](https://datalayer.tech/docs/build).
+For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 
 ## Values
 
@@ -32,14 +32,13 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech/d
 | spacer.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | spacer.env.DATALAYER_SMTP_PORT | string | `""` |  |
 | spacer.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
+| spacer.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | spacer.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
 | spacer.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | spacer.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | spacer.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | spacer.image | string | `"datalayer/spacer:0.0.6"` |  |
-| spacer.imagePullPolicy | string | `"IfNotPresent"` |  |
+| spacer.imagePullPolicy | string | `"Always"` |  |
 | spacer.port | int | `9900` |  |
-| spacer.service.name | string | `"spacer"` |  |
-| spacer.service.type | string | `"LoadBalancer"` |  |
 | spacer.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 

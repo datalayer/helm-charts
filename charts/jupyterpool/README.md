@@ -26,10 +26,8 @@ Jupyterpool
 | jupyterpool.env.GITHUB_OAUTH_CALLBACK_URL | string | `""` |  |
 | jupyterpool.extraEnvVars | list | `[]` |  |
 | jupyterpool.image | string | `"datalayer/jupyterpool:0.0.8"` |  |
-| jupyterpool.imagePullPolicy | string | `"IfNotPresent"` |  |
+| jupyterpool.imagePullPolicy | string | `"Always"` |  |
 | jupyterpool.port | int | `2300` |  |
 | jupyterpool.replicaCount | int | `1` |  |
-| jupyterpool.service.name | string | `"jupyterpool"` |  |
-| jupyterpool.service.type | string | `"LoadBalancer"` |  |
 | jupyterpool.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 

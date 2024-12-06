@@ -2,11 +2,8 @@ spacer:
   image: datalayer/spacer:0.0.6
   sidecar:
     image: datalayer/whoami:0.0.6
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
   port: 9900
-  service:
-    name: spacer
-    type: LoadBalancer
 #  resources:
 #    limits:
 #      memory: "8192Mi"
@@ -27,6 +24,7 @@ spacer:
     DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
     DATALAYER_OPENFGA_STORE_ID: ""
     DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
+    DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
     DATALAYER_SMTP_HOST: ""
     DATALAYER_SMTP_PORT: ""
     DATALAYER_SMTP_USERNAME: ""
