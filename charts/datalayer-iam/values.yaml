@@ -48,7 +48,7 @@ iam:
     DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUNTIME_ENV: "prod"
-    DATALAYER_RUN_HOST: ""
+    DATALAYER_RUN_URL: ""
     DATALAYER_SMTP_HOST: ""
     DATALAYER_SMTP_PASSWORD: ""
     DATALAYER_SMTP_PORT: "0"

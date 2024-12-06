@@ -20,7 +20,7 @@ Jupyterpool
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| jupyterpool.env.DATALAYER_RUN_HOST | string | `""` |  |
+| jupyterpool.env.DATALAYER_RUN_URL | string | `""` |  |
 | jupyterpool.env.GITHUB_CLIENT_ID | string | `""` |  |
 | jupyterpool.env.GITHUB_CLIENT_SECRET | string | `""` |  |
 | jupyterpool.env.GITHUB_OAUTH_CALLBACK_URL | string | `""` |  |

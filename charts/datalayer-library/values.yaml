@@ -9,7 +9,7 @@ library:
 #      memory: "8192Mi"
 #      cpu: "3000m"
   env:
-    DATALAYER_RUN_HOST: ""
+    DATALAYER_RUN_URL: ""
     DATALAYER_CDN_URL: ""
     DATALAYER_SOLR_ZK_HOST: ""
     AWS_ACCESS_KEY_ID: ""

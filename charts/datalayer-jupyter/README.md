@@ -33,7 +33,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
 | jupyter.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | jupyter.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| jupyter.env.DATALAYER_RUN_HOST | string | `""` |  |
+| jupyter.env.DATALAYER_RUN_URL | string | `""` |  |
 | jupyter.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | jupyter.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |

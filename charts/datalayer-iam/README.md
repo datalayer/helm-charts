@@ -41,7 +41,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
 | iam.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | iam.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| iam.env.DATALAYER_RUN_HOST | string | `""` |  |
+| iam.env.DATALAYER_RUN_URL | string | `""` |  |
 | iam.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | iam.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | iam.env.DATALAYER_SMTP_PORT | string | `"0"` |  |

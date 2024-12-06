@@ -47,8 +47,8 @@ spec:
             - containerPort: {{ .Values.server.port }}
               protocol: TCP
           env:
-          - name: DATALAYER_RUN_HOST
-            value: {{ .Values.server.env.DATALAYER_RUN_HOST }}
+          - name: DATALAYER_RUN_URL
+            value: {{ .Values.server.env.DATALAYER_RUN_URL }}
           - name: JUPYTER_BASE_URL
             value: /api/jupyter-server
 #          - name: GITHUB_CLIENT_ID

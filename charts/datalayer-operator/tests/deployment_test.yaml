@@ -62,7 +62,7 @@ tests:
                 value: pulsar
               - name: DATALAYER_PULSAR_URL
                 value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
-              - name: DATALAYER_RUN_HOST
+              - name: DATALAYER_RUN_URL
                 value: ""
               - name: DATALAYER_VAULT_TOKEN
                 value: ""

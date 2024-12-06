@@ -27,7 +27,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | spacer.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | spacer.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | spacer.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| spacer.env.DATALAYER_RUN_HOST | string | `""` |  |
+| spacer.env.DATALAYER_RUN_URL | string | `""` |  |
 | spacer.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | spacer.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | spacer.env.DATALAYER_SMTP_PORT | string | `""` |  |

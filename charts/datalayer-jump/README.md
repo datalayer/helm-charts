@@ -30,7 +30,7 @@ Datalayer Jump
 | jump.env.DATALAYER_LDAP_BIND | string | `""` |  |
 | jump.env.DATALAYER_LDAP_BIND_PWD | string | `""` |  |
 | jump.env.DATALAYER_LDAP_HOST | string | `""` |  |
-| jump.env.DATALAYER_RUN_HOST | string | `""` |  |
+| jump.env.DATALAYER_RUN_URL | string | `""` |  |
 | jump.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | jump.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | jump.env.DATALAYER_SMTP_PORT | string | `""` |  |

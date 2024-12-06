@@ -20,7 +20,7 @@ Jupyter Server
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| server.env.DATALAYER_RUN_HOST | string | `""` |  |
+| server.env.DATALAYER_RUN_URL | string | `""` |  |
 | server.env.GITHUB_CLIENT_ID | string | `""` |  |
 | server.env.GITHUB_CLIENT_SECRET | string | `""` |  |
 | server.env.GITHUB_OAUTH_CALLBACK_URL | string | `""` |  |

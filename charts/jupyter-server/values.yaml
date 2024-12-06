@@ -10,7 +10,7 @@ server:
 #      memory: "8192Mi"
 #      cpu: "3000m"
   env:
-    DATALAYER_RUN_HOST: ""
+    DATALAYER_RUN_URL: ""
     GITHUB_CLIENT_ID: ""
     GITHUB_CLIENT_SECRET: ""
     GITHUB_OAUTH_CALLBACK_URL: ""

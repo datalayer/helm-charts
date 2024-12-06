@@ -38,10 +38,10 @@ spec:
   ingressClassName: {{ .Values.jupyter.ingressClass }}
   tls:
   - hosts:
-    - {{ .Values.jupyter.env.DATALAYER_RUN_HOST }}
-    secretName: {{ .Values.jupyter.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
+    - {{ .Values.jupyter.env.DATALAYER_RUN_URL }}
+    secretName: {{ .Values.jupyter.env.DATALAYER_RUN_URL }}-datalayer-api-cert-secret
   rules:
-  - host: {{ .Values.jupyter.env.DATALAYER_RUN_HOST }}
+  - host: {{ .Values.jupyter.env.DATALAYER_RUN_URL }}
     http:
       paths:
       - path: /api/jupyter
