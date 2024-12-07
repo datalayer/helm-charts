@@ -24,10 +24,10 @@ spec:
   ingressClassName: {{ .Values.iam.ingressClass }}
   tls:
   - hosts:
-    - {{ .Values.iam.env.DATALAYER_RUN_URL }}
-    secretName: {{ .Values.iam.env.DATALAYER_RUN_URL }}-datalayer-api-cert-secret
+    - {{ template "iam.runHost" . }}
+    secretName: {{ template "iam.runHost" . }}-datalayer-api-cert-secret
   rules:
-  - host: {{ .Values.iam.env.DATALAYER_RUN_URL }}
+  - host: {{ template "iam.runHost" . }}
     http:
       paths:
       - path: /api/iam

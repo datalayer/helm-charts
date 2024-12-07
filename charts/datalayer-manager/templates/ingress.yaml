@@ -35,10 +35,10 @@ spec:
   ingressClassName: datalayer-traefik
   tls:
   - hosts:
-    - {{ .Values.manager.env.DATALAYER_RUN_URL }}
-    secretName: {{ .Values.manager.env.DATALAYER_RUN_URL }}-datalayer-api-cert-secret
+    - {{ template "manager.runHost" . }}
+    secretName: {{ template "manager.runHost" . }}-datalayer-api-cert-secret
   rules:
-  - host: {{ .Values.manager.env.DATALAYER_RUN_URL }}
+  - host: {{ template "manager.runHost" . }}
     http:
       paths:
       - path: /api/manager
