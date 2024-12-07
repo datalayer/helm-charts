@@ -37,7 +37,7 @@ spec:
     - {{ template "library.runHost" . }}
     secretName: {{ template "library.runHost" . }}-datalayer-api-cert-secret
   rules:
-  - host: {{ template "library.runHost" . }}}
+  - host: {{ template "library.runHost" . }}
     http:
       paths:
       - path: /api/library
