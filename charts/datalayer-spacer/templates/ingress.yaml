@@ -34,10 +34,10 @@ spec:
   ingressClassName: datalayer-traefik
   tls:
   - hosts:
-    - {{ .Values.spacer.env.DATALAYER_RUN_HOST }}
-    secretName: {{ .Values.spacer.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
+    - {{ template "spacer.runHost" . }}
+    secretName: {{ template "spacer.runHost" . }}-datalayer-api-cert-secret
   rules:
-  - host: {{ .Values.spacer.env.DATALAYER_RUN_HOST }}
+  - host: {{ template "spacer.runHost" . }}
     http:
       paths:
       - path: /api/spacer

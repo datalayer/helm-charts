@@ -22,10 +22,10 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - {{ .Values.jupyterpool.env.DATALAYER_RUN_HOST }}
-    secretName: {{ .Values.jupyterpool.env.DATALAYER_RUN_HOST }}-jupyterpool-cert-secret
+    - {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}
+    secretName: {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}-jupyterpool-cert-secret
   rules:
-  - host: {{ .Values.jupyterpool.env.DATALAYER_RUN_HOST }}
+  - host: {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}
     http:
       paths:
       - path: /api/jupyter-server

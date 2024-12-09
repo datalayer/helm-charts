@@ -38,8 +38,8 @@ spec:
             - containerPort: {{ .Values.jump.port }}
               protocol: TCP
           env:
-          - name: DATALAYER_RUN_HOST
-            value: {{ .Values.jump.env.DATALAYER_RUN_HOST }}
+          - name: DATALAYER_RUN_URL
+            value: {{ .Values.jump.env.DATALAYER_RUN_URL }}
 #          readinessProbe:
 #            httpGet:
 #              path: /api/jump/version

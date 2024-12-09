@@ -34,10 +34,10 @@ spec:
   ingressClassName: datalayer-traefik
   tls:
   - hosts:
-    - {{ .Values.library.env.DATALAYER_RUN_HOST }}
-    secretName: {{ .Values.library.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
+    - {{ template "library.runHost" . }}
+    secretName: {{ template "library.runHost" . }}-datalayer-api-cert-secret
   rules:
-  - host: {{ .Values.library.env.DATALAYER_RUN_HOST }}
+  - host: {{ template "library.runHost" . }}
     http:
       paths:
       - path: /api/library

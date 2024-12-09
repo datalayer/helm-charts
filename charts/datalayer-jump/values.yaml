@@ -2,17 +2,14 @@ jump:
   image: datalayer/jump:0.0.6
   sidecar:
     image: datalayer/whoami:0.0.6
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
   port: 2223
-  service:
-    name: jump
-    type: LoadBalancer
 #  resources:
 #    limits:
 #      memory: "8192Mi"
 #      cpu: "3000m"
   env:
-    DATALAYER_RUN_HOST: ""
+    DATALAYER_RUN_URL: ""
     DATALAYER_CDN_URL: ""
     DATALAYER_SOLR_ZK_HOST: ""
     DATALAYER_KEYCLOAK_REALM_CLIENT_SECRET: ""

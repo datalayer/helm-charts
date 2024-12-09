@@ -232,7 +232,7 @@ Datalayer Observer
 | loki.write.replicas | int | `0` |  |
 | observer.certificateIssuer | string | `"letsencrypt"` |  |
 | observer.clusterType | string | `"any"` |  |
-| observer.env.DATALAYER_RUN_HOST | string | `"oss.datalayer.run"` |  |
+| observer.env.DATALAYER_RUN_URL | string | `"oss.datalayer.run"` |  |
 | observer.ingressClass | string | `"datalayer-traefik"` |  |
 | opentelemetry-operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key | string | `"role.datalayer.io/system"` |  |
 | opentelemetry-operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |

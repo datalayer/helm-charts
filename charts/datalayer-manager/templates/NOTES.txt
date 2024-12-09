@@ -1,0 +1,25 @@
+Your manager server has now been installed, and can be accessed in the following ways:
+
+1. Connect to the manager CLI pod:
+
+  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "manager.name" . }} -o jsonpath='{.items...metadata.name}') -- sh
+
+2. Connect with HTTP internally, within the kubernetes cluster on:
+
+  {{ template "manager.service-name" . }}.{{ .Release.Namespace }}:{{ .Values.manager.port }}
+
+3. Connect with HTTP Node Port to the kubernetes cluster:
+
+  export NODE_IP=$(kubectl get nodes --namespace manager -o jsonpath="{.items[0].status.addresses[0].address}")
+  export NODE_PORT=$(kubectl get --namespace manager -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "manager.service-name" . }})
+  echo http://$NODE_IP:$NODE_PORT/manager/
+
+4. Connect with HTTP external service to the kubernetes cluster:
+
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "manager.name" . }}" -o jsonpath="{ .items[0].metadata.name }")
+  echo "Visit http://127.0.0.1:{{ .Values.manager.port }}/manager/ to access manager"
+  kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.manager.port }}:{{ .Values.manager.port }}
+
+5. For Minikube:
+
+  open http://minikube.local/api/manager/

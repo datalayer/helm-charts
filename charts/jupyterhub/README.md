@@ -46,7 +46,7 @@ ingress:
   ingressClassName: datalayer-traefik
 #  pathSuffix: (/|$)(.*)
   hosts:
-    - ${DATALAYER_RUN_HOST}
+    - ${DATALAYER_RUN_URL}
 """ > ./jupyterhub.yaml
 ```
 
@@ -79,8 +79,8 @@ kubectl get svc -n $NAMESPACE
 # Authenticate with eric / 123 and use the notebook.
 # Use the JupyterHub Admin Panel to add Users (you must be an admin for this in docker > hub > userlist).
 # Go the the control panel then navigate to "Admin". Here you can add and remove users and even access their servers.
-open http://$DATALAYER_RUN_HOST
-open http://$DATALAYER_RUN_HOST/api/jupyterhub/hub/user-redirect
+open http://$DATALAYER_RUN_URL
+open http://$DATALAYER_RUN_URL/api/jupyterhub/hub/user-redirect
 ```
 
 ```bash

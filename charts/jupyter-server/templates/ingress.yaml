@@ -24,10 +24,10 @@ spec:
   ingressClassName: datalayer-traefik
   tls:
   - hosts:
-    - {{ .Values.server.env.DATALAYER_RUN_HOST }}
-    secretName: {{ .Values.server.env.DATALAYER_RUN_HOST }}-datalayer-api-cert-secret
+    - {{ .Values.server.env.DATALAYER_RUN_URL }}
+    secretName: {{ .Values.server.env.DATALAYER_RUN_URL }}-datalayer-api-cert-secret
   rules:
-  - host: {{ .Values.server.env.DATALAYER_RUN_HOST }}
+  - host: {{ .Values.server.env.DATALAYER_RUN_URL }}
     http:
       paths:
       - path: /api/jupyter-server

@@ -3,17 +3,14 @@ jupyterpool:
   replicaCount: 1
   sidecar:
     image: datalayer/whoami:0.0.6
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
   port: 2300
-  service:
-    name: jupyterpool
-    type: LoadBalancer
 #  resources:
 #    limits:
 #      memory: "8192Mi"
 #      cpu: "3000m"
   env:
-    DATALAYER_RUN_HOST: ""
+    DATALAYER_RUN_URL: ""
     GITHUB_CLIENT_ID: ""
     GITHUB_CLIENT_SECRET: ""
     GITHUB_OAUTH_CALLBACK_URL: ""

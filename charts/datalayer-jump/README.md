@@ -30,16 +30,14 @@ Datalayer Jump
 | jump.env.DATALAYER_LDAP_BIND | string | `""` |  |
 | jump.env.DATALAYER_LDAP_BIND_PWD | string | `""` |  |
 | jump.env.DATALAYER_LDAP_HOST | string | `""` |  |
-| jump.env.DATALAYER_RUN_HOST | string | `""` |  |
+| jump.env.DATALAYER_RUN_URL | string | `""` |  |
 | jump.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | jump.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | jump.env.DATALAYER_SMTP_PORT | string | `""` |  |
 | jump.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | jump.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
 | jump.image | string | `"datalayer/jump:0.0.6"` |  |
-| jump.imagePullPolicy | string | `"IfNotPresent"` |  |
+| jump.imagePullPolicy | string | `"Always"` |  |
 | jump.port | int | `2223` |  |
-| jump.service.name | string | `"jump"` |  |
-| jump.service.type | string | `"LoadBalancer"` |  |
 | jump.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 

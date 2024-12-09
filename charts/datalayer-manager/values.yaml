@@ -1,9 +1,10 @@
-spacer:
-  image: datalayer/spacer:0.0.6
+manager:
+  image: datalayer/manager:0.0.1
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
-  port: 9900
+  port: 9300
+  ingress: false
 #  resources:
 #    limits:
 #      memory: "8192Mi"
