@@ -32,7 +32,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | manager.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | manager.env.DATALAYER_SMTP_PORT | string | `""` |  |
 | manager.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
-| manager.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
 | manager.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | manager.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | manager.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |

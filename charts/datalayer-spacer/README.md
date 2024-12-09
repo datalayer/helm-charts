@@ -33,7 +33,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | spacer.env.DATALAYER_SMTP_PORT | string | `""` |  |
 | spacer.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | spacer.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
-| spacer.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
 | spacer.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | spacer.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | spacer.env.OTEL_SDK_DISABLED | string | `"false"` |  |
