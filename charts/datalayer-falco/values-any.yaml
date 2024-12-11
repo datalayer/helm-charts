@@ -57,8 +57,7 @@ falcosidekick:
         # Not working ??
         # templatedfields: "Dkey:{{ or (index .OutputFields \"k8s.ns.name\") \"bar\" }},k8s_labels:{{ printf \"%q\" (or (index .OutputFields \"k8s.pod.labels\") \"error\") }}"
         kafka:
-            hostport: kafka-kafka-bootstrap.kafka.svc.cluster.local:9093
-            tls: true
+            hostport: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
             topic: falco-events
     serviceMonitor:
         enabled: true
