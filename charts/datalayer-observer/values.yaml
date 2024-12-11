@@ -166,6 +166,14 @@ kube-prometheus-stack:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/datalayer
+          - name: "kafka"
+            orgId: 1
+            folder: "Kafka"
+            type: file
+            disableDeletion: true
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/kafka
           - name: "pulsar"
             orgId: 1
             folder: "Pulsar"
@@ -194,6 +202,19 @@ kube-prometheus-stack:
           datasource: Prometheus
         remote_kernel:
           url: https://raw.githubusercontent.com/datalayer/grafana-dashboards/main/dashboards/remote-kernels-details.json
+          datasource: Prometheus
+      kafka:
+        kafka:
+          url: https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/main/examples/metrics/grafana-dashboards/strimzi-kafka.json
+          datasource: Prometheus
+        kafka-exporter:
+          url: https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/main/examples/metrics/grafana-dashboards/strimzi-kafka-exporter.json
+          datasource: Prometheus
+        kafka-operators:
+          url: https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/main/examples/metrics/grafana-dashboards/strimzi-operators.json
+          datasource: Prometheus
+        kafka-zookeeper:
+          url: https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/main/examples/metrics/grafana-dashboards/strimzi-zookeeper.json
           datasource: Prometheus
       pulsar:
         # Download the maintained dashboards from AL 2.0 licensed repo https://github.com/streamnative/apache-pulsar-grafana-dashboard
@@ -300,7 +321,7 @@ kube-prometheus-stack:
         matchExpressions:
           - key: app
             operator: In
-            values: [pulsar]
+            values: [pulsar, strimzi]
       serviceMonitorSelector:
         matchLabels:
           monitoring.datalayer.io/instance: "observer"
