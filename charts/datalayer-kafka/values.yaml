@@ -1,0 +1,10 @@
+strimzi:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
