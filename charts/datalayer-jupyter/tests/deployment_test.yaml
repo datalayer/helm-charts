@@ -38,16 +38,6 @@ tests:
           path: spec.template.spec.containers[0]
           content:
             env:
-              - name: DATALAYER_SOLR_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    key: password
-                    name: solr-basic-auth
-              - name: DATALAYER_SOLR_USERNAME
-                valueFrom:
-                  secretKeyRef:
-                    key: username
-                    name: solr-basic-auth
               - name: DATALAYER_AUTHZ_ENGINE
                 value: ""
               - name: DATALAYER_CDN_URL
@@ -78,6 +68,16 @@ tests:
                 value: prod
               - name: DATALAYER_RUN_URL
                 value: ""
+              - name: DATALAYER_SOLR_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: password
+                    name: solr-basic-auth
+              - name: DATALAYER_SOLR_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    key: username
+                    name: solr-basic-auth
               - name: DATALAYER_SOLR_ZK_HOST
                 value: solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local
               - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
