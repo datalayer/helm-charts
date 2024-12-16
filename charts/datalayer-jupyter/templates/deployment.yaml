@@ -37,15 +37,15 @@ spec:
           ports:
             - containerPort: {{ .Values.jupyter.port }}
               protocol: TCP
-          {{- if or .Values.jupyter.env .Values.jupyter.envValueFrom }}
+          {{- if .Values.jupyter.env }}
           env:
-            {{- range $key, $value := .Values.jupyter.envValueFrom }}
-            - name: {{ $key }}
-              valueFrom: {{- $value | toYaml | nindent 16 }}
-            {{- end }}
             {{- range $key, $value := .Values.jupyter.env }}
             - name: {{ $key }}
+              {{- if kindIs "string" $value }}
               value: {{ $value | quote }}
+              {{- else }}
+              valueFrom: {{- $value | toYaml | nindent 16}}
+              {{- end }}
             {{- end }}
           {{- end }}
           {{- with .Values.jupyter.resources }}

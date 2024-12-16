@@ -36,15 +36,15 @@ spec:
           ports:
             - containerPort: {{ .Values.iam.port }}
               protocol: TCP
-          {{- if or .Values.iam.env .Values.iam.envValueFrom }}
+          {{- if .Values.iam.env }}
           env:
-            {{- range $key, $value := .Values.iam.envValueFrom }}
-            - name: {{ $key }}
-              valueFrom: {{- $value | toYaml | nindent 16 }}
-            {{- end }}
             {{- range $key, $value := .Values.iam.env }}
             - name: {{ $key }}
+              {{- if kindIs "string" $value }}
               value: {{ $value | quote }}
+              {{- else }}
+              valueFrom: {{- $value | toYaml | nindent 16}}
+              {{- end }}
             {{- end }}
           {{- end }}
           {{- with .Values.iam.resources }}
