@@ -16,7 +16,7 @@ iam:
             operator: In
             values:
             - "true"
-  envValueFrom:
+  env:
     DATALAYER_SOLR_USERNAME:
       secretKeyRef:
         name: solr-basic-auth
@@ -25,7 +25,6 @@ iam:
       secretKeyRef:
         name: solr-basic-auth
         key: password
-  env:
     DATALAYER_AUTHZ_ENGINE: "openfga"
     DATALAYER_CDN_URL: ""
     DATALAYER_CREDITS_PROVIDER: ""
