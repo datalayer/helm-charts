@@ -41,19 +41,21 @@ spec:
           ports:
             - containerPort: {{ .Values.operator.port }}
               protocol: TCP
-          {{- if or .Values.operator.sharedFsPVC .Values.operator.env .Values.operator.envValueFrom }}
+          {{- if or .Values.operator.sharedFsPVC .Values.operator.env }}
           env:
             {{- if .Values.operator.sharedFsPVC }}
             - name: 'DATALAYER_USERS_VOLUME_CLAIM_NAME'
               value: {{ .Values.operator.sharedFsPVC }}
             {{- end }}
-            {{- range $key, $value := .Values.operator.envValueFrom }}
-            - name: {{ $key }}
-              valueFrom: {{- $value | toYaml | nindent 16 }}
-            {{- end }}
             {{- range $key, $value := .Values.operator.env }}
             - name: {{ $key }}
+              {{- if kindIs "string" $value }}
               value: {{ $value | quote }}
+              {{- else if kindIs "map" $value }}
+              valueFrom: {{- $value | toYaml | nindent 16}}
+              {{- else }}
+              {{- fail "Env value must be either string or map with key secretKeyRef or configMapKeyRef" }}
+              {{- end }}
             {{- end }}
           {{- end }}
           readinessProbe:

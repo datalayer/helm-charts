@@ -38,16 +38,6 @@ tests:
           path: spec.template.spec.containers[0]
           content:
             env:
-              - name: DATALAYER_SOLR_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    key: password
-                    name: solr-basic-auth
-              - name: DATALAYER_SOLR_USERNAME
-                valueFrom:
-                  secretKeyRef:
-                    key: username
-                    name: solr-basic-auth
               - name: DATALAYER_AUTHZ_ENGINE
                 value: openfga
               - name: DATALAYER_CDN_URL
@@ -102,6 +92,16 @@ tests:
                 value: "0"
               - name: DATALAYER_SMTP_USERNAME
                 value: ""
+              - name: DATALAYER_SOLR_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: password
+                    name: solr-basic-auth
+              - name: DATALAYER_SOLR_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    key: username
+                    name: solr-basic-auth
               - name: DATALAYER_SOLR_ZK_HOST
                 value: solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local
               - name: DATALAYER_STRIPE_API_KEY
