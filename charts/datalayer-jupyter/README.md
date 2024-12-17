@@ -4,7 +4,7 @@
 
 Datalayer Jupyter
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![AppVersion: 1.0.3](https://img.shields.io/badge/AppVersion-1.0.3-informational?style=flat-square)
+![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![AppVersion: 1.0.4](https://img.shields.io/badge/AppVersion-1.0.4-informational?style=flat-square)
 
 ## Documentation
 
@@ -34,15 +34,15 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | jupyter.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | jupyter.env.DATALAYER_RUN_URL | string | `""` |  |
+| jupyter.env.DATALAYER_SOLR_PASSWORD.secretKeyRef.key | string | `"password"` |  |
+| jupyter.env.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
+| jupyter.env.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
+| jupyter.env.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | jupyter.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | jupyter.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| jupyter.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.key | string | `"password"` |  |
-| jupyter.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| jupyter.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
-| jupyter.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| jupyter.image | string | `"datalayer/jupyter:1.0.3"` |  |
+| jupyter.image | string | `"datalayer/jupyter:1.0.4"` |  |
 | jupyter.imagePullPolicy | string | `"Always"` |  |
 | jupyter.ingressClass | string | `"datalayer-traefik"` |  |
 | jupyter.port | int | `9500` |  |

@@ -4,7 +4,7 @@
 
 Datalayer IAM
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![AppVersion: 1.0.4](https://img.shields.io/badge/AppVersion-1.0.4-informational?style=flat-square)
+![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![AppVersion: 1.0.5](https://img.shields.io/badge/AppVersion-1.0.5-informational?style=flat-square)
 
 ## Documentation
 
@@ -46,6 +46,10 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | iam.env.DATALAYER_SMTP_PORT | string | `"0"` |  |
 | iam.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
+| iam.env.DATALAYER_SOLR_PASSWORD.secretKeyRef.key | string | `"password"` |  |
+| iam.env.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
+| iam.env.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
+| iam.env.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | iam.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | iam.env.DATALAYER_STRIPE_API_KEY | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_CHECKOUT_ROUTE | string | `"checkout"` |  |
@@ -60,11 +64,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.key | string | `"password"` |  |
-| iam.envValueFrom.DATALAYER_SOLR_PASSWORD.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
-| iam.envValueFrom.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
-| iam.image | string | `"datalayer/iam:1.0.4"` |  |
+| iam.image | string | `"datalayer/iam:1.0.5"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |

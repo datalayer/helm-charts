@@ -2,7 +2,7 @@ apiVersion: v1
 description: Datalayer Jupyter
 name: datalayer-jupyter
 version: 1.0.5
-appVersion: 1.0.3
+appVersion: 1.0.4
 home: https://datalayer.tech
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-jupyter
