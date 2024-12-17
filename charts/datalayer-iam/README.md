@@ -64,7 +64,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| iam.image | string | `"datalayer/iam:1.0.5"` |  |
+| iam.image | string | `"datalayer/iam:1.0.6"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |

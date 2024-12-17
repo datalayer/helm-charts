@@ -49,12 +49,10 @@ spec:
             {{- end }}
             {{- range $key, $value := .Values.operator.env }}
             - name: {{ $key }}
-              {{- if kindIs "string" $value }}
-              value: {{ $value | quote }}
-              {{- else if kindIs "map" $value }}
+              {{- if kindIs "map" $value }}
               valueFrom: {{- $value | toYaml | nindent 16}}
               {{- else }}
-              {{- fail "Env value must be either string or map with key secretKeyRef or configMapKeyRef" }}
+              value: {{ $value | quote }}
               {{- end }}
             {{- end }}
           {{- end }}
