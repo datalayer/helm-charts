@@ -36,7 +36,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| operator.image | string | `"datalayer/operator:1.0.8"` |  |
+| operator.image | string | `"datalayer/operator:1.0.9"` |  |
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |
 | operator.sharedFsPVC | string | `""` |  |
