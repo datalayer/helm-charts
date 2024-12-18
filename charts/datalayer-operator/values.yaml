@@ -1,5 +1,5 @@
 operator:
-  image: datalayer/operator:1.0.8
+  image: datalayer/operator:1.0.9
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
@@ -19,11 +19,13 @@ operator:
     AWS_DEFAULT_REGION: ""
     AWS_SECRET_ACCESS_KEY: ""
     DATALAYER_AUTHZ_ENGINE: "openfga"
+    DATALAYER_AVAILABLE_KERNELS_MAX_LIFE_SEC: "3600"
     DATALAYER_CERT_ISSUER: "letsencrypt"
     DATALAYER_DOCKER_REGISTRY: ""
     DATALAYER_IAM_API_KEY: ""
     DATALAYER_IAM_HOST: "datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"
     DATALAYER_INGRESS_CLASS_NAME: "datalayer-traefik"
+    DATALAYER_KERNELS_RUN_HOOKS: "false"
     DATALAYER_OPERATOR_API_KEY: ""
     DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
