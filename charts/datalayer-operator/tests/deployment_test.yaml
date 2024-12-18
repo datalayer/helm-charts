@@ -46,6 +46,8 @@ tests:
                 value: ""
               - name: DATALAYER_AUTHZ_ENGINE
                 value: openfga
+              - name: DATALAYER_AVAILABLE_KERNELS_MAX_LIFE_SEC
+                value: "3600"
               - name: DATALAYER_CERT_ISSUER
                 value: letsencrypt
               - name: DATALAYER_DOCKER_REGISTRY
@@ -56,6 +58,8 @@ tests:
                 value: datalayer-iam-svc.datalayer-api.svc.cluster.local:9700
               - name: DATALAYER_INGRESS_CLASS_NAME
                 value: datalayer-traefik
+              - name: DATALAYER_KERNELS_RUN_HOOKS
+                value: "false"
               - name: DATALAYER_OPERATOR_API_KEY
                 value: ""
               - name: DATALAYER_PUB_SUB_ENGINE
