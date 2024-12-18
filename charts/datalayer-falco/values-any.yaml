@@ -86,12 +86,12 @@ falcosidekick:
   prometheusRules:
     enabled: true
 # metrics:
-#     enable: true
+#   enable: true
 # serviceMonitor:
-#     create: true
-#     labels:
-#         monitoring.datalayer.io/enabled: "true"
-#         monitoring.datalayer.io/instance: "observer"
+#   create: true
+#   labels:
+#     monitoring.datalayer.io/enabled: "true"
+#     monitoring.datalayer.io/instance: "observer"
 grafana:
   dashboards:
     enabled: true
