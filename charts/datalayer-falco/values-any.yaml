@@ -54,6 +54,7 @@ falcosidekick:
               - "true"
     # See https://github.com/falcosecurity/falcosidekick/blob/master/config_example.yaml
     config:
+        # debug: true
         # Not working ??
         # templatedfields: "Dkey:{{ or (index .OutputFields \"k8s.ns.name\") \"bar\" }},k8s_labels:{{ printf \"%q\" (or (index .OutputFields \"k8s.pod.labels\") \"error\") }}"
         kafka:

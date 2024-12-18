@@ -1,3 +1,4 @@
+{{ if .Values.telemetry.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -292,3 +293,4 @@ spec:
         summary: 'Certificate will expire in less than 30 days'
         description: |-
             {{`'Certificate of type {{ $labels.type }} in cluster {{ $labels.cluster }} in namespace {{ $labels.resource_namespace }} will expire in less than 30 days'`}}
+{{ end }}
