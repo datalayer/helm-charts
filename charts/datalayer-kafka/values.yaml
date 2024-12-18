@@ -1,3 +1,5 @@
+telemetry:
+  enabled: true
 strimzi:
   affinity:
     nodeAffinity:
