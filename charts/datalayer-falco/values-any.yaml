@@ -1,72 +1,90 @@
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: role.datalayer.io/system
+          operator: In
+          values:
+          - "true"
 collectors:
-    kubernetes:
-        enabled: true
-customRules:
-    rules-override-default.yaml: |-
-        # Whitelist strimzi operator for Kafka to connect to k8s API
-        - macro: user_known_contact_k8s_api_server_activities
-          condition: (container.image.repository=quay.io/strimzi/operator)
-          override:
-            condition: replace
-        # Enable cryptomining related rules
-        # See https://falco.org/blog/falco-detect-cryptomining
-        # Tested with https://github.com/n1g3ld0ugla5/Falco-Cryptomining-CNCF
-        - rule: Detect outbound connections to common miner pool ports
-          enabled: true
-          override:
-            enabled: replace
-        - rule: Set Setuid or Setgid bit
-          enabled: true
-          override:
-            enabled: replace
-falco:
-    rules_files:
-        # Order matters to apply override the rule should
-        # be loaded first
-        - /etc/falco/falco_rules.yaml
-        - /etc/falco/falco-incubating_rules.yaml
-        - /etc/falco/falco-sandbox_rules.yaml
-        - /etc/falco/rules.d
-falcoctl:
-    config:
-        artifact:
-            install:
-                refs:
-                    - falco-rules:3
-                    - falco-incubating-rules:4
-                    - falco-sandbox-rules:4
-                    - ghcr.io/falcosecurity/plugins/plugin/k8smeta:0.2.1
-            follow:
-                refs:
-                    - falco-rules:3
-                    - falco-incubating-rules:4
-                    - falco-sandbox-rules:4
-falcosidekick:
+  kubernetes:
     enabled: true
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: role.datalayer.io/system
-              operator: In
-              values:
-              - "true"
-    # See https://github.com/falcosecurity/falcosidekick/blob/master/config_example.yaml
-    config:
-        # debug: true
-        # Not working ??
-        # templatedfields: "Dkey:{{ or (index .OutputFields \"k8s.ns.name\") \"bar\" }},k8s_labels:{{ printf \"%q\" (or (index .OutputFields \"k8s.pod.labels\") \"error\") }}"
-        kafka:
-            hostport: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
-            topic: falco-events
-    serviceMonitor:
-        enabled: true
-        additionalLabels:
-            monitoring.datalayer.io/enabled: "true"
-            monitoring.datalayer.io/instance: "observer"
-    prometheusRules:
-        enabled: true
+k8s-metacollector:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
+customRules:
+  rules-override-default.yaml: |-
+    # Whitelist strimzi operator for Kafka to connect to k8s API
+    - macro: user_known_contact_k8s_api_server_activities
+      condition: (container.image.repository=quay.io/strimzi/operator)
+      override:
+        condition: replace
+    # Enable cryptomining related rules
+    # See https://falco.org/blog/falco-detect-cryptomining
+    # Tested with https://github.com/n1g3ld0ugla5/Falco-Cryptomining-CNCF
+    - rule: Detect outbound connections to common miner pool ports
+      enabled: true
+      override:
+        enabled: replace
+    - rule: Set Setuid or Setgid bit
+      enabled: true
+      override:
+        enabled: replace
+falco:
+  rules_files:
+    # Order matters to apply override the rule should be loaded first.
+    - /etc/falco/falco_rules.yaml
+    - /etc/falco/falco-incubating_rules.yaml
+    - /etc/falco/falco-sandbox_rules.yaml
+    - /etc/falco/rules.d
+falcoctl:
+  config:
+    artifact:
+      install:
+        refs:
+          - falco-rules:3
+          - falco-incubating-rules:4
+          - falco-sandbox-rules:4
+          - ghcr.io/falcosecurity/plugins/plugin/k8smeta:0.2.1
+      follow:
+        refs:
+          - falco-rules:3
+          - falco-incubating-rules:4
+          - falco-sandbox-rules:4
+falcosidekick:
+  enabled: true
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
+  # See https://github.com/falcosecurity/falcosidekick/blob/master/config_example.yaml
+  config:
+    # debug: true
+    # Not working ??
+    # templatedfields: "Dkey:{{ or (index .OutputFields \"k8s.ns.name\") \"bar\" }},k8s_labels:{{ printf \"%q\" (or (index .OutputFields \"k8s.pod.labels\") \"error\") }}"
+    kafka:
+      hostport: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
+      topic: falco-events
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      monitoring.datalayer.io/enabled: "true"
+      monitoring.datalayer.io/instance: "observer"
+  prometheusRules:
+    enabled: true
 # metrics:
 #     enable: true
 # serviceMonitor:
