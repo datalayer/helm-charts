@@ -1,0 +1,66 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: datalayer-falco-falcosidekick
+  namespace: datalayer-falco
+spec:
+  groups:
+  - name: falcosidekick
+    rules:
+    - alert: FalcosidekickAbsent
+      annotations:
+        description: No metrics are being scraped from falcosidekick. No events will
+          trigger any alerts.
+        summary: Falcosidekick has dissapeared from Prometheus service discovery.
+      expr: absent(up{job="datalayer-falco-falcosidekick"})
+      for: 10m
+      labels:
+        severity: critical
+    - alert: FalcoWarningEventsRateHigh
+      annotations:
+        description: A high rate of warning events are being detected by Falco
+        summary: Falco is experiencing high rate of warning events
+      expr: rate(falcosecurity_falcosidekick_falco_events_total{priority_raw="warning"}[5m]) > 0
+      for: 15m
+      labels:
+        severity: warning
+    - alert: FalcoErrorEventsRateHigh
+      annotations:
+        description: A high rate of error events are being detected by Falco
+        summary: Falco is experiencing high rate of error events
+      expr: rate(falcosecurity_falcosidekick_falco_events_total{priority_raw="error"}[5m]) > 0
+      for: 15m
+      labels:
+        severity: warning
+    - alert: FalcoCriticalEventsRateHigh
+      annotations:
+        description: A high rate of critical events are being detected by Falco
+        summary: Falco is experiencing high rate of critical events
+      expr: rate(falcosecurity_falcosidekick_falco_events_total{priority_raw="critical"}[5m]) > 0
+      for: 15m
+      labels:
+        severity: critical
+    - alert: FalcoAlertEventsRateHigh
+      annotations:
+        description: A high rate of alert events are being detected by Falco
+        summary: Falco is experiencing high rate of alert events
+      expr: rate(falcosecurity_falcosidekick_falco_events_total{priority_raw="alert"}[5m]) > 0
+      for: 5m
+      labels:
+        severity: critical
+    - alert: FalcoEmergencyEventsRateHigh
+      annotations:
+        description: A high rate of emergency events are being detected by Falco
+        summary: Falco is experiencing high rate of emergency events
+      expr: rate(falcosecurity_falcosidekick_falco_events_total{priority_raw="emergency"}[5m]) > 0
+      for: 1m
+      labels:
+        severity: critical
+    - alert: FalcoErrorOutputEventsRateHigh
+      annotations:
+        description: A high rate of errors are being detecting for an output
+        summary: Falcosidekick is experiencing high rate of errors for an output
+      expr: sum by (destination) (rate(falcosecurity_falcosidekick_outputs_total{status="error"}[5m])) > 0
+      for: 1m
+      labels:
+        severity: warning

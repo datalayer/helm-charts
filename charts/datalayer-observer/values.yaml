@@ -322,6 +322,12 @@ kube-prometheus-stack:
           - key: app
             operator: In
             values: [pulsar, strimzi]
+      # Scan all namespace for PrometheusRules
+      ruleNamespaceSelector: {}
+      # Prevent the rule selector to be overwritten by Helm values
+      ruleSelectorNilUsesHelmValues: false
+      # Select all PrometheusRules resources
+      ruleSelector: {}
       serviceMonitorSelector:
         matchLabels:
           monitoring.datalayer.io/instance: "observer"
