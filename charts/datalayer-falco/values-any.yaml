@@ -78,20 +78,18 @@ falcosidekick:
     kafka:
       hostport: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
       topic: falco-events
+    prometheus:
+  grafana:
+    dashboards:
+      enabled: false
+  prometheusRules:
+    # Default rules have wrong metrics nomenclature:
+    # https://github.com/falcosecurity/charts/pull/805
+    enabled: false
   serviceMonitor:
     enabled: true
     additionalLabels:
       monitoring.datalayer.io/enabled: "true"
       monitoring.datalayer.io/instance: "observer"
-  prometheusRules:
-    enabled: true
-# metrics:
-#   enable: true
-# serviceMonitor:
-#   create: true
-#   labels:
-#     monitoring.datalayer.io/enabled: "true"
-#     monitoring.datalayer.io/instance: "observer"
-grafana:
-  dashboards:
-    enabled: true
+  # webui:
+  #   enabled: true
