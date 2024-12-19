@@ -7,6 +7,17 @@ spec:
   kafka:
     version: 3.8.0
     replicas: 3
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: role.datalayer.io/system
+                    operator: In
+                    values:
+                    - "true"
     listeners:
       - name: plain
         port: 9092
@@ -36,7 +47,29 @@ spec:
       type: persistent-claim
       size: 8Gi
       deleteClaim: false
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: role.datalayer.io/system
+                    operator: In
+                    values:
+                    - "true"
   entityOperator:
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: role.datalayer.io/system
+                    operator: In
+                    values:
+                    - "true"
     topicOperator: {}
     userOperator: {}
   kafkaExporter:
