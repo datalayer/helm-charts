@@ -1,6 +1,6 @@
 telemetry:
   enabled: true
-strimzi:
+strimzi-kafka-operator:
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:

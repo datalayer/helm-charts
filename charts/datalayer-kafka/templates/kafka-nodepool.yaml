@@ -1,0 +1,19 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: {{ .Release.Name }}-node-pool
+  namespace: {{ .Release.Namespace }}
+  labels:
+    strimzi.io/cluster: {{ .Release.Name }}
+spec:
+  replicas: 3
+  roles:
+    - broker
+    - controller
+  storage:
+      type: jbod
+      volumes:
+      - id: 0
+        type: persistent-claim
+        size: 8Gi
+        deleteClaim: false
