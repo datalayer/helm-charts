@@ -3,6 +3,9 @@ kind: Kafka
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
+  annotations:
+    strimzi.io/node-pools: enabled
+    strimzi.io/kraft: enabled
 spec:
   kafka:
     version: 3.8.0
@@ -41,23 +44,23 @@ spec:
         type: persistent-claim
         size: 8Gi
         deleteClaim: false
-  zookeeper:
-    replicas: 3
-    storage:
-      type: persistent-claim
-      size: 8Gi
-      deleteClaim: false
-    template:
-      pod:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: role.datalayer.io/system
-                    operator: In
-                    values:
-                    - "true"
+#  zookeeper:
+#    replicas: 3
+#    storage:
+#      type: persistent-claim
+#      size: 8Gi
+#      deleteClaim: false
+#    template:
+#      pod:
+#        affinity:
+#          nodeAffinity:
+#            requiredDuringSchedulingIgnoredDuringExecution:
+#              nodeSelectorTerms:
+#                - matchExpressions:
+#                  - key: role.datalayer.io/system
+#                    operator: In
+#                    values:
+#                    - "true"
   entityOperator:
     template:
       pod:
@@ -73,5 +76,16 @@ spec:
     topicOperator: {}
     userOperator: {}
   kafkaExporter:
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: role.datalayer.io/system
+                    operator: In
+                    values:
+                    - "true"
     topicRegex: ".*"
     groupRegex: ".*"

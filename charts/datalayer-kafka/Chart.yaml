@@ -13,5 +13,5 @@ maintainers:
     url: https://datalayer.io
 dependencies:
   - name: strimzi-kafka-operator
-    version: "0.44.0"
-    repository: "https://strimzi.io/charts/"
+    version: "0.45.0"
+    repository: "https://strimzi.io/charts"
