@@ -40,6 +40,10 @@ tests:
             env:
               - name: DATALAYER_AUTHZ_ENGINE
                 value: openfga
+              - name: DATALAYER_BLUESKY_API_KEY
+                value: ""
+              - name: DATALAYER_BLUESKY_API_SECRET
+                value: ""
               - name: DATALAYER_CDN_URL
                 value: ""
               - name: DATALAYER_CREDITS_PROVIDER
@@ -120,10 +124,6 @@ tests:
                 value: ""
               - name: DATALAYER_VAULT_URL
                 value: http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200
-              - name: DATALAYER_BLUESKY_API_KEY
-                value: ""
-              - name: DATALAYER_BLUESKY_API_SECRET
-                value: ""
               - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
                 value: ""
               - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
