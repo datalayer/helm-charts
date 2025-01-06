@@ -59,8 +59,8 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | iam.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | iam.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
-| iam.env.DATALAYER_X_API_KEY | string | `""` |  |
-| iam.env.DATALAYER_X_API_SECRET | string | `""` |  |
+| iam.env.DATALAYER_BLUESKY_API_KEY | string | `""` |  |
+| iam.env.DATALAYER_BLUESKY_API_SECRET | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
