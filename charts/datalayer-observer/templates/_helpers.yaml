@@ -1,0 +1,6 @@
+{{/*
+Define the value for the datalayer run host.
+*/}}
+{{- define "observer.runHost" -}}
+{{- printf "%s" .Values.observer.env.DATALAYER_RUN_URL | replace "https://" "" -}}
+{{- end -}}
