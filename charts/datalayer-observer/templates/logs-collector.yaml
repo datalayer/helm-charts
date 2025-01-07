@@ -116,7 +116,7 @@ spec:
         # Align resource attributes names with prometheus metrics attributes names
         - key: cluster
           action: upsert
-          value: '{{ .Values.observer.env.DATALAYER_RUN_URL }}'
+          value: '{{ template "observer.runHost" . }}'
         - key: namespace
           action: upsert
           from_attribute: k8s.namespace.name
