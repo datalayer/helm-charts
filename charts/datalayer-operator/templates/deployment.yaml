@@ -19,6 +19,8 @@ spec:
         app: {{ template "operator.app-name" . }}
         release: {{ .Release.Name }}
         datalayer.io/app: {{ template "operator.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
     spec:
       terminationGracePeriodSeconds: 0
       {{- with .Values.operator.affinity }}

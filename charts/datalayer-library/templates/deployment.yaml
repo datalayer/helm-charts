@@ -19,6 +19,8 @@ spec:
         app: {{ template "library.app-name" . }}
         release: {{ .Release.Name }}
         datalayer.io/app: {{ template "library.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
     spec:
       terminationGracePeriodSeconds: 0
       affinity:
