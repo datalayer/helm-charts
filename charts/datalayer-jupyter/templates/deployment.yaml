@@ -19,6 +19,8 @@ spec:
         app: {{ template "jupyter.app-name" . }}
         release: {{ .Release.Name }}
         datalayer.io/app: {{ template "jupyter.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
     spec:
       terminationGracePeriodSeconds: 0
       {{- with .Values.jupyter.affinity }}

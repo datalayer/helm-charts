@@ -19,6 +19,8 @@ spec:
         app: {{ template "spacer.app-name" . }}
         release: {{ .Release.Name }}
         datalayer.io/app: {{ template "spacer.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
     spec:
       terminationGracePeriodSeconds: 0
       affinity:
