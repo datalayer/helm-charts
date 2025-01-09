@@ -46,6 +46,7 @@ iam:
     DATALAYER_OPENFGA_STORE_ID: ""
     DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
+    DATALAYER_KAKFA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
     DATALAYER_RUNTIME_ENV: "prod"
     DATALAYER_RUN_URL: ""
     DATALAYER_SMTP_HOST: ""

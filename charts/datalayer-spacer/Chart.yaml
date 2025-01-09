@@ -2,7 +2,7 @@ apiVersion: v1
 description: Datalayer Spacer
 name: datalayer-spacer
 version: 0.0.7
-appVersion: 0.0.6
+appVersion: 0.0.7
 home: https://datalayer.tech
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-spacer
