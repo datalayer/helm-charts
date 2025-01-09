@@ -28,6 +28,7 @@ operator:
     DATALAYER_KERNELS_RUN_HOOKS: "false"
     DATALAYER_OPERATOR_API_KEY: ""
     DATALAYER_PUB_SUB_ENGINE: "kafka"
+    DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_KAKFA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
     DATALAYER_RUN_URL: ""
     DATALAYER_VAULT_TOKEN: ""
