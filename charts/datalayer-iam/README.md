@@ -4,7 +4,7 @@
 
 Datalayer IAM
 
-![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![AppVersion: 1.0.5](https://img.shields.io/badge/AppVersion-1.0.5-informational?style=flat-square)
+![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![AppVersion: 1.0.7](https://img.shields.io/badge/AppVersion-1.0.7-informational?style=flat-square)
 
 ## Documentation
 
@@ -20,6 +20,8 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.certificateIssuer | string | `"letsencrypt"` |  |
 | iam.clusterType | string | `"any"` |  |
 | iam.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
+| iam.env.DATALAYER_BLUESKY_API_KEY | string | `""` |  |
+| iam.env.DATALAYER_BLUESKY_API_SECRET | string | `""` |  |
 | iam.env.DATALAYER_CDN_URL | string | `""` |  |
 | iam.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | iam.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
@@ -33,6 +35,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | iam.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION | string | `"false"` |  |
+| iam.env.DATALAYER_KAKFA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
 | iam.env.DATALAYER_LINKEDIN_CLIENT_ID | string | `""` |  |
 | iam.env.DATALAYER_LINKEDIN_CLIENT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
@@ -59,8 +62,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | iam.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | iam.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
-| iam.env.DATALAYER_BLUESKY_API_KEY | string | `""` |  |
-| iam.env.DATALAYER_BLUESKY_API_SECRET | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |

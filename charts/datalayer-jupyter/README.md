@@ -4,7 +4,7 @@
 
 Datalayer Jupyter
 
-![Version: 1.0.5](https://img.shields.io/badge/Version-1.0.5-informational?style=flat-square) ![AppVersion: 1.0.4](https://img.shields.io/badge/AppVersion-1.0.4-informational?style=flat-square)
+![Version: 1.0.7](https://img.shields.io/badge/Version-1.0.7-informational?style=flat-square) ![AppVersion: 1.0.5](https://img.shields.io/badge/AppVersion-1.0.5-informational?style=flat-square)
 
 ## Documentation
 
@@ -25,6 +25,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | jupyter.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | jupyter.env.DATALAYER_JWT_SECRET | string | `""` |  |
+| jupyter.env.DATALAYER_KAKFA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
 | jupyter.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | jupyter.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | jupyter.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
