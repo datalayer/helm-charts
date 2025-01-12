@@ -4,7 +4,7 @@
 
 Datalayer Spacer
 
-![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square) ![AppVersion: 0.0.6](https://img.shields.io/badge/AppVersion-0.0.6-informational?style=flat-square)
+![Version: 0.0.7](https://img.shields.io/badge/Version-0.0.7-informational?style=flat-square) ![AppVersion: 0.0.7](https://img.shields.io/badge/AppVersion-0.0.7-informational?style=flat-square)
 
 ## Documentation
 
@@ -39,5 +39,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | spacer.image | string | `"datalayer/spacer:0.0.6"` |  |
 | spacer.imagePullPolicy | string | `"Always"` |  |
 | spacer.port | int | `9900` |  |
+| spacer.sharedFsPVC | string | `""` |  |
 | spacer.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 

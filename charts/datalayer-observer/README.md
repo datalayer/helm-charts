@@ -37,6 +37,7 @@ Datalayer Observer
 | kube-prometheus-stack.defaultRules.create | bool | `true` |  |
 | kube-prometheus-stack.defaultRules.rules.alertmanager | bool | `false` |  |
 | kube-prometheus-stack.enabled | bool | `true` |  |
+| kube-prometheus-stack.grafana."grafana.ini".server.root_url | string | `"%(protocol)s://%(domain)s:%(http_port)s/grafana"` |  |
 | kube-prometheus-stack.grafana."grafana.ini".server.serve_from_sub_path | bool | `true` |  |
 | kube-prometheus-stack.grafana.additionalDataSources[0].access | string | `"proxy"` |  |
 | kube-prometheus-stack.grafana.additionalDataSources[0].basicAuth | bool | `false` |  |
@@ -204,6 +205,9 @@ Datalayer Observer
 | kube-prometheus-stack.prometheus.prometheusSpec.podMonitorSelector.matchExpressions[0].values[0] | string | `"pulsar"` |  |
 | kube-prometheus-stack.prometheus.prometheusSpec.podMonitorSelector.matchExpressions[0].values[1] | string | `"strimzi"` |  |
 | kube-prometheus-stack.prometheus.prometheusSpec.routePrefix | string | `"/prometheus"` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.ruleNamespaceSelector | object | `{}` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.ruleSelector | object | `{}` |  |
+| kube-prometheus-stack.prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues | bool | `false` |  |
 | kube-prometheus-stack.prometheus.prometheusSpec.serviceMonitorSelector.matchLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |
 | kube-prometheus-stack.prometheus.prometheusSpec.serviceMonitorSelector.matchLabels."monitoring.datalayer.io/instance" | string | `"observer"` |  |
 | kube-prometheus-stack.prometheus.serviceMonitor.additionalLabels."monitoring.datalayer.io/enabled" | string | `"true"` |  |

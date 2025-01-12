@@ -4,7 +4,7 @@
 
 Datalayer Library
 
-![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square) ![AppVersion: 0.0.6](https://img.shields.io/badge/AppVersion-0.0.6-informational?style=flat-square)
+![Version: 0.0.8](https://img.shields.io/badge/Version-0.0.8-informational?style=flat-square) ![AppVersion: 0.0.7](https://img.shields.io/badge/AppVersion-0.0.7-informational?style=flat-square)
 
 ## Documentation
 
@@ -38,5 +38,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | library.image | string | `"datalayer/library:0.0.6"` |  |
 | library.imagePullPolicy | string | `"Always"` |  |
 | library.port | int | `9800` |  |
+| library.sharedFsPVC | string | `""` |  |
 | library.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 

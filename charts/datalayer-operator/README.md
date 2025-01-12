@@ -4,7 +4,7 @@
 
 Datalayer Operator
 
-![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![AppVersion: 1.0.8](https://img.shields.io/badge/AppVersion-1.0.8-informational?style=flat-square)
+![Version: 1.0.11](https://img.shields.io/badge/Version-1.0.11-informational?style=flat-square) ![AppVersion: 1.0.10](https://img.shields.io/badge/AppVersion-1.0.10-informational?style=flat-square)
 
 ## Documentation
 
@@ -22,13 +22,16 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.env.AWS_DEFAULT_REGION | string | `""` |  |
 | operator.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
 | operator.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
+| operator.env.DATALAYER_AVAILABLE_KERNELS_MAX_LIFE_SEC | string | `"3600"` |  |
 | operator.env.DATALAYER_CERT_ISSUER | string | `"letsencrypt"` |  |
 | operator.env.DATALAYER_DOCKER_REGISTRY | string | `""` |  |
 | operator.env.DATALAYER_IAM_API_KEY | string | `""` |  |
 | operator.env.DATALAYER_IAM_HOST | string | `"datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"` |  |
 | operator.env.DATALAYER_INGRESS_CLASS_NAME | string | `"datalayer-traefik"` |  |
+| operator.env.DATALAYER_KAKFA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
+| operator.env.DATALAYER_KERNELS_RUN_HOOKS | string | `"false"` |  |
 | operator.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
-| operator.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
+| operator.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
 | operator.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | operator.env.DATALAYER_RUN_URL | string | `""` |  |
 | operator.env.DATALAYER_VAULT_TOKEN | string | `""` |  |

@@ -12,6 +12,19 @@ spec:
   storageClassName: {{ include "sharedStorage.autoStorageClassName" . }}
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.sharedStorage.sharedFsPVC }}
+  namespace: datalayer-api
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ include "sharedStorage.autoStorageSize" . }}
+  storageClassName: {{ include "sharedStorage.autoStorageClassName" . }}
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: shared-fs-prepare

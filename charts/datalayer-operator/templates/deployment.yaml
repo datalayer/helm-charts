@@ -46,7 +46,7 @@ spec:
           {{- if or .Values.operator.sharedFsPVC .Values.operator.env }}
           env:
             {{- if .Values.operator.sharedFsPVC }}
-            - name: 'DATALAYER_USERS_VOLUME_CLAIM_NAME'
+            - name: 'DATALAYER_SHARED_FS_VOLUME_CLAIM_NAME'
               value: {{ .Values.operator.sharedFsPVC }}
             {{- end }}
             {{- range $key, $value := .Values.operator.env }}
