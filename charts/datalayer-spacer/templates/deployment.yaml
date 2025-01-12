@@ -67,3 +67,15 @@ spec:
 #           image: {{ .Values.spacer.sidecar.image }}
 #          imagePullPolicy: {{ .Values.spacer.imagePullPolicy }}
 #           args: ["proxy", "-p", "8001"]
+          {{- if .Values.spacer.sharedFsPVC }}
+          volumeMounts:
+            - name: "sharedfs-data"
+              mountPath: "/mnt/sharedfs"
+          {{- end }}
+      {{- if .Values.spacer.sharedFsPVC }}
+      volumes:
+        - name: "sharedfs-data"
+          persistentVolumeClaim:
+            claimName: {{ .Values.spacer.sharedFsPVC }}
+            readOnly: False
+      {{- end }}

@@ -38,5 +38,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | library.image | string | `"datalayer/library:0.0.6"` |  |
 | library.imagePullPolicy | string | `"Always"` |  |
 | library.port | int | `9800` |  |
+| library.sharedFsPVC | string | `""` |  |
 | library.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 
