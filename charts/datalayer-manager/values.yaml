@@ -1,5 +1,5 @@
 manager:
-  image: datalayer/manager:0.0.1
+  image: datalayer/manager:0.0.2
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always

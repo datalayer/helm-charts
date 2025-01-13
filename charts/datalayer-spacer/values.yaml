@@ -1,5 +1,5 @@
 spacer:
-  image: datalayer/spacer:0.0.6
+  image: datalayer/spacer:0.0.7
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
