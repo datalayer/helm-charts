@@ -20,3 +20,10 @@ Define the name of the client service for jupyter-server.
 {{- define "jupyter-server.service-name" -}}
 {{- printf "%s-%s" (include "jupyter-server.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Define the value for the datalayer run host.
+*/}}
+{{- define "jupyter-server.runHost" -}}
+{{- printf "%s" .Values.server.env.DATALAYER_RUN_URL | replace "https://" "" -}}
+{{- end -}}

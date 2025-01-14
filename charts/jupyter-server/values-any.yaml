@@ -1,7 +1,2 @@
 server:
   clusterType: any
-  image: datalayer/jupyter-server:0.0.8
-  imagePullPolicy: Always
-  sidecar:
-    image: datalayer/whoami:0.0.6
-  replicaCount: 1
