@@ -1,0 +1,36 @@
+{{/*
+Expand the name of the chart.
+*/}}
+{{- define "ai-agent.name" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 24 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a default fully qualified app name.
+We truncate at 24 chars because some kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ai-agent.fullname" -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 24 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Define the name of the client service for ai-agent.
+*/}}
+{{- define "ai-agent.service-name" -}}
+{{- printf "%s-%s" (include "ai-agent.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Define the value for the app label.
+*/}}
+{{- define "ai-agent.app-name" -}}
+{{- printf "%s" .Chart.Name | replace "datalayer-" "" -}}
+{{- end -}}
+
+{{/*
+Define the value for the datalayer run host.
+*/}}
+{{- define "ai-agent.runHost" -}}
+{{- printf "%s" .Values.ai-agent.env.DATALAYER_RUN_URL | replace "https://" "" -}}
+{{- end -}}
