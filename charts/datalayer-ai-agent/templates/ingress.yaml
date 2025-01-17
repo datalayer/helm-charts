@@ -34,10 +34,10 @@ spec:
   ingressClassName: datalayer-traefik
   tls:
   - hosts:
-    - {{ template "ai-agent.runHost" . }}
-    secretName: {{ template "ai-agent.runHost" . }}-datalayer-api-cert-secret
+    - {{ template "aiagent.runHost" . }}
+    secretName: {{ template "aiagent.runHost" . }}-datalayer-api-cert-secret
   rules:
-  - host: {{ template "ai-agent.runHost" . }}
+  - host: {{ template "aiagent.runHost" . }}
     http:
       paths:
       - path: /api/ai-agent
@@ -46,4 +46,4 @@ spec:
           service:
             name: {{ .Release.Name }}-svc
             port: 
-              number: {{ .Values.ai-agent.port }}
+              number: {{ .Values.aiagent.port }}

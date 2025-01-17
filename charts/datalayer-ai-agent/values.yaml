@@ -1,4 +1,4 @@
-ai-agent:
+aiagent:
   image: datalayer/ai-agent:0.0.1
   sidecar:
     image: datalayer/whoami:0.0.6

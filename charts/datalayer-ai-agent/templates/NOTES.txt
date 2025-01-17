@@ -1,25 +1,25 @@
-Your ai-agent server has now been installed, and can be accessed in the following ways:
+Your aiagent server has now been installed, and can be accessed in the following ways:
 
-1. Connect to the ai-agent CLI pod:
+1. Connect to the aiagent CLI pod:
 
-  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "ai-agent.name" . }} -o jsonpath='{.items...metadata.name}') -- sh
+  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "aiagent.name" . }} -o jsonpath='{.items...metadata.name}') -- sh
 
 2. Connect with HTTP internally, within the kubernetes cluster on:
 
-  {{ template "ai-agent.service-name" . }}.{{ .Release.Namespace }}:{{ .Values.ai-agent.port }}
+  {{ template "aiagent.service-name" . }}.{{ .Release.Namespace }}:{{ .Values.aiagent.port }}
 
 3. Connect with HTTP Node Port to the kubernetes cluster:
 
-  export NODE_IP=$(kubectl get nodes --namespace ai-agent -o jsonpath="{.items[0].status.addresses[0].address}")
-  export NODE_PORT=$(kubectl get --namespace ai-agent -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "ai-agent.service-name" . }})
-  echo http://$NODE_IP:$NODE_PORT/ai-agent/
+  export NODE_IP=$(kubectl get nodes --namespace aiagent -o jsonpath="{.items[0].status.addresses[0].address}")
+  export NODE_PORT=$(kubectl get --namespace aiagent -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "aiagent.service-name" . }})
+  echo http://$NODE_IP:$NODE_PORT/aiagent/
 
 4. Connect with HTTP external service to the kubernetes cluster:
 
-  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "ai-agent.name" . }}" -o jsonpath="{ .items[0].metadata.name }")
-  echo "Visit http://127.0.0.1:{{ .Values.ai-agent.port }}/ai-agent/ to access ai-agent"
-  kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.ai-agent.port }}:{{ .Values.ai-agent.port }}
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "aiagent.name" . }}" -o jsonpath="{ .items[0].metadata.name }")
+  echo "Visit http://127.0.0.1:{{ .Values.aiagent.port }}/aiagent/ to access aiagent"
+  kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.aiagent.port }}:{{ .Values.aiagent.port }}
 
 5. For Minikube:
 
-  open http://minikube.local/api/ai-agent/
+  open http://minikube.local/api/ai-agent
