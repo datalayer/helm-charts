@@ -60,7 +60,6 @@ spec:
             failureThreshold: 5
             initialDelaySeconds: 5
             periodSeconds: 15
-          volumeMounts:
           resources:
 {{ toYaml .Values.spacer.resources | indent 12 }} 
 #         - name: spacer-sidecar

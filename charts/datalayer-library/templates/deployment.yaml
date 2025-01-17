@@ -64,7 +64,6 @@ spec:
             failureThreshold: 5
             initialDelaySeconds: 5
             periodSeconds: 15
-          volumeMounts:
           resources:
 {{ toYaml .Values.library.resources | indent 12 }} 
 #         - name: library-sidecar
