@@ -50,6 +50,8 @@ tests:
                 value: https://id.datalayer.run
               - name: DATALAYER_JWT_SECRET
                 value: ""
+              - name: DATALAYER_KAFKA_URL
+                value: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
               - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
                 value: ""
               - name: DATALAYER_OPENFGA_REST_URL
