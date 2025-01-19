@@ -35,7 +35,7 @@ spec:
       imagePullSecrets:
             - name: reg-creds
       containers:
-        - name: aiagent
+        - name: ai-agent
           image: {{ .Values.aiagent.image }}
           imagePullPolicy: {{ .Values.aiagent.imagePullPolicy }}
           ports:
