@@ -69,8 +69,8 @@ tests:
               - name: DATALAYER_JWT_SECRET
                 value: ""
               - name: DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION
-                value: "false"
-              - name: DATALAYER_KAFKA_URL
+                value: ""
+              - name: DATALAYER_SUPPORT_EMAIL
                 value: ""
               - name: DATALAYER_VAULT_TOKEN
                 value: ""
