@@ -18,7 +18,7 @@ tests:
                       - "true"
   - it: "test tolerations"
     set:
-      iam.tolerations:
+      success.tolerations:
         - key: "key1"
           operator: "Equal"
           value: "value1"
@@ -52,7 +52,7 @@ tests:
                 value: ""
               - name: DATALAYER_GITHUB_CLIENT_SECRET
                 value: ""
-              - name: DATALAYER_IAM_API_KEY
+              - name: DATALAYER_SUCCESS_API_KEY
                 value: ""
               - name: DATALAYER_INITIAL_USER_CREDITS
                 value: "500"
@@ -132,9 +132,9 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/iam:1.0.7
+            image: datalayer/success:0.0.1
             imagePullPolicy: Always
-            name: iam
+            name: success
             ports:
-              - containerPort: 9700
+              - containerPort: 3300
                 protocol: TCP

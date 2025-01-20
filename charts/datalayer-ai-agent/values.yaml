@@ -1,0 +1,28 @@
+aiagent:
+  image: datalayer/ai-agent:0.0.1
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  imagePullPolicy: Always
+  port: 4400
+#  resources:
+#    limits:
+#      memory: "8192Mi"
+#      cpu: "3000m"
+  env:
+    DATALAYER_AUTHZ_ENGINE: ""
+    DATALAYER_AZURE_OPENAI_API_KEY: ""
+    DATALAYER_AZURE_OPENAI_ENDPOINT: ""
+    DATALAYER_CDN_URL: ""
+    DATALAYER_JWT_ALGORITHM: ""
+    DATALAYER_JWT_CACHE_VALIDATE: "false"
+    DATALAYER_JWT_ISSUER: ""
+    DATALAYER_JWT_SECRET: ""
+    DATALAYER_OPENAI_API_VERSION: ""
+    DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
+    DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
+    DATALAYER_OPENFGA_STORE_ID: ""
+    DATALAYER_RUNTIME_ENV: "prod"
+    DATALAYER_RUN_URL: ""
+    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
+    OTEL_SDK_DISABLED: "false"

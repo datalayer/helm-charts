@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "aiagent.app-name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "aiagent.app-name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "aiagent.app-name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "aiagent.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/api
+                operator: In
+                values:
+                - "true"
+      imagePullSecrets:
+            - name: reg-creds
+      containers:
+        - name: ai-agent
+          image: {{ .Values.aiagent.image }}
+          imagePullPolicy: {{ .Values.aiagent.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.aiagent.port }}
+              protocol: TCP
+          {{- if or .Values.aiagent.env .Values.aiagent.envValueFrom }}
+          env:
+            {{- range $key, $value := .Values.aiagent.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom: {{- $value | toYaml | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.aiagent.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /api/ai-agent/version
+              port: 4400
+            successThreshold: 1
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          volumeMounts:
+          resources:
+{{ toYaml .Values.aiagent.resources | indent 12 }} 
