@@ -33,7 +33,7 @@ spec:
                 values:
                 - "true"
       imagePullSecrets:
-            - name: reg-creds
+            - name: {{ .Values.aiagent.registryCredentialsSecret }}
       containers:
         - name: ai-agent
           image: {{ .Values.aiagent.image }}
@@ -52,14 +52,14 @@ spec:
               value: {{ $value | quote }}
             {{- end }}
           {{- end }}
-          readinessProbe:
-            httpGet:
-              path: /api/ai-agent/version
-              port: 4400
-            successThreshold: 1
-            failureThreshold: 5
-            initialDelaySeconds: 5
-            periodSeconds: 15
+#          readinessProbe:
+#            httpGet:
+#              path: /api/ai-agent/version
+#              port: {{ .Values.aiagent.port }}
+#            successThreshold: 1
+#            failureThreshold: 5
+#            initialDelaySeconds: 5
+#            periodSeconds: 15
           volumeMounts:
           resources:
 {{ toYaml .Values.aiagent.resources | indent 12 }} 

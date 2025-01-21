@@ -4,6 +4,7 @@ aiagent:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
   port: 4400
+  registryCredentialsSecret: reg-creds
 #  resources:
 #    limits:
 #      memory: "8192Mi"
