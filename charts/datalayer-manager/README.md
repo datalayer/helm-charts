@@ -36,7 +36,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | manager.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | manager.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | manager.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| manager.image | string | `"datalayer/manager:0.0.1"` |  |
+| manager.image | string | `"datalayer/manager:0.0.2"` |  |
 | manager.imagePullPolicy | string | `"Always"` |  |
 | manager.ingress | bool | `false` |  |
 | manager.port | int | `9300` |  |

@@ -25,7 +25,7 @@ Jupyter Server
 | server.env.GITHUB_CLIENT_SECRET | string | `""` |  |
 | server.env.GITHUB_OAUTH_CALLBACK_URL | string | `""` |  |
 | server.extraEnvVars | list | `[]` |  |
-| server.image | string | `"datalayer/jupyter-server:0.0.8"` |  |
+| server.image | string | `"datalayer/jupyter-server:0.0.9"` |  |
 | server.imagePullPolicy | string | `"Always"` |  |
 | server.port | int | `8888` |  |
 | server.replicaCount | int | `1` |  |

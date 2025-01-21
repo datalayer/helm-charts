@@ -1,11 +1,11 @@
 apiVersion: v1
 description: Datalayer AI Agent
-name: datalayer-ai-agent
+name: datalayer-ai-agents
 version: 0.0.1
 appVersion: 0.0.1
 home: https://datalayer.tech
 sources:
-- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-ai-agent
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-ai-agents
 icon: https://assets.datalayer.tech/datalayer-square.png
 maintainers:
 - name: Datalayer

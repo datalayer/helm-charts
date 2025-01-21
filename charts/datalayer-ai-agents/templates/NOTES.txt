@@ -1,0 +1,25 @@
+Your aiagents server has now been installed, and can be accessed in the following ways:
+
+1. Connect to the aiagents CLI pod:
+
+  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "aiagents.name" . }} -o jsonpath='{.items...metadata.name}') -- sh
+
+2. Connect with HTTP internally, within the kubernetes cluster on:
+
+  {{ template "aiagents.service-name" . }}.{{ .Release.Namespace }}:{{ .Values.aiagents.port }}
+
+3. Connect with HTTP Node Port to the kubernetes cluster:
+
+  export NODE_IP=$(kubectl get nodes --namespace aiagents -o jsonpath="{.items[0].status.addresses[0].address}")
+  export NODE_PORT=$(kubectl get --namespace aiagents -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "aiagents.service-name" . }})
+  echo http://$NODE_IP:$NODE_PORT/aiagents/
+
+4. Connect with HTTP external service to the kubernetes cluster:
+
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "aiagents.name" . }}" -o jsonpath="{ .items[0].metadata.name }")
+  echo "Visit http://127.0.0.1:{{ .Values.aiagents.port }}/aiagents/ to access aiagents"
+  kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.aiagents.port }}:{{ .Values.aiagents.port }}
+
+5. For Minikube:
+
+  open http://minikube.local/api/ai-agents

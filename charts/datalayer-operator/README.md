@@ -28,7 +28,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.env.DATALAYER_IAM_API_KEY | string | `""` |  |
 | operator.env.DATALAYER_IAM_HOST | string | `"datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"` |  |
 | operator.env.DATALAYER_INGRESS_CLASS_NAME | string | `"datalayer-traefik"` |  |
-| operator.env.DATALAYER_KAKFA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
+| operator.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
 | operator.env.DATALAYER_KERNELS_RUN_HOOKS | string | `"false"` |  |
 | operator.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
 | operator.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
@@ -39,7 +39,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| operator.image | string | `"datalayer/operator:1.0.9"` |  |
+| operator.image | string | `"datalayer/operator:1.0.10"` |  |
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |
 | operator.sharedFsPVC | string | `""` |  |

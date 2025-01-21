@@ -4,21 +4,21 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "aiagent.app-name" . }}
+    app: {{ template "aiagents.app-name" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "aiagent.app-name" . }}
+      app: {{ template "aiagents.app-name" . }}
   strategy:
     rollingUpdate:
       maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: {{ template "aiagent.app-name" . }}
+        app: {{ template "aiagents.app-name" . }}
         release: {{ .Release.Name }}
-        datalayer.io/app: {{ template "aiagent.app-name" . }}
+        datalayer.io/app: {{ template "aiagents.app-name" . }}
       annotations:
         karpenter.sh/do-not-disrupt: "true"      
     spec:
@@ -33,33 +33,33 @@ spec:
                 values:
                 - "true"
       imagePullSecrets:
-            - name: {{ .Values.aiagent.registryCredentialsSecret }}
+            - name: {{ .Values.aiagents.registryCredentialsSecret }}
       containers:
-        - name: ai-agent
-          image: {{ .Values.aiagent.image }}
-          imagePullPolicy: {{ .Values.aiagent.imagePullPolicy }}
+        - name: ai-agents
+          image: {{ .Values.aiagents.image }}
+          imagePullPolicy: {{ .Values.aiagents.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.aiagent.port }}
+            - containerPort: {{ .Values.aiagents.port }}
               protocol: TCP
-          {{- if or .Values.aiagent.env .Values.aiagent.envValueFrom }}
+          {{- if or .Values.aiagents.env .Values.aiagents.envValueFrom }}
           env:
-            {{- range $key, $value := .Values.aiagent.envValueFrom }}
+            {{- range $key, $value := .Values.aiagents.envValueFrom }}
             - name: {{ $key }}
               valueFrom: {{- $value | toYaml | nindent 16 }}
             {{- end }}
-            {{- range $key, $value := .Values.aiagent.env }}
+            {{- range $key, $value := .Values.aiagents.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
           {{- end }}
 #          readinessProbe:
 #            httpGet:
-#              path: /api/ai-agent/version
-#              port: {{ .Values.aiagent.port }}
+#              path: /api/ai-agents/version
+#              port: {{ .Values.aiagents.port }}
 #            successThreshold: 1
 #            failureThreshold: 5
 #            initialDelaySeconds: 5
 #            periodSeconds: 15
           volumeMounts:
           resources:
-{{ toYaml .Values.aiagent.resources | indent 12 }} 
+{{ toYaml .Values.aiagents.resources | indent 12 }} 

@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-svc
   labels:
-    app: {{ template "aiagent.app-name" . }}
+    app: {{ template "aiagents.app-name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -16,11 +16,11 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.aiagent.port }}
-    name: ai-agent-http
+  - port: {{ .Values.aiagents.port }}
+    name: ai-agents-http
     protocol: TCP
-    targetPort: {{ .Values.aiagent.port }}
+    targetPort: {{ .Values.aiagents.port }}
   selector:
-    app: {{ template "aiagent.app-name" . }}
+    app: {{ template "aiagents.app-name" . }}
     release: {{ .Release.Name }}
 #  externalTrafficPolicy: Local       # Important?!
