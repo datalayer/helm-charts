@@ -35,7 +35,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | library.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | library.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | library.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| library.image | string | `"datalayer/library:0.0.6"` |  |
+| library.image | string | `"datalayer/library:0.0.7"` |  |
 | library.imagePullPolicy | string | `"Always"` |  |
 | library.port | int | `9800` |  |
 | library.sharedFsPVC | string | `""` |  |

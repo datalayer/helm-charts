@@ -52,8 +52,6 @@ tests:
                 value: ""
               - name: DATALAYER_GITHUB_CLIENT_SECRET
                 value: ""
-              - name: DATALAYER_SUCCESS_API_KEY
-                value: ""
               - name: DATALAYER_INITIAL_USER_CREDITS
                 value: "500"
               - name: DATALAYER_JWT_ALGORITHM
@@ -121,6 +119,8 @@ tests:
               - name: DATALAYER_STRIPE_WEBHOOK_SECRET
                 value: ""
               - name: DATALAYER_SUPPORT_EMAIL
+                value: ""
+              - name: DATALAYER_Success_API_KEY
                 value: ""
               - name: DATALAYER_VAULT_TOKEN
                 value: ""

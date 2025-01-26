@@ -25,7 +25,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | jupyter.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | jupyter.env.DATALAYER_JWT_SECRET | string | `""` |  |
-| jupyter.env.DATALAYER_KAKFA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
+| jupyter.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
 | jupyter.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | jupyter.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | jupyter.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
@@ -43,7 +43,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| jupyter.image | string | `"datalayer/jupyter:1.0.4"` |  |
+| jupyter.image | string | `"datalayer/jupyter:1.0.5"` |  |
 | jupyter.imagePullPolicy | string | `"Always"` |  |
 | jupyter.ingressClass | string | `"datalayer-traefik"` |  |
 | jupyter.port | int | `9500` |  |

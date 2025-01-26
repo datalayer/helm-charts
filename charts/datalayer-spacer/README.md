@@ -36,7 +36,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | spacer.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | spacer.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | spacer.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| spacer.image | string | `"datalayer/spacer:0.0.6"` |  |
+| spacer.image | string | `"datalayer/spacer:0.0.7"` |  |
 | spacer.imagePullPolicy | string | `"Always"` |  |
 | spacer.port | int | `9900` |  |
 | spacer.sharedFsPVC | string | `""` |  |

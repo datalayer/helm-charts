@@ -4,7 +4,7 @@
 
 Datalayer Success
 
-![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![AppVersion: 1.0.7](https://img.shields.io/badge/AppVersion-1.0.7-informational?style=flat-square)
+![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 ## Documentation
 
@@ -26,7 +26,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | success.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | success.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | success.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
-| success.env.DATALAYER_Success_API_KEY | string | `""` |  |
 | success.env.DATALAYER_INITIAL_USER_CREDITS | string | `"500"` |  |
 | success.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | success.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
@@ -35,7 +34,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | success.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | success.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | success.env.DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION | string | `"false"` |  |
-| success.env.DATALAYER_KAKFA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
+| success.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
 | success.env.DATALAYER_LINKEDIN_CLIENT_ID | string | `""` |  |
 | success.env.DATALAYER_LINKEDIN_CLIENT_SECRET | string | `""` |  |
 | success.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
@@ -60,12 +59,13 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | success.env.DATALAYER_STRIPE_PRODUCT_ID | string | `""` |  |
 | success.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
 | success.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
+| success.env.DATALAYER_Success_API_KEY | string | `""` |  |
 | success.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | success.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
 | success.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | success.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | success.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| success.image | string | `"datalayer/success:1.0.6"` |  |
+| success.image | string | `"datalayer/success:0.0.1"` |  |
 | success.imagePullPolicy | string | `"Always"` |  |
 | success.ingressClass | string | `"datalayer-traefik"` |  |
 | success.port | int | `3300` |  |
