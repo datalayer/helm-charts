@@ -1,5 +1,5 @@
 jupyter:
-  image: datalayer/jupyter:1.0.5
+  image: datalayer/jupyter:1.0.6
   imagePullPolicy: Always
   sidecar:
     image: datalayer/whoami:0.0.6
