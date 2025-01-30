@@ -49,7 +49,7 @@ spec:
     - -e
     - -c
     - |
-      for DIRECTORY in home public datalayer datasets tmp
+      for DIRECTORY in home public datalayer datasets ai-models tmp
       do
         mkdir -pm 775 /mnt/sharedfs/$DIRECTORY
         chmod g+ws /mnt/sharedfs/$DIRECTORY
