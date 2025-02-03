@@ -29,36 +29,40 @@ spec:
               properties:
                 type:
                   type: string
-                  enum: 
+                  enum:
                     - git
+                    - nfs
                     - s3
                   title: Type of content
                 description:
                   type: string
                   title: Content long description.
-                location:
-                  type: string
-                  title: Location
-                  description: |
-                    For `s3`, its the region.
                 source:
                   type: string
                   title: Content source
                   description: |
                     For `git`, its the repository URI.
+                    For `nfs`, its the...
                     For `s3`, its the bucket name.
+                location:
+                  type: string
+                  title: Location (for s3).
+                subPath:
+                  type: string
+                  title: Subpath
+                  description: |
+                    The subpath of the remote content to mount on the local.
                 permissions:
                   type: string
                   enum:
                     - ro
                     - rw
-                  default: rw
+                  default: ro
                 secret:
                   title: K8S Secret name for accessing the content
                   type: string
               required:
                 - type
-                - source
             status:
               type: object
               x-kubernetes-preserve-unknown-fields: true
