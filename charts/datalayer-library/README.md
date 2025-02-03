@@ -19,6 +19,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | library.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
 | library.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | library.env.DATALAYER_CDN_URL | string | `""` |  |
+| library.env.DATALAYER_CORS_ORIGIN | string | `""` |  |
 | library.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | library.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | library.env.DATALAYER_JWT_ISSUER | string | `""` |  |

@@ -18,6 +18,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | aiagents.env.DATALAYER_AZURE_OPENAI_API_KEY | string | `""` |  |
 | aiagents.env.DATALAYER_AZURE_OPENAI_ENDPOINT | string | `""` |  |
 | aiagents.env.DATALAYER_CDN_URL | string | `""` |  |
+| aiagents.env.DATALAYER_CORS_ORIGIN | string | `""` |  |
 | aiagents.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | aiagents.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | aiagents.env.DATALAYER_JWT_ISSUER | string | `""` |  |

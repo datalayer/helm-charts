@@ -1,5 +1,5 @@
 iam:
-  image: datalayer/iam:1.0.8
+  image: datalayer/iam:1.0.9
   imagePullPolicy: Always
   port: 9700
   sidecar:
@@ -27,6 +27,7 @@ iam:
         key: password
     DATALAYER_AUTHZ_ENGINE: "openfga"
     DATALAYER_CDN_URL: ""
+    DATALAYER_CORS_ORIGIN: ""
     DATALAYER_CREDITS_PROVIDER: ""
     DATALAYER_GITHUB_CLIENT_ID: ""
     DATALAYER_GITHUB_CLIENT_SECRET: ""

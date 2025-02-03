@@ -4,7 +4,7 @@
 
 Datalayer Jupyter
 
-![Version: 1.0.7](https://img.shields.io/badge/Version-1.0.7-informational?style=flat-square) ![AppVersion: 1.0.5](https://img.shields.io/badge/AppVersion-1.0.5-informational?style=flat-square)
+![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![AppVersion: 1.0.6](https://img.shields.io/badge/AppVersion-1.0.6-informational?style=flat-square)
 
 ## Documentation
 
@@ -21,6 +21,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.clusterType | string | `"any"` |  |
 | jupyter.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | jupyter.env.DATALAYER_CDN_URL | string | `""` |  |
+| jupyter.env.DATALAYER_CORS_ORIGIN | string | `""` |  |
 | jupyter.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | jupyter.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | jupyter.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
@@ -43,7 +44,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| jupyter.image | string | `"datalayer/jupyter:1.0.6"` |  |
+| jupyter.image | string | `"datalayer/jupyter:1.0.7"` |  |
 | jupyter.imagePullPolicy | string | `"Always"` |  |
 | jupyter.ingressClass | string | `"datalayer-traefik"` |  |
 | jupyter.port | int | `9500` |  |
