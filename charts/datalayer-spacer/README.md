@@ -19,7 +19,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | spacer.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
 | spacer.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | spacer.env.DATALAYER_CDN_URL | string | `""` |  |
-| spacer.env.DATALAYER_CORS_ORIGIN | string | `""` |  |
+| spacer.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
 | spacer.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | spacer.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | spacer.env.DATALAYER_JWT_ISSUER | string | `""` |  |

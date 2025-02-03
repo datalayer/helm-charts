@@ -24,7 +24,7 @@ Datalayer Jump
 | jump.env.AWS_DEFAULT_REGION | string | `""` |  |
 | jump.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
 | jump.env.DATALAYER_CDN_URL | string | `""` |  |
-| jump.env.DATALAYER_CORS_ORIGIN | string | `""` |  |
+| jump.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
 | jump.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | jump.env.DATALAYER_KEYCLOAK_REALM_CLIENT_SECRET | string | `""` |  |
 | jump.env.DATALAYER_KEYCLOAK_SCHEME_HOST | string | `""` |  |

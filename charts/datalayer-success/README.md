@@ -23,7 +23,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | success.env.DATALAYER_BLUESKY_API_KEY | string | `""` |  |
 | success.env.DATALAYER_BLUESKY_API_SECRET | string | `""` |  |
 | success.env.DATALAYER_CDN_URL | string | `""` |  |
-| success.env.DATALAYER_CORS_ORIGIN | string | `""` |  |
+| success.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
 | success.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | success.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | success.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |

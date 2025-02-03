@@ -4,7 +4,7 @@
 
 Datalayer Jupyter
 
-![Version: 1.0.8](https://img.shields.io/badge/Version-1.0.8-informational?style=flat-square) ![AppVersion: 1.0.6](https://img.shields.io/badge/AppVersion-1.0.6-informational?style=flat-square)
+![Version: 1.0.9](https://img.shields.io/badge/Version-1.0.9-informational?style=flat-square) ![AppVersion: 1.0.7](https://img.shields.io/badge/AppVersion-1.0.7-informational?style=flat-square)
 
 ## Documentation
 
@@ -21,7 +21,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.clusterType | string | `"any"` |  |
 | jupyter.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | jupyter.env.DATALAYER_CDN_URL | string | `""` |  |
-| jupyter.env.DATALAYER_CORS_ORIGIN | string | `""` |  |
+| jupyter.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
 | jupyter.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | jupyter.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | jupyter.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
