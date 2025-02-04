@@ -47,7 +47,7 @@ tests:
               - name: DATALAYER_CDN_URL
                 value: ""
               - name: DATALAYER_CORS_ORIGIN
-                value: ""
+                value: '*'
               - name: DATALAYER_CREDITS_PROVIDER
                 value: ""
               - name: DATALAYER_GITHUB_CLIENT_ID

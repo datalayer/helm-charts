@@ -43,7 +43,7 @@ tests:
               - name: DATALAYER_CDN_URL
                 value: ""
               - name: DATALAYER_CORS_ORIGIN
-                value: ""
+                value: '*'
               - name: DATALAYER_JWT_ALGORITHM
                 value: ""
               - name: DATALAYER_JWT_CACHE_VALIDATE
