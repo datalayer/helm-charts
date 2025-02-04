@@ -19,6 +19,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | manager.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
 | manager.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | manager.env.DATALAYER_CDN_URL | string | `""` |  |
+| manager.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
 | manager.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | manager.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | manager.env.DATALAYER_JWT_ISSUER | string | `""` |  |

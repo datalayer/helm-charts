@@ -42,6 +42,8 @@ tests:
                 value: ""
               - name: DATALAYER_CDN_URL
                 value: ""
+              - name: DATALAYER_CORS_ORIGIN
+                value: '*'
               - name: DATALAYER_JWT_ALGORITHM
                 value: ""
               - name: DATALAYER_JWT_CACHE_VALIDATE
@@ -88,7 +90,7 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/jupyter:1.0.6
+            image: datalayer/jupyter:1.0.7
             imagePullPolicy: Always
             name: jupyter
             ports:

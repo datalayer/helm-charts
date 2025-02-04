@@ -1,5 +1,5 @@
 jupyter:
-  image: datalayer/jupyter:1.0.6
+  image: datalayer/jupyter:1.0.7
   imagePullPolicy: Always
   sidecar:
     image: datalayer/whoami:0.0.6
@@ -27,6 +27,7 @@ jupyter:
         key: password
     DATALAYER_AUTHZ_ENGINE: ""
     DATALAYER_CDN_URL: ""
+    DATALAYER_CORS_ORIGIN: "*"
     DATALAYER_JWT_ALGORITHM: ""
     DATALAYER_JWT_ISSUER: "https://id.datalayer.run"
     DATALAYER_JWT_SECRET: ""
