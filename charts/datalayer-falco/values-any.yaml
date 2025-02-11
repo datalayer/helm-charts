@@ -3,7 +3,7 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: role.datalayer.io/system
+        - key: role.datalayer.io/jupyter
           operator: In
           values:
           - "true"
@@ -27,7 +27,25 @@ falco:
     - /etc/falco/falco-incubating_rules.yaml
     - /etc/falco/falco-sandbox_rules.yaml
     - /etc/falco/rules.d
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/jupyter
+            operator: In
+            values:
+            - "true"
 falcoctl:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/jupyter
+            operator: In
+            values:
+            - "true"
   config:
     artifact:
       install:
