@@ -4,7 +4,7 @@
 
 Datalayer IAM
 
-![Version: 1.0.10](https://img.shields.io/badge/Version-1.0.10-informational?style=flat-square) ![AppVersion: 1.0.9](https://img.shields.io/badge/AppVersion-1.0.9-informational?style=flat-square)
+![Version: 1.0.11](https://img.shields.io/badge/Version-1.0.11-informational?style=flat-square) ![AppVersion: 1.0.11](https://img.shields.io/badge/AppVersion-1.0.11-informational?style=flat-square)
 
 ## Documentation
 
@@ -36,7 +36,9 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | iam.env.DATALAYER_JWT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION | string | `"false"` |  |
+| iam.env.DATALAYER_KAFKA_PASSWORD | string | `""` |  |
 | iam.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
+| iam.env.DATALAYER_KAFKA_USERNAME | string | `""` |  |
 | iam.env.DATALAYER_LINKEDIN_CLIENT_ID | string | `""` |  |
 | iam.env.DATALAYER_LINKEDIN_CLIENT_SECRET | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
@@ -66,7 +68,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| iam.image | string | `"datalayer/iam:1.0.10"` |  |
+| iam.image | string | `"datalayer/iam:1.0.11"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |

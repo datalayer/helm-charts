@@ -1,5 +1,5 @@
 iam:
-  image: datalayer/iam:1.0.10
+  image: datalayer/iam:1.0.11
   imagePullPolicy: Always
   port: 9700
   sidecar:
@@ -26,6 +26,8 @@ iam:
         name: solr-basic-auth
         key: password
     DATALAYER_AUTHZ_ENGINE: "openfga"
+    DATALAYER_BLUESKY_API_KEY: ""
+    DATALAYER_BLUESKY_API_SECRET: ""
     DATALAYER_CDN_URL: ""
     DATALAYER_CORS_ORIGIN: "*"
     DATALAYER_CREDITS_PROVIDER: ""
@@ -40,6 +42,9 @@ iam:
     DATALAYER_JWT_ISSUER: "https://id.datalayer.run"
     DATALAYER_JWT_SECRET: ""
     DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION: "false"
+    DATALAYER_KAFKA_PASSWORD: ""
+    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
+    DATALAYER_KAFKA_USERNAME: ""
     DATALAYER_LINKEDIN_CLIENT_ID: ""
     DATALAYER_LINKEDIN_CLIENT_SECRET: ""
     DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
@@ -47,7 +52,6 @@ iam:
     DATALAYER_OPENFGA_STORE_ID: ""
     DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
-    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
     DATALAYER_RUNTIME_ENV: "prod"
     DATALAYER_RUN_URL: ""
     DATALAYER_SMTP_HOST: ""
@@ -63,8 +67,6 @@ iam:
     DATALAYER_SUPPORT_EMAIL: ""
     DATALAYER_VAULT_TOKEN: ""
     DATALAYER_VAULT_URL: "http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"
-    DATALAYER_BLUESKY_API_KEY: ""
-    DATALAYER_BLUESKY_API_SECRET: ""
     OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
     OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
     OTEL_SDK_DISABLED: "false"
