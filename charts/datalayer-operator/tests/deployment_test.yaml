@@ -58,11 +58,11 @@ tests:
                 value: datalayer-iam-svc.datalayer-api.svc.cluster.local:9700
               - name: DATALAYER_INGRESS_CLASS_NAME
                 value: datalayer-traefik
+              - name: DATALAYER_KAFKA_PASSWORD
+                value: ""
               - name: DATALAYER_KAFKA_URL
                 value: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
               - name: DATALAYER_KAFKA_USERNAME
-                value: ""
-              - name: DATALAYER_KAFKA_PASSWORD
                 value: ""
               - name: DATALAYER_KERNELS_RUN_HOOKS
                 value: "false"

@@ -72,11 +72,11 @@ tests:
                 value: ""
               - name: DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION
                 value: "false"
+              - name: DATALAYER_KAFKA_PASSWORD
+                value: ""
               - name: DATALAYER_KAFKA_URL
                 value: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
               - name: DATALAYER_KAFKA_USERNAME
-                value: ""
-              - name: DATALAYER_KAFKA_PASSWORD
                 value: ""
               - name: DATALAYER_LINKEDIN_CLIENT_ID
                 value: ""
