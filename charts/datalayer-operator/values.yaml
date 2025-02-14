@@ -1,5 +1,5 @@
 operator:
-  image: datalayer/operator:1.0.11
+  image: datalayer/operator:1.0.12
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
@@ -25,11 +25,13 @@ operator:
     DATALAYER_IAM_API_KEY: ""
     DATALAYER_IAM_HOST: "datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"
     DATALAYER_INGRESS_CLASS_NAME: "datalayer-traefik"
+    DATALAYER_KAFKA_PASSWORD: ""
+    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
+    DATALAYER_KAFKA_USERNAME: ""
     DATALAYER_KERNELS_RUN_HOOKS: "false"
     DATALAYER_OPERATOR_API_KEY: ""
     DATALAYER_PUB_SUB_ENGINE: "kafka"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
-    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
     DATALAYER_RUN_URL: ""
     DATALAYER_VAULT_TOKEN: ""
     DATALAYER_VAULT_URL: "http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"

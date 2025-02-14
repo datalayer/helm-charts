@@ -60,6 +60,10 @@ tests:
                 value: datalayer-traefik
               - name: DATALAYER_KAFKA_URL
                 value: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
+              - name: DATALAYER_KAFKA_USERNAME
+                value: ""
+              - name: DATALAYER_KAFKA_PASSWORD
+                value: ""
               - name: DATALAYER_KERNELS_RUN_HOOKS
                 value: "false"
               - name: DATALAYER_OPERATOR_API_KEY
@@ -80,7 +84,7 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/operator:1.0.11
+            image: datalayer/operator:1.0.12
             imagePullPolicy: Always
             name: operator
             ports:

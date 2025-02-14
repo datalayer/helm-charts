@@ -1,5 +1,5 @@
 jupyter:
-  image: datalayer/jupyter:1.0.7
+  image: datalayer/jupyter:1.0.8
   imagePullPolicy: Always
   sidecar:
     image: datalayer/whoami:0.0.6
@@ -29,16 +29,18 @@ jupyter:
     DATALAYER_CDN_URL: ""
     DATALAYER_CORS_ORIGIN: "*"
     DATALAYER_JWT_ALGORITHM: ""
+    DATALAYER_JWT_CACHE_VALIDATE: "false"
     DATALAYER_JWT_ISSUER: "https://id.datalayer.run"
     DATALAYER_JWT_SECRET: ""
-    DATALAYER_JWT_CACHE_VALIDATE: "false"
+    DATALAYER_KAFKA_PASSWORD: ""
+    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
+    DATALAYER_KAFKA_USERNAME: ""
     DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
     DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
     DATALAYER_OPENFGA_STORE_ID: ""
     DATALAYER_OPERATOR_API_KEY: ""
     DATALAYER_OPERATOR_HOST: "datalayer-operator-svc.datalayer-jupyter.svc.cluster.local:2111"
     DATALAYER_PUB_SUB_ENGINE: "pulsar"
-    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUNTIME_ENV: "prod"
     DATALAYER_RUN_URL: ""

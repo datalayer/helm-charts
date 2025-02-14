@@ -4,7 +4,7 @@
 
 Datalayer Jupyter
 
-![Version: 1.0.9](https://img.shields.io/badge/Version-1.0.9-informational?style=flat-square) ![AppVersion: 1.0.7](https://img.shields.io/badge/AppVersion-1.0.7-informational?style=flat-square)
+![Version: 1.0.10](https://img.shields.io/badge/Version-1.0.10-informational?style=flat-square) ![AppVersion: 1.0.8](https://img.shields.io/badge/AppVersion-1.0.8-informational?style=flat-square)
 
 ## Documentation
 
@@ -26,7 +26,9 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | jupyter.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
 | jupyter.env.DATALAYER_JWT_SECRET | string | `""` |  |
+| jupyter.env.DATALAYER_KAFKA_PASSWORD | string | `""` |  |
 | jupyter.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
+| jupyter.env.DATALAYER_KAFKA_USERNAME | string | `""` |  |
 | jupyter.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | jupyter.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | jupyter.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
@@ -44,7 +46,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | jupyter.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| jupyter.image | string | `"datalayer/jupyter:1.0.7"` |  |
+| jupyter.image | string | `"datalayer/jupyter:1.0.8"` |  |
 | jupyter.imagePullPolicy | string | `"Always"` |  |
 | jupyter.ingressClass | string | `"datalayer-traefik"` |  |
 | jupyter.port | int | `9500` |  |
