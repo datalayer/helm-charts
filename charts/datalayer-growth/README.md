@@ -69,7 +69,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | growth.image | string | `"datalayer/growth:0.0.1"` |  |
 | growth.imagePullPolicy | string | `"Always"` |  |
 | growth.ingressClass | string | `"datalayer-traefik"` |  |
-| growth.port | int | `3300` |  |
+| growth.port | int | `6660` |  |
 | growth.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 | growth.tolerations | object | `{}` |  |
 

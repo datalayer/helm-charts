@@ -138,5 +138,5 @@ tests:
             imagePullPolicy: Always
             name: growth
             ports:
-              - containerPort: 3300
+              - containerPort: 6660
                 protocol: TCP

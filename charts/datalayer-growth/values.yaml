@@ -1,7 +1,7 @@
 growth:
   image: datalayer/growth:0.0.1
   imagePullPolicy: Always
-  port: 3300
+  port: 6660
   sidecar:
     image: datalayer/whoami:0.0.6
   clusterType: any
