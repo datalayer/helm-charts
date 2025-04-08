@@ -72,8 +72,8 @@ spec:
           {{- if or .Values.operator.sharedFsPVC .Values.operator.volumeMounts }}
           volumeMounts:
             {{- if .Values.operator.sharedFsPVC }}
-            - name: "sharedfs-data"
-              mountPath: "/mnt/sharedfs"
+            - name: "shared-fs-data"
+              mountPath: "/mnt/shared-fs"
             {{- end }}
             {{- with .Values.operator.volumeMounts }}
             {{- toYaml . | nindent 12 }}
@@ -85,7 +85,7 @@ spec:
 #          args: ["proxy", "-p", "8001"]
       {{- if .Values.operator.sharedFsPVC }}
       volumes:
-        - name: "sharedfs-data"
+        - name: "shared-fs-data"
           persistentVolumeClaim:
             claimName: {{ .Values.operator.sharedFsPVC }}
             readOnly: False

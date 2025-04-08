@@ -51,10 +51,12 @@ spec:
     - |
       for DIRECTORY in home public datalayer datasets ai-models tmp
       do
-        mkdir -pm 775 /mnt/sharedfs/$DIRECTORY
-        chmod g+ws /mnt/sharedfs/$DIRECTORY
-        chown $KERNEL_UID:$KERNEL_GID /mnt/sharedfs/$DIRECTORY
+        mkdir -pm 775 /mnt/shared-fs/$DIRECTORY
+        chmod g+ws /mnt/shared-fs/$DIRECTORY
+        chown $KERNEL_UID:$KERNEL_GID /mnt/shared-fs/$DIRECTORY
       done
+      chown -R root:root /mnt/shared-fs/ai-models
+      chmod -R 555 /mnt/shared-fs/ai-models
       sleep 1000
     env:
       - name: KERNEL_UID
@@ -69,10 +71,10 @@ spec:
         cpu: 250m
         memory: 64Mi
     volumeMounts:
-    - mountPath: /mnt/sharedfs
-      name: sharedfs-data
+    - mountPath: /mnt/shared-fs
+      name: shared-fs-data
   volumes:
-  - name: sharedfs-data
+  - name: shared-fs-data
     persistentVolumeClaim:
       claimName: {{ .Values.sharedStorage.sharedFsPVC }}
       readOnly: false

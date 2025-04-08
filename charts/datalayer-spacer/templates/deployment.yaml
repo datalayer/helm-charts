@@ -68,12 +68,12 @@ spec:
 #           args: ["proxy", "-p", "8001"]
           {{- if .Values.spacer.sharedFsPVC }}
           volumeMounts:
-            - name: "sharedfs-data"
-              mountPath: "/mnt/sharedfs"
+            - name: "shared-fs-data"
+              mountPath: "/mnt/shared-fs"
           {{- end }}
       {{- if .Values.spacer.sharedFsPVC }}
       volumes:
-        - name: "sharedfs-data"
+        - name: "shared-fs-data"
           persistentVolumeClaim:
             claimName: {{ .Values.spacer.sharedFsPVC }}
             readOnly: False
