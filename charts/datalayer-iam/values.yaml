@@ -1,5 +1,5 @@
 iam:
-  image: datalayer/iam:1.0.14
+  image: datalayer/iam:1.0.15
   imagePullPolicy: Always
   port: 9700
   sidecar:
