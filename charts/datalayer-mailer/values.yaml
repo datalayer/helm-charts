@@ -17,3 +17,7 @@ mailer:
     DATALAYER_SMTP_PASSWORD: ""
     DATALAYER_SMTP_PORT: "0"
     DATALAYER_SMTP_USERNAME: ""
+    DATALAYER_PUB_SUB_ENGINE: "kafka"
+    DATALAYER_KAFKA_PASSWORD: ""
+    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
+    DATALAYER_KAFKA_USERNAME: ""
