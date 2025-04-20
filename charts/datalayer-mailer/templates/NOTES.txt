@@ -1,9 +1,0 @@
-Your mailer has now been installed, and can be accessed in the following ways:
-
-1. Connect with a shell
-
-  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "mailer.app-name" . }} -o jsonpath='{.items...metadata.name}') -it -- sh
-
-2. Read the logs
-
-  kubectl logs -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "mailer.app-name" . }} -o jsonpath='{.items...metadata.name}')

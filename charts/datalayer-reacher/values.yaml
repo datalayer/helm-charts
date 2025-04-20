@@ -1,8 +1,9 @@
-mailer:
-  image:
-  imagePullPolicy: Always
-  port: 2331
+reacher:
   namespace: datalayer-system
+  mailer:
+    image:
+    imagePullPolicy: Always
+    port: 2331
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:

@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "mailer.name" -}}
+{{- define "reacher.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 24 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -9,21 +9,21 @@ Expand the name of the chart.
 Create a default fully qualified app name.
 We truncate at 24 chars because some kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "mailer.fullname" -}}
+{{- define "reacher.fullname" -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 24 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
-Define the name of the client service for mailer.
+Define the name of the client service for reacher.
 */}}
-{{- define "mailer.service-name" -}}
-{{- printf "%s-%s" (include "mailer.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
+{{- define "reacher.service-name" -}}
+{{- printf "%s-%s" (include "reacher.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Define the value for the app label.
 */}}
-{{- define "mailer.app-name" -}}
+{{- define "reacher.app-name" -}}
 {{- printf "%s" .Chart.Name | replace "datalayer-" "" -}}
 {{- end -}}

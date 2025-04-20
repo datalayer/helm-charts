@@ -2,54 +2,54 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ default .Values.mailer.namespace .Release.Namespace }}
+  namespace: {{ default .Values.reacher.namespace .Release.Namespace }}
   labels:
-    app: {{ template "mailer.app-name" . }}
+    app: {{ template "reacher.app-name" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "mailer.app-name" . }}
+      app: {{ template "reacher.app-name" . }}
   strategy:
     rollingUpdate:
       maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: {{ template "mailer.app-name" . }}
+        app: {{ template "reacher.app-name" . }}
         release: {{ .Release.Name }}
-        datalayer.io/app: {{ template "mailer.app-name" . }}
+        datalayer.io/app: {{ template "reacher.app-name" . }}
     spec:
       terminationGracePeriodSeconds: 0
-      {{- with .Values.mailer.affinity }}
+      {{- with .Values.reacher.affinity }}
       affinity: {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.mailer.tolerations }}
+      {{- with .Values.reacher.tolerations }}
       tolerations: {{- toYaml . | nindent 8 }}
       {{- end }}
       imagePullSecrets:
         - name: reg-creds
       containers:
-        - name: mailer
-          image: {{ .Values.mailer.image }}
-          imagePullPolicy: {{ .Values.mailer.imagePullPolicy }}
+        - name: reacher
+          image: {{ .Values.reacher.mailer.image }}
+          imagePullPolicy: {{ .Values.reacher.mailer.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.mailer.port }}
+            - containerPort: {{ .Values.reacher.mailer.port }}
               protocol: TCP
-          {{- if or .Values.mailer.env .Values.mailer.envValueFrom }}
+          {{- if or .Values.reacher.env .Values.reacher.envValueFrom }}
           env:
-            {{- range $key, $value := .Values.mailer.envValueFrom }}
+            {{- range $key, $value := .Values.reacher.envValueFrom }}
             - name: {{ $key }}
               valueFrom: {{- $value | toYaml | nindent 16 }}
             {{- end }}
-            {{- range $key, $value := .Values.mailer.env }}
+            {{- range $key, $value := .Values.reacher.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
           {{- end }}
-          {{- with .Values.mailer.resources }}
+          {{- with .Values.reacher.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.mailer.volumeMounts }}
+          {{- with .Values.reacher.volumeMounts }}
           volumeMounts: {{- toYaml . | nindent 12 }}
           {{- end }}
