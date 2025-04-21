@@ -1,0 +1,24 @@
+outbounds:
+  namespace: datalayer-system
+  mailer:
+    image:
+    imagePullPolicy: Always
+    port: 2331
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
+  env:
+    DATALAYER_SMTP_HOST: ""
+    DATALAYER_SMTP_PASSWORD: ""
+    DATALAYER_SMTP_PORT: "0"
+    DATALAYER_SMTP_USERNAME: ""
+    DATALAYER_PUB_SUB_ENGINE: "kafka"
+    DATALAYER_KAFKA_PASSWORD: ""
+    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
+    DATALAYER_KAFKA_USERNAME: ""

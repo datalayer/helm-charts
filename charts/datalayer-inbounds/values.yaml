@@ -1,4 +1,4 @@
-reacher:
+inbounds:
   namespace: datalayer-system
   mailer:
     image:

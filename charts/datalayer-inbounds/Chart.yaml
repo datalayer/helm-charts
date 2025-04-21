@@ -1,0 +1,12 @@
+apiVersion: v1
+name: datalayer-inbounds
+version: 0.0.2
+appVersion: 0.0.2
+home: https://datalayer.tech
+sources:
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-inbounds
+icon: https://assets.datalayer.tech/datalayer-square.png
+maintainers:
+- name: Datalayer
+  email: support@datalayer.io
+  url: https://datalayer.io

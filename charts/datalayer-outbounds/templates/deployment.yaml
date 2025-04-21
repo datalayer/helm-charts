@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ default .Values.outbounds.namespace .Release.Namespace }}
+  labels:
+    app: {{ template "outbounds.app-name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "outbounds.app-name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "outbounds.app-name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "outbounds.app-name" . }}
+    spec:
+      terminationGracePeriodSeconds: 0
+      {{- with .Values.outbounds.affinity }}
+      affinity: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.outbounds.tolerations }}
+      tolerations: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      imagePullSecrets:
+        - name: reg-creds
+      containers:
+        - name: outbounds
+          image: {{ .Values.outbounds.mailer.image }}
+          imagePullPolicy: {{ .Values.outbounds.mailer.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.outbounds.mailer.port }}
+              protocol: TCP
+          {{- if or .Values.outbounds.env .Values.outbounds.envValueFrom }}
+          env:
+            {{- range $key, $value := .Values.outbounds.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom: {{- $value | toYaml | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.outbounds.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.outbounds.resources }}
+          resources: {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.outbounds.volumeMounts }}
+          volumeMounts: {{- toYaml . | nindent 12 }}
+          {{- end }}

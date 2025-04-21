@@ -2,54 +2,54 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ default .Values.reacher.namespace .Release.Namespace }}
+  namespace: {{ default .Values.inbounds.namespace .Release.Namespace }}
   labels:
-    app: {{ template "reacher.app-name" . }}
+    app: {{ template "inbounds.app-name" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "reacher.app-name" . }}
+      app: {{ template "inbounds.app-name" . }}
   strategy:
     rollingUpdate:
       maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: {{ template "reacher.app-name" . }}
+        app: {{ template "inbounds.app-name" . }}
         release: {{ .Release.Name }}
-        datalayer.io/app: {{ template "reacher.app-name" . }}
+        datalayer.io/app: {{ template "inbounds.app-name" . }}
     spec:
       terminationGracePeriodSeconds: 0
-      {{- with .Values.reacher.affinity }}
+      {{- with .Values.inbounds.affinity }}
       affinity: {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.reacher.tolerations }}
+      {{- with .Values.inbounds.tolerations }}
       tolerations: {{- toYaml . | nindent 8 }}
       {{- end }}
       imagePullSecrets:
         - name: reg-creds
       containers:
-        - name: reacher
-          image: {{ .Values.reacher.mailer.image }}
-          imagePullPolicy: {{ .Values.reacher.mailer.imagePullPolicy }}
+        - name: inbounds
+          image: {{ .Values.inbounds.mailer.image }}
+          imagePullPolicy: {{ .Values.inbounds.mailer.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.reacher.mailer.port }}
+            - containerPort: {{ .Values.inbounds.mailer.port }}
               protocol: TCP
-          {{- if or .Values.reacher.env .Values.reacher.envValueFrom }}
+          {{- if or .Values.inbounds.env .Values.inbounds.envValueFrom }}
           env:
-            {{- range $key, $value := .Values.reacher.envValueFrom }}
+            {{- range $key, $value := .Values.inbounds.envValueFrom }}
             - name: {{ $key }}
               valueFrom: {{- $value | toYaml | nindent 16 }}
             {{- end }}
-            {{- range $key, $value := .Values.reacher.env }}
+            {{- range $key, $value := .Values.inbounds.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
           {{- end }}
-          {{- with .Values.reacher.resources }}
+          {{- with .Values.inbounds.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.reacher.volumeMounts }}
+          {{- with .Values.inbounds.volumeMounts }}
           volumeMounts: {{- toYaml . | nindent 12 }}
           {{- end }}
