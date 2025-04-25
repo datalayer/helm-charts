@@ -84,7 +84,7 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/operator:1.0.12
+            image: datalayer/operator:1.0.13
             imagePullPolicy: Always
             name: operator
             ports:

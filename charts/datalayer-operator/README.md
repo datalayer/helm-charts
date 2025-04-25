@@ -4,7 +4,7 @@
 
 Datalayer Operator
 
-![Version: 1.0.13](https://img.shields.io/badge/Version-1.0.13-informational?style=flat-square) ![AppVersion: 1.0.12](https://img.shields.io/badge/AppVersion-1.0.12-informational?style=flat-square)
+![Version: 1.0.14](https://img.shields.io/badge/Version-1.0.14-informational?style=flat-square) ![AppVersion: 1.0.13](https://img.shields.io/badge/AppVersion-1.0.13-informational?style=flat-square)
 
 ## Documentation
 
@@ -41,7 +41,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | operator.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| operator.image | string | `"datalayer/operator:1.0.12"` |  |
+| operator.image | string | `"datalayer/operator:1.0.13"` |  |
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |
 | operator.sharedFsPVC | string | `""` |  |
