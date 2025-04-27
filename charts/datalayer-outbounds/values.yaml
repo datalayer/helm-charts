@@ -22,3 +22,4 @@ outbounds:
     DATALAYER_KAFKA_PASSWORD: ""
     DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
     DATALAYER_KAFKA_USERNAME: ""
+    DATALAYER_MAIL_OUTBOUND_INTERVAL_SEC: 60
