@@ -26,5 +26,5 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | outbounds.mailer.image | string | `nil` |  |
 | outbounds.mailer.imagePullPolicy | string | `"Always"` |  |
 | outbounds.mailer.port | int | `2331` |  |
-| outbounds.namespace | string | `"datalayer-system"` |  |
+| outbounds.namespace | string | `"datalayer-growth"` |  |
 
