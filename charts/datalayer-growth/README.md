@@ -42,7 +42,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | growth.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | growth.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | growth.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
-| growth.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
+| growth.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
 | growth.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | growth.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | growth.env.DATALAYER_RUN_URL | string | `""` |  |
@@ -55,11 +55,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | growth.env.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
 | growth.env.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | growth.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
-| growth.env.DATALAYER_STRIPE_API_KEY | string | `""` |  |
-| growth.env.DATALAYER_STRIPE_CHECKOUT_ROUTE | string | `"checkout"` |  |
-| growth.env.DATALAYER_STRIPE_JS_API_KEY | string | `""` |  |
-| growth.env.DATALAYER_STRIPE_PRODUCT_ID | string | `""` |  |
-| growth.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
 | growth.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | growth.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | growth.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |

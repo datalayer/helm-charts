@@ -1,7 +1,8 @@
 apiVersion: v1
+description: Datalayer Inbounds
 name: datalayer-inbounds
-version: 0.0.2
-appVersion: 0.0.2
+version: 0.0.1
+appVersion: 0.0.1
 home: https://datalayer.tech
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-inbounds

@@ -25,6 +25,7 @@ growth:
       secretKeyRef:
         name: solr-basic-auth
         key: password
+    DATALAYER_ANYMAIL_API_KEY: ""
     DATALAYER_AUTHZ_ENGINE: "openfga"
     DATALAYER_CDN_URL: ""
     DATALAYER_CORS_ORIGIN: "*"

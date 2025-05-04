@@ -19,6 +19,8 @@ spec:
         app: {{ template "inbounds.app-name" . }}
         release: {{ .Release.Name }}
         datalayer.io/app: {{ template "inbounds.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
     spec:
       terminationGracePeriodSeconds: 0
       {{- with .Values.inbounds.affinity }}
@@ -31,20 +33,20 @@ spec:
         - name: reg-creds
       containers:
         - name: inbounds
-          image: {{ .Values.inbounds.mailer.image }}
-          imagePullPolicy: {{ .Values.inbounds.mailer.imagePullPolicy }}
+          image: {{ .Values.inbounds.image }}
+          imagePullPolicy: {{ .Values.inbounds.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.inbounds.mailer.port }}
+            - containerPort: {{ .Values.inbounds.port }}
               protocol: TCP
-          {{- if or .Values.inbounds.env .Values.inbounds.envValueFrom }}
+          {{- if .Values.inbounds.env }}
           env:
-            {{- range $key, $value := .Values.inbounds.envValueFrom }}
-            - name: {{ $key }}
-              valueFrom: {{- $value | toYaml | nindent 16 }}
-            {{- end }}
             {{- range $key, $value := .Values.inbounds.env }}
             - name: {{ $key }}
+              {{- if kindIs "map" $value }}
+              valueFrom: {{- $value | toYaml | nindent 16}}
+              {{- else }}
               value: {{ $value | quote }}
+              {{- end }}
             {{- end }}
           {{- end }}
           {{- with .Values.inbounds.resources }}
@@ -53,3 +55,7 @@ spec:
           {{- with .Values.inbounds.volumeMounts }}
           volumeMounts: {{- toYaml . | nindent 12 }}
           {{- end }}
+#        - name: inbounds-sidecar
+#          image: {{ .Values.inbounds.sidecar.image }}
+#          imagePullPolicy: {{ .Values.inbounds.imagePullPolicy }}
+#          args: ["proxy", "-p", "8001"]
