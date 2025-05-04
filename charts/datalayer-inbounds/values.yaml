@@ -1,7 +1,7 @@
 inbounds:
   image: datalayer/inbounds:0.0.1
   imagePullPolicy: Always
-  port: 2336
+  port: 7667
   sidecar:
     image: datalayer/whoami:0.0.6
   clusterType: any
