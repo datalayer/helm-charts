@@ -27,7 +27,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | growth.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | growth.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | growth.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
-| growth.env.DATALAYER_Growth_API_KEY | string | `""` |  |
+| growth.env.DATALAYER_ANYMAIL_API_KEY | string | `""` |  |
 | growth.env.DATALAYER_INITIAL_USER_CREDITS | string | `"500"` |  |
 | growth.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | growth.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |

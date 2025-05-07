@@ -122,7 +122,7 @@ tests:
                 value: ""
               - name: DATALAYER_SUPPORT_EMAIL
                 value: ""
-              - name: DATALAYER_Growth_API_KEY
+              - name: DATALAYER_ANYMAIL_FINDER_API_KEY
                 value: ""
               - name: DATALAYER_VAULT_TOKEN
                 value: ""
