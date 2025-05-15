@@ -19,6 +19,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | inbounds.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
 | inbounds.certificateIssuer | string | `"letsencrypt"` |  |
 | inbounds.clusterType | string | `"any"` |  |
+| inbounds.env.DATALAYER_ANYMAIL_API_KEY | string | `""` |  |
 | inbounds.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
 | inbounds.env.DATALAYER_BLUESKY_API_KEY | string | `""` |  |
 | inbounds.env.DATALAYER_BLUESKY_API_SECRET | string | `""` |  |
@@ -27,8 +28,8 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | inbounds.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | inbounds.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | inbounds.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
-| inbounds.env.DATALAYER_Inbounds_API_KEY | string | `""` |  |
 | inbounds.env.DATALAYER_INITIAL_USER_CREDITS | string | `"500"` |  |
+| inbounds.env.DATALAYER_Inbounds_API_KEY | string | `""` |  |
 | inbounds.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | inbounds.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
 | inbounds.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"true"` |  |
@@ -64,7 +65,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | inbounds.image | string | `"datalayer/inbounds:0.0.1"` |  |
 | inbounds.imagePullPolicy | string | `"Always"` |  |
 | inbounds.ingressClass | string | `"datalayer-traefik"` |  |
-| inbounds.port | int | `6660` |  |
+| inbounds.port | int | `7667` |  |
 | inbounds.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 | inbounds.tolerations | object | `{}` |  |
 

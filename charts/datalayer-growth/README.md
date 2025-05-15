@@ -19,6 +19,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | growth.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
 | growth.certificateIssuer | string | `"letsencrypt"` |  |
 | growth.clusterType | string | `"any"` |  |
+| growth.env.DATALAYER_ANYMAIL_FINDER_API_KEY | string | `""` |  |
 | growth.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
 | growth.env.DATALAYER_BLUESKY_API_KEY | string | `""` |  |
 | growth.env.DATALAYER_BLUESKY_API_SECRET | string | `""` |  |
@@ -27,7 +28,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | growth.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | growth.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | growth.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
-| growth.env.DATALAYER_ANYMAIL_API_KEY | string | `""` |  |
 | growth.env.DATALAYER_INITIAL_USER_CREDITS | string | `"500"` |  |
 | growth.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | growth.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
@@ -56,6 +56,11 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | growth.env.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | growth.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | growth.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
+| growth.env.DATALAYER_UNIPILE_API_KEY | string | `""` |  |
+| growth.env.DATALAYER_UNIPILE_DSN_URL | string | `""` |  |
+| growth.env.DATALAYER_UNIPILE_GMAIL_ACCOUNT_ID | string | `""` |  |
+| growth.env.DATALAYER_UNIPILE_LINKEDIN_ACCOUNT_ID | string | `""` |  |
+| growth.env.DATALAYER_UNIPILE_LINKEDIN_ACCOUNT_INTERNAL_ID | string | `""` |  |
 | growth.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | growth.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
 | growth.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
