@@ -1,0 +1,142 @@
+suite: test deployment
+templates:
+  - templates/deployment.yaml
+tests:
+  - it: "test affinity"
+    asserts:
+      - isSubset:
+          path: spec.template.spec
+          content:
+            affinity:
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: role.datalayer.io/api
+                      operator: In
+                      values:
+                      - "true"
+  - it: "test tolerations"
+    set:
+      growth.tolerations:
+        - key: "key1"
+          operator: "Equal"
+          value: "value1"
+          effect: "NoSchedule"
+    asserts:
+      - isSubset:
+          path: spec.template.spec
+          content:
+            tolerations:
+              - key: "key1"
+                operator: "Equal"
+                value: "value1"
+                effect: "NoSchedule"
+  - it: "test environment variables"
+    asserts:
+      - isSubset:
+          path: spec.template.spec.containers[0]
+          content:
+            env:
+              - name: DATALAYER_AUTHZ_ENGINE
+                value: openfga
+              - name: DATALAYER_BLUESKY_API_KEY
+                value: ""
+              - name: DATALAYER_BLUESKY_API_SECRET
+                value: ""
+              - name: DATALAYER_CDN_URL
+                value: ""
+              - name: DATALAYER_CORS_ORIGIN
+                value: '*'
+              - name: DATALAYER_CREDITS_PROVIDER
+                value: ""
+              - name: DATALAYER_GITHUB_CLIENT_ID
+                value: ""
+              - name: DATALAYER_GITHUB_CLIENT_SECRET
+                value: ""
+              - name: DATALAYER_INITIAL_USER_CREDITS
+                value: "500"
+              - name: DATALAYER_JWT_ALGORITHM
+                value: ""
+              - name: DATALAYER_JWT_ALLOWED_ISSUERS
+                value: ""
+              - name: DATALAYER_JWT_CACHE_VALIDATE
+                value: "true"
+              - name: DATALAYER_JWT_DEFAULT_KID_ISSUER
+                value: ""
+              - name: DATALAYER_JWT_ISSUER
+                value: https://id.datalayer.run
+              - name: DATALAYER_JWT_SECRET
+                value: ""
+              - name: DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION
+                value: "false"
+              - name: DATALAYER_KAFKA_URL
+                value: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
+              - name: DATALAYER_LINKEDIN_CLIENT_ID
+                value: ""
+              - name: DATALAYER_LINKEDIN_CLIENT_SECRET
+                value: ""
+              - name: DATALAYER_OPENFGA_AUTHZ_MODEL_ID
+                value: ""
+              - name: DATALAYER_OPENFGA_REST_URL
+                value: http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080
+              - name: DATALAYER_OPENFGA_STORE_ID
+                value: ""
+              - name: DATALAYER_PUB_SUB_ENGINE
+                value: pulsar
+              - name: DATALAYER_PULSAR_URL
+                value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
+              - name: DATALAYER_RUNTIME_ENV
+                value: prod
+              - name: DATALAYER_RUN_URL
+                value: ""
+              - name: DATALAYER_SMTP_HOST
+                value: ""
+              - name: DATALAYER_SMTP_PASSWORD
+                value: ""
+              - name: DATALAYER_SMTP_PORT
+                value: "0"
+              - name: DATALAYER_SMTP_USERNAME
+                value: ""
+              - name: DATALAYER_SOLR_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    key: password
+                    name: solr-basic-auth
+              - name: DATALAYER_SOLR_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    key: username
+                    name: solr-basic-auth
+              - name: DATALAYER_SOLR_ZK_HOST
+                value: solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local
+              - name: DATALAYER_STRIPE_API_KEY
+                value: ""
+              - name: DATALAYER_STRIPE_CHECKOUT_ROUTE
+                value: checkout
+              - name: DATALAYER_STRIPE_JS_API_KEY
+                value: ""
+              - name: DATALAYER_STRIPE_PRODUCT_ID
+                value: ""
+              - name: DATALAYER_STRIPE_WEBHOOK_SECRET
+                value: ""
+              - name: DATALAYER_SUPPORT_EMAIL
+                value: ""
+              - name: DATALAYER_ANYMAIL_FINDER_API_KEY
+                value: ""
+              - name: DATALAYER_VAULT_TOKEN
+                value: ""
+              - name: DATALAYER_VAULT_URL
+                value: http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200
+              - name: OTEL_EXPORTER_OTLP_METRICS_ENDPOINT
+                value: ""
+              - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+                value: ""
+              - name: OTEL_SDK_DISABLED
+                value: "false"
+            image: datalayer/growth:0.0.1
+            imagePullPolicy: Always
+            name: growth
+            ports:
+              - containerPort: 6660
+                protocol: TCP

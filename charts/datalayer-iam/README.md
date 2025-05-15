@@ -4,7 +4,7 @@
 
 Datalayer IAM
 
-![Version: 1.0.11](https://img.shields.io/badge/Version-1.0.11-informational?style=flat-square) ![AppVersion: 1.0.11](https://img.shields.io/badge/AppVersion-1.0.11-informational?style=flat-square)
+![Version: 1.0.15](https://img.shields.io/badge/Version-1.0.15-informational?style=flat-square) ![AppVersion: 1.0.16](https://img.shields.io/badge/AppVersion-1.0.16-informational?style=flat-square)
 
 ## Documentation
 
@@ -44,7 +44,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | iam.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | iam.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
-| iam.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
+| iam.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
 | iam.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | iam.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | iam.env.DATALAYER_RUN_URL | string | `""` |  |
@@ -68,7 +68,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| iam.image | string | `"datalayer/iam:1.0.11"` |  |
+| iam.image | string | `"datalayer/iam:1.0.16"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |

@@ -2,54 +2,54 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ default .Values.mailer.namespace .Release.Namespace }}
+  namespace: {{ default .Values.outbounds.namespace .Release.Namespace }}
   labels:
-    app: {{ template "mailer.app-name" . }}
+    app: {{ template "outbounds.app-name" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "mailer.app-name" . }}
+      app: {{ template "outbounds.app-name" . }}
   strategy:
     rollingUpdate:
       maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: {{ template "mailer.app-name" . }}
+        app: {{ template "outbounds.app-name" . }}
         release: {{ .Release.Name }}
-        datalayer.io/app: {{ template "mailer.app-name" . }}
+        datalayer.io/app: {{ template "outbounds.app-name" . }}
     spec:
       terminationGracePeriodSeconds: 0
-      {{- with .Values.mailer.affinity }}
+      {{- with .Values.outbounds.affinity }}
       affinity: {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.mailer.tolerations }}
+      {{- with .Values.outbounds.tolerations }}
       tolerations: {{- toYaml . | nindent 8 }}
       {{- end }}
       imagePullSecrets:
         - name: reg-creds
       containers:
-        - name: mailer
-          image: {{ .Values.mailer.image }}
-          imagePullPolicy: {{ .Values.mailer.imagePullPolicy }}
+        - name: outbounds
+          image: {{ .Values.outbounds.mailer.image }}
+          imagePullPolicy: {{ .Values.outbounds.mailer.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.mailer.port }}
+            - containerPort: {{ .Values.outbounds.mailer.port }}
               protocol: TCP
-          {{- if or .Values.mailer.env .Values.mailer.envValueFrom }}
+          {{- if or .Values.outbounds.env .Values.outbounds.envValueFrom }}
           env:
-            {{- range $key, $value := .Values.mailer.envValueFrom }}
+            {{- range $key, $value := .Values.outbounds.envValueFrom }}
             - name: {{ $key }}
               valueFrom: {{- $value | toYaml | nindent 16 }}
             {{- end }}
-            {{- range $key, $value := .Values.mailer.env }}
+            {{- range $key, $value := .Values.outbounds.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
           {{- end }}
-          {{- with .Values.mailer.resources }}
+          {{- with .Values.outbounds.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.mailer.volumeMounts }}
+          {{- with .Values.outbounds.volumeMounts }}
           volumeMounts: {{- toYaml . | nindent 12 }}
           {{- end }}

@@ -1,0 +1,25 @@
+Your inbounds server has now been installed, and can be accessed in the following ways:
+
+1. Connect to the inbounds CLI pod:
+
+  kubectl exec -n {{ .Release.Namespace }} $(kubectl get pod -n {{ .Release.Namespace }} --selector=app={{ template "inbounds.app-name" . }} -o jsonpath='{.items...metadata.name}') -- sh
+
+2. Connect with HTTP internally, within the kubernetes cluster on:
+
+  {{ template "inbounds.service-name" . }}.{{ .Release.Namespace }}:{{ .Values.inbounds.port }}
+
+3. Connect with HTTP Node Port to the kubernetes cluster:
+
+  export NODE_IP=$(kubectl get nodes --namespace inbounds -o jsonpath="{.items[0].status.addresses[0].address}")
+  export NODE_PORT=$(kubectl get --namespace inbounds -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "inbounds.service-name" . }})
+  echo http://$NODE_IP:$NODE_PORT/inbounds/
+
+4. Connect with HTTP external service to the kubernetes cluster:
+
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ template "inbounds.name" . }}" -o jsonpath="{ .items[0].metadata.name }")
+  echo "Visit http://127.0.0.1:{{ .Values.inbounds.port }}/inbounds/ to access inbounds"
+  kubectl port-forward --namespace {{ .Release.Namespace }} $POD_NAME {{ .Values.inbounds.port }}:{{ .Values.inbounds.port }}
+
+5. For Minikube:
+
+  open http://minikube.local/api/inbounds/

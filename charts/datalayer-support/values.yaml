@@ -1,0 +1,75 @@
+support:
+  image: datalayer/support:0.0.1
+  imagePullPolicy: Always
+  port: 2200
+  sidecar:
+    image: datalayer/whoami:0.0.6
+  clusterType: any
+  certificateIssuer: letsencrypt
+  ingressClass: datalayer-traefik
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/api
+            operator: In
+            values:
+            - "true"
+  env:
+    DATALAYER_SOLR_USERNAME:
+      secretKeyRef:
+        name: solr-basic-auth
+        key: username
+    DATALAYER_SOLR_PASSWORD:
+      secretKeyRef:
+        name: solr-basic-auth
+        key: password
+    DATALAYER_AUTHZ_ENGINE: "openfga"
+    DATALAYER_CDN_URL: ""
+    DATALAYER_CORS_ORIGIN: "*"
+    DATALAYER_CREDITS_PROVIDER: ""
+    DATALAYER_GITHUB_CLIENT_ID: ""
+    DATALAYER_GITHUB_CLIENT_SECRET: ""
+    DATALAYER_Support_API_KEY: ""
+    DATALAYER_INITIAL_USER_CREDITS: "500"
+    DATALAYER_JWT_ALGORITHM: ""
+    DATALAYER_JWT_ALLOWED_ISSUERS: ""
+    DATALAYER_JWT_CACHE_VALIDATE: "true"
+    DATALAYER_JWT_DEFAULT_KID_ISSUER: ""
+    DATALAYER_JWT_ISSUER: "https://id.datalayer.run"
+    DATALAYER_JWT_SECRET: ""
+    DATALAYER_JWT_SKIP_EXTERNAL_TOKEN_SIGNATURE_VERIFICATION: "false"
+    DATALAYER_LINKEDIN_CLIENT_ID: ""
+    DATALAYER_LINKEDIN_CLIENT_SECRET: ""
+    DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
+    DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
+    DATALAYER_OPENFGA_STORE_ID: ""
+    DATALAYER_PUB_SUB_ENGINE: "kafka"
+    DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
+    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
+    DATALAYER_RUNTIME_ENV: "prod"
+    DATALAYER_RUN_URL: ""
+    DATALAYER_SMTP_HOST: ""
+    DATALAYER_SMTP_PASSWORD: ""
+    DATALAYER_SMTP_PORT: "0"
+    DATALAYER_SMTP_USERNAME: ""
+    DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
+    DATALAYER_STRIPE_API_KEY: ""
+    DATALAYER_STRIPE_CHECKOUT_ROUTE: "checkout"
+    DATALAYER_STRIPE_JS_API_KEY: ""
+    DATALAYER_STRIPE_PRODUCT_ID: ""
+    DATALAYER_STRIPE_WEBHOOK_SECRET: ""
+    DATALAYER_SUPPORT_EMAIL: ""
+    DATALAYER_VAULT_TOKEN: ""
+    DATALAYER_VAULT_URL: "http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"
+    DATALAYER_BLUESKY_API_KEY: ""
+    DATALAYER_BLUESKY_API_SECRET: ""
+    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
+    OTEL_SDK_DISABLED: "false"
+  tolerations: {}
+#  resources:
+#    limits:
+#      memory: "8192Mi"
+#      cpu: "3000m"

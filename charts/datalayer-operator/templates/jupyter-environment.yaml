@@ -93,6 +93,8 @@ spec:
                               type: string
                             memory:
                               type: string
+                            ephemeral-storage:
+                              type: string
                             nvidia.com/gpu:
                               type: string
                         limits:
@@ -101,6 +103,8 @@ spec:
                             cpu:
                               type: string
                             memory:
+                              type: string
+                            ephemeral-storage:
                               type: string
                             nvidia.com/gpu:
                               type: string

@@ -1,0 +1,35 @@
+outbounds:
+  namespace: datalayer-growth
+  mailer:
+    image:
+    imagePullPolicy: Always
+    port: 2331
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: role.datalayer.io/system
+            operator: In
+            values:
+            - "true"
+  env:
+    DATALAYER_SOLR_USERNAME:
+      secretKeyRef:
+        name: solr-basic-auth
+        key: username
+    DATALAYER_SOLR_PASSWORD:
+      secretKeyRef:
+        name: solr-basic-auth
+        key: password
+    DATALAYER_KAFKA_PASSWORD: ""
+    DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
+    DATALAYER_KAFKA_USERNAME: ""
+    DATALAYER_MAIL_OUTBOUND_INTERVAL_SEC: 60
+    DATALAYER_SMTP_HOST: ""
+    DATALAYER_SMTP_PASSWORD: ""
+    DATALAYER_SMTP_PORT: "0"
+    DATALAYER_SMTP_USERNAME: ""
+    DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
+    DATALAYER_PUB_SUB_ENGINE: "pulsar"
+    DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"

@@ -1,0 +1,13 @@
+apiVersion: v1
+description: Datalayer Growth
+name: datalayer-growth
+version: 0.0.1
+appVersion: 0.0.1
+home: https://datalayer.tech
+sources:
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-growth
+icon: https://assets.datalayer.tech/datalayer-square.png
+maintainers:
+- name: Datalayer
+  email: support@datalayer.io
+  url: https://datalayer.io

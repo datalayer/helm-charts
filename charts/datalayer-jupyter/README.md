@@ -34,7 +34,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | jupyter.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | jupyter.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
 | jupyter.env.DATALAYER_OPERATOR_HOST | string | `"datalayer-operator-svc.datalayer-jupyter.svc.cluster.local:2111"` |  |
-| jupyter.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
+| jupyter.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
 | jupyter.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | jupyter.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | jupyter.env.DATALAYER_RUN_URL | string | `""` |  |

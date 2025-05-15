@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "mailer.name" -}}
+{{- define "inbounds.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 24 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -9,21 +9,28 @@ Expand the name of the chart.
 Create a default fully qualified app name.
 We truncate at 24 chars because some kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "mailer.fullname" -}}
+{{- define "inbounds.fullname" -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 24 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
-Define the name of the client service for mailer.
+Define the name of the client service for inbounds.
 */}}
-{{- define "mailer.service-name" -}}
-{{- printf "%s-%s" (include "mailer.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
+{{- define "inbounds.service-name" -}}
+{{- printf "%s-%s" (include "inbounds.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Define the value for the app label.
 */}}
-{{- define "mailer.app-name" -}}
+{{- define "inbounds.app-name" -}}
 {{- printf "%s" .Chart.Name | replace "datalayer-" "" -}}
+{{- end -}}
+
+{{/*
+Define the value for the datalayer run host.
+*/}}
+{{- define "inbounds.runHost" -}}
+{{- printf "%s" .Values.inbounds.env.DATALAYER_RUN_URL | replace "https://" "" -}}
 {{- end -}}

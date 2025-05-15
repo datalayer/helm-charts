@@ -1,11 +1,10 @@
 apiVersion: v1
-description: Datalayer Mailer
-name: datalayer-mailer
+name: datalayer-outbounds
 version: 0.0.2
 appVersion: 0.0.2
 home: https://datalayer.tech
 sources:
-- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-mailer
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-outbounds
 icon: https://assets.datalayer.tech/datalayer-square.png
 maintainers:
 - name: Datalayer

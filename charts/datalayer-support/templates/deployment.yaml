@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ default .Values.support.namespace .Release.Namespace }}
+  labels:
+    app: {{ template "support.app-name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "support.app-name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "support.app-name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "support.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
+    spec:
+      terminationGracePeriodSeconds: 0
+      {{- with .Values.support.affinity }}
+      affinity: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.support.tolerations }}
+      tolerations: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      imagePullSecrets:
+        - name: reg-creds
+      containers:
+        - name: support
+          image: {{ .Values.support.image }}
+          imagePullPolicy: {{ .Values.support.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.support.port }}
+              protocol: TCP
+          {{- if .Values.support.env }}
+          env:
+            {{- range $key, $value := .Values.support.env }}
+            - name: {{ $key }}
+              {{- if kindIs "map" $value }}
+              valueFrom: {{- $value | toYaml | nindent 16}}
+              {{- else }}
+              value: {{ $value | quote }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.support.resources }}
+          resources: {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.support.volumeMounts }}
+          volumeMounts: {{- toYaml . | nindent 12 }}
+          {{- end }}
+#        - name: support-sidecar
+#          image: {{ .Values.support.sidecar.image }}
+#          imagePullPolicy: {{ .Values.support.imagePullPolicy }}
+#          args: ["proxy", "-p", "8001"]

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ default .Values.inbounds.namespace .Release.Namespace }}
+  labels:
+    app: {{ template "inbounds.app-name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "inbounds.app-name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "inbounds.app-name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "inbounds.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
+    spec:
+      terminationGracePeriodSeconds: 0
+      {{- with .Values.inbounds.affinity }}
+      affinity: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.inbounds.tolerations }}
+      tolerations: {{- toYaml . | nindent 8 }}
+      {{- end }}
+      imagePullSecrets:
+        - name: reg-creds
+      containers:
+        - name: inbounds
+          image: {{ .Values.inbounds.image }}
+          imagePullPolicy: {{ .Values.inbounds.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.inbounds.port }}
+              protocol: TCP
+          {{- if .Values.inbounds.env }}
+          env:
+            {{- range $key, $value := .Values.inbounds.env }}
+            - name: {{ $key }}
+              {{- if kindIs "map" $value }}
+              valueFrom: {{- $value | toYaml | nindent 16}}
+              {{- else }}
+              value: {{ $value | quote }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.inbounds.resources }}
+          resources: {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.inbounds.volumeMounts }}
+          volumeMounts: {{- toYaml . | nindent 12 }}
+          {{- end }}
+#        - name: inbounds-sidecar
+#          image: {{ .Values.inbounds.sidecar.image }}
+#          imagePullPolicy: {{ .Values.inbounds.imagePullPolicy }}
+#          args: ["proxy", "-p", "8001"]
