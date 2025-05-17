@@ -1,5 +1,5 @@
 growth:
-  image: datalayer/growth:0.0.1
+  image: datalayer/growth:0.0.2
   imagePullPolicy: Always
   port: 6660
   sidecar:

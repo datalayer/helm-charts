@@ -66,7 +66,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | growth.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | growth.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | growth.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| growth.image | string | `"datalayer/growth:0.0.1"` |  |
+| growth.image | string | `"datalayer/growth:0.0.2"` |  |
 | growth.imagePullPolicy | string | `"Always"` |  |
 | growth.ingressClass | string | `"datalayer-traefik"` |  |
 | growth.port | int | `6660` |  |

@@ -134,7 +134,7 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/growth:0.0.1
+            image: datalayer/growth:0.0.2
             imagePullPolicy: Always
             name: growth
             ports:
