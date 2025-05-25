@@ -42,6 +42,10 @@ spec:
           ports:
             - containerPort: {{ .Values.jump.port }}
               protocol: TCP
+          securityContext:
+            privileged: true
+#            runAsUser: 1000
+#            runAsGroup: 100
           env:
           - name: DATALAYER_RUN_URL
             value: {{ .Values.jump.env.DATALAYER_RUN_URL }}

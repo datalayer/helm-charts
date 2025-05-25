@@ -5,7 +5,7 @@ nodeSelector:
   role.datalayer.io/router: "true"
 
 ports:
-  jump-ssh:
+  ssh-ssh:
     protocol: TCP
     port: 2223
     expose:
