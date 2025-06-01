@@ -38,6 +38,8 @@ tests:
           path: spec.template.spec.containers[0]
           content:
             env:
+              - name: DATALAYER_ANYMAIL_FINDER_API_KEY
+                value: ""
               - name: DATALAYER_AUTHZ_ENGINE
                 value: openfga
               - name: DATALAYER_BLUESKY_API_KEY
@@ -110,19 +112,17 @@ tests:
                     name: solr-basic-auth
               - name: DATALAYER_SOLR_ZK_HOST
                 value: solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local
-              - name: DATALAYER_STRIPE_API_KEY
-                value: ""
-              - name: DATALAYER_STRIPE_CHECKOUT_ROUTE
-                value: checkout
-              - name: DATALAYER_STRIPE_JS_API_KEY
-                value: ""
-              - name: DATALAYER_STRIPE_PRODUCT_ID
-                value: ""
-              - name: DATALAYER_STRIPE_WEBHOOK_SECRET
-                value: ""
               - name: DATALAYER_SUPPORT_EMAIL
                 value: ""
-              - name: DATALAYER_ANYMAIL_FINDER_API_KEY
+              - name: DATALAYER_UNIPILE_API_KEY
+                value: ""
+              - name: DATALAYER_UNIPILE_DSN_URL
+                value: ""
+              - name: DATALAYER_UNIPILE_GMAIL_ACCOUNT_ID
+                value: ""
+              - name: DATALAYER_UNIPILE_LINKEDIN_ACCOUNT_ID
+                value: ""
+              - name: DATALAYER_UNIPILE_LINKEDIN_ACCOUNT_INTERNAL_ID
                 value: ""
               - name: DATALAYER_VAULT_TOKEN
                 value: ""
