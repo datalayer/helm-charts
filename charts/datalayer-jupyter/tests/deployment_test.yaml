@@ -69,7 +69,7 @@ tests:
               - name: DATALAYER_OPERATOR_HOST
                 value: datalayer-operator-svc.datalayer-jupyter.svc.cluster.local:2111
               - name: DATALAYER_PUB_SUB_ENGINE
-                value: pulsar
+                value: kafka
               - name: DATALAYER_PULSAR_URL
                 value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
               - name: DATALAYER_RUNTIME_ENV
@@ -94,7 +94,7 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/jupyter:1.0.8
+            image: datalayer/jupyter:1.0.9
             imagePullPolicy: Always
             name: jupyter
             ports:

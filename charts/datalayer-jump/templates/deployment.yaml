@@ -18,6 +18,9 @@ spec:
       labels:
         app: {{ template "jump.name" . }}
         release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "jump.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
     spec:
       subdomain: jump
       terminationGracePeriodSeconds: 0
@@ -30,6 +33,8 @@ spec:
                 operator: In
                 values:
                 - "true"
+      imagePullSecrets:
+        - name: reg-creds
       containers:
         - name: jump
           image: {{ .Values.jump.image }}
@@ -37,6 +42,10 @@ spec:
           ports:
             - containerPort: {{ .Values.jump.port }}
               protocol: TCP
+          securityContext:
+            privileged: true
+#            runAsUser: 1000
+#            runAsGroup: 100
           env:
           - name: DATALAYER_RUN_URL
             value: {{ .Values.jump.env.DATALAYER_RUN_URL }}
