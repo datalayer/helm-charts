@@ -56,10 +56,10 @@ tests:
                 value: ""
               - name: DATALAYER_GITHUB_CLIENT_SECRET
                 value: ""
-              - name: DATALAYER_INITIAL_USER_CREDITS
-                value: "500"
               - name: DATALAYER_INBOUNDS_API_KEY
                 value: ""
+              - name: DATALAYER_INITIAL_USER_CREDITS
+                value: "500"
               - name: DATALAYER_JWT_ALGORITHM
                 value: ""
               - name: DATALAYER_JWT_ALLOWED_ISSUERS
