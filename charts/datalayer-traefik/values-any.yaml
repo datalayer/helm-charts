@@ -4,14 +4,6 @@ globalArguments:
 nodeSelector:
   role.datalayer.io/router: "true"
 
-ports:
-  ssh-ssh:
-    protocol: TCP
-    port: 2223
-    expose:
-      default: true
-    exposedPort: 2223
-
 logs:
   access:
     enabled: true

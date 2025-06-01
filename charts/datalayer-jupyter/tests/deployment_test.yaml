@@ -94,7 +94,7 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/jupyter:1.0.8
+            image: datalayer/jupyter:1.0.9
             imagePullPolicy: Always
             name: jupyter
             ports:

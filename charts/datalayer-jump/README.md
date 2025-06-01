@@ -20,23 +20,7 @@ Datalayer Jump
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| jump.env.AWS_ACCESS_KEY_ID | string | `""` |  |
-| jump.env.AWS_DEFAULT_REGION | string | `""` |  |
-| jump.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
-| jump.env.DATALAYER_CDN_URL | string | `""` |  |
-| jump.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
-| jump.env.DATALAYER_JWT_SECRET | string | `""` |  |
-| jump.env.DATALAYER_KEYCLOAK_REALM_CLIENT_SECRET | string | `""` |  |
-| jump.env.DATALAYER_KEYCLOAK_SCHEME_HOST | string | `""` |  |
-| jump.env.DATALAYER_LDAP_BIND | string | `""` |  |
-| jump.env.DATALAYER_LDAP_BIND_PWD | string | `""` |  |
-| jump.env.DATALAYER_LDAP_HOST | string | `""` |  |
 | jump.env.DATALAYER_RUN_URL | string | `""` |  |
-| jump.env.DATALAYER_SMTP_HOST | string | `""` |  |
-| jump.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
-| jump.env.DATALAYER_SMTP_PORT | string | `""` |  |
-| jump.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
-| jump.env.DATALAYER_SOLR_ZK_HOST | string | `""` |  |
 | jump.image | string | `"datalayer/jump:0.0.6"` |  |
 | jump.imagePullPolicy | string | `"Always"` |  |
 | jump.port | int | `2223` |  |
