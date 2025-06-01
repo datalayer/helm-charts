@@ -28,8 +28,8 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | inbounds.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | inbounds.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | inbounds.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
+| inbounds.env.DATALAYER_INBOUNDS_API_KEY | string | `""` |  |
 | inbounds.env.DATALAYER_INITIAL_USER_CREDITS | string | `"500"` |  |
-| inbounds.env.DATALAYER_Inbounds_API_KEY | string | `""` |  |
 | inbounds.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | inbounds.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
 | inbounds.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"true"` |  |

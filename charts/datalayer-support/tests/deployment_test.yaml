@@ -83,7 +83,7 @@ tests:
               - name: DATALAYER_OPENFGA_STORE_ID
                 value: ""
               - name: DATALAYER_PUB_SUB_ENGINE
-                value: pulsar
+                value: kafka
               - name: DATALAYER_PULSAR_URL
                 value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
               - name: DATALAYER_RUNTIME_ENV

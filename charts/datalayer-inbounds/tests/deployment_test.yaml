@@ -38,6 +38,8 @@ tests:
           path: spec.template.spec.containers[0]
           content:
             env:
+              - name: DATALAYER_ANYMAIL_API_KEY
+                value: ""
               - name: DATALAYER_AUTHZ_ENGINE
                 value: openfga
               - name: DATALAYER_BLUESKY_API_KEY
@@ -56,6 +58,8 @@ tests:
                 value: ""
               - name: DATALAYER_INITIAL_USER_CREDITS
                 value: "500"
+              - name: DATALAYER_INBOUNDS_API_KEY
+                value: ""
               - name: DATALAYER_JWT_ALGORITHM
                 value: ""
               - name: DATALAYER_JWT_ALLOWED_ISSUERS
@@ -110,19 +114,7 @@ tests:
                     name: solr-basic-auth
               - name: DATALAYER_SOLR_ZK_HOST
                 value: solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local
-              - name: DATALAYER_STRIPE_API_KEY
-                value: ""
-              - name: DATALAYER_STRIPE_CHECKOUT_ROUTE
-                value: checkout
-              - name: DATALAYER_STRIPE_JS_API_KEY
-                value: ""
-              - name: DATALAYER_STRIPE_PRODUCT_ID
-                value: ""
-              - name: DATALAYER_STRIPE_WEBHOOK_SECRET
-                value: ""
               - name: DATALAYER_SUPPORT_EMAIL
-                value: ""
-              - name: DATALAYER_Inbounds_API_KEY
                 value: ""
               - name: DATALAYER_VAULT_TOKEN
                 value: ""
@@ -138,5 +130,5 @@ tests:
             imagePullPolicy: Always
             name: inbounds
             ports:
-              - containerPort: 6660
+              - containerPort: 7667
                 protocol: TCP
