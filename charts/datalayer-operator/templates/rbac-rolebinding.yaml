@@ -1,13 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: datalayer-runtimes-companion-svc
+  name: datalayer-runtimes-rolebinding
   namespace: datalayer-runtimes
 subjects:
 - kind: ServiceAccount
-  name: datalayer-runtimes-companion
+  name: datalayer-runtimes-sa
   namespace: datalayer-runtimes
 roleRef:
   kind: Role
-  name: datalayer-runtimes-companion
+  name: datalayer-runtimes-role
   apiGroup: rbac.authorization.k8s.io
