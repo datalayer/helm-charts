@@ -1,5 +1,5 @@
-jupyter:
-  image: datalayer/jupyter:1.0.9
+runtimes:
+  image: datalayer/runtimes:1.0.9
   imagePullPolicy: Always
   sidecar:
     image: datalayer/whoami:0.0.6
@@ -39,7 +39,7 @@ jupyter:
     DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
     DATALAYER_OPENFGA_STORE_ID: ""
     DATALAYER_OPERATOR_API_KEY: ""
-    DATALAYER_OPERATOR_HOST: "datalayer-operator-svc.datalayer-jupyter.svc.cluster.local:2111"
+    DATALAYER_OPERATOR_HOST: "datalayer-operator-svc.datalayer-runtimes.svc.cluster.local:2111"
     DATALAYER_PUB_SUB_ENGINE: "kafka"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUNTIME_ENV: "prod"

@@ -1,13 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: datalayer-jupyter-svc
-  namespace: datalayer-jupyter
+  name: datalayer-runtimes-svc
+  namespace: datalayer-runtimes
 subjects:
 - kind: ServiceAccount
-  name: datalayer-jupyter
+  name: datalayer-runtimes
   namespace: datalayer-api
 roleRef:
   kind: Role
-  name: datalayer-jupyter
+  name: datalayer-runtimes
   apiGroup: rbac.authorization.k8s.io

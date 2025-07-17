@@ -9,15 +9,15 @@ metadata:
     traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.samesite: "none"
   labels:
-    app: {{ template "jupyter.app-name" . }}
+    app: {{ template "runtimes.app-name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.jupyter.port }}
-    name: jupyter-http
+  - port: {{ .Values.runtimes.port }}
+    name: runtimes-http
   selector:
-    app: {{ template "jupyter.app-name" . }}
+    app: {{ template "runtimes.app-name" . }}
     release: {{ .Release.Name }}

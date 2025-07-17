@@ -1,11 +1,11 @@
 apiVersion: v1
-description: Datalayer Jupyter
-name: datalayer-jupyter
+description: Datalayer Runtimes
+name: datalayer-runtimes
 version: 1.0.11
 appVersion: 1.0.9
 home: https://datalayer.tech
 sources:
-- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-jupyter
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-runtimes
 icon: https://assets.datalayer.tech/datalayer-square.png
 maintainers:
 - name: Datalayer
