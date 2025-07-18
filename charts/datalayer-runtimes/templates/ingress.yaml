@@ -1,12 +1,12 @@
-{{ if eq .Values.jupyter.clusterType "any" -}}
+{{ if eq .Values.runtimes.clusterType "any" -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: jupyter-ingress
+  name: runtimes-ingress
   annotations:
-    acme.cert-manager.io/http01-ingress-class: {{ .Values.jupyter.ingressClass }}
+    acme.cert-manager.io/http01-ingress-class: {{ .Values.runtimes.ingressClass }}
     cert-manager.io/acme-challenge-type: http01
-    cert-manager.io/cluster-issuer: {{ .Values.jupyter.certificateIssuer }}
+    cert-manager.io/cluster-issuer: {{ .Values.runtimes.certificateIssuer }}
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/affinity: cookie
@@ -14,7 +14,7 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-expires: '172800'
     nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
     nginx.ingress.kubernetes.io/session-cookie-samesite: None
-    nginx.ingress.kubernetes.io/session-cookie-name: jupyter-affinity
+    nginx.ingress.kubernetes.io/session-cookie-name: runtimes-affinity
     nginx.ingress.kubernetes.io/session-cookie-path: "/"
     nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
     nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
@@ -33,22 +33,22 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: 'true'
 #    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-iam-auth@kubernetescrd
   labels:
-    app: jupyter
+    app: runtimes
 spec:
-  ingressClassName: {{ .Values.jupyter.ingressClass }}
+  ingressClassName: {{ .Values.runtimes.ingressClass }}
   tls:
   - hosts:
-    - {{ template "jupyter.runHost" . }}
-    secretName: {{ template "jupyter.runHost" . }}-datalayer-api-cert-secret
+    - {{ template "runtimes.runHost" . }}
+    secretName: {{ template "runtimes.runHost" . }}-datalayer-api-cert-secret
   rules:
-  - host: {{ template "jupyter.runHost" . }}
+  - host: {{ template "runtimes.runHost" . }}
     http:
       paths:
-      - path: /api/jupyter
+      - path: /api/runtimes
         pathType: Prefix
         backend:
           service:
             name: {{ .Release.Name }}-svc
             port: 
-              number: {{ .Values.jupyter.port }}
+              number: {{ .Values.runtimes.port }}
 {{- end }}

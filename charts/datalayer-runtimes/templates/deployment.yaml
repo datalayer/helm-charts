@@ -2,46 +2,46 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ default .Values.jupyter.namespace .Release.Namespace }}
+  namespace: {{ default .Values.runtimes.namespace .Release.Namespace }}
   labels:
-    app: {{ template "jupyter.app-name" . }}
+    app: {{ template "runtimes.app-name" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "jupyter.app-name" . }}
+      app: {{ template "runtimes.app-name" . }}
   strategy:
     rollingUpdate:
       maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: {{ template "jupyter.app-name" . }}
+        app: {{ template "runtimes.app-name" . }}
         release: {{ .Release.Name }}
-        datalayer.io/app: {{ template "jupyter.app-name" . }}
+        datalayer.io/app: {{ template "runtimes.app-name" . }}
       annotations:
         karpenter.sh/do-not-disrupt: "true"      
     spec:
       terminationGracePeriodSeconds: 0
-      {{- with .Values.jupyter.affinity }}
+      {{- with .Values.runtimes.affinity }}
       affinity: {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.jupyter.tolerations }}
+      {{- with .Values.runtimes.tolerations }}
       tolerations: {{- toYaml . | nindent 8 }}
       {{- end }}
       imagePullSecrets:
             - name: reg-creds
-      serviceAccountName: datalayer-jupyter
+      serviceAccountName: datalayer-runtimes
       containers:
-        - name: jupyter
-          image: {{ .Values.jupyter.image }}
-          imagePullPolicy: {{ .Values.jupyter.imagePullPolicy }}
+        - name: runtimes
+          image: {{ .Values.runtimes.image }}
+          imagePullPolicy: {{ .Values.runtimes.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.jupyter.port }}
+            - containerPort: {{ .Values.runtimes.port }}
               protocol: TCP
-          {{- if .Values.jupyter.env }}
+          {{- if .Values.runtimes.env }}
           env:
-            {{- range $key, $value := .Values.jupyter.env }}
+            {{- range $key, $value := .Values.runtimes.env }}
             - name: {{ $key }}
               {{- if kindIs "map" $value }}
               valueFrom: {{- $value | toYaml | nindent 16}}
@@ -50,13 +50,13 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
-          {{- with .Values.jupyter.resources }}
+          {{- with .Values.runtimes.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.jupyter.volumeMounts }}
+          {{- with .Values.runtimes.volumeMounts }}
           volumeMounts: {{- toYaml . | nindent 12 }}
           {{- end }}
-#        - name: jupyter-sidecar
-#          image: {{ .Values.jupyter.sidecar.image }}
-#          imagePullPolicy: {{ .Values.jupyter.imagePullPolicy }}
+#        - name: runtimes-sidecar
+#          image: {{ .Values.runtimes.sidecar.image }}
+#          imagePullPolicy: {{ .Values.runtimes.imagePullPolicy }}
 #          args: ["proxy", "-p", "8001"]

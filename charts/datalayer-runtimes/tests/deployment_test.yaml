@@ -18,7 +18,7 @@ tests:
                       - "true"
   - it: "test tolerations"
     set:
-      jupyter.tolerations:
+      runtimes.tolerations:
         - key: "key1"
           operator: "Equal"
           value: "value1"
@@ -67,7 +67,7 @@ tests:
               - name: DATALAYER_OPERATOR_API_KEY
                 value: ""
               - name: DATALAYER_OPERATOR_HOST
-                value: datalayer-operator-svc.datalayer-jupyter.svc.cluster.local:2111
+                value: datalayer-operator-svc.datalayer-runtimes.svc.cluster.local:2111
               - name: DATALAYER_PUB_SUB_ENGINE
                 value: kafka
               - name: DATALAYER_PULSAR_URL
@@ -94,9 +94,9 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/jupyter:1.0.9
+            image: datalayer/runtimes:1.0.9
             imagePullPolicy: Always
-            name: jupyter
+            name: runtimes
             ports:
               - containerPort: 9500
                 protocol: TCP
