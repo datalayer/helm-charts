@@ -22,7 +22,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.env.AWS_DEFAULT_REGION | string | `""` |  |
 | operator.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
 | operator.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
-| operator.env.DATALAYER_AVAILABLE_KERNELS_MAX_LIFE_SEC | string | `"3600"` |  |
+| operator.env.DATALAYER_AVAILABLE_RUNTIMES_MAX_LIFE_SEC | string | `"3600"` |  |
 | operator.env.DATALAYER_CERT_ISSUER | string | `"letsencrypt"` |  |
 | operator.env.DATALAYER_DOCKER_REGISTRY | string | `""` |  |
 | operator.env.DATALAYER_IAM_API_KEY | string | `""` |  |
@@ -31,10 +31,10 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.env.DATALAYER_KAFKA_PASSWORD | string | `""` |  |
 | operator.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
 | operator.env.DATALAYER_KAFKA_USERNAME | string | `""` |  |
-| operator.env.DATALAYER_KERNELS_RUN_HOOKS | string | `"false"` |  |
 | operator.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
 | operator.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
 | operator.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
+| operator.env.DATALAYER_RUNTIMES_RUN_HOOKS | string | `"false"` |  |
 | operator.env.DATALAYER_RUN_URL | string | `""` |  |
 | operator.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | operator.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
