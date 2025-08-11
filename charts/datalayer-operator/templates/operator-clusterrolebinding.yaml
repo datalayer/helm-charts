@@ -1,0 +1,20 @@
+{{- if .Values.operator.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: datalayer-operator-binding
+  labels:
+    k8s-app: datalayer-operator
+    app: {{ template "operator.app-name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: datalayer-operator-role
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.operator.rbac.serviceAccountName }}
+  namespace: {{ default .Values.operator.namespace .Release.Namespace }}
+{{- end }}

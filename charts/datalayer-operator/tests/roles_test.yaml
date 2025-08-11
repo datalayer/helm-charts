@@ -1,11 +1,43 @@
-suite: test roles
+suite: test secure rbac configuration
 templates:
-  - templates/roles.yaml
+  - templates/operator-serviceaccount.yaml
+  - templates/operator-clusterrole.yaml
+  - templates/operator-clusterrolebinding.yaml
 tests:
-  - it: "test ClusterRoleBinding subjects"
+  - it: "test ServiceAccount creation"
+    template: templates/operator-serviceaccount.yaml
+    asserts:
+      - equal:
+          path: metadata.name
+          value: datalayer-operator-sa
+      - equal:
+          path: kind
+          value: ServiceAccount
+
+  - it: "test ClusterRole has restricted permissions"
+    template: templates/operator-clusterrole.yaml
+    asserts:
+      - equal:
+          path: metadata.name
+          value: datalayer-operator-role
+      - equal:
+          path: kind
+          value: ClusterRole
+
+  - it: "test ClusterRoleBinding uses secure ServiceAccount"
+    template: templates/operator-clusterrolebinding.yaml
     release:
       namespace: default
     asserts:
-      - equal: 
+      - equal:
+          path: subjects[0].name
+          value: datalayer-operator-sa
+      - equal:
           path: subjects[0].namespace
           value: default
+      - equal:
+          path: roleRef.name
+          value: datalayer-operator-role
+      - notEqual:
+          path: roleRef.name
+          value: cluster-admin

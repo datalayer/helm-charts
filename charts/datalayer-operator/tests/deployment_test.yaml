@@ -64,14 +64,14 @@ tests:
                 value: datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092
               - name: DATALAYER_KAFKA_USERNAME
                 value: ""
-              - name: DATALAYER_RUNTIMES_RUN_HOOKS
-                value: "false"
               - name: DATALAYER_OPERATOR_API_KEY
                 value: ""
               - name: DATALAYER_PUB_SUB_ENGINE
                 value: kafka
               - name: DATALAYER_PULSAR_URL
                 value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
+              - name: DATALAYER_RUNTIMES_RUN_HOOKS
+                value: "false"
               - name: DATALAYER_RUN_URL
                 value: ""
               - name: DATALAYER_VAULT_TOKEN

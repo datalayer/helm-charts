@@ -22,6 +22,7 @@ spec:
       annotations:
         karpenter.sh/do-not-disrupt: "true"      
     spec:
+      serviceAccountName: {{ .Values.operator.rbac.serviceAccountName }}
       terminationGracePeriodSeconds: 0
       {{- with .Values.operator.affinity }}
       affinity: {{- toYaml . | nindent 8 }}
