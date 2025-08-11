@@ -1,4 +1,10 @@
 operator:
+  # RBAC Configuration
+  rbac:
+    # Create RBAC resources (ServiceAccount, ClusterRole, ClusterRoleBinding)
+    create: true
+    # Name of the ServiceAccount to create
+    serviceAccountName: "datalayer-operator-sa"
   image: datalayer/operator:1.0.19
   sidecar:
     image: datalayer/whoami:0.0.6

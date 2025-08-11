@@ -1,18 +1,8 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: datalayer-operator
-  labels:
-    k8s-app: datalayer-operator
-    app: {{ template "operator.app-name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: default
-  namespace: {{ default .Values.operator.namespace .Release.Namespace }}
+# This file has been replaced with secure RBAC configuration.
+# The new configuration uses:
+# 1. datalayer-operator-sa ServiceAccount (defined in operator-serviceaccount.yaml)
+# 2. datalayer-operator-role ClusterRole with restricted permissions (defined in operator-clusterrole.yaml) 
+# 3. datalayer-operator-binding ClusterRoleBinding (defined in operator-clusterrolebinding.yaml)
+#
+# This replaces the insecure binding of the 'default' ServiceAccount to 'cluster-admin'
+# which violated CIS Kubernetes Benchmarks 5.1.1 and 5.1.5
