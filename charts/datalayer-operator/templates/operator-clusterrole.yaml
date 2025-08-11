@@ -40,6 +40,11 @@ rules:
   resources: ["ingresses", "networkpolicies"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 
+# Traefik ingress resources
+- apiGroups: ["traefik.io"]
+  resources: ["ingressroutes", "ingressroutetcps", "ingressrouteudps", "middlewares"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
 # Custom Resource Definitions management
 - apiGroups: ["apiextensions.k8s.io"]
   resources: ["customresourcedefinitions"]
