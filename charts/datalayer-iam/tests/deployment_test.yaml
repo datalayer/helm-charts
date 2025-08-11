@@ -138,7 +138,7 @@ tests:
                 value: ""
               - name: OTEL_SDK_DISABLED
                 value: "false"
-            image: datalayer/iam:1.0.17
+            image: datalayer/iam:1.0.19
             imagePullPolicy: Always
             name: iam
             ports:
