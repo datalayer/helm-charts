@@ -16,7 +16,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 |-----|------|---------|-------------|
 | aiagents.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | aiagents.env.DATALAYER_AZURE_OPENAI_API_KEY | string | `""` |  |
-| aiagents.env.DATALAYER_AZURE_OPENAI_ENDPOINT | string | `""` |  |
+| aiagents.env.DATALAYER_AZURE_OPENAI_CHAT_COMPLETION_ENDPOINT | string | `""` |  |
 | aiagents.env.DATALAYER_CDN_URL | string | `""` |  |
 | aiagents.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
 | aiagents.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |

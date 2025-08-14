@@ -1,9 +1,9 @@
-aiagents:
-  image: datalayer/ai-agents:0.0.1
+aiinference:
+  image: datalayer/ai-inference:0.0.1
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
-  port: 4400
+  port: 4450
   registryCredentialsSecret: reg-creds
 #  resources:
 #    limits:

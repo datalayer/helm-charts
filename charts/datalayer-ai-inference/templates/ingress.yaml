@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ai-inference-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/affinity-mode: persistent
+    nginx.ingress.kubernetes.io/session-cookie-expires: '172800'
+    nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
+    nginx.ingress.kubernetes.io/session-cookie-samesite: None
+    nginx.ingress.kubernetes.io/session-cookie-name: ai-inference-affinity
+    nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: '0'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '600'
+    # FIXME what is the best way to parametrize this - full url or composition?
+#    nginx.ingress.kubernetes.io/auth-url: 'http://datalayer-iam-svc.{{ .Release.Namespace }}.svc.cluster.local:9700/api/iam/v1/auth'
+#    nginx.ingress.kubernetes.io/auth-snippet: |
+#      proxy_set_header X-Forwarded-Method $request_method;
+#      proxy_set_header X-Forwarded-Proto $scheme;
+#      proxy_set_header X-Forwarded-Host $host;
+#      proxy_set_header X-Forwarded-Uri $scheme://$host$request_uri;
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: letsencrypt
+    acme.cert-manager.io/http01-ingress-class: datalayer-traefik
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+#    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-iam-auth@kubernetescrd
+  labels:
+    app: ai-inference
+spec:
+  ingressClassName: datalayer-traefik
+  tls:
+  - hosts:
+    - {{ template "aiinference.runHost" . }}
+    secretName: {{ template "aiinference.runHost" . }}-datalayer-api-cert-secret
+  rules:
+  - host: {{ template "aiinference.runHost" . }}
+    http:
+      paths:
+      - path: /api/ai-inference
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-svc
+            port: 
+              number: {{ .Values.aiinference.port }}
