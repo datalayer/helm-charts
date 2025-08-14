@@ -2,13 +2,13 @@
 
 # datalayer-ai-inference
 
-Datalayer AI Agent
+Datalayer AI Inference
 
 ![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 ## Documentation
 
-For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
+For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 
 ## Values
 

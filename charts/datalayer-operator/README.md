@@ -8,7 +8,7 @@ Datalayer Operator
 
 ## Documentation
 
-For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
+For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 
 ## Values
 

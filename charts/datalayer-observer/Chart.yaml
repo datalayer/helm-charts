@@ -3,7 +3,7 @@ description: Datalayer Observer
 name: datalayer-observer
 version: 0.1.0
 appVersion: 0.1.0
-home: https://datalayer.tech
+home: https://datalayer.ai
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-observer
 icon: https://assets.datalayer.tech/datalayer-square.png
