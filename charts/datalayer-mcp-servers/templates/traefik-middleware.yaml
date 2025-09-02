@@ -1,0 +1,11 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-lexical-loro-prefix
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: mcp-servers
+spec:
+  stripPrefix:
+    prefixes:
+      - /api/mcp-servers/lexical-loro

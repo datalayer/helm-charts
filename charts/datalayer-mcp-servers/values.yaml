@@ -3,7 +3,7 @@ mcpservers:
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
-  port: 4400
+  port: 4111
   registryCredentialsSecret: reg-creds
 #  resources:
 #    limits:

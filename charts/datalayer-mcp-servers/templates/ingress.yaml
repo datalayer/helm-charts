@@ -27,7 +27,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     acme.cert-manager.io/http01-ingress-class: datalayer-traefik
     traefik.ingress.kubernetes.io/router.tls: 'true'
-#    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-iam-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-strip-lexical-loro-prefix@kubernetescrd
   labels:
     app: mcp-servers
 spec:
@@ -40,7 +40,7 @@ spec:
   - host: {{ template "mcpservers.runHost" . }}
     http:
       paths:
-      - path: /api/mcp-servers
+      - path: /api/mcp-servers/lexical-loro
         pathType: Prefix
         backend:
           service:
