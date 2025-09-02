@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "mcpservers.app-name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "mcpservers.app-name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "mcpservers.app-name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "mcpservers.app-name" . }}
+      annotations:
+        karpenter.sh/do-not-disrupt: "true"      
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role.datalayer.io/api
+                operator: In
+                values:
+                - "true"
+      imagePullSecrets:
+            - name: {{ .Values.mcpservers.registryCredentialsSecret }}
+      containers:
+        - name: mcp-servers
+          image: {{ .Values.mcpservers.image }}
+          imagePullPolicy: {{ .Values.mcpservers.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.mcpservers.port }}
+              protocol: TCP
+          {{- if or .Values.mcpservers.env .Values.mcpservers.envValueFrom }}
+          env:
+            {{- range $key, $value := .Values.mcpservers.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom: {{- $value | toYaml | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.mcpservers.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+#          readinessProbe:
+#            httpGet:
+#              path: /api/mcp-servers/version
+#              port: {{ .Values.mcpservers.port }}
+#            successThreshold: 1
+#            failureThreshold: 5
+#            initialDelaySeconds: 5
+#            periodSeconds: 15
+          volumeMounts:
+          resources:
+{{ toYaml .Values.mcpservers.resources | indent 12 }} 
