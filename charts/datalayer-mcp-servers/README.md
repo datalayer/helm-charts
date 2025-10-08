@@ -34,7 +34,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | mcpservers.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | mcpservers.image | string | `"datalayer/mcp-servers:0.0.1"` |  |
 | mcpservers.imagePullPolicy | string | `"Always"` |  |
-| mcpservers.port | int | `4400` |  |
+| mcpservers.port | int | `4111` |  |
 | mcpservers.registryCredentialsSecret | string | `"reg-creds"` |  |
 | mcpservers.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 
