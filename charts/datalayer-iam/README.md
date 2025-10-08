@@ -4,7 +4,7 @@
 
 Datalayer IAM
 
-![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![AppVersion: 1.1.1](https://img.shields.io/badge/AppVersion-1.1.1-informational?style=flat-square)
+![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-informational?style=flat-square) ![AppVersion: 1.1.2](https://img.shields.io/badge/AppVersion-1.1.2-informational?style=flat-square)
 
 ## Documentation
 
@@ -68,7 +68,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | iam.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
 | iam.env.OTEL_SDK_DISABLED | string | `"false"` |  |
-| iam.image | string | `"datalayer/iam:1.1.1"` |  |
+| iam.image | string | `"datalayer/iam:1.1.2"` |  |
 | iam.imagePullPolicy | string | `"Always"` |  |
 | iam.ingressClass | string | `"datalayer-traefik"` |  |
 | iam.port | int | `9700` |  |
