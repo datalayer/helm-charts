@@ -3,7 +3,7 @@ description: Datalayer Library
 name: datalayer-library
 version: 0.0.8
 appVersion: 0.0.7
-home: https://datalayer.tech
+home: https://datalayer.ai
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-library
 icon: https://assets.datalayer.tech/datalayer-square.png

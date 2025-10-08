@@ -1,0 +1,13 @@
+apiVersion: v1
+description: Datalayer AI Inference
+name: datalayer-ai-inference
+version: 0.0.1
+appVersion: 0.0.1
+home: https://datalayer.ai
+sources:
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-ai-inference
+icon: https://assets.datalayer.tech/datalayer-square.png
+maintainers:
+- name: Datalayer
+  email: support@datalayer.io
+  url: https://datalayer.io

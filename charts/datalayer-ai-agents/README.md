@@ -2,13 +2,13 @@
 
 # datalayer-ai-agents
 
-Datalayer AI Agent
+Datalayer AI Agents
 
 ![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 ## Documentation
 
-For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
+For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 
 ## Values
 
@@ -16,7 +16,7 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 |-----|------|---------|-------------|
 | aiagents.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | aiagents.env.DATALAYER_AZURE_OPENAI_API_KEY | string | `""` |  |
-| aiagents.env.DATALAYER_AZURE_OPENAI_ENDPOINT | string | `""` |  |
+| aiagents.env.DATALAYER_AZURE_OPENAI_CHAT_COMPLETION_ENDPOINT | string | `""` |  |
 | aiagents.env.DATALAYER_CDN_URL | string | `""` |  |
 | aiagents.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
 | aiagents.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |

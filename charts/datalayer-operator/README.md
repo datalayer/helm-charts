@@ -4,30 +4,11 @@
 
 Datalayer Operator
 
-![Version: 1.0.17](https://img.shields.io/badge/Version-1.0.17-informational?style=flat-square) ![AppVersion: 1.0.19](https://img.shields.io/badge/AppVersion-1.0.19-informational?style=flat-square)
-
-## Security
-
-This Helm chart implements secure RBAC (Role-Based Access Control) practices:
-
-- **Dedicated ServiceAccount**: Uses a dedicated `datalayer-operator-sa` ServiceAccount instead of the default ServiceAccount, following CIS Kubernetes Benchmark 5.1.5
-- **Restricted Permissions**: Uses a custom ClusterRole with minimal required permissions instead of cluster-admin, following CIS Kubernetes Benchmark 5.1.1
-- **Least Privilege**: Grants only the necessary permissions for managing Jupyter workloads and custom resources
-
-### RBAC Configuration
-
-The operator requires the following permissions:
-- **Core resources**: pods, services, configmaps, secrets, persistentvolumeclaims, events
-- **Apps resources**: deployments, statefulsets, daemonsets, replicasets  
-- **Networking**: ingresses, networkpolicies
-- **Custom resources**: jupyterpools, jupyter-contents, jupyter-environments
-- **CRD management**: customresourcedefinitions
-- **Limited RBAC**: roles, rolebindings (for namespace-scoped permissions)
-- **Read-only access**: namespaces, nodes (for discovery and scheduling)
+![Version: 1.0.19](https://img.shields.io/badge/Version-1.0.19-informational?style=flat-square) ![AppVersion: 1.0.19](https://img.shields.io/badge/AppVersion-1.0.19-informational?style=flat-square)
 
 ## Documentation
 
-For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
+For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 
 ## Values
 
@@ -37,8 +18,6 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].operator | string | `"In"` |  |
 | operator.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].values[0] | string | `"true"` |  |
 | operator.crds | bool | `true` |  |
-| operator.rbac.create | bool | `true` | Create RBAC resources (ServiceAccount, ClusterRole, ClusterRoleBinding) |
-| operator.rbac.serviceAccountName | string | `"datalayer-operator-sa"` | Name of the ServiceAccount to create |
 | operator.env.AWS_ACCESS_KEY_ID | string | `""` |  |
 | operator.env.AWS_DEFAULT_REGION | string | `""` |  |
 | operator.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
@@ -65,6 +44,8 @@ For full documentation please checkout [Datalayer Tech](https://datalayer.tech).
 | operator.image | string | `"datalayer/operator:1.0.19"` |  |
 | operator.imagePullPolicy | string | `"Always"` |  |
 | operator.port | int | `2111` |  |
+| operator.rbac.create | bool | `true` |  |
+| operator.rbac.serviceAccountName | string | `"datalayer-operator-sa"` |  |
 | operator.sharedFsPVC | string | `""` |  |
 | operator.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
 | operator.tolerations | object | `{}` |  |

@@ -3,7 +3,7 @@ description: Datalayer Success
 name: datalayer-success
 version: 0.0.1
 appVersion: 0.0.1
-home: https://datalayer.tech
+home: https://datalayer.ai
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-success
 icon: https://assets.datalayer.tech/datalayer-square.png

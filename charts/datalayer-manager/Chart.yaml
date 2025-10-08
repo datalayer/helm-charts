@@ -3,7 +3,7 @@ description: Datalayer Manager
 name: datalayer-manager
 version: 0.0.2
 appVersion: 0.0.2
-home: https://datalayer.tech
+home: https://datalayer.ai
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-manager
 icon: https://assets.datalayer.tech/datalayer-square.png

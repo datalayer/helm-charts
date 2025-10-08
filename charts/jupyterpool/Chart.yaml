@@ -3,7 +3,7 @@ description: Jupyterpool
 name: jupyterpool
 version: 0.0.6
 appVersion: 0.0.6
-home: https://datalayer.tech
+home: https://datalayer.ai
 sources:
 - https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-jupyterpool
 icon: https://assets.datalayer.tech/datalayer-square.png

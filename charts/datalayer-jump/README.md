@@ -4,7 +4,7 @@
 
 Datalayer Jump
 
-**Homepage:** <https://datalayer.tech>
+**Homepage:** <https://datalayer.ai>
 
 ## Maintainers
 
