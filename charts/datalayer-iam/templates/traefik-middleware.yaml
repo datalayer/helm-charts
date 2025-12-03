@@ -10,4 +10,17 @@ spec:
     trustForwardHeader: true
     # authRequestHeaders:
     #   - "Authorization"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-root
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: iam
+spec:
+  redirectRegex:
+    regex: ^https://{{ template "iam.runHost" . }}/$
+    replacement: https://datalayer.ai
+    permanent: true
 {{- end }}
