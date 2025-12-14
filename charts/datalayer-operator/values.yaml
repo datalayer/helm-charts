@@ -5,7 +5,7 @@ operator:
     create: true
     # Name of the ServiceAccount to create
     serviceAccountName: "datalayer-operator-sa"
-  image: datalayer/operator:1.0.19
+  image: datalayer/operator:1.0.20
   sidecar:
     image: datalayer/whoami:0.0.6
   imagePullPolicy: Always
