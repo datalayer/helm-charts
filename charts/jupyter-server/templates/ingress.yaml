@@ -16,7 +16,6 @@ metadata:
     nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
     cert-manager.io/acme-challenge-type: http01
     cert-manager.io/cluster-issuer: letsencrypt
-    acme.cert-manager.io/http01-ingress-class: datalayer-traefik
     traefik.ingress.kubernetes.io/router.tls: 'true'
   labels:
     app: jupyter-server

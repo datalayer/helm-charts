@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: success-ingress
   annotations:
-    acme.cert-manager.io/http01-ingress-class: {{ .Values.success.ingressClass }}
     cert-manager.io/acme-challenge-type: http01
     cert-manager.io/cluster-issuer: {{ .Values.success.certificateIssuer }}
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'

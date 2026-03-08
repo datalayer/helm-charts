@@ -25,7 +25,6 @@ metadata:
 #      proxy_set_header X-Forwarded-Uri $scheme://$host$request_uri;
     cert-manager.io/acme-challenge-type: http01
     cert-manager.io/cluster-issuer: letsencrypt
-    acme.cert-manager.io/http01-ingress-class: datalayer-traefik
     traefik.ingress.kubernetes.io/router.tls: 'true'
 #    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-iam-auth@kubernetescrd
   labels:

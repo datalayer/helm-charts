@@ -42,7 +42,7 @@ spec:
   restartPolicy: OnFailure
   containers:
   - image: busybox:1.36.1-musl
-    name: prepare-cephfs
+    name: prepare-fs
     command:
     - /bin/sh
     - -x
