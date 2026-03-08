@@ -26,7 +26,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | operator.env.DATALAYER_CERT_ISSUER | string | `"letsencrypt"` |  |
 | operator.env.DATALAYER_DOCKER_REGISTRY | string | `""` |  |
 | operator.env.DATALAYER_IAM_API_KEY | string | `""` |  |
-| operator.env.DATALAYER_IAM_HOST | string | `"datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"` |  |
+| operator.env.DATALAYER_IAM_URL | string | `"http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"` |  |
 | operator.env.DATALAYER_INGRESS_CLASS_NAME | string | `"datalayer-traefik"` |  |
 | operator.env.DATALAYER_KAFKA_PASSWORD | string | `""` |  |
 | operator.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
@@ -36,6 +36,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | operator.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | operator.env.DATALAYER_RUNTIMES_RUN_HOOKS | string | `"false"` |  |
 | operator.env.DATALAYER_RUN_URL | string | `""` |  |
+| operator.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | operator.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | operator.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
 | operator.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |

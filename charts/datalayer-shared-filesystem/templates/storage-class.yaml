@@ -1,12 +1,6 @@
-{{ if eq .Values.sharedStorage.storageProvider "azure" }}
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: {{ include "sharedStorage.autoStorageClassName" . }}
-provisioner: file.csi.azure.com
-allowVolumeExpansion: true
-parameters:
-  shareName: {{ .Values.sharedStorage.shareName }}
-  skuName: Premium_LRS
-  protocol: nfs
-{{ end }}
+{{/*
+  Azure: StorageClass 'azure-nfs' is created during cluster setup (clouder kubeadm setup)
+  with the Azure subscription, resource group, and location baked in.
+  On AKS, create it manually or via a separate step before running plane up.
+  The helm chart only creates a StorageClass for the ceph provider.
+*/}}

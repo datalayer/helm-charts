@@ -54,7 +54,7 @@ tests:
                 value: ""
               - name: DATALAYER_IAM_API_KEY
                 value: ""
-              - name: DATALAYER_IAM_HOST
+              - name: DATALAYER_IAM_URL
                 value: datalayer-iam-svc.datalayer-api.svc.cluster.local:9700
               - name: DATALAYER_INGRESS_CLASS_NAME
                 value: datalayer-traefik

@@ -33,7 +33,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | runtimes.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | runtimes.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | runtimes.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
-| runtimes.env.DATALAYER_OPERATOR_HOST | string | `"datalayer-operator-svc.datalayer-runtimes.svc.cluster.local:2111"` |  |
+| runtimes.env.DATALAYER_OPERATOR_URL | string | `"http://datalayer-operator-svc.datalayer-runtimes.svc.cluster.local:2111"` |  |
 | runtimes.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
 | runtimes.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | runtimes.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
