@@ -55,6 +55,11 @@ rules:
   resources: ["jupyterpools", "jupyter-contents", "jupyter-environments"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 
+# Datashim datasets for S3 content mounting
+- apiGroups: ["datashim.io"]
+  resources: ["datasets"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
 # RBAC resources for managing service accounts and role bindings in specific namespaces
 - apiGroups: ["rbac.authorization.k8s.io"]
   resources: ["roles", "rolebindings"]
