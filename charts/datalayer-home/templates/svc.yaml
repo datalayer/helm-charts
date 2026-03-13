@@ -1,0 +1,5 @@
+{{/*
+No service needed — the ingress backend points directly to the IAM service
+(datalayer-iam-svc) which exists in the same namespace. The Traefik redirect-root
+middleware intercepts the request before it ever reaches the backend.
+*/}}

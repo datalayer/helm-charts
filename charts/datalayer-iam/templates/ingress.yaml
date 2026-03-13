@@ -2,34 +2,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: iam-root-redirect
-  annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: datalayer-api-redirect-root@kubernetescrd
-    nginx.ingress.kubernetes.io/permanent-redirect: https://datalayer.ai
-    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
-  labels:
-    app: iam
-spec:
-  ingressClassName: {{ .Values.iam.ingressClass }}
-  tls:
-  - hosts:
-    - {{ template "iam.runHost" . }}
-    secretName: {{ template "iam.runHost" . }}-datalayer-api-cert-secret
-  rules:
-  - host: {{ template "iam.runHost" . }}
-    http:
-      paths:
-      - path: /
-        pathType: Exact
-        backend:
-          service:
-            name: {{ .Release.Name }}-svc
-            port: 
-              number: {{ .Values.iam.port }}
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
   name: iam-ingress
   annotations:
     cert-manager.io/acme-challenge-type: http01

@@ -50,6 +50,12 @@ spec:
             - name: 'DATALAYER_SHARED_FS_VOLUME_CLAIM_NAME'
               value: {{ .Values.operator.sharedFsPVC }}
             {{- end }}
+            {{- if and .Values.operator.kubeletCerts.cert .Values.operator.kubeletCerts.key }}
+            - name: KUBELET_CLIENT_CERT
+              value: "{{ .Values.operator.kubeletCerts.mountPath }}/tls.crt"
+            - name: KUBELET_CLIENT_KEY
+              value: "{{ .Values.operator.kubeletCerts.mountPath }}/tls.key"
+            {{- end }}
             {{- range $key, $value := .Values.operator.env }}
             - name: {{ $key }}
               {{- if kindIs "map" $value }}
@@ -70,11 +76,16 @@ spec:
           {{- with .Values.operator.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if or .Values.operator.sharedFsPVC .Values.operator.volumeMounts }}
+          {{- if or .Values.operator.sharedFsPVC .Values.operator.volumeMounts (and .Values.operator.kubeletCerts.cert .Values.operator.kubeletCerts.key) }}
           volumeMounts:
             {{- if .Values.operator.sharedFsPVC }}
             - name: "shared-fs-data"
               mountPath: "/mnt/shared-fs"
+            {{- end }}
+            {{- if and .Values.operator.kubeletCerts.cert .Values.operator.kubeletCerts.key }}
+            - name: kubelet-certs
+              mountPath: {{ .Values.operator.kubeletCerts.mountPath }}
+              readOnly: true
             {{- end }}
             {{- with .Values.operator.volumeMounts }}
             {{- toYaml . | nindent 12 }}
@@ -84,10 +95,17 @@ spec:
 #          image: {{ .Values.operator.sidecar.image }}
 #          imagePullPolicy: {{ .Values.operator.imagePullPolicy }}
 #          args: ["proxy", "-p", "8001"]
-      {{- if .Values.operator.sharedFsPVC }}
+      {{- if or .Values.operator.sharedFsPVC (and .Values.operator.kubeletCerts.cert .Values.operator.kubeletCerts.key) }}
       volumes:
+        {{- if .Values.operator.sharedFsPVC }}
         - name: "shared-fs-data"
           persistentVolumeClaim:
             claimName: {{ .Values.operator.sharedFsPVC }}
             readOnly: False
+        {{- end }}
+        {{- if and .Values.operator.kubeletCerts.cert .Values.operator.kubeletCerts.key }}
+        - name: kubelet-certs
+          secret:
+            secretName: {{ .Release.Name }}-kubelet-certs
+        {{- end }}
       {{- end }}

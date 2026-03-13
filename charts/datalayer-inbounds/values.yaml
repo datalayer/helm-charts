@@ -61,9 +61,12 @@ inbounds:
     DATALAYER_VAULT_URL: "http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"
     DATALAYER_BLUESKY_API_KEY: ""
     DATALAYER_BLUESKY_API_SECRET: ""
-    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
-    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
+    OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: "http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"
+    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: "http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"
+    DATALAYER_OTEL_API_KEY: ""
     OTEL_SDK_DISABLED: "false"
+    OTEL_PYTHON_LOG_LEVEL: "info"
   tolerations: {}
 #  resources:
 #    limits:

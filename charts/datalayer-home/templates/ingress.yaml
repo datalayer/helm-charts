@@ -1,0 +1,29 @@
+{{ if eq .Values.home.clusterType "any" -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: home-root-redirect
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-redirect-root@kubernetescrd
+    nginx.ingress.kubernetes.io/permanent-redirect: {{ .Values.home.redirectUrl }}
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+  labels:
+    app: home
+spec:
+  ingressClassName: {{ .Values.home.ingressClass }}
+  tls:
+  - hosts:
+    - {{ template "home.runHost" . }}
+    secretName: {{ template "home.runHost" . }}-datalayer-api-cert-secret
+  rules:
+  - host: {{ template "home.runHost" . }}
+    http:
+      paths:
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: datalayer-iam-svc
+            port: 
+              number: 9700
+{{- end }}

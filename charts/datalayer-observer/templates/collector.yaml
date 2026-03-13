@@ -141,10 +141,16 @@ spec:
         endpoint: 0.0.0.0:8889
         # namespace: default
 
+      # Data sources: traces → Tempo
       otlp:
         endpoint: {{ default .Values.observer.namespace .Release.Namespace }}-tempo:4317
         tls:
           insecure: true
+
+      # Data sources: logs → Loki (OTLP/HTTP ingestion)
+      # https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
+      otlphttp/loki:
+        logs_endpoint: http://{{ default .Values.observer.namespace .Release.Namespace }}-loki.{{ default .Values.observer.namespace .Release.Namespace }}.svc.cluster.local:3100/otlp/v1/logs
 
     extensions:
       # https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckextension
@@ -165,4 +171,8 @@ spec:
           receivers: [otlp]
           processors: [memory_limiter, k8sattributes, transform, batch]
           exporters: [prometheus]
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, k8sattributes, resource, batch]
+          exporters: [otlphttp/loki]
 {{- end }}

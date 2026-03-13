@@ -29,6 +29,14 @@ rules:
 - apiGroups: [""]
   resources: ["events"]
   verbs: ["create", "patch"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get"]
+
+# Batch resources for CRIU checkpoint/restore helper Jobs
+- apiGroups: ["batch"]
+  resources: ["jobs", "jobs/status"]
+  verbs: ["get", "list", "watch", "create", "delete"]
 
 # Apps resources for managing deployments, statefulsets, etc.
 - apiGroups: ["apps"]

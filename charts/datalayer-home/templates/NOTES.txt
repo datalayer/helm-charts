@@ -1,0 +1,3 @@
+Datalayer Home has been installed.
+
+It redirects the root URL (/) of https://{{ template "home.runHost" . }} to {{ .Values.home.redirectUrl }}.

@@ -42,9 +42,23 @@ operator:
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
     DATALAYER_VAULT_TOKEN: ""
     DATALAYER_VAULT_URL: "http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"
-    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: ""
-    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: ""
+    # CRIU checkpoint/restore configuration
+    DATALAYER_CRIU_HELPER_IMAGE: "datalayer/criu-helper:0.0.1"
+    DATALAYER_S3_CHECKPOINT_URL: "https://s3.us-west-2.amazonaws.com"
+    # OTEL configuration
+    OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: "https://prod1.datalayer.run/api/otel/v1/otlp/v1/logs"
+    OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: "https://prod1.datalayer.run/api/otel/v1/otlp/v1/metrics"
+    OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "https://prod1.datalayer.run/api/otel/v1/otlp/v1/traces"
+    OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
+    DATALAYER_OTEL_API_KEY: ""
     OTEL_SDK_DISABLED: "false"
+    OTEL_PYTHON_LOG_LEVEL: "info"
   tolerations: {}
   volumeMounts: {}
   sharedFsPVC: ""
+  # Kubelet client certificates (PEM content, set via --set-file in up.sh).
+  # When provided, a Secret is created and mounted at /etc/kubelet-certs/.
+  kubeletCerts:
+    cert: ""
+    key: ""
+    mountPath: /etc/kubelet-certs

@@ -1,0 +1,14 @@
+{{- if eq .Values.home.ingressClass "datalayer-traefik" }}
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-root
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: home
+spec:
+  redirectRegex:
+    regex: ^https://{{ template "home.runHost" . }}/$
+    replacement: {{ .Values.home.redirectUrl }}
+    permanent: true
+{{- end }}
