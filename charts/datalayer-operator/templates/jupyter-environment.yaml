@@ -38,6 +38,10 @@ spec:
                 dockerImage:
                   type: string
                   title: Environment docker image
+                icon:
+                  type: string
+                  title: Environment icon key
+                  description: "Optional icon slug. Example: ai-agent resolves to AiAgentIcon from @datalayer/icons-react."
                 env:
                   type: array
                   items:

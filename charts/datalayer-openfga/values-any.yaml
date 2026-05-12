@@ -1,4 +1,55 @@
 nodeSelector:
-  role.datalayer.io/system: "true"
+  role.datalayer.io/api: "true"
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: role.datalayer.io/api
+              operator: In
+              values:
+                - "true"
+
 experimentals:
-  - enable-list-users
+  - enable-list-objects-optimizations
+
+# Run schema migrations as an init container so OpenFGA pods always
+# come up against an up-to-date datastore (avoids broken hook-job flow).
+datastore:
+  engine: postgres
+  applyMigrations: true
+  migrationType: initContainer
+  waitForMigrations: false
+
+mysql:
+  enabled: false
+
+# Use the bundled Bitnami postgresql subchart.
+# NOTE: Bitnami moved legacy free tags from `bitnami/*` to `bitnamilegacy/*`
+# on Docker Hub (Aug 2025); pin to a tag that still exists there.
+postgresql:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/postgresql
+    tag: 15.4.0-debian-11-r45
+  auth:
+    username: postgres
+    password: password
+    postgresPassword: password
+    database: postgres
+  primary:
+    persistence:
+      enabled: true
+      size: 8Gi
+    nodeSelector:
+      role.datalayer.io/api: "true"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: role.datalayer.io/api
+                  operator: In
+                  values:
+                    - "true"

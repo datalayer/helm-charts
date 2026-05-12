@@ -50,6 +50,8 @@ spec:
             - name: 'DATALAYER_SHARED_FS_VOLUME_CLAIM_NAME'
               value: {{ .Values.operator.sharedFsPVC }}
             {{- end }}
+            - name: DATALAYER_OPERATOR_SERVICE_ACCOUNT
+              value: {{ .Values.operator.rbac.serviceAccountName | quote }}
             {{- if and .Values.operator.kubeletCerts.cert .Values.operator.kubeletCerts.key }}
             - name: KUBELET_CLIENT_CERT
               value: "{{ .Values.operator.kubeletCerts.mountPath }}/tls.crt"

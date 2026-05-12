@@ -83,6 +83,11 @@ rules:
   resources: ["nodes"]
   verbs: ["get", "list", "watch"]
 
+# Required for service-account based kubelet checkpoint auth.
+- apiGroups: [""]
+  resources: ["nodes/checkpoint"]
+  verbs: ["create"]
+
 # Metrics access for monitoring
 - apiGroups: ["metrics.k8s.io"]
   resources: ["pods", "nodes"]

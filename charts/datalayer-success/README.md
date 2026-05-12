@@ -57,7 +57,8 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | success.env.DATALAYER_STRIPE_API_KEY | string | `""` |  |
 | success.env.DATALAYER_STRIPE_CHECKOUT_ROUTE | string | `"checkout"` |  |
 | success.env.DATALAYER_STRIPE_JS_API_KEY | string | `""` |  |
-| success.env.DATALAYER_STRIPE_PRODUCT_ID | string | `""` |  |
+| success.env.DATALAYER_STRIPE_TOPUP_PRODUCT_ID | string | `""` |  |
+| success.env.DATALAYER_STRIPE_SUBSCRIPTION_PRODUCT_ID | string | `""` |  |
 | success.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
 | success.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | success.env.DATALAYER_Success_API_KEY | string | `""` |  |
