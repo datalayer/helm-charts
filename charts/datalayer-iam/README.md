@@ -60,8 +60,9 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | iam.env.DATALAYER_STRIPE_API_KEY | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_CHECKOUT_ROUTE | string | `"checkout"` |  |
 | iam.env.DATALAYER_STRIPE_JS_API_KEY | string | `""` |  |
-| iam.env.DATALAYER_STRIPE_TOPUP_PRODUCT_ID | string | `""` |  |
-| iam.env.DATALAYER_STRIPE_SUBSCRIPTION_PRODUCT_ID | string | `""` |  |
+| iam.env.DATALAYER_STRIPE_TOPUP_PRICE_LOOKUP_KEYS | string | `""` |  |
+| iam.env.DATALAYER_STRIPE_TEAM_PLAN_PRICE_LOOKUP_KEY | string | `""` |  |
+| iam.env.DATALAYER_STRIPE_ORGANIZATION_SEAT_PRICE_LOOKUP_KEY | string | `""` |  |
 | iam.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
 | iam.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | iam.env.DATALAYER_VAULT_TOKEN | string | `""` |  |

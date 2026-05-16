@@ -116,9 +116,11 @@ tests:
                 value: checkout
               - name: DATALAYER_STRIPE_JS_API_KEY
                 value: ""
-              - name: DATALAYER_STRIPE_TOPUP_PRODUCT_ID
+              - name: DATALAYER_STRIPE_TOPUP_PRICE_LOOKUP_KEYS
                 value: ""
-              - name: DATALAYER_STRIPE_SUBSCRIPTION_PRODUCT_ID
+              - name: DATALAYER_STRIPE_TEAM_PLAN_PRICE_LOOKUP_KEY
+                value: ""
+              - name: DATALAYER_STRIPE_ORGANIZATION_SEAT_PRICE_LOOKUP_KEY
                 value: ""
               - name: DATALAYER_STRIPE_WEBHOOK_SECRET
                 value: ""

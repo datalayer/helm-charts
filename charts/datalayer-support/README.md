@@ -57,8 +57,9 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | support.env.DATALAYER_STRIPE_API_KEY | string | `""` |  |
 | support.env.DATALAYER_STRIPE_CHECKOUT_ROUTE | string | `"checkout"` |  |
 | support.env.DATALAYER_STRIPE_JS_API_KEY | string | `""` |  |
-| support.env.DATALAYER_STRIPE_TOPUP_PRODUCT_ID | string | `""` |  |
-| support.env.DATALAYER_STRIPE_SUBSCRIPTION_PRODUCT_ID | string | `""` |  |
+| support.env.DATALAYER_STRIPE_TOPUP_PRICE_LOOKUP_KEYS | string | `""` |  |
+| support.env.DATALAYER_STRIPE_TEAM_PLAN_PRICE_LOOKUP_KEY | string | `""` |  |
+| support.env.DATALAYER_STRIPE_ORGANIZATION_SEAT_PRICE_LOOKUP_KEY | string | `""` |  |
 | support.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
 | support.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | support.env.DATALAYER_Support_API_KEY | string | `""` |  |
