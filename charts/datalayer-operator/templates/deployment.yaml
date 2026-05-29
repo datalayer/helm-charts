@@ -23,6 +23,9 @@ spec:
         karpenter.sh/do-not-disrupt: "true"      
     spec:
       serviceAccountName: {{ .Values.operator.rbac.serviceAccountName }}
+      # NOTE (for later): if operator auth falls back to anonymous, consider
+      # re-enabling service account token automount.
+      # automountServiceAccountToken: true
       terminationGracePeriodSeconds: 0
       {{- with .Values.operator.affinity }}
       affinity: {{- toYaml . | nindent 8 }}

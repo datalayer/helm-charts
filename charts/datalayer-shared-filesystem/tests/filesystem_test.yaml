@@ -1,7 +1,7 @@
-suite: test shared-storage assets
+suite: test datalayer-shared-filesystem assets
 templates:
   - templates/_helpers.yaml
-  - templates/shared-storage.yaml
+  - templates/datalayer-shared-filesystem.yaml
   - templates/storage-class.yaml
 tests:
   - it: check azure storage class
@@ -23,7 +23,7 @@ tests:
   - it: check azure provider PVC
     set:
       sharedStorage.storageProvider: azure
-    template: templates/shared-storage.yaml
+    template: templates/datalayer-shared-filesystem.yaml
     documentIndex: 0
     asserts:
       - equal:
@@ -48,7 +48,7 @@ tests:
   - it: check default ceph provider PVC
     set:
       sharedStorage.storageProvider: ceph
-    template: templates/shared-storage.yaml
+    template: templates/datalayer-shared-filesystem.yaml
     documentIndex: 0
     asserts:
       - isSubset:

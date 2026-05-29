@@ -27,10 +27,13 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | aiinference.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | aiinference.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | aiinference.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
+| aiinference.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | aiinference.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | aiinference.env.DATALAYER_RUN_URL | string | `""` |  |
-| aiinference.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
-| aiinference.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| aiinference.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| aiinference.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| aiinference.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| aiinference.env.OTEL_PYTHON_LOG_LEVEL | string | `"info"` |  |
 | aiinference.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | aiinference.image | string | `"datalayer/ai-inference:0.0.1"` |  |
 | aiinference.imagePullPolicy | string | `"Always"` |  |

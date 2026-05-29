@@ -1,13 +1,28 @@
-# Datalayer Home Helm Chart
+# datalayer-home
 
-This chart deploys the root redirect for the Datalayer platform, sending `/` requests to [datalayer.ai](https://datalayer.ai).
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
-## Configuration
+Datalayer Home - Root redirect to datalayer.ai
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `home.clusterType` | Cluster type (`any` to enable) | `any` |
-| `home.certificateIssuer` | Cert-manager issuer | `letsencrypt` |
-| `home.ingressClass` | Ingress class | `datalayer-traefik` |
-| `home.redirectUrl` | URL to redirect `/` to | `https://datalayer.ai` |
-| `home.env.DATALAYER_RUN_URL` | The run URL (host is derived from this) | `""` |
+**Homepage:** <https://datalayer.ai>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
+
+## Source Code
+
+* <https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-home>
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| home.certificateIssuer | string | `"letsencrypt"` |  |
+| home.clusterType | string | `"any"` |  |
+| home.env.DATALAYER_RUN_URL | string | `""` |  |
+| home.ingressClass | string | `"datalayer-traefik"` |  |
+| home.redirectUrl | string | `"https://datalayer.ai"` |  |
+

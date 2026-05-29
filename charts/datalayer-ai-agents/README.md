@@ -14,6 +14,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| aiagents.env.DATALAYER_AGENT_RUNTIMES_URL | string | `""` |  |
 | aiagents.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | aiagents.env.DATALAYER_AZURE_OPENAI_API_KEY | string | `""` |  |
 | aiagents.env.DATALAYER_AZURE_OPENAI_CHAT_COMPLETION_ENDPOINT | string | `""` |  |
@@ -27,10 +28,13 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | aiagents.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | aiagents.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | aiagents.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
+| aiagents.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | aiagents.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | aiagents.env.DATALAYER_RUN_URL | string | `""` |  |
-| aiagents.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
-| aiagents.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| aiagents.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| aiagents.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| aiagents.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| aiagents.env.OTEL_PYTHON_LOG_LEVEL | string | `"info"` |  |
 | aiagents.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | aiagents.image | string | `"datalayer/ai-agents:0.0.1"` |  |
 | aiagents.imagePullPolicy | string | `"Always"` |  |

@@ -43,6 +43,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | inbounds.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | inbounds.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | inbounds.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
+| inbounds.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | inbounds.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
 | inbounds.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | inbounds.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
@@ -59,8 +60,10 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | inbounds.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | inbounds.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | inbounds.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
-| inbounds.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
-| inbounds.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| inbounds.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| inbounds.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| inbounds.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| inbounds.env.OTEL_PYTHON_LOG_LEVEL | string | `"info"` |  |
 | inbounds.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | inbounds.image | string | `"datalayer/inbounds:0.0.1"` |  |
 | inbounds.imagePullPolicy | string | `"Always"` |  |

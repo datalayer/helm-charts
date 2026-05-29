@@ -27,6 +27,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | manager.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | manager.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | manager.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
+| manager.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | manager.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | manager.env.DATALAYER_RUN_URL | string | `""` |  |
 | manager.env.DATALAYER_SMTP_HOST | string | `""` |  |
@@ -34,8 +35,10 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | manager.env.DATALAYER_SMTP_PORT | string | `""` |  |
 | manager.env.DATALAYER_SMTP_USERNAME | string | `""` |  |
 | manager.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
-| manager.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
-| manager.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| manager.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| manager.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| manager.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| manager.env.OTEL_PYTHON_LOG_LEVEL | string | `"info"` |  |
 | manager.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | manager.image | string | `"datalayer/manager:0.0.2"` |  |
 | manager.imagePullPolicy | string | `"Always"` |  |

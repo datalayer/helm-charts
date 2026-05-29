@@ -27,10 +27,13 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | mcpservers.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | mcpservers.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | mcpservers.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
+| mcpservers.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | mcpservers.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | mcpservers.env.DATALAYER_RUN_URL | string | `""` |  |
-| mcpservers.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
-| mcpservers.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| mcpservers.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| mcpservers.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| mcpservers.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |
+| mcpservers.env.OTEL_PYTHON_LOG_LEVEL | string | `"info"` |  |
 | mcpservers.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | mcpservers.image | string | `"datalayer/mcp-servers:0.0.1"` |  |
 | mcpservers.imagePullPolicy | string | `"Always"` |  |

@@ -34,6 +34,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | runtimes.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | runtimes.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
 | runtimes.env.DATALAYER_OPERATOR_URL | string | `"http://datalayer-operator-svc.datalayer-runtimes.svc.cluster.local:2111"` |  |
+| runtimes.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | runtimes.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
 | runtimes.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | runtimes.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
@@ -43,8 +44,11 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | runtimes.env.DATALAYER_SOLR_USERNAME.secretKeyRef.key | string | `"username"` |  |
 | runtimes.env.DATALAYER_SOLR_USERNAME.secretKeyRef.name | string | `"solr-basic-auth"` |  |
 | runtimes.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
-| runtimes.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `""` |  |
-| runtimes.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `""` |  |
+| runtimes.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT | string | `"https://prod1.datalayer.run/api/otel/v1/otlp/v1/logs"` |  |
+| runtimes.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT | string | `"https://prod1.datalayer.run/api/otel/v1/otlp/v1/metrics"` |  |
+| runtimes.env.OTEL_EXPORTER_OTLP_PROTOCOL | string | `"http/protobuf"` |  |
+| runtimes.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT | string | `"https://prod1.datalayer.run/api/otel/v1/otlp/v1/traces"` |  |
+| runtimes.env.OTEL_PYTHON_LOG_LEVEL | string | `"info"` |  |
 | runtimes.env.OTEL_SDK_DISABLED | string | `"false"` |  |
 | runtimes.image | string | `"datalayer/runtimes:1.0.9"` |  |
 | runtimes.imagePullPolicy | string | `"Always"` |  |
