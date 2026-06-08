@@ -14,6 +14,9 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| manager.affinity | object | `{}` |  |
+| manager.certificateIssuer | string | `"letsencrypt"` |  |
+| manager.clusterType | string | `"any"` |  |
 | manager.env.AWS_ACCESS_KEY_ID | string | `""` |  |
 | manager.env.AWS_DEFAULT_REGION | string | `""` |  |
 | manager.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
@@ -43,6 +46,10 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | manager.image | string | `"datalayer/manager:0.0.2"` |  |
 | manager.imagePullPolicy | string | `"Always"` |  |
 | manager.ingress | bool | `false` |  |
+| manager.ingressClass | string | `"datalayer-traefik"` |  |
+| manager.ingressPathPrefix | string | `"/api/manager"` |  |
 | manager.port | int | `9300` |  |
+| manager.resources | object | `{}` |  |
 | manager.sidecar.image | string | `"datalayer/whoami:0.0.6"` |  |
+| manager.tolerations | object | `{}` |  |
 

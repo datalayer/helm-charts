@@ -15,16 +15,16 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | aiinference.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
+| aiinference.env.DATALAYER_AZURE_OPENAI_API_KEY | string | `""` |  |
+| aiinference.env.DATALAYER_AZURE_OPENAI_CHAT_COMPLETION_ENDPOINT | string | `""` |  |
 | aiinference.env.DATALAYER_BEDROCK_AWS_ACCESS_KEY_ID | string | `""` |  |
 | aiinference.env.DATALAYER_BEDROCK_AWS_DEFAULT_REGION | string | `""` |  |
 | aiinference.env.DATALAYER_BEDROCK_AWS_SECRET_ACCESS_KEY | string | `""` |  |
 | aiinference.env.DATALAYER_BEDROCK_MODEL | string | `""` |  |
-| aiinference.env.DATALAYER_INFERENCE_MODEL | string | `""` |  |
-| aiinference.env.DATALAYER_INFERENCE_PROVIDER | string | `"bedrock"` |  |
-| aiinference.env.DATALAYER_AZURE_OPENAI_API_KEY | string | `""` |  |
-| aiinference.env.DATALAYER_AZURE_OPENAI_CHAT_COMPLETION_ENDPOINT | string | `""` |  |
 | aiinference.env.DATALAYER_CDN_URL | string | `""` |  |
 | aiinference.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
+| aiinference.env.DATALAYER_INFERENCE_MODEL | string | `""` |  |
+| aiinference.env.DATALAYER_INFERENCE_PROVIDER | string | `"bedrock"` |  |
 | aiinference.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | aiinference.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | aiinference.env.DATALAYER_JWT_ISSUER | string | `""` |  |

@@ -1,17 +1,57 @@
 # datalayer-ray
 
-Helm chart deploying:
+![Version: 0.0.1](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
-- `datalayer-ray` addon API service
-- KubeRay operator (dependency, optional but enabled by default)
-- Optional default `RayCluster` bootstrap object
+Datalayer Ray addon + KubeRay operator integration
 
-## Notes
+**Homepage:** <https://datalayer.ai>
 
-- The chart creates RBAC for Ray CRDs and Kubernetes resources needed for job monitoring (`pods`, `pods/log`, `events`).
-- Health probes are enabled on `/healthz`.
-- Authentication is enforced by the addon on all API endpoints except `/healthz`.
-- Configure authentication environment variables through `ray.env` / `ray.envValueFrom` (for example JWT/IAM-related settings in your cluster).
-- Ingress supports cert-manager TLS using `ray.certificateIssuer`, with TLS secret defaulting to `<release>-cert-secret`.
-- `plane up datalayer-ray` derives ingress host from `DATALAYER_RUN_URL`.
-- Bootstrap RayCluster worker autoscaling is enabled by default via `spec.enableInTreeAutoscaling=true` with worker bounds from `bootstrapRayCluster.worker.minReplicas` and `bootstrapRayCluster.worker.maxReplicas`.
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Datalayer | <support@datalayer.io> | <https://datalayer.io> |
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://ray-project.github.io/kuberay-helm/ | kuberay-operator | 1.3.2 |
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| bootstrapRayCluster.autoscaling.enabled | bool | `true` |  |
+| bootstrapRayCluster.enabled | bool | `false` |  |
+| bootstrapRayCluster.image | string | `"rayproject/ray:2.38.0"` |  |
+| bootstrapRayCluster.name | string | `"raycluster"` |  |
+| bootstrapRayCluster.namespace | string | `"default"` |  |
+| bootstrapRayCluster.rayVersion | string | `"2.38.0"` |  |
+| bootstrapRayCluster.worker.maxReplicas | int | `3` |  |
+| bootstrapRayCluster.worker.minReplicas | int | `1` |  |
+| bootstrapRayCluster.worker.replicas | int | `1` |  |
+| kuberayOperator.enabled | bool | `true` |  |
+| namespace | string | `"datalayer-api"` |  |
+| ray.certificateIssuer | string | `"letsencrypt"` |  |
+| ray.env.DATALAYER_RAY_PUBLIC_URL | string | `"http://datalayer-ray-svc.datalayer-api.svc.cluster.local:4460"` |  |
+| ray.env.DATALAYER_RUNTIMES_API_KEY | string | `""` |  |
+| ray.env.DATALAYER_RUNTIMES_SERVICE_URL | string | `"https://r1.datalayer.run"` |  |
+| ray.envValueFrom | object | `{}` |  |
+| ray.image | string | `"datalayer/ray:0.0.1"` |  |
+| ray.imagePullPolicy | string | `"Always"` |  |
+| ray.ingress.className | string | `"traefik"` |  |
+| ray.ingress.enabled | bool | `false` |  |
+| ray.ingress.host | string | `"ray.local"` |  |
+| ray.ingress.tlsSecretName | string | `""` |  |
+| ray.port | int | `4460` |  |
+| ray.registryCredentialsSecret | string | `"reg-creds"` |  |
+| ray.replicas | int | `1` |  |
+| ray.resources.limits.cpu | string | `"1000m"` |  |
+| ray.resources.limits.memory | string | `"1Gi"` |  |
+| ray.resources.requests.cpu | string | `"250m"` |  |
+| ray.resources.requests.memory | string | `"256Mi"` |  |
+| ray.serviceAccount.create | bool | `true` |  |
+| ray.serviceAccount.name | string | `""` |  |
+| ray.serviceType | string | `"ClusterIP"` |  |
+
