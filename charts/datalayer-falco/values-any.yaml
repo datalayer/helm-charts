@@ -3,7 +3,7 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: role.datalayer.io/jupyter
+        - key: role.datalayer.io/runtime
           operator: In
           values:
           - "true"
@@ -32,7 +32,7 @@ falco:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
-          - key: role.datalayer.io/jupyter
+          - key: role.datalayer.io/runtime
             operator: In
             values:
             - "true"
@@ -42,7 +42,7 @@ falcoctl:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
-          - key: role.datalayer.io/jupyter
+          - key: role.datalayer.io/runtime
             operator: In
             values:
             - "true"

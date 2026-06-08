@@ -1,0 +1,4 @@
+namespace: datalayer-api
+ray:
+  ingress:
+    enabled: false

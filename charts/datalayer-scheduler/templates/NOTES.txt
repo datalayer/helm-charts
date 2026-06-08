@@ -1,0 +1,2 @@
+Datalayer Scheduler deployed.
+Service URL: http://{{ .Release.Name }}-svc:{{ .Values.scheduler.port }}/api/scheduler/v1/ping

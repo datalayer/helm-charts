@@ -11,7 +11,13 @@ tls:
 components:
   functions: false
   toolset: false
-  proxy: false
+  # The Pulsar Proxy provides a single stable endpoint that hides broker
+  # topology from clients. It correctly handles namespace bundle ownership
+  # lookups, so consumers/producers never need to talk directly to a
+  # specific broker pod. Required for local development (where kubectl
+  # port-forward cannot reach more than one broker) and used in production
+  # as the canonical entrypoint for in-cluster services as well.
+  proxy: true
   pulsar_manager: false
 kube-prometheus-stack:
   enabled: false
@@ -32,6 +38,15 @@ broker:
   nodeSelector:
     role.datalayer.io/system: "true"
 proxy:
+  service:
+    annotations: {}
+    # Keep proxy reachable in-cluster and through kubectl port-forward.
+    type: ClusterIP
+  ports:
+    http: 80
+    https: 443
+    pulsar: 6650
+    pulsarssl: 6651
   podMonitor:
     enabled: false
   nodeSelector:

@@ -44,6 +44,11 @@ spec:
         - name: operator
           image: {{ .Values.operator.image }}
           imagePullPolicy: {{ .Values.operator.imagePullPolicy }}
+          {{- if .Values.operator.cloudCredentials.enabled }}
+          envFrom:
+            - secretRef:
+                name: {{ include "operator.cloud-credentials-secret-name" . }}
+          {{- end }}
           ports:
             - containerPort: {{ .Values.operator.port }}
               protocol: TCP
@@ -61,13 +66,22 @@ spec:
             - name: KUBELET_CLIENT_KEY
               value: "{{ .Values.operator.kubeletCerts.mountPath }}/tls.key"
             {{- end }}
+            - name: DATALAYER_CLOUDER_CLUSTER_NAME
+              value: {{ (index .Values.operator.env "DATALAYER_CLOUDER_CLUSTER_NAME" | default "") | quote }}
             {{- range $key, $value := .Values.operator.env }}
+            {{- if eq $key "DATALAYER_CLOUDER_CLUSTER_NAME" }}
+            {{- else }}
+            {{- $isCloudCredentialKey := or (eq $key "AWS_ACCESS_KEY_ID") (eq $key "AWS_DEFAULT_REGION") (eq $key "AWS_SECRET_ACCESS_KEY") (eq $key "AZURE_TENANT_ID") (eq $key "AZURE_CLIENT_ID") (eq $key "AZURE_CLIENT_SECRET") (eq $key "AZURE_SUBSCRIPTION_ID") (eq $key "AZURE_RESOURCE_GROUP") }}
+            {{- if and $.Values.operator.cloudCredentials.enabled $isCloudCredentialKey }}
+            {{- else }}
             - name: {{ $key }}
               {{- if kindIs "map" $value }}
               valueFrom: {{- $value | toYaml | nindent 16}}
               {{- else }}
               value: {{ $value | quote }}
               {{- end }}
+            {{- end }}
+            {{- end }}
             {{- end }}
           {{- end }}
           readinessProbe:

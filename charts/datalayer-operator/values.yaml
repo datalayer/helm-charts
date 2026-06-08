@@ -5,6 +5,8 @@ operator:
     create: true
     # Name of the ServiceAccount to create
     serviceAccountName: "datalayer-operator-sa"
+    # Optional annotations (for example Azure Workload Identity binding).
+    annotations: {}
   image: datalayer/operator:1.0.20
   sidecar:
     image: datalayer/whoami:0.0.6
@@ -35,11 +37,42 @@ operator:
     DATALAYER_KAFKA_URL: "datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"
     DATALAYER_KAFKA_USERNAME: ""
     DATALAYER_OPERATOR_API_KEY: ""
-    DATALAYER_PUB_SUB_ENGINE: "kafka"
+    DATALAYER_PUB_SUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUNTIMES_RUN_HOOKS: "false"
     DATALAYER_RUN_URL: ""
-    DATALAYER_SOLR_CHECKPOINT_COLLECTION: "runtimes-checkpoints"
+    # Scaling configuration
+    AGENT_OP_FEATURES: ""
+    DATALAYER_SCALING_STRATEGY: "simple"
+    DATALAYER_SCALING_DRY_RUN: "true"
+    DATALAYER_SCALING_MIN_NODES: "0"
+    DATALAYER_SCALING_MAX_NODES: "100"
+    DATALAYER_SCALING_TICK_INTERVAL_SECONDS: "5"
+    DATALAYER_SCALING_PRESSURE_SCALE_UP_THRESHOLD: "1"
+    DATALAYER_SCALING_PRESSURE_SCALE_DOWN_THRESHOLD: "0"
+    DATALAYER_SCALING_SCALE_DOWN_MAX_STEP: "1"
+    DATALAYER_SCALING_SCALE_DOWN_HEADROOM_MULTIPLIER: "2"
+    DATALAYER_SCALING_COOLDOWN_SECONDS: "30"
+    DATALAYER_SCALING_EVENT_DEDUP_SECONDS: "5"
+    DATALAYER_SCALING_HISTORY_MAX_EVENTS: "512"
+    DATALAYER_SCALING_EVENTS_TOPIC: "operator-scaling-events-topic"
+    DATALAYER_SCALING_COMMANDS_TOPIC: "operator-scaling-commands-topic"
+    DATALAYER_SCALING_COMMANDS_DLQ_TOPIC: "operator-scaling-commands-dlq-topic"
+    DATALAYER_SCALING_COMMANDS_SUBSCRIPTION: "datalayer-operator-scaling"
+    DATALAYER_SCALING_COMMANDS_MAX_REDELIVERIES: "5"
+    DATALAYER_SCALING_COMMANDS_RETRY_DELAY_SECONDS: "5"
+    DATALAYER_SCALING_MIN_HEADROOM_CPU_MILLIS: "1000"
+    DATALAYER_SCALING_MIN_HEADROOM_MEMORY_MB: "1024"
+    # Clouder scaling executor configuration (always Python mode)
+    DATALAYER_CLOUDER_CLUSTER_NAME: ""
+    DATALAYER_CLOUDER_OS_DISK_SIZE_GB: ""
+    DATALAYER_CLOUDER_EXECUTOR_PYTHON_TIMEOUT_SECONDS: "300"
+    AZURE_TENANT_ID: ""
+    AZURE_CLIENT_ID: ""
+    AZURE_CLIENT_SECRET: ""
+    AZURE_SUBSCRIPTION_ID: ""
+    AZURE_RESOURCE_GROUP: ""
+    DATALAYER_SOLR_CHECKPOINT_COLLECTION: "runtime-checkpoints"
     DATALAYER_SOLR_PASSWORD: ""
     DATALAYER_SOLR_USERNAME: ""
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local:2181"
@@ -59,6 +92,22 @@ operator:
   tolerations: {}
   volumeMounts: {}
   sharedFsPVC: ""
+  # Optional cloud credentials secret mounted as environment variables.
+  # When enabled, deployment consumes AWS_* and AZURE_* from this secret.
+  cloudCredentials:
+    enabled: false
+    create: false
+    secretName: ""
+    aws:
+      accessKeyId: ""
+      secretAccessKey: ""
+      defaultRegion: ""
+    azure:
+      tenantId: ""
+      clientId: ""
+      clientSecret: ""
+      subscriptionId: ""
+      resourceGroup: ""
   # Kubelet client certificates (PEM content, set via --set-file in up.sh).
   # When provided, a Secret is created and mounted at /etc/kubelet-certs/.
   kubeletCerts:

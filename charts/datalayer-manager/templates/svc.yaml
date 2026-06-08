@@ -13,7 +13,9 @@ metadata:
     traefik.ingress.kubernetes.io/service.sticky.cookie.httponly: "false"
     traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
     traefik.ingress.kubernetes.io/service.sticky.cookie.samesite: "none"
-    cloud.google.com/backend-config: '{"ports": {"9800": "manager-backend-config"}}'
+    {{- if eq .Values.manager.clusterType "gke" }}
+    cloud.google.com/backend-config: '{"ports": {"{{ .Values.manager.port }}": "manager-backend-config"}}'
+    {{- end }}
 spec:
   type: ClusterIP
   ports:

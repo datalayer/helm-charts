@@ -25,6 +25,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | operator.env.DATALAYER_AUTHZ_ENGINE | string | `"openfga"` |  |
 | operator.env.DATALAYER_AVAILABLE_RUNTIMES_MAX_LIFE_SEC | string | `"3600"` |  |
 | operator.env.DATALAYER_CERT_ISSUER | string | `"letsencrypt"` |  |
+| operator.env.DATALAYER_CLOUDER_OS_DISK_SIZE_GB | string | `""` |  |
 | operator.env.DATALAYER_DOCKER_REGISTRY | string | `""` |  |
 | operator.env.DATALAYER_IAM_API_KEY | string | `""` |  |
 | operator.env.DATALAYER_IAM_URL | string | `"http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"` |  |
@@ -39,7 +40,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | operator.env.DATALAYER_RUNTIMES_RUN_HOOKS | string | `"false"` |  |
 | operator.env.DATALAYER_RUN_URL | string | `""` |  |
 | operator.env.DATALAYER_S3_CHECKPOINT_URL | string | `"https://s3.us-west-2.amazonaws.com"` |  |
-| operator.env.DATALAYER_SOLR_CHECKPOINT_COLLECTION | string | `"runtimes-checkpoints"` |  |
+| operator.env.DATALAYER_SOLR_CHECKPOINT_COLLECTION | string | `"runtime-checkpoints"` |  |
 | operator.env.DATALAYER_SOLR_PASSWORD | string | `""` |  |
 | operator.env.DATALAYER_SOLR_USERNAME | string | `""` |  |
 | operator.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local:2181"` |  |

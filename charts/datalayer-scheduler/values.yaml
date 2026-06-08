@@ -1,45 +1,30 @@
-manager:
-  image: datalayer/manager:0.0.2
-  sidecar:
-    image: datalayer/whoami:0.0.6
+scheduler:
+  image: datalayer/scheduler:0.0.1
   imagePullPolicy: Always
-  port: 9300
+  port: 9920
   clusterType: any
   certificateIssuer: letsencrypt
   ingressClass: datalayer-traefik
-  ingressPathPrefix: /api/manager
-  ingress: false
-  affinity: {}
-  tolerations: {}
   resources: {}
-#  resources:
-#    limits:
-#      memory: "8192Mi"
-#      cpu: "3000m"
   env:
     DATALAYER_RUN_URL: ""
-    DATALAYER_CDN_URL: ""
     DATALAYER_CORS_ORIGIN: "*"
     DATALAYER_RUNTIME_ENV: "prod"
-    AWS_ACCESS_KEY_ID: ""
-    AWS_SECRET_ACCESS_KEY: ""
-    AWS_DEFAULT_REGION: ""
     DATALAYER_JWT_ISSUER: ""
     DATALAYER_JWT_SECRET: ""
     DATALAYER_JWT_ALGORITHM: ""
     DATALAYER_JWT_CACHE_VALIDATE: "false"
-    DATALAYER_AUTHZ_ENGINE: ""
-    DATALAYER_OPENFGA_REST_URL: "http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"
-    DATALAYER_OPENFGA_STORE_ID: ""
-    DATALAYER_OPENFGA_AUTHZ_MODEL_ID: ""
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
-    DATALAYER_SMTP_HOST: ""
-    DATALAYER_SMTP_PORT: ""
-    DATALAYER_SMTP_USERNAME: ""
-    DATALAYER_SMTP_PASSWORD: ""
+    DATALAYER_IAM_SERVICE_URL: "http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"
+    DATALAYER_SPACER_SERVICE_URL: "http://datalayer-spacer-svc.datalayer-api.svc.cluster.local:9900"
+    DATALAYER_RUNTIME_SERVICE_URL: "http://datalayer-runtimes-svc.datalayer-api.svc.cluster.local:9500"
+    DATALAYER_SCHEDULER_INTERVAL_SECONDS: "10"
+    DATALAYER_SCHEDULER_RUNTIME_ENVIRONMENT: "ai-agent-env"
+    DATALAYER_SCHEDULER_RUNTIME_CREDITS_FRACTION: "0.5"
+    DATALAYER_SCHEDULER_EXEC_TIMEOUT_SECONDS: "300"
     OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: "http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"
     OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: "http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"
     OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"
-    DATALAYER_OTEL_API_KEY: ""
     OTEL_SDK_DISABLED: "false"
     OTEL_PYTHON_LOG_LEVEL: "info"
+    DATALAYER_OTEL_API_KEY: ""

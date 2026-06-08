@@ -60,6 +60,5 @@ spec:
 #            failureThreshold: 5
 #            initialDelaySeconds: 5
 #            periodSeconds: 15
-          volumeMounts:
           resources:
 {{ toYaml .Values.aiinference.resources | indent 12 }} 

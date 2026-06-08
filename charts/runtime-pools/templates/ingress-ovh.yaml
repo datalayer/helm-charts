@@ -1,8 +1,8 @@
-{{ if eq .Values.jupyterpool.clusterType "eks" -}}
+{{ if eq .Values.runtime-pools.clusterType "ovh" -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: jupyterpool-ingress
+  name: runtime-pools-ingress
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
@@ -11,21 +11,21 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-expires: '172800'
     nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
     nginx.ingress.kubernetes.io/session-cookie-samesite: None
-    nginx.ingress.kubernetes.io/session-cookie-name: jupyterpool-affinity
+    nginx.ingress.kubernetes.io/session-cookie-name: runtime-pools-affinity
     nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
     nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
     cert-manager.io/acme-challenge-type: http01
     cert-manager.io/cluster-issuer: letsencrypt
   labels:
-    app: jupyterpool
+    app: runtime-pools
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}
-    secretName: {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}-jupyterpool-cert-secret
+    - {{ .Values.runtime-pools.env.DATALAYER_RUN_URL }}
+    secretName: {{ .Values.runtime-pools.env.DATALAYER_RUN_URL }}-runtime-pools-cert-secret
   rules:
-  - host: {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}
+  - host: {{ .Values.runtime-pools.env.DATALAYER_RUN_URL }}
     http:
       paths:
       - path: /api/jupyter-server

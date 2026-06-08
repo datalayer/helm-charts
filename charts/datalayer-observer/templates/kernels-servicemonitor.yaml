@@ -14,7 +14,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      datalayer.io/app: jupyterpool
+      datalayer.io/app: runtime-pools
   endpoints:
   # Collector metrics monitoring
   - targetPort:  2300

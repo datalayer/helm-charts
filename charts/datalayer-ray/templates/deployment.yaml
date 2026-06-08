@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ include "ray.app-name" . }}
+spec:
+  replicas: {{ .Values.ray.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "ray.app-name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "ray.app-name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ include "ray.serviceAccountName" . }}
+      {{- if .Values.ray.registryCredentialsSecret }}
+      imagePullSecrets:
+        - name: {{ .Values.ray.registryCredentialsSecret }}
+      {{- end }}
+      containers:
+        - name: datalayer-ray
+          image: {{ .Values.ray.image }}
+          imagePullPolicy: {{ .Values.ray.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.ray.port }}
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.ray.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.ray.port }}
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+          {{- if or .Values.ray.env .Values.ray.envValueFrom }}
+          env:
+            {{- range $key, $value := .Values.ray.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom: {{- $value | toYaml | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.ray.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          resources:
+{{ toYaml .Values.ray.resources | indent 12 }}

@@ -1,0 +1,35 @@
+{{/*
+Expand the name of the chart.
+*/}}
+{{- define "scheduler.name" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 24 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a default fully qualified app name.
+*/}}
+{{- define "scheduler.fullname" -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 24 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Define the name of the scheduler client service.
+*/}}
+{{- define "scheduler.service-name" -}}
+{{- printf "%s-%s" (include "scheduler.fullname" .) "svc" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Define the value for the app label.
+*/}}
+{{- define "scheduler.app-name" -}}
+{{- printf "%s" .Chart.Name | replace "datalayer-" "" -}}
+{{- end -}}
+
+{{/*
+Define the value for the datalayer run host.
+*/}}
+{{- define "scheduler.runHost" -}}
+{{- printf "%s" .Values.scheduler.env.DATALAYER_RUN_URL | replace "https://" "" -}}
+{{- end -}}

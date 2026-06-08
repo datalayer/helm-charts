@@ -1,5 +1,5 @@
-jupyterpool:
-  image: datalayer/jupyterpool:0.0.8
+runtime-pools:
+  image: datalayer/runtime-pools:0.0.8
   replicaCount: 1
   sidecar:
     image: datalayer/whoami:0.0.6

@@ -1,11 +1,11 @@
 apiVersion: v1
-description: Jupyterpool
-name: jupyterpool
+description: Runtime Pools
+name: runtime-pools
 version: 0.0.6
 appVersion: 0.0.6
 home: https://datalayer.ai
 sources:
-- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-jupyterpool
+- https://github.com/datalayer/helm-charts/tree/main/charts/datalayer-runtime-pools
 icon: https://assets.datalayer.tech/datalayer-square.png
 maintainers:
 - name: Datalayer

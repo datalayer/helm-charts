@@ -74,19 +74,19 @@ spec:
             key: datalayer.io/app
             from: pod
           - tag_name: datalayer.pool.name
-            key: jupyterpool.datalayer.io/name
+            key: runtime-pools.datalayer.io/name
             from: pod
           - tag_name: datalayer.pool.status
-            key: jupyterpool.datalayer.io/pod-status
+            key: runtime-pools.datalayer.io/pod-status
             from: pod
           - tag_name: datalayer.pool.user
-            key: jupyterpool.datalayer.io/user-uid
+            key: runtime-pools.datalayer.io/user-uid
             from: pod
           - tag_name: datalayer.pool.type
-            key: jupyterpool.datalayer.io/kernel-type
+            key: runtime-pools.datalayer.io/kernel-type
             from: pod
           - tag_name: datalayer.pool.reservation
-            key: jupyterpool.datalayer.io/reservation-id
+            key: runtime-pools.datalayer.io/reservation-id
             from: pod
         filter:
           node_from_env_var: KUBE_NODE_NAME

@@ -3,20 +3,20 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-svc
   labels:
-    app: {{ template "jupyterpool.name" . }}
+    app: {{ template "runtime-pools.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
   annotations:
-    cloud.google.com/backend-config: '{"ports": {"jupyterpool-http": "jupyterpool-backend-config"}}'
+    cloud.google.com/backend-config: '{"ports": {"runtime-pools-http": "runtime-pools-backend-config"}}'
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.jupyterpool.port }}
-    name: jupyterpool-http
+  - port: {{ .Values.runtime-pools.port }}
+    name: runtime-pools-http
     protocol: TCP
-    targetPort: {{ .Values.jupyterpool.port }}
+    targetPort: {{ .Values.runtime-pools.port }}
   selector:
-    app: {{ template "jupyterpool.name" . }}
+    app: {{ template "runtime-pools.name" . }}
     release: {{ .Release.Name }}
 #  externalTrafficPolicy: Local       # Important?!

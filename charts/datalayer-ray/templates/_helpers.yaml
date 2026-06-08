@@ -1,0 +1,23 @@
+{{- define "ray.app-name" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "ray.fullname" -}}
+{{- if .Values.fullnameOverride -}}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name (include "ray.app-name" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+
+{{- define "ray.serviceAccountName" -}}
+{{- if .Values.ray.serviceAccount.create -}}
+{{- if .Values.ray.serviceAccount.name -}}
+{{- .Values.ray.serviceAccount.name -}}
+{{- else -}}
+{{ include "ray.fullname" . }}
+{{- end -}}
+{{- else -}}
+{{- .Values.ray.serviceAccount.name -}}
+{{- end -}}
+{{- end -}}

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ template "scheduler.app-name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "scheduler.app-name" . }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ template "scheduler.app-name" . }}
+        release: {{ .Release.Name }}
+        datalayer.io/app: {{ template "scheduler.app-name" . }}
+    spec:
+      imagePullSecrets:
+            - name: reg-creds
+      containers:
+        - name: scheduler
+          image: {{ .Values.scheduler.image }}
+          imagePullPolicy: {{ .Values.scheduler.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.scheduler.port }}
+              protocol: TCP
+          {{- if or .Values.scheduler.env .Values.scheduler.envValueFrom }}
+          env:
+            {{- range $key, $value := .Values.scheduler.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom: {{- $value | toYaml | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.scheduler.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /api/scheduler/v1/ping
+              port: 9920
+            successThreshold: 1
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          resources:
+{{ toYaml .Values.scheduler.resources | indent 12 }}

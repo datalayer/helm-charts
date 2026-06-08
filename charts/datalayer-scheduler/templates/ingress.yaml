@@ -1,9 +1,11 @@
-{{ if eq .Values.jupyterpool.clusterType "ovh" -}}
+{{ if eq .Values.scheduler.clusterType "any" -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: jupyterpool-ingress
+  name: scheduler-ingress
   annotations:
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: {{ .Values.scheduler.certificateIssuer }}
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
     nginx.ingress.kubernetes.io/affinity: cookie
@@ -11,28 +13,27 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-expires: '172800'
     nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
     nginx.ingress.kubernetes.io/session-cookie-samesite: None
-    nginx.ingress.kubernetes.io/session-cookie-name: jupyterpool-affinity
+    nginx.ingress.kubernetes.io/session-cookie-name: scheduler-affinity
     nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
     nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
-    cert-manager.io/acme-challenge-type: http01
-    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.tls: 'true'
   labels:
-    app: jupyterpool
+    app: scheduler
 spec:
-  ingressClassName: nginx
+  ingressClassName: {{ .Values.scheduler.ingressClass }}
   tls:
   - hosts:
-    - {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}
-    secretName: {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}-jupyterpool-cert-secret
+    - {{ template "scheduler.runHost" . }}
+    secretName: {{ template "scheduler.runHost" . }}-datalayer-api-cert-secret
   rules:
-  - host: {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}
+  - host: {{ template "scheduler.runHost" . }}
     http:
       paths:
-      - path: /api/jupyter-server
+      - path: /api/scheduler
         pathType: Prefix
         backend:
           service:
-            name: {{ .Release.Name }}-svc
+            name: {{ template "scheduler.service-name" . }}
             port:
-              number: 2300
+              number: {{ .Values.scheduler.port }}
 {{- end }}

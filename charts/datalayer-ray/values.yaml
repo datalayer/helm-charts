@@ -1,0 +1,46 @@
+namespace: datalayer-api
+
+ray:
+  image: datalayer/ray:0.0.1
+  imagePullPolicy: Always
+  registryCredentialsSecret: reg-creds
+  certificateIssuer: letsencrypt
+  replicas: 1
+  port: 4460
+  serviceType: ClusterIP
+  ingress:
+    enabled: false
+    className: traefik
+    host: ray.local
+    tlsSecretName: ""
+  env:
+    DATALAYER_RUNTIMES_SERVICE_URL: https://r1.datalayer.run
+    DATALAYER_RUNTIMES_API_KEY: ""
+    DATALAYER_RAY_PUBLIC_URL: http://datalayer-ray-svc.datalayer-api.svc.cluster.local:4460
+  envValueFrom: {}
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+  serviceAccount:
+    create: true
+    name: ""
+
+kuberayOperator:
+  enabled: true
+
+bootstrapRayCluster:
+  enabled: false
+  name: raycluster
+  namespace: default
+  rayVersion: "2.38.0"
+  image: rayproject/ray:2.38.0
+  autoscaling:
+    enabled: true
+  worker:
+    replicas: 1
+    minReplicas: 1
+    maxReplicas: 3

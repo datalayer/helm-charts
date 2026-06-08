@@ -1,4 +1,4 @@
-{{ if eq .Values.manager.ingress true -}}
+{{ if and (eq .Values.manager.clusterType "any") (eq .Values.manager.ingress true) -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -12,6 +12,7 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-max-age: '172800'
     nginx.ingress.kubernetes.io/session-cookie-samesite: None
     nginx.ingress.kubernetes.io/session-cookie-name: manager-affinity
+    nginx.ingress.kubernetes.io/session-cookie-path: "/"
     nginx.ingress.kubernetes.io/enable-modsecurity: 'true'
     nginx.ingress.kubernetes.io/enable-owasp-core-rules: 'true'
     nginx.ingress.kubernetes.io/proxy-body-size: '0'
@@ -25,13 +26,13 @@ metadata:
 #      proxy_set_header X-Forwarded-Host $host;
 #      proxy_set_header X-Forwarded-Uri $scheme://$host$request_uri;
     cert-manager.io/acme-challenge-type: http01
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: {{ .Values.manager.certificateIssuer }}
     traefik.ingress.kubernetes.io/router.tls: 'true'
 #    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-iam-auth@kubernetescrd
   labels:
     app: manager
 spec:
-  ingressClassName: datalayer-traefik
+  ingressClassName: {{ .Values.manager.ingressClass }}
   tls:
   - hosts:
     - {{ template "manager.runHost" . }}
@@ -40,7 +41,7 @@ spec:
   - host: {{ template "manager.runHost" . }}
     http:
       paths:
-      - path: /api/manager
+      - path: {{ .Values.manager.ingressPathPrefix }}
         pathType: Prefix
         backend:
           service:

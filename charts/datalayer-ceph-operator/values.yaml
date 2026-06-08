@@ -436,7 +436,7 @@ csi:
   #      effect: NoSchedule
 
   # -- The node labels for affinity of the CephCSI RBD plugin DaemonSet [^1]
-  pluginNodeAffinity: role.datalayer.io/jupyter=true # key1=value1,value2; key2=value3
+  pluginNodeAffinity: role.datalayer.io/runtime=true # key1=value1,value2; key2=value3
 
   # -- Enable Ceph CSI Liveness sidecar deployment
   enableLiveness: false

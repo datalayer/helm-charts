@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ default .Values.manager.namespace .Release.Namespace }}
   labels:
     app: {{ template "manager.app-name" . }}
 spec:
@@ -21,17 +21,24 @@ spec:
         datalayer.io/app: {{ template "manager.app-name" . }}
     spec:
       terminationGracePeriodSeconds: 0
+      {{- with .Values.manager.affinity }}
+      affinity: {{- toYaml . | nindent 8 }}
+      {{- else }}
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: role.datalayer.io/api
-                operator: In
-                values:
-                - "true"
+              - matchExpressions:
+                  - key: role.datalayer.io/api
+                    operator: In
+                    values:
+                      - "true"
+      {{- end }}
+      {{- with .Values.manager.tolerations }}
+      tolerations: {{- toYaml . | nindent 8 }}
+      {{- end }}
       imagePullSecrets:
-            - name: reg-creds
+        - name: reg-creds
       containers:
         - name: manager
           image: {{ .Values.manager.image }}
@@ -58,9 +65,9 @@ spec:
             failureThreshold: 5
             initialDelaySeconds: 5
             periodSeconds: 15
-          volumeMounts:
-          resources:
-{{ toYaml .Values.manager.resources | indent 12 }} 
+          {{- with .Values.manager.resources }}
+          resources: {{- toYaml . | nindent 12 }}
+          {{- end }}
 #         - name: manager-sidecar
 #           image: {{ .Values.manager.sidecar.image }}
 #          imagePullPolicy: {{ .Values.manager.imagePullPolicy }}

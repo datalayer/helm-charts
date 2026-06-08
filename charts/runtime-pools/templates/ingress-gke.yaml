@@ -1,8 +1,8 @@
-{{ if eq .Values.jupyterpool.clusterType "gke-NA" -}}
+{{ if eq .Values.runtime-pools.clusterType "gke-NA" -}}
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: jupyterpool-ingress
+  name: runtime-pools-ingress
   annotations:
     # specify the name of the global IP address resource to be associated with the HTTP(S) Load Balancer.
     kubernetes.io/ingress.global-static-ip-name: datalayer-io-ip
@@ -12,12 +12,12 @@ metadata:
     # or a new one is created specifically for the HTTP01 challenge.
     acme.cert-manager.io/http01-edit-in-place: "true"
   labels:
-    app: jupyterpool
+    app: runtime-pools
 spec:
   tls: # < placing a host in the TLS config will indicate a certificate should be created
   - hosts:
     - datalayer.io
-    secretName: jupyterpool-cert-secret # < cert-manager will store the created certificate in this secret
+    secretName: runtime-pools-cert-secret # < cert-manager will store the created certificate in this secret
   rules:
   - host: datalayer.io
     http:

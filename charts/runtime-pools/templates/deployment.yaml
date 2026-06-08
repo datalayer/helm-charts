@@ -4,19 +4,19 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "jupyterpool.name" . }}
+    app: {{ template "runtime-pools.name" . }}
 spec:
-  replicas: {{ .Values.jupyterpool.replicaCount }}
+  replicas: {{ .Values.runtime-pools.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "jupyterpool.name" . }}
+      app: {{ template "runtime-pools.name" . }}
   strategy:
     rollingUpdate:
       maxUnavailable: 0
   template:
     metadata:
       labels:
-        app: {{ template "jupyterpool.name" . }}
+        app: {{ template "runtime-pools.name" . }}
         release: {{ .Release.Name }}
     spec:
       terminationGracePeriodSeconds: 0
@@ -25,7 +25,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: role.datalayer.io/jupyter
+              - key: role.datalayer.io/runtime
                 operator: In
                 values:
                 - "true"
@@ -33,7 +33,7 @@ spec:
                 operator: In
                 values:
                 - "true"
-{{ if eq .Values.jupyterpool.clusterType "minikube" }}
+{{ if eq .Values.runtime-pools.clusterType "minikube" }}
 #      volumes:
 #        - name: nfs-volume
 #          nfs:
@@ -42,25 +42,25 @@ spec:
 #            readOnly: no
 {{- end }}
       containers:
-        - name: jupyterpool
-          image: {{ .Values.jupyterpool.image }}
-          imagePullPolicy: {{ .Values.jupyterpool.imagePullPolicy }}
+        - name: runtime-pools
+          image: {{ .Values.runtime-pools.image }}
+          imagePullPolicy: {{ .Values.runtime-pools.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.jupyterpool.port }}
+            - containerPort: {{ .Values.runtime-pools.port }}
               protocol: TCP
           env:
           - name: DATALAYER_RUN_URL
-            value: {{ .Values.jupyterpool.env.DATALAYER_RUN_URL }}
+            value: {{ .Values.runtime-pools.env.DATALAYER_RUN_URL }}
           - name: JUPYTER_BASE_URL
             value: /api/jupyter-server
 #          - name: GITHUB_CLIENT_ID
-#            value: {{ .Values.jupyterpool.env.GITHUB_CLIENT_ID }}
+#            value: {{ .Values.runtime-pools.env.GITHUB_CLIENT_ID }}
 #          - name: GITHUB_CLIENT_SECRET
-#            value: {{ .Values.jupyterpool.env.GITHUB_CLIENT_SECRET }}
+#            value: {{ .Values.runtime-pools.env.GITHUB_CLIENT_SECRET }}
 #          - name: GITHUB_OAUTH_CALLBACK_URL
-#            value: {{ .Values.jupyterpool.env.GITHUB_OAUTH_CALLBACK_URL }}
-{{- if .Values.jupyterpool.extraEnvVars }}
-{{ toYaml .Values.jupyterpool.extraEnvVars | indent 10 }}
+#            value: {{ .Values.runtime-pools.env.GITHUB_OAUTH_CALLBACK_URL }}
+{{- if .Values.runtime-pools.extraEnvVars }}
+{{ toYaml .Values.runtime-pools.extraEnvVars | indent 10 }}
 {{- end }}
           readinessProbe:
             httpGet:
@@ -71,13 +71,13 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 15
           volumeMounts:
-{{ if eq .Values.jupyterpool.clusterType "minikube" }}
+{{ if eq .Values.runtime-pools.clusterType "minikube" }}
 #            - name: nfs-volume
 #              mountPath: /data
 {{- end }}
           resources:
-{{ toYaml .Values.jupyterpool.resources | indent 12 }} 
-#        - name: jupyterpool-sidecar
-#          image: {{ .Values.jupyterpool.sidecar.image }}
-#          imagePullPolicy: {{ .Values.jupyterpool.imagePullPolicy }}
+{{ toYaml .Values.runtime-pools.resources | indent 12 }} 
+#        - name: runtime-pools-sidecar
+#          image: {{ .Values.runtime-pools.sidecar.image }}
+#          imagePullPolicy: {{ .Values.runtime-pools.imagePullPolicy }}
 #          args: ["proxy", "-p", "8001"]

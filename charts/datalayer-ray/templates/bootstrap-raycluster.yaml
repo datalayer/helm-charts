@@ -1,0 +1,39 @@
+{{- if .Values.bootstrapRayCluster.enabled }}
+apiVersion: ray.io/v1
+kind: RayCluster
+metadata:
+  name: {{ .Values.bootstrapRayCluster.name }}
+  namespace: {{ .Values.bootstrapRayCluster.namespace }}
+  labels:
+    ray.io/cluster: {{ .Values.bootstrapRayCluster.name }}
+spec:
+  rayVersion: {{ .Values.bootstrapRayCluster.rayVersion | quote }}
+  enableInTreeAutoscaling: {{ .Values.bootstrapRayCluster.autoscaling.enabled }}
+  headGroupSpec:
+    serviceType: ClusterIP
+    rayStartParams:
+      dashboard-host: 0.0.0.0
+    template:
+      spec:
+        containers:
+          - name: ray-head
+            image: {{ .Values.bootstrapRayCluster.image }}
+            ports:
+              - containerPort: 6379
+                name: gcs
+              - containerPort: 8265
+                name: dashboard
+              - containerPort: 10001
+                name: client
+  workerGroupSpecs:
+    - groupName: workers
+      replicas: {{ .Values.bootstrapRayCluster.worker.replicas }}
+      minReplicas: {{ .Values.bootstrapRayCluster.worker.minReplicas }}
+      maxReplicas: {{ .Values.bootstrapRayCluster.worker.maxReplicas }}
+      rayStartParams: {}
+      template:
+        spec:
+          containers:
+            - name: ray-worker
+              image: {{ .Values.bootstrapRayCluster.image }}
+{{- end }}

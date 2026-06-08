@@ -1,0 +1,17 @@
+apiVersion: v2
+description: Datalayer Ray addon + KubeRay operator integration
+name: datalayer-ray
+type: application
+version: 0.0.1
+appVersion: 0.0.1
+home: https://datalayer.ai
+icon: https://assets.datalayer.tech/datalayer-square.png
+maintainers:
+  - name: Datalayer
+    email: support@datalayer.io
+    url: https://datalayer.io
+dependencies:
+  - name: kuberay-operator
+    version: 1.3.2
+    repository: https://ray-project.github.io/kuberay-helm/
+    condition: kuberayOperator.enabled

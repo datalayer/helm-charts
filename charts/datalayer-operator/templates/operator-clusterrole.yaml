@@ -10,10 +10,13 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 rules:
-# Core resources needed for managing Jupyter workloads
+# Core resources needed for managing runtime workloads
 - apiGroups: [""]
   resources: ["pods"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: [""]
+  resources: ["pods/status"]
+  verbs: ["get", "patch", "update"]
 - apiGroups: [""]
   resources: ["services"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
@@ -60,8 +63,11 @@ rules:
 
 # Datalayer custom resources
 - apiGroups: ["datalayer.io"]
-  resources: ["jupyterpools", "jupyter-contents", "jupyter-environments"]
+  resources: ["runtime-pools", "runtime-contents", "runtime-environments"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: ["datalayer.io"]
+  resources: ["runtime-pools/status", "runtime-contents/status", "runtime-environments/status"]
+  verbs: ["get", "update", "patch"]
 
 # Datashim datasets for S3 content mounting
 - apiGroups: ["datashim.io"]
@@ -82,6 +88,9 @@ rules:
 - apiGroups: [""]
   resources: ["nodes"]
   verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["nodes/status"]
+  verbs: ["get"]
 
 # Required for service-account based kubelet checkpoint auth.
 - apiGroups: [""]
@@ -92,4 +101,9 @@ rules:
 - apiGroups: ["metrics.k8s.io"]
   resources: ["pods", "nodes"]
   verbs: ["get", "list"]
+
+# Coordination leases used by operator leader election and scaling workers
+- apiGroups: ["coordination.k8s.io"]
+  resources: ["leases"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 {{- end }}
