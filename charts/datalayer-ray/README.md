@@ -34,7 +34,7 @@ Datalayer Ray addon + KubeRay operator integration
 | kuberayOperator.enabled | bool | `true` |  |
 | namespace | string | `"datalayer-api"` |  |
 | ray.certificateIssuer | string | `"letsencrypt"` |  |
-| ray.env.DATALAYER_RAY_PUBLIC_URL | string | `"http://datalayer-ray-svc.datalayer-api.svc.cluster.local:4460"` |  |
+| ray.env.DATALAYER_RAY_PUBLIC_URL | string | `"https://prod1.datalayer.run"` |  |
 | ray.env.DATALAYER_RUNTIMES_API_KEY | string | `""` |  |
 | ray.env.DATALAYER_RUNTIMES_SERVICE_URL | string | `"https://r1.datalayer.run"` |  |
 | ray.envValueFrom | object | `{}` |  |
