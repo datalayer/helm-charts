@@ -1,5 +1,14 @@
-{{/*
-No service needed — the ingress backend points directly to the IAM service
-(datalayer-iam-svc) which exists in the same namespace. The Traefik redirect-root
-middleware intercepts the request before it ever reaches the backend.
-*/}}
+{{ if eq .Values.home.clusterType "any" -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-redirect-svc
+  labels:
+    app: home
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9700
+    targetPort: 9700
+    protocol: TCP
+{{- end }}

@@ -4,8 +4,11 @@ kind: Ingress
 metadata:
   name: home-root-redirect
   annotations:
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: {{ .Values.home.certificateIssuer }}
     traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-redirect-root@kubernetescrd
-    nginx.ingress.kubernetes.io/permanent-redirect: {{ .Values.home.redirectUrl }}
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+    nginx.ingress.kubernetes.io/temporal-redirect: {{ .Values.home.redirectUrl }}
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
   labels:
     app: home
@@ -14,7 +17,7 @@ spec:
   tls:
   - hosts:
     - {{ template "home.runHost" . }}
-    secretName: {{ template "home.runHost" . }}-datalayer-api-cert-secret
+    secretName: {{ template "home.runHost" . }}-datalayer-home-cert-secret
   rules:
   - host: {{ template "home.runHost" . }}
     http:
@@ -23,7 +26,7 @@ spec:
         pathType: Exact
         backend:
           service:
-            name: datalayer-iam-svc
+            name: home-redirect-svc
             port: 
               number: 9700
 {{- end }}

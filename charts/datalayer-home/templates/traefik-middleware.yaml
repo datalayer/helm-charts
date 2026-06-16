@@ -8,7 +8,7 @@ metadata:
     app: home
 spec:
   redirectRegex:
-    regex: ^https://{{ template "home.runHost" . }}/$
+    regex: ^https?://{{ template "home.runHost" . }}(?:/.*)?$
     replacement: {{ .Values.home.redirectUrl }}
-    permanent: true
+    permanent: false
 {{- end }}

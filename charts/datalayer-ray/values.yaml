@@ -14,7 +14,7 @@ ray:
     host: ray.local
     tlsSecretName: ""
   env:
-    DATALAYER_RUNTIMES_SERVICE_URL: https://r1.datalayer.run
+    DATALAYER_RUNTIMES_URL: https://r1.datalayer.run
     DATALAYER_RUNTIMES_API_KEY: ""
     DATALAYER_RAY_PUBLIC_URL: https://prod1.datalayer.run
   envValueFrom: {}

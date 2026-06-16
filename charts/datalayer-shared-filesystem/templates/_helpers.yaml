@@ -10,6 +10,8 @@ Value for ceph should match the one specified in ceph-cluster chart
         "ceph-filesystem"
     {{- else if eq .Values.sharedStorage.storageProvider "azure" -}}
         "azure-nfs"
+    {{- else if eq .Values.sharedStorage.storageProvider "aws" -}}
+        "aws-efs"
     {{- else -}}
         null
     {{- end -}}
@@ -24,6 +26,8 @@ Define the storage size
     {{- else if eq .Values.sharedStorage.storageProvider "ceph" -}}
         "8Gi"
     {{- else if eq .Values.sharedStorage.storageProvider "azure" -}}
+        "100Gi"
+    {{- else if eq .Values.sharedStorage.storageProvider "aws" -}}
         "100Gi"
     {{- else -}}
         null

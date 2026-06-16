@@ -38,7 +38,7 @@ spec:
   tls:
   - hosts:
     - {{ template "runtimes.runHost" . }}
-    secretName: {{ template "runtimes.runHost" . }}-datalayer-api-cert-secret
+    secretName: {{ template "runtimes.runHost" . }}-datalayer-runtimes-cert-secret
   rules:
   - host: {{ template "runtimes.runHost" . }}
     http:

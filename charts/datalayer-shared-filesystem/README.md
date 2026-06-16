@@ -19,6 +19,6 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | sharedStorage.storageClassName | string | `nil` | Storage class to use If not specified the default value will be inferred from the provider. |
 | sharedStorage.storageOwner.gid | string | `"100"` |  |
 | sharedStorage.storageOwner.uid | string | `"1000"` |  |
-| sharedStorage.storageProvider | string | `"ceph"` | Will set automatically value depending on the storage provider. Supported value are: "azure" or "ceph" |
+| sharedStorage.storageProvider | string | `"ceph"` | Will set automatically value depending on the storage provider. Supported values are: "azure", "aws", or "ceph" |
 | sharedStorage.storageSize | string | `nil` | Storage size If not specified the default value will be inferred from the provider. |
 

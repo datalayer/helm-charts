@@ -42,7 +42,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | support.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | support.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | support.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
-| support.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
+| support.env.DATALAYER_PUBSUB_ENGINE | string | `"kafka"` |  |
 | support.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | support.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | support.env.DATALAYER_RUN_URL | string | `""` |  |

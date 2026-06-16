@@ -19,7 +19,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | outbounds.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
 | outbounds.env.DATALAYER_KAFKA_USERNAME | string | `""` |  |
 | outbounds.env.DATALAYER_MAIL_OUTBOUND_INTERVAL_SEC | int | `60` |  |
-| outbounds.env.DATALAYER_PUB_SUB_ENGINE | string | `"pulsar"` |  |
+| outbounds.env.DATALAYER_PUBSUB_ENGINE | string | `"pulsar"` |  |
 | outbounds.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | outbounds.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | outbounds.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |

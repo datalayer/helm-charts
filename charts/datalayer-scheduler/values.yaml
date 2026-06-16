@@ -7,7 +7,7 @@ scheduler:
   ingressClass: datalayer-traefik
   resources: {}
   env:
-    DATALAYER_API_KEY: ""
+    DATALAYER_SCHEDULER_API_KEY: ""
     DATALAYER_RUN_URL: ""
     DATALAYER_CORS_ORIGIN: "*"
     DATALAYER_RUNTIME_ENV: "prod"
@@ -18,11 +18,10 @@ scheduler:
     DATALAYER_JWT_SECRET: ""
     DATALAYER_JWT_ALGORITHM: ""
     DATALAYER_JWT_CACHE_VALIDATE: "false"
-    DATALAYER_SCHEDULER_SERVICE_TOKEN: ""
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
-    DATALAYER_IAM_SERVICE_URL: "http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"
-    DATALAYER_SPACER_SERVICE_URL: "http://datalayer-spacer-svc.datalayer-api.svc.cluster.local:9900"
-    DATALAYER_RUNTIMES_SERVICE_URL: "http://datalayer-runtimes-svc.datalayer-api.svc.cluster.local:9500"
+    DATALAYER_IAM_URL: "http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"
+    DATALAYER_SPACE_URL: "http://datalayer-spacer-svc.datalayer-api.svc.cluster.local:9900"
+    DATALAYER_RUNTIMES_URL: "http://datalayer-runtimes-svc.datalayer-api.svc.cluster.local:9500"
     DATALAYER_SCHEDULER_INTERVAL_SECONDS: "10"
     DATALAYER_SCHEDULER_RUNTIME_ENVIRONMENT: "ai-agents-env"
     DATALAYER_SCHEDULER_RUNTIME_CREDITS_FRACTION: "0.5"

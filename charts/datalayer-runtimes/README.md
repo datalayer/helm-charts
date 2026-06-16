@@ -35,10 +35,10 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | runtimes.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
 | runtimes.env.DATALAYER_OPERATOR_URL | string | `"http://datalayer-operator-svc.datalayer-runtimes.svc.cluster.local:2111"` |  |
 | runtimes.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
-| runtimes.env.DATALAYER_PUB_SUB_ENGINE | string | `"kafka"` |  |
+| runtimes.env.DATALAYER_PUBSUB_ENGINE | string | `"kafka"` |  |
 | runtimes.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | runtimes.env.DATALAYER_RUNTIMES_API_KEY | string | `""` |  |
-| runtimes.env.DATALAYER_RUNTIMES_SERVICE_URL | string | `"https://r1.datalayer.run"` |  |
+| runtimes.env.DATALAYER_RUNTIMES_URL | string | `"https://r1.datalayer.run"` |  |
 | runtimes.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
 | runtimes.env.DATALAYER_RUN_URL | string | `""` |  |
 | runtimes.env.DATALAYER_SOLR_PASSWORD.secretKeyRef.key | string | `"password"` |  |

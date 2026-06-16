@@ -36,7 +36,7 @@ Datalayer Ray addon + KubeRay operator integration
 | ray.certificateIssuer | string | `"letsencrypt"` |  |
 | ray.env.DATALAYER_RAY_PUBLIC_URL | string | `"https://prod1.datalayer.run"` |  |
 | ray.env.DATALAYER_RUNTIMES_API_KEY | string | `""` |  |
-| ray.env.DATALAYER_RUNTIMES_SERVICE_URL | string | `"https://r1.datalayer.run"` |  |
+| ray.env.DATALAYER_RUNTIMES_URL | string | `"https://r1.datalayer.run"` |  |
 | ray.envValueFrom | object | `{}` |  |
 | ray.image | string | `"datalayer/ray:0.0.1"` |  |
 | ray.imagePullPolicy | string | `"Always"` |  |
