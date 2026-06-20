@@ -12,6 +12,8 @@ spec:
     singular: runtime-content
     plural: runtime-contents
     shortNames:
+        - rc
+        - rcs
         - rtc
   versions:
     - name: v1

@@ -12,6 +12,10 @@ spec:
     singular: runtime-environment
     plural: runtime-environments
     shortNames:
+        - re
+        - res
+        - renv
+        - renvs
         - rte
   versions:
     - name: v1

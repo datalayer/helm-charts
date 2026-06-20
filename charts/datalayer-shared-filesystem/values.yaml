@@ -15,3 +15,13 @@ sharedStorage:
     # Must match sandbox container user uid/gid
     uid: '1000'
     gid: '100'
+  aws:
+    # sharedStorage.aws.fileSystemId -- AWS EFS filesystem id used by aws-efs StorageClass.
+    # Auto-populated by plane up datalayer-shared-filesystem on kubeadm/AWS.
+    fileSystemId: null
+    # sharedStorage.aws.uid -- POSIX uid enforced by EFS Access Points created dynamically.
+    # Set to "0" to allow prepare pod chown operations.
+    uid: '0'
+    # sharedStorage.aws.gid -- POSIX gid enforced by EFS Access Points created dynamically.
+    # Set to "0" to allow prepare pod chown operations.
+    gid: '0'

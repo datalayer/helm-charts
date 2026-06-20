@@ -1,9 +1,17 @@
-{{/*
-  Azure: StorageClass 'azure-nfs' is created during cluster setup (clouder kubeadm setup)
-  with the Azure subscription, resource group, and location baked in.
-  AWS: StorageClass 'aws-efs' must exist before deploying this chart.
-  The AWS EFS infrastructure + StorageClass should be provisioned by platform automation
-  (not manually by end users).
-  On AKS, create it manually or via a separate step before running plane up.
-  The helm chart expects provider-specific StorageClass resources to exist ahead of time.
-*/}}
+{{- if and (eq .Values.sharedStorage.storageProvider "aws") .Values.sharedStorage.aws.fileSystemId }}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: aws-efs
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: {{ .Values.sharedStorage.aws.fileSystemId | quote }}
+  uid: {{ .Values.sharedStorage.aws.uid | quote }}
+  gid: {{ .Values.sharedStorage.aws.gid | quote }}
+  directoryPerms: "700"
+  basePath: "/datalayer-dynamic"
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+{{- end }}
