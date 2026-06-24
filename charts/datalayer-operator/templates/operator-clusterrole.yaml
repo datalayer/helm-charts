@@ -92,6 +92,11 @@ rules:
   resources: ["nodes/status"]
   verbs: ["get"]
 
+# Read-only access to storage classes for /status/storage endpoint
+- apiGroups: ["storage.k8s.io"]
+  resources: ["storageclasses"]
+  verbs: ["get", "list", "watch"]
+
 # Required for service-account based kubelet checkpoint auth.
 - apiGroups: [""]
   resources: ["nodes/checkpoint"]
