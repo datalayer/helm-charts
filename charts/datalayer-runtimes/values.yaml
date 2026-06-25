@@ -45,7 +45,7 @@ runtimes:
     DATALAYER_PUBSUB_ENGINE: "kafka"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUNTIME_ENV: "prod"
-    DATALAYER_RUN_URL: ""
+    DATALAYER_URL: ""
     DATALAYER_SOLR_ZK_HOST: "solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"
     DATALAYER_SOLR_RUNTIME_REGISTRATIONS_COLLECTION: "runtime-registrations"
     OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: "https://prod1.datalayer.run/api/otel/v1/otlp/v1/logs"

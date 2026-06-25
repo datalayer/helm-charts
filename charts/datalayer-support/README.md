@@ -45,7 +45,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | support.env.DATALAYER_PUBSUB_ENGINE | string | `"kafka"` |  |
 | support.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | support.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| support.env.DATALAYER_RUN_URL | string | `""` |  |
+| support.env.DATALAYER_URL | string | `""` |  |
 | support.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | support.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | support.env.DATALAYER_SMTP_PORT | string | `"0"` |  |

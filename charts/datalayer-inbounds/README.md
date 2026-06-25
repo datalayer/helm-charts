@@ -47,7 +47,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | inbounds.env.DATALAYER_PUBSUB_ENGINE | string | `"pulsar"` |  |
 | inbounds.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | inbounds.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| inbounds.env.DATALAYER_RUN_URL | string | `""` |  |
+| inbounds.env.DATALAYER_URL | string | `""` |  |
 | inbounds.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | inbounds.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | inbounds.env.DATALAYER_SMTP_PORT | string | `"0"` |  |

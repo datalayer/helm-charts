@@ -9,4 +9,4 @@ jump:
 #      memory: "8192Mi"
 #      cpu: "3000m"
   env:
-    DATALAYER_RUN_URL: ""
+    DATALAYER_URL: ""

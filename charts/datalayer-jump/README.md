@@ -20,7 +20,7 @@ Datalayer Jump
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| jump.env.DATALAYER_RUN_URL | string | `""` |  |
+| jump.env.DATALAYER_URL | string | `""` |  |
 | jump.image | string | `"datalayer/jump:0.0.6"` |  |
 | jump.imagePullPolicy | string | `"Always"` |  |
 | jump.port | int | `2223` |  |

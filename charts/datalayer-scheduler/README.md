@@ -34,7 +34,7 @@ Datalayer Scheduler
 | scheduler.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | scheduler.env.DATALAYER_RUNTIMES_URL | string | `"http://datalayer-runtimes-svc.datalayer-api.svc.cluster.local:9500"` |  |
 | scheduler.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| scheduler.env.DATALAYER_RUN_URL | string | `""` |  |
+| scheduler.env.DATALAYER_URL | string | `""` |  |
 | scheduler.env.DATALAYER_SCHEDULER_API_KEY | string | `""` |  |
 | scheduler.env.DATALAYER_SCHEDULER_EXEC_TIMEOUT_SECONDS | string | `"300"` |  |
 | scheduler.env.DATALAYER_SCHEDULER_INTERVAL_SECONDS | string | `"10"` |  |

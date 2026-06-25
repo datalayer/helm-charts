@@ -8,7 +8,7 @@ scheduler:
   resources: {}
   env:
     DATALAYER_SCHEDULER_API_KEY: ""
-    DATALAYER_RUN_URL: ""
+    DATALAYER_URL: ""
     DATALAYER_CORS_ORIGIN: "*"
     DATALAYER_RUNTIME_ENV: "prod"
     AWS_ACCESS_KEY_ID: ""

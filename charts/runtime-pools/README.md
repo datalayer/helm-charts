@@ -20,7 +20,7 @@ Runtime Pools
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| runtime-pools.env.DATALAYER_RUN_URL | string | `""` |  |
+| runtime-pools.env.DATALAYER_URL | string | `""` |  |
 | runtime-pools.env.GITHUB_CLIENT_ID | string | `""` |  |
 | runtime-pools.env.GITHUB_CLIENT_SECRET | string | `""` |  |
 | runtime-pools.env.GITHUB_OAUTH_CALLBACK_URL | string | `""` |  |

@@ -57,7 +57,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | operator.env.DATALAYER_PUBSUB_ENGINE | string | `"pulsar"` |  |
 | operator.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | operator.env.DATALAYER_RUNTIMES_RUN_HOOKS | string | `"false"` |  |
-| operator.env.DATALAYER_RUN_URL | string | `""` |  |
+| operator.env.DATALAYER_URL | string | `""` |  |
 | operator.env.DATALAYER_S3_CHECKPOINT_URL | string | `"https://s3.us-west-2.amazonaws.com"` |  |
 | operator.env.DATALAYER_SCALING_COMMANDS_DLQ_TOPIC | string | `"operator-scaling-commands-dlq-topic"` |  |
 | operator.env.DATALAYER_SCALING_COMMANDS_MAX_REDELIVERIES | string | `"5"` |  |

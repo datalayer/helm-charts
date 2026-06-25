@@ -4,4 +4,4 @@ home:
   ingressClass: datalayer-traefik
   redirectUrl: https://datalayer.ai
   env:
-    DATALAYER_RUN_URL: ""
+    DATALAYER_URL: ""

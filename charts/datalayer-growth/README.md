@@ -46,7 +46,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | growth.env.DATALAYER_PUBSUB_ENGINE | string | `"pulsar"` |  |
 | growth.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | growth.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| growth.env.DATALAYER_RUN_URL | string | `""` |  |
+| growth.env.DATALAYER_URL | string | `""` |  |
 | growth.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | growth.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | growth.env.DATALAYER_SMTP_PORT | string | `"0"` |  |

@@ -25,5 +25,5 @@ Define the value for the app label.
 Define the value for the datalayer run host.
 */}}
 {{- define "home.runHost" -}}
-{{- printf "%s" .Values.home.env.DATALAYER_RUN_URL | replace "https://" "" -}}
+{{- printf "%s" .Values.home.env.DATALAYER_URL | replace "https://" "" -}}
 {{- end -}}

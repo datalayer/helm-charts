@@ -32,5 +32,5 @@ Define the value for the app label.
 Define the value for the datalayer run host.
 */}}
 {{- define "spacer.runHost" -}}
-{{- printf "%s" .Values.spacer.env.DATALAYER_RUN_URL | replace "https://" "" -}}
+{{- printf "%s" .Values.spacer.env.DATALAYER_URL | replace "https://" "" -}}
 {{- end -}}

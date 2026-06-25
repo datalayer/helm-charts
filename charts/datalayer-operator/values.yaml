@@ -40,7 +40,7 @@ operator:
     DATALAYER_PUBSUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUNTIMES_RUN_HOOKS: "false"
-    DATALAYER_RUN_URL: ""
+    DATALAYER_URL: ""
     # Scaling configuration
     AGENT_OP_FEATURES: ""
     DATALAYER_SCALING_STRATEGY: "simple"

@@ -22,7 +22,7 @@ Datalayer Home - Root redirect to datalayer.ai
 |-----|------|---------|-------------|
 | home.certificateIssuer | string | `"letsencrypt"` |  |
 | home.clusterType | string | `"any"` |  |
-| home.env.DATALAYER_RUN_URL | string | `""` |  |
+| home.env.DATALAYER_URL | string | `""` |  |
 | home.ingressClass | string | `"datalayer-traefik"` |  |
 | home.redirectUrl | string | `"https://datalayer.ai"` |  |
 

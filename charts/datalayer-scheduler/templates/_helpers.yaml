@@ -31,5 +31,5 @@ Define the value for the app label.
 Define the value for the datalayer run host.
 */}}
 {{- define "scheduler.runHost" -}}
-{{- printf "%s" .Values.scheduler.env.DATALAYER_RUN_URL | replace "https://" "" -}}
+{{- printf "%s" .Values.scheduler.env.DATALAYER_URL | replace "https://" "" -}}
 {{- end -}}

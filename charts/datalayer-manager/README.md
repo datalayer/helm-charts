@@ -32,7 +32,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | manager.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | manager.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | manager.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| manager.env.DATALAYER_RUN_URL | string | `""` |  |
+| manager.env.DATALAYER_URL | string | `""` |  |
 | manager.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | manager.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | manager.env.DATALAYER_SMTP_PORT | string | `""` |  |

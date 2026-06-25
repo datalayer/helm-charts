@@ -72,7 +72,7 @@ tests:
                 value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
               - name: DATALAYER_RUNTIMES_RUN_HOOKS
                 value: "false"
-              - name: DATALAYER_RUN_URL
+              - name: DATALAYER_URL
                 value: ""
               - name: DATALAYER_VAULT_TOKEN
                 value: ""
