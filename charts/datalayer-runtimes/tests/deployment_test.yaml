@@ -74,6 +74,8 @@ tests:
                 value: pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650
               - name: DATALAYER_RUNTIME_ENV
                 value: prod
+              - name: DATALAYER_SPACER_URL
+                value: datalayer-spacer-svc.datalayer-api.svc.cluster.local:9900
               - name: DATALAYER_URL
                 value: ""
               - name: DATALAYER_SOLR_PASSWORD

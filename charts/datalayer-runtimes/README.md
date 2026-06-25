@@ -22,6 +22,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | runtimes.env.DATALAYER_AUTHZ_ENGINE | string | `""` |  |
 | runtimes.env.DATALAYER_CDN_URL | string | `""` |  |
 | runtimes.env.DATALAYER_CORS_ORIGIN | string | `"*"` |  |
+| runtimes.env.DATALAYER_IAM_URL | string | `"http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"` |  |
 | runtimes.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | runtimes.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | runtimes.env.DATALAYER_JWT_ISSUER | string | `"https://id.datalayer.run"` |  |
