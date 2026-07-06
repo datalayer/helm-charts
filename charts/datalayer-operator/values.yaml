@@ -41,6 +41,11 @@ operator:
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
     DATALAYER_RUNTIMES_RUN_HOOKS: "false"
     DATALAYER_URL: ""
+    # Public base URL used to build the runtime pod ingress returned to the
+    # frontend. Defaults to DATALAYER_URL in code; override when the operator
+    # runs locally against a remote cluster so the ingress is always a reachable
+    # cloud URL (e.g. https://r1.datalayer.run) and never localhost.
+    DATALAYER_RUNTIMES_INGRESS_URL: ""
     # Scaling configuration
     AGENT_OP_FEATURES: ""
     DATALAYER_SCALING_STRATEGY: "simple"
