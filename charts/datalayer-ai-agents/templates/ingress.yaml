@@ -1,5 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
+{{- $runHost := include "aiagents.runHost" . | trim }}
 metadata:
   name: ai-agents-ingress
   annotations:
@@ -31,12 +32,16 @@ metadata:
     app: ai-agents
 spec:
   ingressClassName: datalayer-traefik
+{{- if $runHost }}
   tls:
   - hosts:
-    - {{ template "aiagents.runHost" . }}
-    secretName: {{ template "aiagents.runHost" . }}-datalayer-api-cert-secret
+    - {{ $runHost }}
+    secretName: {{ $runHost }}-datalayer-api-cert-secret
+{{- end }}
   rules:
-  - host: {{ template "aiagents.runHost" . }}
+  - {{- if $runHost }}
+    host: {{ $runHost }}
+    {{- end }}
     http:
       paths:
       - path: /api/ai-agents

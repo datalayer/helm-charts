@@ -39,9 +39,8 @@ csi-nfs-chart:
   affinity: {}
 
 csi-s3-chart:
-  # baseRepo: "anotherrepo"
-  # dockerRegistrySecret: "anothersecret"
-  # mounter: "goofys"
+  baseRepo: "quay.io/datashim-io"
+  mounter: "goofys"
   enabled: true
   csis3:
     image: "csi-s3"

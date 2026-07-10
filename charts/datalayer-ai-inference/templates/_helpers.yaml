@@ -32,5 +32,8 @@ Define the value for the app label.
 Define the value for the datalayer run host.
 */}}
 {{- define "aiinference.runHost" -}}
-{{- printf "%s" .Values.aiinference.env.DATALAYER_URL | replace "https://" "" -}}
+{{- $raw := default "" .Values.aiinference.env.DATALAYER_URL -}}
+{{- $noProto := regexReplaceAll "^https?://" $raw "" -}}
+{{- $host := first (splitList "/" $noProto) -}}
+{{- printf "%s" $host | trim -}}
 {{- end -}}

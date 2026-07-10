@@ -1,5 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
+{{- $runHost := include "aiinference.runHost" . | trim }}
 metadata:
   name: ai-inference-ingress
   annotations:
@@ -31,12 +32,16 @@ metadata:
     app: ai-inference
 spec:
   ingressClassName: datalayer-traefik
+{{- if $runHost }}
   tls:
   - hosts:
-    - {{ template "aiinference.runHost" . }}
-    secretName: {{ template "aiinference.runHost" . }}-datalayer-api-cert-secret
+    - {{ $runHost }}
+    secretName: {{ $runHost }}-datalayer-api-cert-secret
+{{- end }}
   rules:
-  - host: {{ template "aiinference.runHost" . }}
+  - {{- if $runHost }}
+    host: {{ $runHost }}
+    {{- end }}
     http:
       paths:
       - path: /api/ai-inference
