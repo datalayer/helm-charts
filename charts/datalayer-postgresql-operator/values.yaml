@@ -1,0 +1,31 @@
+# Copyright (c) 2023-2026 Datalayer, Inc.
+# Datalayer License
+
+# Values for the CloudNativePG operator (https://cloudnative-pg.io).
+#
+# These values are passed to the upstream `cnpg/cloudnative-pg` Helm chart.
+# The chart ships with sensible defaults; only the overrides that matter for
+# Datalayer are documented here. Cluster-type specific overrides (for example
+# the node selector) live in the `values-<cluster>.yaml` files and are the ones
+# actually applied by `plane up datalayer-postgresql-operator`.
+
+# Number of operator replicas. A single replica is enough for most clusters as
+# the operator supports leader election and pods are rescheduled on failure.
+replicaCount: 1
+
+# The operator is installed cluster-wide by default (empty watch namespaces).
+# Set to a comma-separated list to restrict which namespaces are watched.
+config:
+  data: {}
+
+# Pin the operator image to a known-good release. Chart 0.29.0 ships
+# CloudNativePG 1.30.0.
+image:
+  repository: ghcr.io/cloudnative-pg/cloudnative-pg
+  pullPolicy: IfNotPresent
+
+monitoring:
+  # Requires the Prometheus operator CRDs to be installed in the cluster.
+  podMonitorEnabled: false
+
+resources: {}
