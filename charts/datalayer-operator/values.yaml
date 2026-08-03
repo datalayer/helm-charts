@@ -39,6 +39,16 @@ operator:
     DATALAYER_OPERATOR_API_KEY: ""
     DATALAYER_PUBSUB_ENGINE: "pulsar"
     DATALAYER_PULSAR_URL: "pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"
+    AGENT_RUNTIMES_MEM0_BACKEND: "auto"
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_NAMESPACE: "datalayer-postgresql"
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_SECRET: "datalayer-postgresql-agent-memories-app"
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_HOST: "datalayer-postgresql-agent-memories-rw.datalayer-postgresql.svc.cluster.local"
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_PORT: "5432"
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_DATABASE: "mem0"
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_COLLECTION: "agent_memories"
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_URI: ""
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_USER: ""
+    DATALAYER_POSTGRESQL_AGENT_MEMORIES_PASSWORD: ""
     DATALAYER_RUNTIMES_RUN_HOOKS: "false"
     DATALAYER_URL: ""
     # Public base URL used to build the runtime pod ingress returned to the
@@ -113,6 +123,13 @@ operator:
       clientSecret: ""
       subscriptionId: ""
       resourceGroup: ""
+  # Optional explicit RBAC grant allowing the operator service account in
+  # datalayer-runtimes to read the CloudNativePG generated app secret in
+  # datalayer-postgresql.
+  postgresqlAgentMemories:
+    grantRBAC: true
+    namespace: "datalayer-postgresql"
+    secretName: "datalayer-postgresql-agent-memories-app"
   # Kubelet client certificates (PEM content, set via --set-file in up.sh).
   # When provided, a Secret is created and mounted at /etc/kubelet-certs/.
   kubeletCerts:

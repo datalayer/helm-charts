@@ -10,6 +10,27 @@ Datalayer Operator
 
 For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 
+## PostgreSQL Memory Secret Integration
+
+The operator can read CloudNativePG's generated app secret from the PostgreSQL
+namespace and inject memory credentials into runtime pods.
+
+- `operator.postgresqlMemory.grantRBAC` enables a cross-namespace Role/RoleBinding.
+- `operator.postgresqlMemory.namespace` defaults to `datalayer-postgresql`.
+- `operator.postgresqlMemory.secretName` defaults to `datalayer-postgresql-memory-app`.
+
+Related operator env values:
+
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_NAMESPACE`
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_SECRET`
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_HOST`
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_PORT`
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_DATABASE`
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_COLLECTION`
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_URI`
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_USER`
+- `operator.env.DATALAYER_POSTGRESQL_MEMORY_PASSWORD`
+
 ## Values
 
 | Key | Type | Default | Description |

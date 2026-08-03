@@ -3,6 +3,7 @@ templates:
   - templates/operator-serviceaccount.yaml
   - templates/operator-clusterrole.yaml
   - templates/operator-clusterrolebinding.yaml
+  - templates/operator-postgresql-memory-secret-rbac.yaml
 tests:
   - it: "test ServiceAccount creation"
     template: templates/operator-serviceaccount.yaml
@@ -41,3 +42,15 @@ tests:
       - notEqual:
           path: roleRef.name
           value: cluster-admin
+
+  - it: "test PostgreSQL memory secret rolebinding is enabled by default"
+    template: templates/operator-postgresql-memory-secret-rbac.yaml
+    release:
+      namespace: datalayer-runtimes
+    asserts:
+      - containsDocument:
+          kind: Role
+          apiVersion: rbac.authorization.k8s.io/v1
+      - containsDocument:
+          kind: RoleBinding
+          apiVersion: rbac.authorization.k8s.io/v1
