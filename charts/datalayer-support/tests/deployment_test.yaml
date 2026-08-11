@@ -126,7 +126,7 @@ tests:
                 value: ""
               - name: DATALAYER_SUPPORT_EMAIL
                 value: ""
-              - name: DATALAYER_Support_API_KEY
+              - name: DATALAYER_SUPPORT_API_KEY
                 value: ""
               - name: DATALAYER_VAULT_TOKEN
                 value: ""
