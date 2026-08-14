@@ -10,27 +10,6 @@ Datalayer Operator
 
 For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 
-## PostgreSQL Memory Secret Integration
-
-The operator can read CloudNativePG's generated app secret from the PostgreSQL
-namespace and inject memory credentials into runtime pods.
-
-- `operator.postgresqlMemory.grantRBAC` enables a cross-namespace Role/RoleBinding.
-- `operator.postgresqlMemory.namespace` defaults to `datalayer-postgresql`.
-- `operator.postgresqlMemory.secretName` defaults to `datalayer-postgresql-memory-app`.
-
-Related operator env values:
-
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_NAMESPACE`
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_SECRET`
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_HOST`
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_PORT`
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_DATABASE`
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_COLLECTION`
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_URI`
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_USER`
-- `operator.env.DATALAYER_POSTGRESQL_MEMORY_PASSWORD`
-
 ## Values
 
 | Key | Type | Default | Description |
@@ -51,6 +30,7 @@ Related operator env values:
 | operator.cloudCredentials.secretName | string | `""` |  |
 | operator.crds | bool | `true` |  |
 | operator.env.AGENT_OP_FEATURES | string | `""` |  |
+| operator.env.AGENT_RUNTIMES_MEM0_BACKEND | string | `"auto"` |  |
 | operator.env.AWS_ACCESS_KEY_ID | string | `""` |  |
 | operator.env.AWS_DEFAULT_REGION | string | `""` |  |
 | operator.env.AWS_SECRET_ACCESS_KEY | string | `""` |  |
@@ -69,16 +49,26 @@ Related operator env values:
 | operator.env.DATALAYER_DOCKER_REGISTRY | string | `""` |  |
 | operator.env.DATALAYER_IAM_API_KEY | string | `""` |  |
 | operator.env.DATALAYER_IAM_URL | string | `"http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"` |  |
+| operator.env.DATALAYER_IAM_URL | string | `""` |  |
 | operator.env.DATALAYER_INGRESS_CLASS_NAME | string | `"datalayer-traefik"` |  |
 | operator.env.DATALAYER_KAFKA_PASSWORD | string | `""` |  |
 | operator.env.DATALAYER_KAFKA_URL | string | `"datalayer-kafka-kafka-bootstrap.datalayer-kafka.svc.cluster.local:9092"` |  |
 | operator.env.DATALAYER_KAFKA_USERNAME | string | `""` |  |
 | operator.env.DATALAYER_OPERATOR_API_KEY | string | `""` |  |
 | operator.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_COLLECTION | string | `"agent_memories"` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_DATABASE | string | `"mem0"` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_HOST | string | `"datalayer-postgresql-agent-memories-rw.datalayer-postgresql.svc.cluster.local"` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_NAMESPACE | string | `"datalayer-postgresql"` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_PASSWORD | string | `""` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_PORT | string | `"5432"` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_SECRET | string | `"datalayer-postgresql-agent-memories-app"` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_URI | string | `""` |  |
+| operator.env.DATALAYER_POSTGRESQL_AGENT_MEMORIES_USER | string | `""` |  |
 | operator.env.DATALAYER_PUBSUB_ENGINE | string | `"pulsar"` |  |
 | operator.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
+| operator.env.DATALAYER_RUNTIMES_INGRESS_URL | string | `""` |  |
 | operator.env.DATALAYER_RUNTIMES_RUN_HOOKS | string | `"false"` |  |
-| operator.env.DATALAYER_URL | string | `""` |  |
 | operator.env.DATALAYER_S3_CHECKPOINT_URL | string | `"https://s3.us-west-2.amazonaws.com"` |  |
 | operator.env.DATALAYER_SCALING_COMMANDS_DLQ_TOPIC | string | `"operator-scaling-commands-dlq-topic"` |  |
 | operator.env.DATALAYER_SCALING_COMMANDS_MAX_REDELIVERIES | string | `"5"` |  |
@@ -118,6 +108,9 @@ Related operator env values:
 | operator.kubeletCerts.key | string | `""` |  |
 | operator.kubeletCerts.mountPath | string | `"/etc/kubelet-certs"` |  |
 | operator.port | int | `2111` |  |
+| operator.postgresqlAgentMemories.grantRBAC | bool | `true` |  |
+| operator.postgresqlAgentMemories.namespace | string | `"datalayer-postgresql"` |  |
+| operator.postgresqlAgentMemories.secretName | string | `"datalayer-postgresql-agent-memories-app"` |  |
 | operator.rbac.annotations | object | `{}` |  |
 | operator.rbac.create | bool | `true` |  |
 | operator.rbac.serviceAccountName | string | `"datalayer-operator-sa"` |  |

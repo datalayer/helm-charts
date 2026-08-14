@@ -47,8 +47,8 @@ spec:
 #            runAsUser: 1000
 #            runAsGroup: 100
           env:
-          - name: DATALAYER_URL
-            value: {{ .Values.jump.env.DATALAYER_URL }}
+          - name: DATALAYER_IAM_URL
+            value: {{ .Values.jump.env.DATALAYER_IAM_URL }}
 #          readinessProbe:
 #            httpGet:
 #              path: /api/jump/version

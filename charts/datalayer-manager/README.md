@@ -27,12 +27,12 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | manager.env.DATALAYER_JWT_CACHE_VALIDATE | string | `"false"` |  |
 | manager.env.DATALAYER_JWT_ISSUER | string | `""` |  |
 | manager.env.DATALAYER_JWT_SECRET | string | `""` |  |
+| manager.env.DATALAYER_MANAGER_URL | string | `""` |  |
 | manager.env.DATALAYER_OPENFGA_AUTHZ_MODEL_ID | string | `""` |  |
 | manager.env.DATALAYER_OPENFGA_REST_URL | string | `"http://datalayer-openfga.datalayer-openfga.svc.cluster.local:8080"` |  |
 | manager.env.DATALAYER_OPENFGA_STORE_ID | string | `""` |  |
 | manager.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | manager.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| manager.env.DATALAYER_URL | string | `""` |  |
 | manager.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | manager.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | manager.env.DATALAYER_SMTP_PORT | string | `""` |  |

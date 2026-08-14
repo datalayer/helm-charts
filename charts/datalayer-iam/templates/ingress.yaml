@@ -34,6 +34,23 @@ spec:
         backend:
           service:
             name: {{ .Release.Name }}-svc
-            port: 
+            port:
+              number: {{ .Values.iam.port }}
+      # The OAuth discovery documents an MCP client reads before it can
+      # authenticate. RFC 8414 and RFC 9728 place them at the root of the
+      # host, so they cannot live behind the /api/iam prefix.
+      - path: /.well-known/oauth-authorization-server
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-svc
+            port:
+              number: {{ .Values.iam.port }}
+      - path: /.well-known/oauth-protected-resource
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-svc
+            port:
               number: {{ .Values.iam.port }}
 {{- end }}

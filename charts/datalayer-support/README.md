@@ -45,7 +45,6 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | support.env.DATALAYER_PUBSUB_ENGINE | string | `"kafka"` |  |
 | support.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | support.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| support.env.DATALAYER_URL | string | `""` |  |
 | support.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | support.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | support.env.DATALAYER_SMTP_PORT | string | `"0"` |  |
@@ -62,8 +61,9 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | support.env.DATALAYER_STRIPE_TEAM_PLAN_PRICE_LOOKUP_KEY | string | `""` |  |
 | support.env.DATALAYER_STRIPE_TOPUP_PRICE_LOOKUP_KEYS | string | `""` |  |
 | support.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
-| support.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | support.env.DATALAYER_SUPPORT_API_KEY | string | `""` |  |
+| support.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
+| support.env.DATALAYER_SUPPORT_URL | string | `""` |  |
 | support.env.DATALAYER_VAULT_TOKEN | string | `""` |  |
 | support.env.DATALAYER_VAULT_URL | string | `"http://datalayer-vault-internal.datalayer-vault.svc.cluster.local:8200"` |  |
 | support.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |

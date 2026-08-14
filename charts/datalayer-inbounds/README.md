@@ -29,6 +29,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | inbounds.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | inbounds.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
 | inbounds.env.DATALAYER_INBOUNDS_API_KEY | string | `""` |  |
+| inbounds.env.DATALAYER_INBOUNDS_URL | string | `""` |  |
 | inbounds.env.DATALAYER_INITIAL_USER_CREDITS | string | `"500"` |  |
 | inbounds.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | inbounds.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
@@ -47,7 +48,6 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | inbounds.env.DATALAYER_PUBSUB_ENGINE | string | `"pulsar"` |  |
 | inbounds.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | inbounds.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| inbounds.env.DATALAYER_URL | string | `""` |  |
 | inbounds.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | inbounds.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | inbounds.env.DATALAYER_SMTP_PORT | string | `"0"` |  |

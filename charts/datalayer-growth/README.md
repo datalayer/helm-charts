@@ -28,6 +28,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | growth.env.DATALAYER_CREDITS_PROVIDER | string | `""` |  |
 | growth.env.DATALAYER_GITHUB_CLIENT_ID | string | `""` |  |
 | growth.env.DATALAYER_GITHUB_CLIENT_SECRET | string | `""` |  |
+| growth.env.DATALAYER_GROWTH_URL | string | `""` |  |
 | growth.env.DATALAYER_INITIAL_USER_CREDITS | string | `"500"` |  |
 | growth.env.DATALAYER_JWT_ALGORITHM | string | `""` |  |
 | growth.env.DATALAYER_JWT_ALLOWED_ISSUERS | string | `""` |  |
@@ -46,7 +47,6 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | growth.env.DATALAYER_PUBSUB_ENGINE | string | `"pulsar"` |  |
 | growth.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | growth.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| growth.env.DATALAYER_URL | string | `""` |  |
 | growth.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | growth.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | growth.env.DATALAYER_SMTP_PORT | string | `"0"` |  |

@@ -3,7 +3,7 @@ observer:
   certificateIssuer: letsencrypt
   ingressClass: datalayer-traefik
   env:
-    DATALAYER_URL: "oss.datalayer.run"
+    DATALAYER_IAM_URL: "oss.datalayer.run"
 # Metrics and traces collector
 collector:
   affinity:

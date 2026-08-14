@@ -34,12 +34,12 @@ Datalayer Scheduler
 | scheduler.env.DATALAYER_OTEL_API_KEY | string | `""` |  |
 | scheduler.env.DATALAYER_RUNTIMES_URL | string | `"http://datalayer-runtimes-svc.datalayer-api.svc.cluster.local:9500"` |  |
 | scheduler.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| scheduler.env.DATALAYER_URL | string | `""` |  |
 | scheduler.env.DATALAYER_SCHEDULER_API_KEY | string | `""` |  |
 | scheduler.env.DATALAYER_SCHEDULER_EXEC_TIMEOUT_SECONDS | string | `"300"` |  |
 | scheduler.env.DATALAYER_SCHEDULER_INTERVAL_SECONDS | string | `"10"` |  |
 | scheduler.env.DATALAYER_SCHEDULER_RUNTIME_CREDITS_FRACTION | string | `"0.5"` |  |
 | scheduler.env.DATALAYER_SCHEDULER_RUNTIME_ENVIRONMENT | string | `"ai-agents-env"` |  |
+| scheduler.env.DATALAYER_SCHEDULER_URL | string | `""` |  |
 | scheduler.env.DATALAYER_SOLR_ZK_HOST | string | `"solr-datalayer-solrcloud-zookeeper-headless.datalayer-solr.svc.cluster.local"` |  |
 | scheduler.env.DATALAYER_SPACE_URL | string | `"http://datalayer-spacer-svc.datalayer-api.svc.cluster.local:9900"` |  |
 | scheduler.env.OTEL_EXPORTER_OTLP_LOGS_ENDPOINT | string | `"http://datalayer-otel-otel-collector-svc.datalayer-otel.svc.cluster.local:4317"` |  |

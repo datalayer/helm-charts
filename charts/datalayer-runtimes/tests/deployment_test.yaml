@@ -76,7 +76,7 @@ tests:
                 value: prod
               - name: DATALAYER_SPACER_URL
                 value: datalayer-spacer-svc.datalayer-api.svc.cluster.local:9900
-              - name: DATALAYER_URL
+              - name: DATALAYER_RUNTIMES_URL
                 value: ""
               - name: DATALAYER_SOLR_PASSWORD
                 valueFrom:

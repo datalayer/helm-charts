@@ -45,7 +45,6 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | success.env.DATALAYER_PUBSUB_ENGINE | string | `"kafka"` |  |
 | success.env.DATALAYER_PULSAR_URL | string | `"pulsar://datalayer-pulsar-broker.datalayer-pulsar.svc.cluster.local:6650"` |  |
 | success.env.DATALAYER_RUNTIME_ENV | string | `"prod"` |  |
-| success.env.DATALAYER_URL | string | `""` |  |
 | success.env.DATALAYER_SMTP_HOST | string | `""` |  |
 | success.env.DATALAYER_SMTP_PASSWORD | string | `""` |  |
 | success.env.DATALAYER_SMTP_PORT | string | `"0"` |  |
@@ -62,6 +61,7 @@ For full documentation please checkout [Datalayer AI](https://datalayer.ai).
 | success.env.DATALAYER_STRIPE_TEAM_PLAN_PRICE_LOOKUP_KEY | string | `""` |  |
 | success.env.DATALAYER_STRIPE_TOPUP_PRICE_LOOKUP_KEYS | string | `""` |  |
 | success.env.DATALAYER_STRIPE_WEBHOOK_SECRET | string | `""` |  |
+| success.env.DATALAYER_SUCCESS_URL | string | `""` |  |
 | success.env.DATALAYER_SUPPORT_EMAIL | string | `""` |  |
 | success.env.DATALAYER_Success_API_KEY | string | `""` |  |
 | success.env.DATALAYER_VAULT_TOKEN | string | `""` |  |

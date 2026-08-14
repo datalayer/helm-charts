@@ -32,7 +32,7 @@ Define the value for the app label.
 Define the value for the datalayer run host.
 */}}
 {{- define "aiagents.runHost" -}}
-{{- $raw := default "" .Values.aiagents.env.DATALAYER_URL -}}
+{{- $raw := default "" .Values.aiagents.env.DATALAYER_AI_AGENTS_URL -}}
 {{- $noProto := regexReplaceAll "^https?://" $raw "" -}}
 {{- $host := first (splitList "/" $noProto) -}}
 {{- printf "%s" $host | trim -}}
