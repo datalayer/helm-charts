@@ -38,7 +38,6 @@ spec:
           ports:
             - containerPort: {{ .Values.iam.port }}
               protocol: TCP
-          {{- if .Values.iam.env }}
           env:
             {{- range $key, $value := .Values.iam.env }}
             - name: {{ $key }}
@@ -48,7 +47,20 @@ spec:
               value: {{ $value | quote }}
               {{- end }}
             {{- end }}
-          {{- end }}
+            {{- if .Values.iam.oidc.privateKey }}
+            # The OpenID Connect signing key, from the Secret this chart
+            # renders for it. See templates/oidc-secret.yaml.
+            - name: DATALAYER_OIDC_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "iam.fullname" . }}-oidc
+                  key: private-key.pem
+            - name: DATALAYER_OIDC_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "iam.fullname" . }}-oidc
+                  key: key-id
+            {{- end }}
           {{- with .Values.iam.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}

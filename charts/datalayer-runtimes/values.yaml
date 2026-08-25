@@ -28,6 +28,7 @@ runtimes:
     DATALAYER_AUTHZ_ENGINE: ""
     DATALAYER_CDN_URL: ""
     DATALAYER_CORS_ORIGIN: "*"
+    DATALAYER_CONTENTS_URL: "http://datalayer-contents-svc.datalayer-api.svc.cluster.local:9400"
     DATALAYER_IAM_URL: "http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"
     DATALAYER_JWT_ALGORITHM: ""
     DATALAYER_JWT_CACHE_VALIDATE: "false"

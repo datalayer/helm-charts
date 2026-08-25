@@ -53,4 +53,14 @@ spec:
             name: {{ .Release.Name }}-svc
             port:
               number: {{ .Values.iam.port }}
+      # OpenID Connect Discovery at the host root, for a client given only
+      # the host, and in the RFC 8414 path-inserted form; the form under the
+      # issuer is already covered by the /api/iam prefix.
+      - path: /.well-known/openid-configuration
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-svc
+            port:
+              number: {{ .Values.iam.port }}
 {{- end }}

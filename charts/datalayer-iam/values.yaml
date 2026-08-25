@@ -16,6 +16,13 @@ iam:
             operator: In
             values:
             - "true"
+  # OpenID Connect. The private key that signs ID tokens, PEM-encoded, and
+  # the `kid` it is published under. Set from a file at deploy time:
+  #   --set-file iam.oidc.privateKey=/path/to/private-key.pem
+  # Empty means this IAM is an OAuth server only; `openid` is refused.
+  oidc:
+    privateKey: ""
+    keyId: ""
   env:
     DATALAYER_SOLR_USERNAME:
       secretKeyRef:

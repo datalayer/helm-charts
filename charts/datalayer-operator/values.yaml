@@ -29,6 +29,7 @@ operator:
     DATALAYER_AUTHZ_ENGINE: "openfga"
     DATALAYER_AVAILABLE_RUNTIMES_MAX_LIFE_SEC: "3600"
     DATALAYER_CERT_ISSUER: "letsencrypt"
+    DATALAYER_CONTENTS_URL: "http://datalayer-contents-svc.datalayer-api.svc.cluster.local:9400"
     DATALAYER_DOCKER_REGISTRY: ""
     DATALAYER_IAM_API_KEY: ""
     DATALAYER_IAM_URL: "http://datalayer-iam-svc.datalayer-api.svc.cluster.local:9700"
