@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-connectors
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "dataserver.labels" . | nindent 4 }}
+data:
+  connectors.json: |-
+    {{- toPrettyJson .Values.dataserver.connectors | nindent 4 }}

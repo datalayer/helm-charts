@@ -12,11 +12,11 @@ spec:
     singular: runtime-pool
     plural: runtime-pools
     shortNames:
+        - rtp
         - rp
         - rps
         - rpool
         - rpools
-        - rtp
   versions:
     - name: v1
       served: true

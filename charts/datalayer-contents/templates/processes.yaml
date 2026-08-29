@@ -38,6 +38,14 @@ spec:
             - name: 'DATALAYER_SHARED_FS_MOUNT_PATH'
               value: {{ $.Values.contents.sharedFsMountPath | quote }}
             {{- end }}
+            {{- if $.Values.contents.processes.bridge.enabled }}
+            - name: DATALAYER_CONTENTS_BRIDGE_ENABLED
+              value: "true"
+            - name: DATALAYER_CONTENTS_BRIDGE_URL
+              value: wss://{{ include "contents.runHost" $ }}/bridges
+            - name: DATALAYER_CONTENTS_BRIDGE_PORT
+              value: {{ $.Values.contents.bridgePort | quote }}
+            {{- end }}
             {{- range $key, $value := $.Values.contents.envValueFrom }}
             - name: {{ $key }}
               valueFrom: {{- $value | toYaml | nindent 16 }}
@@ -46,21 +54,36 @@ spec:
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
+            {{- if eq $name "worker" }}
+            - name: 'DATALAYER_CONTENTS_WORKER_PROBE_PORT'
+              value: {{ $.Values.contents.workerProbePort | quote }}
+            {{- end }}
           {{- if eq $name "worker" }}
+          # The port is set here as well as probed above: the two must agree,
+          # and only the chart knows the number.
+          {{- end }}
+          {{- if eq $name "worker" }}
+          ports:
+            - name: probes
+              containerPort: {{ $.Values.contents.workerProbePort }}
+          # The worker answers the same two questions the API does, on a port
+          # of its own. It used to touch a file from a thread beside the loop,
+          # which kept saying "alive" while the loop itself was wedged, and
+          # said nothing at all about Solr being unreachable.
           readinessProbe:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - test -n "$(find /tmp/datalayer-contents-worker-heartbeat -mmin -2 -print 2>/dev/null)"
+            httpGet:
+              path: /ready
+              port: probes
             initialDelaySeconds: 5
             periodSeconds: 15
+            # Above DATALAYER_CONTENTS_DEPENDENCY_TIMEOUT_SECONDS, so an
+            # unreachable dependency is reported as a 503 naming it rather
+            # than as an opaque probe timeout.
+            timeoutSeconds: 5
           livenessProbe:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - test -n "$(find /tmp/datalayer-contents-worker-heartbeat -mmin -2 -print 2>/dev/null)"
+            httpGet:
+              path: /health
+              port: probes
             initialDelaySeconds: 15
             periodSeconds: 30
           {{- end }}

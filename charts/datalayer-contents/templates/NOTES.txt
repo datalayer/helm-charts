@@ -1,0 +1,29 @@
+Datalayer Contents is installed in namespace {{ .Values.namespace }}.
+
+API, inside the cluster:
+
+  http://{{ .Release.Name }}-svc.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.contents.apiPort }}/api/contents/v1/health
+{{- if .Values.contents.runHost }}
+
+API, through the ingress:
+
+  https://{{ include "contents.runHost" . }}/api/contents/v1/health
+{{- end }}
+
+Processes enabled:
+{{- range $name, $process := .Values.contents.processes }}
+{{- if $process.enabled }}
+  - {{ $name }} ({{ $process.replicas }} replica{{ if ne (int $process.replicas) 1 }}s{{ end }})
+{{- end }}
+{{- end }}
+{{- if .Values.contents.processes.flight.enabled }}
+
+Arrow Flight (DoGet of a Contents ticket; Flight SQL is not served):
+
+  in-cluster:  grpc://{{ .Release.Name }}-flight-svc.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.contents.flightPort }}
+{{- if .Values.contents.flightHost }}
+  public:      grpc+tls://{{ .Values.contents.flightHost }}:443   (TLS passthrough; the gateway needs its certificate)
+{{- else }}
+  public:      not routed — set contents.flightHost to add the IngressRouteTCP
+{{- end }}
+{{- end }}

@@ -12,11 +12,11 @@ spec:
     singular: runtime-environment
     plural: runtime-environments
     shortNames:
+        - rte
         - re
         - res
         - renv
         - renvs
-        - rte
   versions:
     - name: v1
       served: true
@@ -74,6 +74,86 @@ spec:
                     required:
                       - title
                       - code
+                capabilities:
+                  type: array
+                  title: What a runtime of this environment can do
+                  description: |
+                    Declared by the names of `datalayer_common.capabilities`
+                    (`agent`, `sandbox`, `mcp`, `home-folder`, `gpu`,
+                    `snapshot`, `checkpoint`, `local-bridge-mount`). A launch
+                    that requires a capability the environment does not
+                    declare is refused before the pod exists; the effective
+                    set is written on the runtime record. `contents.<uid>` is
+                    derived from `contents`, never declared here.
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        pattern: "^(agent|sandbox|mcp|home-folder|gpu|snapshot|checkpoint|local-bridge-mount)$"
+                        title: The capability, by its name in the vocabulary
+                      enabled:
+                        type: boolean
+                        default: true
+                      params:
+                        type: object
+                        x-kubernetes-preserve-unknown-fields: true
+                        title: Capability parameters (e.g. `flavor` for `gpu`)
+                    required:
+                      - name
+                contents:
+                  type: array
+                  title: Runtime Contents this environment brings, by uid
+                  description: |
+                    Each entry selects one RuntimeContent by its `spec.uid`
+                    and says where it appears in the runtime. Only the
+                    selected contents are mounted or checked out; an entry
+                    whose uid matches no RuntimeContent refuses the launch.
+                  items:
+                    type: object
+                    properties:
+                      uid:
+                        type: string
+                        pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        title: The RuntimeContent `spec.uid`
+                      mount:
+                        type: string
+                        title: Absolute path inside the runtime
+                      permissions:
+                        type: string
+                        enum:
+                          - ro
+                          - rw
+                        title: Access from the runtime; never wider than the content's own
+                    required:
+                      - uid
+                      - mount
+                contents_build:
+                  type: array
+                  title: Immutable files built into the environment artifact
+                  description: |
+                    Each entry names a `source`, its destination `path` in
+                    the runtime image and the `sha256` the fetched file must
+                    have. The build fetches and verifies every entry
+                    (`sha256sum -c`) and fails on a mismatch; the image lists
+                    what it carries at /etc/datalayer/environment-contents.json.
+                  items:
+                    type: object
+                    properties:
+                      source:
+                        type: string
+                        title: Where the file is fetched from
+                      path:
+                        type: string
+                        title: Absolute path inside the runtime
+                      sha256:
+                        type: string
+                        pattern: "^[0-9a-f]{64}$"
+                        title: Digest the fetched file must have
+                    required:
+                      - source
+                      - path
+                      - sha256
                 kernel:
                   type: object
                   properties:

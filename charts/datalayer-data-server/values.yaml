@@ -1,0 +1,53 @@
+namespace: datalayer-dataserver
+
+dataserver:
+  image: datalayer/data-server:0.1.0
+  imagePullPolicy: Always
+  imagePullSecrets: []
+  # One is enough: a registration identity is one certificate, and two
+  # pods with the same one look to Contents like one Data Server twice.
+  replicas: 1
+  # Where Contents answers, and the identity this Data Server registers as.
+  contentsUrl: ""
+  identity: ""
+  # The `dataserver` service identity's API key, from an existing Secret.
+  apiKeySecret:
+    name: datalayer-data-server-api-key
+    key: api-key
+  # The mTLS identity `datalayer-data-server bootstrap` wrote: a Secret
+  # with tls.crt and tls.key, and ca.crt when Contents' CA is private.
+  # Create it from the bootstrap output:
+  #   kubectl create secret generic datalayer-data-server-identity \
+  #     --from-file=tls.crt=identity/tls.crt --from-file=tls.key=identity/tls.key \
+  #     --from-file=ca.crt=identity/ca.crt
+  identitySecret:
+    name: datalayer-data-server-identity
+    hasCA: true
+  # The connectors and their policy, rendered into a ConfigMap as
+  # connectors.json. Settings here are the connector's (paths, workgroups,
+  # projects); credentials are not settings — see `envValueFrom`.
+  connectors: []
+  # Plain environment: AWS_REGION, GOOGLE_CLOUD_PROJECT, tuning knobs.
+  env:
+    DATALAYER_DATASERVER_MAX_PARALLEL_JOBS: "2"
+    DATALAYER_DATASERVER_POLL_WAIT_SECONDS: "20"
+    DATALAYER_DATASERVER_DRAIN_SECONDS: "60"
+  # Source credentials from Secrets, as the drivers read them:
+  #   AWS_ACCESS_KEY_ID: {secretKeyRef: {name: aws, key: id}}
+  # They reach the drivers here and go nowhere else.
+  envValueFrom: {}
+  # Anything else to mount: a service-account JSON for BigQuery, a DuckDB
+  # file, a read-only PVC of data.
+  extraVolumes: []
+  extraVolumeMounts: []
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 2Gi
+  nodeSelector: {}
+  tolerations: []
+  # The spool: where a result is written while it is hashed and uploaded.
+  spool:
+    sizeLimit: 10Gi

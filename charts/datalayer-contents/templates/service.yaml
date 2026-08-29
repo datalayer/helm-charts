@@ -13,3 +13,51 @@ spec:
     - name: http
       port: {{ .Values.contents.apiPort }}
       targetPort: http
+{{- if .Values.contents.processes.flight.enabled }}
+---
+# The Flight gateway's own Service. The Service above selects the API pods
+# (`app: contents`); the gateway runs in the `contents-flight` pods and is the
+# only thing listening on the Flight port, so a port on the API Service would
+# route to nothing.
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-flight-svc
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "contents.labels" . | nindent 4 }}
+    datalayer.io/process: flight
+spec:
+  type: ClusterIP
+  selector:
+    app: contents-flight
+    release: {{ .Release.Name }}
+  ports:
+    - name: grpc
+      port: {{ .Values.contents.flightPort }}
+      targetPort: {{ .Values.contents.flightPort }}
+      protocol: TCP
+{{- end }}
+{{- if .Values.contents.processes.bridge.enabled }}
+---
+# The local-bridge relay: its own pods (`app: contents-bridge`), reached
+# through the API host's ingress on `/bridges` — a websocket over the same
+# TLS, so nothing new is exposed.
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-bridge-svc
+  namespace: {{ .Values.namespace }}
+  labels:
+    datalayer.io/app: contents
+    datalayer.io/process: bridge
+spec:
+  type: ClusterIP
+  selector:
+    app: contents-bridge
+  ports:
+    - name: bridge
+      port: {{ .Values.contents.bridgePort }}
+      targetPort: {{ .Values.contents.bridgePort }}
+      protocol: TCP
+{{- end }}

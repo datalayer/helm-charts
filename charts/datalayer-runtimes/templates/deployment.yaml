@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ template "runtimes.app-name" . }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.runtimes.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "runtimes.app-name" . }}
@@ -41,6 +41,8 @@ spec:
               protocol: TCP
           {{- if .Values.runtimes.env }}
           env:
+            - name: DATALAYER_RUNTIMES_REPLICAS
+              value: {{ .Values.runtimes.replicaCount | quote }}
             {{- range $key, $value := .Values.runtimes.env }}
             - name: {{ $key }}
               {{- if kindIs "map" $value }}

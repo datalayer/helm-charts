@@ -36,6 +36,14 @@ spec:
             - name: 'DATALAYER_SHARED_FS_MOUNT_PATH'
               value: {{ .Values.contents.sharedFsMountPath | quote }}
             {{- end }}
+            {{- if .Values.contents.processes.bridge.enabled }}
+            - name: DATALAYER_CONTENTS_BRIDGE_ENABLED
+              value: "true"
+            - name: DATALAYER_CONTENTS_BRIDGE_URL
+              value: wss://{{ include "contents.runHost" . }}/bridges
+            - name: DATALAYER_CONTENTS_BRIDGE_PORT
+              value: {{ .Values.contents.bridgePort | quote }}
+            {{- end }}
             {{- range $key, $value := .Values.contents.envValueFrom }}
             - name: {{ $key }}
               valueFrom: {{- $value | toYaml | nindent 16 }}

@@ -1,4 +1,8 @@
 runtimes:
+  # One replica: the external sandbox session registry is per process and the
+  # service refuses to open external sessions when DATALAYER_RUNTIMES_REPLICAS > 1
+  # (EXTERNAL_SESSIONS_UNPINNED) until the sessions are pinned across replicas.
+  replicaCount: 1
   image: datalayer/runtimes:1.0.9
   imagePullPolicy: Always
   sidecar:

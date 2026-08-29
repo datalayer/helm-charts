@@ -1,0 +1,133 @@
+{{- /*
+The alert rules for Contents, rendered only when `contents.alerts.enabled`
+is set: they are a `PrometheusRule`, which needs the Prometheus Operator
+CRDs the observer chart installs. The metric names are the ones
+`datalayer_contents/metrics.py` writes, as the collector's Prometheus
+exporter translates them (dots to underscores, `_total` on counters, the
+unit as a suffix). Thresholds come from `contents.alerts`, so a deployment
+tunes them without editing the rule.
+*/ -}}
+{{- if .Values.contents.alerts.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}-alerts
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "contents.labels" . | nindent 4 }}
+    {{- with .Values.contents.alerts.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  groups:
+    - name: contents.worker
+      rules:
+        # The worker exports, so it is up, but its loop has not come round:
+        # the same wedge `/health` reports as `stalled`, seen from outside.
+        - alert: ContentsWorkerStalled
+          expr: increase(contents_worker_loops_total[5m]) == 0
+          for: {{ .Values.contents.alerts.workerStalledFor }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "The Contents worker's loop has stopped coming round"
+            description: {{ `"No turn of the loop in 5 minutes on {{ $labels.pod }}: operations queue up, retention and lease sweeps do not run. The liveness probe restarts a stalled worker; if this keeps firing, the worker is being restarted for being busy — raise DATALAYER_CONTENTS_WORKER_STALL_SECONDS or sample the reconciliation."` | quote }}
+        # No worker reports at all. Distinct from a stalled one: a
+        # deployment scaled to zero, or a worker that never started.
+        - alert: ContentsWorkerAbsent
+          expr: absent(contents_worker_loops_total)
+          for: {{ .Values.contents.alerts.workerAbsentFor }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "No Contents worker is reporting"
+            description: "No contents_worker_loops_total series has been seen. The API still accepts operations; nothing runs them."
+        # Operations that gave up: the count is a gauge the worker sets on
+        # every housekeeping sweep, so growth is a real dead letter growing.
+        - alert: ContentsDeadLetterGrowing
+          expr: delta(contents_operations_dead_letter[1h]) > 0
+          for: {{ .Values.contents.alerts.deadLetterGrowingFor }}
+          labels:
+            severity: warning
+          annotations:
+            summary: "Operations are landing in the Contents dead letter"
+            description: {{ `"The dead letter grew by {{ $value }} in the last hour. 'datalayer contents operations dead-letter' says what gave up and why; 'requeue' once the cause is fixed."` | quote }}
+        - alert: ContentsDeadLetterDeep
+          expr: max(contents_operations_dead_letter) > {{ .Values.contents.alerts.deadLetterDepth }}
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: "The Contents dead letter holds more than {{ .Values.contents.alerts.deadLetterDepth }} operations"
+            description: {{ `"{{ $value }} operations are waiting on a person. Each is somebody's transfer, query or Volume that will not finish on its own."` | quote }}
+    - name: contents.readiness
+      rules:
+        # A required dependency reported down by a readiness probe — the
+        # API's `/ready` or a process's own — more than a blip's worth.
+        - alert: ContentsReadinessFailing
+          expr: sum by (process, dependency) (increase(contents_readiness_failures_total[10m])) > {{ .Values.contents.alerts.readinessFailures }}
+          for: {{ .Values.contents.alerts.readinessFailingFor }}
+          labels:
+            severity: critical
+          annotations:
+            summary: {{ `"{{ $labels.process }} is not ready: {{ $labels.dependency }} is down"` | quote }}
+            description: {{ `"Readiness has reported {{ $labels.dependency }} unavailable {{ $value }} times in 10 minutes for {{ $labels.process }}. The process is out of service until it is back."` | quote }}
+    - name: contents.bridges
+      rules:
+        # Bridge ends dropping: laptops closing is normal; a burst is the
+        # relay, or the network between it and everyone.
+        - alert: ContentsBridgeDisconnects
+          expr: sum(increase(contents_bridge_sessions_total{state="disconnected"}[15m])) > {{ .Values.contents.alerts.bridgeDisconnects }}
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Bridge ends are disconnecting from the Contents relay"
+            description: {{ `"{{ $value }} bridge ends disconnected in 15 minutes. Every one is a local mount in a sandbox reading 'degraded' until its end comes back."` | quote }}
+    - name: contents.dataservers
+      rules:
+        # A Dataserver's lease ran out three times over, or a query was
+        # refused because its Dataserver was not routable.
+        - alert: ContentsDataserverUnavailable
+          expr: |
+            sum(increase(contents_dataserver_lease_sweeps_total{state="unavailable"}[15m])) > 0
+            or sum(increase(contents_dataserver_refusals_total{code="DATASERVER_UNAVAILABLE"}[15m])) > 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "A Dataserver is unavailable"
+            description: "A Dataserver missed three leases, or a query routed through one was refused as DATASERVER_UNAVAILABLE. `datalayer contents dataservers status SOURCE` names the state; the next heartbeat with the same identity makes it ready again."
+    - name: contents.reconcile
+      rules:
+        # The worker compared the catalog with the store and they disagree.
+        - alert: ContentsReconcileDiscrepancies
+          expr: sum(contents_reconcile_discrepancies) > 0
+          for: {{ .Values.contents.alerts.reconcileDiscrepanciesFor }}
+          labels:
+            severity: warning
+          annotations:
+            summary: "The Contents catalog and the object store disagree"
+            description: {{ `"{{ $value }} discrepancies in the last reconciliation. GET /operations/reconcile lists them by kind (missing-bytes, orphan-bytes, size-mismatch, checksum-mismatch, version-without-key) and 'datalayer-contents-reconcile --verify' reproduces the report."` | quote }}
+        # No reconciliation for two intervals: the worker is not running
+        # it, or it never finishes.
+        - alert: ContentsReconcileStale
+          expr: time() - max(contents_reconcile_last_run_timestamp_seconds) > {{ mul 2 .Values.contents.alerts.reconcileIntervalSeconds }}
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "The Contents catalog has not been reconciled against the store lately"
+            description: "More than two intervals have passed since the worker's last reconciliation. Check the worker's log for a comparison that failed, or DATALAYER_CONTENTS_RECONCILE_INTERVAL_SECONDS for one that is off."
+    - name: contents.limits
+      rules:
+        # Not an outage, but a signal: callers are hitting the ceilings.
+        - alert: ContentsLimitsRefusing
+          expr: sum by (limit) (increase(contents_limit_refusals_total[15m])) > {{ .Values.contents.alerts.limitRefusals }}
+          for: 15m
+          labels:
+            severity: info
+          annotations:
+            summary: {{ `"The Contents {{ $labels.limit }} limit is refusing requests"` | quote }}
+            description: {{ `"{{ $value }} requests were refused by the {{ $labels.limit }} limit in 15 minutes. Raise the setting, or find who is looping."` | quote }}
+{{- end }}

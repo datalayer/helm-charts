@@ -27,4 +27,14 @@ spec:
                 name: {{ .Release.Name }}-svc
                 port:
                   number: {{ .Values.contents.apiPort }}
+          {{- if .Values.contents.processes.bridge.enabled }}
+          # The relay's websocket, on the API's host: `wss://<runHost>/bridges/<uid>`.
+          - path: /bridges
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Release.Name }}-bridge-svc
+                port:
+                  number: {{ .Values.contents.bridgePort }}
+          {{- end }}
 {{- end }}

@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "localcsi.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "localcsi.selectorLabels" . | nindent 6 }}
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        {{- include "localcsi.selectorLabels" . | nindent 8 }}
+        datalayer.io/app: local-csi
+    spec:
+      serviceAccountName: {{ .Release.Name }}
+      priorityClassName: system-node-critical
+      {{- with .Values.driver.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.driver.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.driver.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: driver
+          image: {{ .Values.driver.image }}
+          imagePullPolicy: {{ .Values.driver.imagePullPolicy }}
+          args:
+            - --endpoint=unix:///csi/csi.sock
+            - --node-id=$(NODE_ID)
+            - --state-dir=/csi/mounts
+            - --health-port={{ .Values.driver.healthPort }}
+            - --log-level={{ .Values.driver.logLevel }}
+            {{- if .Values.relay.host }}
+            - --relay-host={{ .Values.relay.host }}
+            {{- end }}
+            {{- if .Values.driver.allowInsecureRelay }}
+            - --allow-insecure-relay
+            {{- end }}
+          env:
+            - name: NODE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: CSI_ENDPOINT
+              value: unix:///csi/csi.sock
+          # Mounting FUSE filesystems and bind mounts on the host, and
+          # propagating them into pods, needs a privileged container.
+          securityContext:
+            privileged: true
+            capabilities:
+              add: ["SYS_ADMIN"]
+            allowPrivilegeEscalation: true
+          ports:
+            - name: health
+              containerPort: {{ .Values.driver.healthPort }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: health
+            initialDelaySeconds: 5
+            periodSeconds: 15
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+              mountPropagation: Bidirectional
+            - name: pods-dir
+              mountPath: {{ .Values.driver.kubeletDir }}/pods
+              mountPropagation: Bidirectional
+            - name: fuse
+              mountPath: /dev/fuse
+          resources:
+            {{- toYaml .Values.driver.resources | nindent 12 }}
+        - name: registrar
+          image: {{ .Values.registrar.image }}
+          imagePullPolicy: {{ .Values.registrar.imagePullPolicy }}
+          args:
+            - --csi-address=/csi/csi.sock
+            - --kubelet-registration-path={{ include "localcsi.pluginDir" . }}/csi.sock
+            - --health-port=9809
+          env:
+            - name: KUBE_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9809
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+            - name: registration-dir
+              mountPath: /registration
+          resources:
+            {{- toYaml .Values.registrar.resources | nindent 12 }}
+      volumes:
+        - name: plugin-dir
+          hostPath:
+            path: {{ include "localcsi.pluginDir" . }}
+            type: DirectoryOrCreate
+        - name: registration-dir
+          hostPath:
+            path: {{ .Values.driver.kubeletDir }}/plugins_registry
+            type: DirectoryOrCreate
+        - name: pods-dir
+          hostPath:
+            path: {{ .Values.driver.kubeletDir }}/pods
+            type: Directory
+        - name: fuse
+          hostPath:
+            path: /dev/fuse
+            type: CharDevice

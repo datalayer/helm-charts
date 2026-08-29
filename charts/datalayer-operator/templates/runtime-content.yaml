@@ -12,9 +12,9 @@ spec:
     singular: runtime-content
     plural: runtime-contents
     shortNames:
+        - rtc
         - rc
         - rcs
-        - rtc
   versions:
     - name: v1
       served: true
@@ -27,6 +27,15 @@ spec:
               x-kubernetes-preserve-unknown-fields: true
               type: object
               properties:
+                uid:
+                  type: string
+                  pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  title: Stable identity of the content (ULID)
+                  description: |
+                    Environments select contents by this uid, never by name:
+                    a content can be renamed or re-described without every
+                    Environment that uses it silently pointing elsewhere.
+                    Assigned once, when the content is defined.
                 type:
                   type: string
                   enum:
@@ -61,17 +70,44 @@ spec:
                 secret:
                   title: K8S Secret name for accessing the content
                   type: string
+                revision:
+                  type: string
+                  pattern: "^[0-9a-f]{40}$"
+                  title: Pinned commit (for git)
+                  description: |
+                    The commit sha the runtime checks out. A git content
+                    without a revision is refused at launch: a tutorial that
+                    changes under a user is not the tutorial they were promised.
+                sha256:
+                  type: string
+                  pattern: "^[0-9a-f]{64}$"
+                  title: Digest of the verified tarball (optional)
+                  description: |
+                    When set, the checkout is verified: the sha256 of
+                    `git archive --format=tar <revision>` must match, and the
+                    runtime pod fails to start otherwise.
               required:
+                - uid
                 - type
             status:
               type: object
               x-kubernetes-preserve-unknown-fields: true
       additionalPrinterColumns:
+        - name: UID
+          type: string
+          priority: 0
+          jsonPath: .spec.uid
+          description: Stable identity of the content.
         - name: Type
           type: string
           priority: 0
           jsonPath: .spec.type
           description: Type of content.
+        - name: Revision
+          type: string
+          priority: 1
+          jsonPath: .spec.revision
+          description: Pinned commit (git).
         - name: Message
           type: string
           priority: 0

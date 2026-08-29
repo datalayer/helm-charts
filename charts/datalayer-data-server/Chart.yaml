@@ -1,0 +1,8 @@
+apiVersion: v2
+name: datalayer-data-server
+description: Datalayer Data Server, a query gateway for a customer network — outbound only
+type: application
+version: 0.1.0
+appVersion: 0.1.0
+home: https://datalayer.ai
+icon: https://assets.datalayer.tech/datalayer-square.png

@@ -16,7 +16,17 @@ contents:
   # `up.sh` passes DATALAYER_CONTENTS_URL or DATALAYER_RUNTIMES_URL.
   runHost: ""
   apiPort: 9400
+  # Where the worker answers /health and /ready. It is not a service port:
+  # nothing but the kubelet talks to it.
+  workerProbePort: 9403
   flightPort: 9401
+  # The public host of the Arrow Flight gateway, e.g. `flight.<runHost>`.
+  # It routes as TLS passthrough on Traefik's `websecure` entrypoint
+  # (`templates/ingressroute-flight.yaml`), so it must be a host of its own:
+  # a passthrough TCP router matching the API's SNI would swallow the API's
+  # TLS before its HTTP router saw it. Empty renders no route; the Flight
+  # Service is still there for in-cluster clients.
+  flightHost: ""
   bridgePort: 9402
   replicas: 1
   env:
@@ -52,13 +62,46 @@ contents:
     DATALAYER_CONTENTS_STORAGE_BUCKET: "datalayer-contents"
     DATALAYER_CONTENTS_STORAGE_ENDPOINT_URL: ""
     DATALAYER_CONTENTS_STORAGE_REGION: ""
-    DATALAYER_CONTENTS_USER_FOLDER_QUOTA_BYTES: "10737418240"
-    DATALAYER_CONTENTS_USER_FOLDER_QUOTA_OBJECTS: "100000"
+    DATALAYER_CONTENTS_HOME_FOLDER_QUOTA_BYTES: "10737418240"
+    DATALAYER_CONTENTS_HOME_FOLDER_QUOTA_OBJECTS: "100000"
     DATALAYER_CONTENTS_VERSION_RETENTION_DAYS: "30"
     DATALAYER_CONTENTS_CLEANUP_INTERVAL_SECONDS: "300"
     DATALAYER_CONTENTS_MAXIMUM_UPLOAD_PART_BYTES: "16777216"
+    # The worker's reconciliation of the catalog against the store: every
+    # six hours, sizes only (`_VERIFY` hashes every object, which reads the
+    # whole bucket), every version (`_SAMPLE` looks at that many). `0`
+    # turns it off. The last report is `GET /operations/reconcile`.
+    DATALAYER_CONTENTS_RECONCILE_INTERVAL_SECONDS: "21600"
+    DATALAYER_CONTENTS_RECONCILE_VERIFY: "false"
+    DATALAYER_CONTENTS_RECONCILE_SAMPLE: "0"
+    # Limits beyond the quota; `0` disables the one it names. Queries one
+    # actor may have in flight (429 QUERY_LIMIT past it); the rows, bytes
+    # and seconds any query may run under, whatever its Datasource allows;
+    # tool calls one MCP session may make per minute (429 MCP_RATE_LIMIT);
+    # bridge sessions one person may hold (429 BRIDGE_LIMIT); the largest
+    # single transfer (413 TRANSFER_TOO_LARGE).
+    DATALAYER_CONTENTS_MAX_CONCURRENT_QUERIES: "8"
+    DATALAYER_CONTENTS_QUERY_MAX_ROWS: "1000000"
+    DATALAYER_CONTENTS_QUERY_MAX_BYTES: "1073741824"
+    DATALAYER_CONTENTS_QUERY_MAX_SECONDS: "600"
+    DATALAYER_CONTENTS_MCP_CALLS_PER_MINUTE: "60"
+    DATALAYER_CONTENTS_MAX_BRIDGES: "10"
+    DATALAYER_CONTENTS_MAX_TRANSFER_BYTES: "0"
     DATALAYER_RUNTIMES_API_KEY: ""
     DATALAYER_OPERATOR_API_KEY: ""
+    # The Flight gateway's identity when it asks the API whether a ticket is
+    # good (`processes.flight`). The API reads it to recognise the gateway;
+    # the gateway reads it to introduce itself.
+    DATALAYER_CONTENTS_FLIGHT_API_KEY: ""
+    # Where the gateway answers /health and /ready. Like the worker's, it is
+    # not a service port.
+    DATALAYER_CONTENTS_FLIGHT_PROBE_PORT: "9404"
+    # The gateway terminates TLS itself (the route is passthrough). Both are
+    # PEM or a path to one; put the pair here through `envValueFrom` with
+    # `optional: true` — see the chart README — or leave them empty for
+    # plain gRPC inside the cluster.
+    DATALAYER_CONTENTS_FLIGHT_TLS_CERT: ""
+    DATALAYER_CONTENTS_FLIGHT_TLS_KEY: ""
     OTEL_SERVICE_NAME: "datalayer-contents"
   envValueFrom:
     # Signs pagination cursors and ETags. It must be at least 32 bytes and it
@@ -82,10 +125,34 @@ contents:
       memory: 256Mi
     limits:
       memory: 1Gi
+  # Alert rules, as a PrometheusRule the observer's Prometheus picks up.
+  # Off by default: the CRD comes with the observer chart, and a cluster
+  # without it refuses the manifest. The names are the ones
+  # `datalayer_contents/metrics.py` writes; the thresholds are here.
+  alerts:
+    enabled: false
+    # Labels the Prometheus Operator selects rules by, e.g. `release: observer`.
+    labels: {}
+    workerStalledFor: 5m
+    workerAbsentFor: 15m
+    deadLetterGrowingFor: 15m
+    deadLetterDepth: 25
+    # Readiness failures in 10 minutes before a dependency is called down —
+    # a probe every 10-15 s makes one blip a handful of failures.
+    readinessFailures: 6
+    readinessFailingFor: 5m
+    bridgeDisconnects: 20
+    reconcileDiscrepanciesFor: 10m
+    # Must match DATALAYER_CONTENTS_RECONCILE_INTERVAL_SECONDS above.
+    reconcileIntervalSeconds: 21600
+    limitRefusals: 50
   processes:
     worker:
       enabled: true
       replicas: 1
+    # The Arrow Flight gateway: `datalayer-contents-flight`, DoGet of a
+    # ticket Contents minted. Flight SQL is not served yet. Enabling it adds
+    # the `-flight-svc` Service and, with `flightHost`, the TCP route.
     flight:
       enabled: false
       replicas: 1
