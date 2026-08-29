@@ -11,6 +11,12 @@ aiinference:
 #      cpu: "3000m"
   env:
     DATALAYER_INFERENCE_PROVIDER: "bedrock"
+    # How long a visitor with no account may use the service, in seconds.
+    #
+    # Short on purpose: it is enough to ask a question and read the answer on a
+    # public page, and not enough for a token copied out of a browser to be
+    # worth anything. Raising it raises exactly that exposure.
+    DATALAYER_ANONYMOUS_TOKEN_TTL_SECONDS: "60"
     DATALAYER_INFERENCE_MODEL: ""
     DATALAYER_AUTHZ_ENGINE: ""
     DATALAYER_BEDROCK_AWS_ACCESS_KEY_ID: ""
