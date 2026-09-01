@@ -1,8 +1,0 @@
-apiVersion: v2
-name: datalayer-contents
-description: Datalayer Contents control and data plane
-type: application
-version: 0.1.0
-appVersion: 0.1.0
-home: https://datalayer.ai
-icon: https://assets.datalayer.tech/datalayer-square.png

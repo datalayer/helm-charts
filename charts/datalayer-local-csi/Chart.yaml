@@ -1,8 +1,0 @@
-apiVersion: v2
-name: datalayer-local-csi
-description: Datalayer Local CSI driver, local.csi.datalayer.io, presenting a user's own folder inside a Runtime through the Contents local bridge
-type: application
-version: 0.1.0
-appVersion: 0.1.0
-home: https://datalayer.ai
-icon: https://assets.datalayer.tech/datalayer-square.png
